@@ -45,7 +45,7 @@ public class FrameLogin extends JFrame {
 		//FrameLogin.setDefaultLookAndFeelDecorated(true);
 		
 		frame = new JFrame("Accesso centropolisportivo");
-		frame.getContentPane().setBackground(Color.GRAY);
+		frame.getContentPane().setBackground(new Color(0,204,255));
 		frame.setResizable(false);
 		frame.setBounds(0,0,1400, 800);
 		//frame.setMinimumSize(new Dimension(500, 300));
