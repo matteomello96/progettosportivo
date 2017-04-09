@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.*;
 import java.awt.Toolkit;
@@ -20,6 +21,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
+
+import Listener.LoginListener;
+
 import javax.swing.event.ChangeEvent;
 
 public class FrameLogin extends JFrame {
@@ -52,8 +56,7 @@ public class FrameLogin extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
-
-    
+		
 		
 		 
 		 frame.addMouseListener(new MouseAdapter(){
@@ -83,7 +86,7 @@ public class FrameLogin extends JFrame {
 		baccedi.setEnabled(false);
 
 
-
+	//	baccedi.addActionListener(new LoginListener(this));
       
 
 		frame.getRootPane().setDefaultButton(baccedi); //RENDE ACCEDI PULSANTE PREDEFINITO PER ENTER
@@ -92,7 +95,7 @@ public class FrameLogin extends JFrame {
 		baccedi.setFont(new Font("Dialog", Font.PLAIN, 12));
 		baccedi.setBounds(1215, 0, 150, 24);
 		frame.getContentPane().setLayout(null);
-		//frame.getContentPane().add(lblNewLabel);
+		
 
 		baccedi.setContentAreaFilled(true);
 
