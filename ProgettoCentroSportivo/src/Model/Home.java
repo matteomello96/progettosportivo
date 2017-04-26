@@ -1,7 +1,7 @@
 package Model;
 
 
-import Viste.*;
+import Viste.FrameLogin;
 
 public class Home {
 

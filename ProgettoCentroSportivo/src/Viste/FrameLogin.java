@@ -3,11 +3,11 @@ package Viste;
 //import it.progetto.listeners.LoginListener;
 
 import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.*;
 import java.awt.Toolkit;
@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 
 
 import javax.swing.border.Border;
-import javax.swing.JButton;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 
 import Listener.LoginListener;
+import ClassiDao.ElencoDiscipline;
+import DBInterfaccia.DbConnection;
 
 import javax.swing.event.ChangeEvent;
 
@@ -39,6 +41,7 @@ public class FrameLogin extends JFrame {
 	public JTextField CasellaNomeutenteOLD;
 	//private JTextField nullfield;
 	public JPasswordField passwordField;
+	public static JTable table;
 	public JTextField CasellaNomeutente;
 	public final JButton baccedi;
 	public static boolean crypt=true;
@@ -49,8 +52,10 @@ public class FrameLogin extends JFrame {
 		//FrameLogin.setDefaultLookAndFeelDecorated(true);
 		
 		frame = new JFrame("Accesso centropolisportivo");
+		frame.setTitle("Pagina iniziale Centro Polisportivo");
 		frame.getContentPane().setBackground(new Color(0,204,255));
 		frame.setResizable(false);
+		
 		frame.setBounds(0,0,1400, 800);
 		//frame.setMinimumSize(new Dimension(500, 300));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,14 +81,23 @@ public class FrameLogin extends JFrame {
 		                }
 		            });
 
+		    JMenuBar menuBar = new JMenuBar();
+			frame.setJMenuBar(menuBar);
+			JMenu mnAccedi = new JMenu("Accedi");
+			menuBar.add(mnAccedi);
 
-	
+			JMenuItem mntmRegistra = new JMenuItem("Registrati al portale");
+			mntmRegistra.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new Registrazione();
+					frame.setEnabled(false);
+				}
+			});
+			mnAccedi.add(mntmRegistra);
 
-
-
-
-		baccedi = new JButton("Accedi");
-		baccedi.setEnabled(false);
+		baccedi = new JButton("Registrati!");
+		baccedi.setEnabled(true);
+		
 
 
 	//	baccedi.addActionListener(new LoginListener(this));
@@ -101,7 +115,8 @@ public class FrameLogin extends JFrame {
 
 		frame.getContentPane().add(baccedi);
 
-	
+		
+		
 		
 
 		JLayeredPane layeredPane = new JLayeredPane();
@@ -230,9 +245,19 @@ public class FrameLogin extends JFrame {
 				}
 			}
 		});
+		
+		
+		table.setModel(ElencoDiscipline.Elencoiniziale());
+		table.setEnabled(true);
+		
+		
 
 		//CasellaNomeutente.requestFocusInWindow();
 	}
+	
+	
+	
+	
 }
 
 
