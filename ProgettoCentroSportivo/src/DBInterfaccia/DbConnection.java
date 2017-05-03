@@ -27,12 +27,13 @@ public class DbConnection {
   
 
    public static DbConnection getInstance() {
-	   if(instance == null)
-		   instance = new DbConnection();
-	   if(connesso != true)
-			connetti(nomebase, rootu, rootp);
-	   return instance;
+       if(instance == null)
+           instance = new DbConnection();
+       if(connesso != true)
+            connetti("centropolisportivo", "root", "Bla.bla.12");
+       return instance;
    }
+    
    
    // Apre la connessione con il Database
    public static boolean connetti(String nomeDB, String nomeUtente, String pwdUtente) {
@@ -42,7 +43,7 @@ public class DbConnection {
 
          // Carico il driver JDBC per la connessione con il database MySQL
          Class.forName("com.mysql.jdbc.Driver");
-         db = DriverManager.getConnection("jdbc:mysql:://"+host+"/"  + nomeDB + "?user=" + nomeUtente + "&password=" + pwdUtente);
+         db = DriverManager.getConnection("jdbc:mysql://127.0.0.1/"   + nomeDB + "?user=" + nomeUtente + "&password=" + pwdUtente);
          
          connesso=true;
          

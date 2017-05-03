@@ -17,14 +17,14 @@ public class ElencoDiscipline {
 		Object[] dat= new Object[2];
         ArrayList<Object[]> dati= new ArrayList<Object[]>();
         
-        Connection con = DbConnection.db;
+        Connection conx = DbConnection.db;
         
         Statement st;
         
         ResultSet rs;
-try {
+     try {
             
-            st = con.createStatement();
+            st = conx.createStatement();
             rs = st.executeQuery("select distinct  C.NomeDisciplina,B.NomeLivello,A.MaxIscrittiTurno,A.CostoMensile,C.Descrizione,C.Immagine,C.Calendario from disciplinedisponibili as A INNER JOIN livello as B ON A.Livello=B.NomeLivello INNER JOIN disciplina as C ON A.Disciplina=C.NomeDisciplina INNER JOIN calendario as D ON D.nomecalendario=C.Calendario ");
         
             while(rs.next()){
@@ -42,13 +42,14 @@ try {
             }catch (SQLException ex) {
                 
             }
+     //////////////////////////////////////////////////////////////////////////////////////
 DefaultTableModel model = new DefaultTableModel(){
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	boolean[] columnEditables = new boolean[] {
-			false, false,false,false,false,false,false
+			false, false,false,false,false,false,false,true
 		};
 	public boolean isCellEditable(int row, int column) {
 		return columnEditables[column];
@@ -73,7 +74,7 @@ DefaultTableModel model = new DefaultTableModel(){
             case 6:
             	return String.class;
             default:
-                return Float.class;
+                return String.class;
                 
         }
     }

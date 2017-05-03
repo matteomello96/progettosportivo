@@ -11,12 +11,15 @@ import java.awt.event.KeyEvent;
 
 
 import javax.swing.border.Border;
+import javax.swing.table.TableRowSorter;
+import javax.swing.tree.TreeSelectionModel;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import ClassiDao.ElencoDiscipline;
 import DBInterfaccia.DbConnection;
+
 
 public class FrameLogin extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +28,7 @@ public class FrameLogin extends JFrame {
 	public JTextField CasellaNomeutenteOLD;
 	//private JTextField nullfield;
 	public JPasswordField passwordField;
-	public static JTable table;
+	public static JTable tabelladisc;
 	public JTextField CasellaNomeutente;
 	public final JButton baccedi;
 	public static boolean crypt=true;
@@ -225,10 +228,23 @@ public class FrameLogin extends JFrame {
 			}
 		});
 		
-		table = new JTable();
-		table.setModel(ElencoDiscipline.Elencoiniziale());
-		table.setEnabled(true);
-		table.setVisible(true);
+		tabelladisc = new JTable();
+		tabelladisc.setFillsViewportHeight(true);
+		tabelladisc.setShowGrid(false);
+		tabelladisc.setRowHeight(20);
+		tabelladisc.setModel(ElencoDiscipline.Elencoiniziale());
+		
+		tabelladisc.getTableHeader().setReorderingAllowed(false);
+		tabelladisc.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		tabelladisc.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		
+		TableRowSorter myModel3 = new TableRowSorter();
+		
+		tabelladisc.setRowSorter(myModel3);
+		
+		
+		tabelladisc.setAutoCreateRowSorter(true);
 		
 
 		//CasellaNomeutente.requestFocusInWindow();
