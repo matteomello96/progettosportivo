@@ -1,40 +1,24 @@
 package Viste;
-//import it.progetto.listeners.*;
-//import it.progetto.listeners.LoginListener;
+
 
 import javax.swing.*;
 
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.*;
-import java.awt.Toolkit;
+
 import java.awt.event.KeyEvent;
 
 
 import javax.swing.border.Border;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.event.ChangeListener;
-
-import Listener.LoginListener;
 import ClassiDao.ElencoDiscipline;
 import DBInterfaccia.DbConnection;
 
-import javax.swing.event.ChangeEvent;
-
 public class FrameLogin extends JFrame {
-
-	
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
 	public JTextField CasellaPassword;
@@ -97,12 +81,7 @@ public class FrameLogin extends JFrame {
 
 		baccedi = new JButton("Registrati!");
 		baccedi.setEnabled(true);
-		
-
-
-	//	baccedi.addActionListener(new LoginListener(this));
-      
-
+	
 		frame.getRootPane().setDefaultButton(baccedi); //RENDE ACCEDI PULSANTE PREDEFINITO PER ENTER
 
 		baccedi.setToolTipText("Esegui l'accesso");
@@ -246,17 +225,14 @@ public class FrameLogin extends JFrame {
 			}
 		});
 		
-		
+		table = new JTable();
 		table.setModel(ElencoDiscipline.Elencoiniziale());
 		table.setEnabled(true);
-		
+		table.setVisible(true);
 		
 
 		//CasellaNomeutente.requestFocusInWindow();
 	}
-	
-	
-	
 	
 }
 

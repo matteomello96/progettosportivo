@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
+
 import javax.swing.table.DefaultTableModel;
 import DBInterfaccia.DbConnection;
 
@@ -39,7 +39,7 @@ try {
             	
             	dati.add(dat.clone());
             }
-            }catch (SQLException ex) {JOptionPane.showMessageDialog(null, "CHUPA");
+            }catch (SQLException ex) {
                 
             }
 DefaultTableModel model = new DefaultTableModel(){
@@ -90,7 +90,6 @@ columnsName[4] = "Descrizione ";
 columnsName[5] = "Immagine"; 
 columnsName[6] = "Calendario"; 
 
-
 model.setColumnIdentifiers(columnsName);
 
 Object[] rigaDati = new Object[7];
@@ -105,18 +104,9 @@ for(int i = 0; i < dati.size(); i++){
      rigaDati[5] = dati.get(i)[5];
      rigaDati[6] = dati.get(i)[6];
        
-       
-  
-       
        model.addRow(rigaDati);
    
 }
-
-
 return model;
-
 }
-
-	
-	
 }
