@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="C:/Users/Matteo/git/progettosportivo/ProgettoCentroSportivo/miglayout15-swing.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Matteo/git/progettosportivo/ProgettoCentroSportivo/miglayout-src.zip"/>
 	<classpathentry kind="lib" path="C:/Users/Matteo/git/progettosportivo/ProgettoCentroSportivo/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/MySQL JDBC Driver"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
