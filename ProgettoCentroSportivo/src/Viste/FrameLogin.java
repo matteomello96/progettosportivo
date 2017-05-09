@@ -4,21 +4,20 @@ package Viste;
 import javax.swing.*;
 
 import java.awt.Font;
-import java.awt.event.FocusEvent;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.*;
 
-import java.awt.event.KeyEvent;
-
-
 import javax.swing.border.Border;
-import javax.swing.table.TableRowSorter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
 
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 import ClassiDao.ElencoDiscipline;
 import DBInterfaccia.DbConnection;
+
 
 
 public class FrameLogin extends JFrame {
@@ -228,28 +227,46 @@ public class FrameLogin extends JFrame {
 			}
 		});
 		
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 5, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		frame.getContentPane().add(scrollPane, gbc_scrollPane);
+		
+		
+		tabelladisc.setModel(ElencoDiscipline.elencoiniziale());
 		tabelladisc = new JTable();
+		scrollPane.setViewportView(tabelladisc);
+		final DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+		final DefaultTableCellRenderer lead1 = new DefaultTableCellRenderer();
+		lead1.setHorizontalAlignment( JLabel.LEADING);
+		
+		
 		tabelladisc.setFillsViewportHeight(true);
 		tabelladisc.setShowGrid(false);
 		tabelladisc.setRowHeight(20);
-		tabelladisc.setModel(ElencoDiscipline.Elencoiniziale());
+		
 		
 		tabelladisc.getTableHeader().setReorderingAllowed(false);
 		tabelladisc.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tabelladisc.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		
-		TableRowSorter myModel3 = new TableRowSorter();
-		
-		tabelladisc.setRowSorter(myModel3);
+		tabelladisc.addMouseListener(new MouseAdapter() {
+		    public void mousePressed(MouseEvent me) {
+		        JTable table =(JTable) me.getSource();
+		        Point p = me.getPoint();
+		        table.rowAtPoint(p);
+		    }
+		});
 		
 		
 		tabelladisc.setAutoCreateRowSorter(true);
-		
-
-		//CasellaNomeutente.requestFocusInWindow();
 	}
-	
+		
+		
 }
 
 

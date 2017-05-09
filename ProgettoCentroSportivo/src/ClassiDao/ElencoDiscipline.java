@@ -1,4 +1,5 @@
 package ClassiDao; 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,20 +13,25 @@ import DBInterfaccia.DbConnection;
 public class ElencoDiscipline {
 
 	
-	public static DefaultTableModel Elencoiniziale()
-	{
-		Object[] dat= new Object[2];
+	public static DefaultTableModel elencoiniziale(){
+		Object[] dat= new Object[7];
         ArrayList<Object[]> dati= new ArrayList<Object[]>();
         
-        Connection conx = DbConnection.db;
+        Connection con = DbConnection.db;
+        
+        
         
         Statement st;
         
         ResultSet rs;
+        
+      
+        
      try {
-            
-            st = conx.createStatement();
-            rs = st.executeQuery("select distinct  C.NomeDisciplina,B.NomeLivello,A.MaxIscrittiTurno,A.CostoMensile,C.Descrizione,C.Immagine,C.Calendario from disciplinedisponibili as A INNER JOIN livello as B ON A.Livello=B.NomeLivello INNER JOIN disciplina as C ON A.Disciplina=C.NomeDisciplina INNER JOIN calendario as D ON D.nomecalendario=C.Calendario ");
+           
+            System.out.println(con);
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT DISTINCT C.NomeDisciplina,B.NomeLivello,A.MaxIscrittiTurno,A.CostoMensile,C.Descrizione,C.Immagine,C.Calendario from disciplinedisponibili as A INNER JOIN livello as B ON A.Livello=B.NomeLivello INNER JOIN disciplina as C ON A.Disciplina=C.NomeDisciplina INNER JOIN calendario as D ON D.nomecalendario=C.Calendario ");
         
             while(rs.next()){
             	
@@ -34,7 +40,7 @@ public class ElencoDiscipline {
             	dat[2]=rs.getInt("MaxIscrittiTurno");
             	dat[3]=rs.getFloat("CostoMensile");
             	dat[4]=rs.getString("Descrizione");
-            	dat[5]=rs.getByte("Immagine");
+            	dat[5]=rs.getBlob("Immagine");
             	dat[6]=rs.getString("Calendario");
             	
             	dati.add(dat.clone());
@@ -49,7 +55,7 @@ DefaultTableModel model = new DefaultTableModel(){
 	 */
 	private static final long serialVersionUID = 1L;
 	boolean[] columnEditables = new boolean[] {
-			false, false,false,false,false,false,false,true
+			false, false,false,false,false,false,false
 		};
 	public boolean isCellEditable(int row, int column) {
 		return columnEditables[column];
@@ -70,7 +76,7 @@ DefaultTableModel model = new DefaultTableModel(){
             case 4:
             	return String.class;
             case 5:
-            	return Byte.class;
+            	return Blob.class;
             case 6:
             	return String.class;
             default:
@@ -97,7 +103,7 @@ Object[] rigaDati = new Object[7];
 
 for(int i = 0; i < dati.size(); i++){
     
-    rigaDati[0] = dati.get(i)[0];
+     rigaDati[0] = dati.get(i)[0];
      rigaDati[1] = dati.get(i)[1];
      rigaDati[2] = dati.get(i)[2];
      rigaDati[3] = dati.get(i)[3];
