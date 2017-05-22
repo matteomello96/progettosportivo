@@ -2,7 +2,6 @@ package ClassiDao;
 
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
 
 
 import DBInterfaccia.DbConnection;
@@ -48,7 +47,6 @@ private static UtenteDao instance;
 		}
 		catch(Exception e)
 		{
-			JOptionPane.showMessageDialog(null, "Qualcuno vuole eseguire una SQL injection...?","SQL injection",JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		}

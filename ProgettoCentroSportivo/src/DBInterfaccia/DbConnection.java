@@ -1,5 +1,6 @@
 package DBInterfaccia;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Vector;
 public class DbConnection {
@@ -51,6 +52,28 @@ public class DbConnection {
 		            record = new String[colonne];
 		            for (int i=0; i<colonne; i++) record[i] = rs.getString(i+1);
 		            v.add( (String[]) record.clone() );
+		         }
+		         rs.close();     
+		         stmt.close();   
+		      } catch (Exception e) { e.printStackTrace(); }
+
+		      return v;
+		   }
+	   public Vector<InputStream[]> eseguiImmagine(String query) {
+		      Vector<InputStream[]> v = null;
+		      InputStream [] record;
+		      int colonne = 0;
+		      try {
+		         Statement stmt = db.createStatement();    
+		         ResultSet rs = stmt.executeQuery(query);   
+		         v = new Vector<InputStream[]>();
+		         ResultSetMetaData rsmd = rs.getMetaData();
+		         colonne = rsmd.getColumnCount();
+
+		         while(rs.next()) {   
+		            record = new InputStream[colonne];
+		            for (int i=0; i<colonne; i++) record[i] = rs.getBinaryStream(i+1);
+		            v.add( (InputStream[]) record.clone() );
 		         }
 		         rs.close();     
 		         stmt.close();   

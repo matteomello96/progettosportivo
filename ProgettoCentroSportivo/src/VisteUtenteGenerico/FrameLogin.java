@@ -1,50 +1,55 @@
-package Viste;
+package VisteUtenteGenerico;
+
 
 
 import javax.swing.*;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.Point;
+
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.border.Border;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.tree.TreeSelectionModel;
+
+import ClassiDao.ElencoDisciplineDAO;
 
 import java.awt.Color;
+import ModelliTabelle.ModDiscIni;
 
-import ClassiDao.ElencoDiscipline;
-import DBInterfaccia.DbConnection;
+import Model.DisciplinaElenco;
 
 
 
 public class FrameLogin extends JFrame {
 	private static final long serialVersionUID = 1L;
+    private ModDiscIni model;
 	public static JFrame frame;
 	public JTextField CasellaPassword;
+    private JTable tabelladisc;
 	public JTextField CasellaNomeutenteOLD;
 	//private JTextField nullfield;
 	public JPasswordField passwordField;
-	public static JTable tabelladisc;
+	private JScrollPane tablescroller;
 	public JTextField CasellaNomeutente;
 	public final JButton baccedi;
 	public static boolean crypt=true;
 	int xi;
 	int yi;
 	
-	public FrameLogin(){
+	public FrameLogin() {
 		//FrameLogin.setDefaultLookAndFeelDecorated(true);
 		
 		frame = new JFrame("Accesso centropolisportivo");
 		frame.setTitle("Pagina iniziale Centro Polisportivo");
-		frame.getContentPane().setBackground(new Color(0,204,255));
-		frame.setResizable(false);
+		frame.getContentPane().setBackground(new Color(0,205,215));
+		frame.setResizable(true);
 		
 		frame.setBounds(0,0,1400, 800);
 		//frame.setMinimumSize(new Dimension(500, 300));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		
@@ -75,7 +80,7 @@ public class FrameLogin extends JFrame {
 			JMenuItem mntmRegistra = new JMenuItem("Registrati al portale");
 			mntmRegistra.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new Registrazione();
+					new FrameRegistrazione();
 					frame.setEnabled(false);
 				}
 			});
@@ -227,43 +232,21 @@ public class FrameLogin extends JFrame {
 			}
 		});
 		
-		JScrollPane scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 5, 5, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 1;
-		frame.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		
-		tabelladisc.setModel(ElencoDiscipline.elencoiniziale());
-		tabelladisc = new JTable();
-		scrollPane.setViewportView(tabelladisc);
-		final DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-		final DefaultTableCellRenderer lead1 = new DefaultTableCellRenderer();
-		lead1.setHorizontalAlignment( JLabel.LEADING);
 		
 		
-		tabelladisc.setFillsViewportHeight(true);
-		tabelladisc.setShowGrid(false);
-		tabelladisc.setRowHeight(20);
+		
+		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
+		
+		tabelladisc = new JTable(model);
+		frame.getContentPane().add(new JScrollPane(this.tabelladisc));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                
 		
 		
-		tabelladisc.getTableHeader().setReorderingAllowed(false);
-		tabelladisc.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		tabelladisc.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
-		tabelladisc.addMouseListener(new MouseAdapter() {
-		    public void mousePressed(MouseEvent me) {
-		        JTable table =(JTable) me.getSource();
-		        Point p = me.getPoint();
-		        table.rowAtPoint(p);
-		    }
-		});
 		
 		
-		tabelladisc.setAutoCreateRowSorter(true);
 	}
 		
 		

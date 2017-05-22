@@ -1,13 +1,17 @@
 package Model;
 
 
-import Viste.FrameLogin;
+import java.sql.SQLException;
+
+import javax.sql.rowset.serial.SerialException;
+
+import VisteUtenteGenerico.*;
 
 public class Home {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SerialException, SQLException {
 	
-		new FrameLogin();
+		new FrameIniziale();
 		
 	}
 }
