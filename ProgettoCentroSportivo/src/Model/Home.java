@@ -1,17 +1,14 @@
 package Model;
 
 
-import java.sql.SQLException;
-
-import javax.sql.rowset.serial.SerialException;
-
 import VisteUtenteGenerico.*;
+
 
 public class Home {
 
-	public static void main(String[] args) throws SerialException, SQLException {
+	public static void main(String[] args) {
 	
+	//	new FrameLogin();
 		new FrameIniziale();
-		
 	}
 }
