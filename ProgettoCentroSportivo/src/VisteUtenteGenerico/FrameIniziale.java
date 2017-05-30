@@ -29,6 +29,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import Model.Home;
 import ModelliTabelle.ModDiscIni;
+import Listener.Listen;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -67,6 +68,8 @@ public class FrameIniziale extends JFrame {
 		JMenuItem MenuRegistra = new JMenuItem("Registrati al portale");
 	
 		menuBar.add(MenuRegistra);
+		MenuRegistra.addActionListener(new Listen(this));
+		MenuRegistra.setActionCommand("Vai_reg");
 		
 		JMenuItem MenuAccedi = new JMenuItem("Accedi al portale");
 		menuBar.add(MenuAccedi);
@@ -118,5 +121,6 @@ public class FrameIniziale extends JFrame {
 		gbc_table.gridy = 3;
 		contentPane.add(table, gbc_table);
 	}
+	
 
 }

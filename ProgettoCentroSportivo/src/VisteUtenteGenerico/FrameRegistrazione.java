@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Listener.Listen;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -77,6 +80,8 @@ public class FrameRegistrazione extends JFrame {
 		JMenuItem mntmTornaAllaPagina = new JMenuItem("Torna alla pagina iniziale");
 	
 		mnNewMenu.add(mntmTornaAllaPagina);
+		mntmTornaAllaPagina.addActionListener(new Listen(this));
+		mntmTornaAllaPagina.setActionCommand("Vai_home");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.setContentPane(contentPane);
