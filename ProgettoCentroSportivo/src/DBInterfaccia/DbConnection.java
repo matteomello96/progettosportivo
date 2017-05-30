@@ -12,7 +12,7 @@ public class DbConnection {
 		   if(instance == null)
 			   instance = new DbConnection();
 		   if(connesso != true)
-				connetti("centropolisportivo", "root", "Bla.bla.12");
+				connetti("centropolisportivo", "root", "Furfudopfa81");
 		   return instance;
 	   }
 	   
