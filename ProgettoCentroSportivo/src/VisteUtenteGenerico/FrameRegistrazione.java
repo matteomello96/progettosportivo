@@ -16,6 +16,8 @@ import javax.swing.JMenu;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
+import javax.swing.DefaultComboBoxModel;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -252,6 +254,7 @@ public class FrameRegistrazione extends JFrame {
 		gbc_combotipoutente.gridx = 5;
 		gbc_combotipoutente.gridy = 6;
 		contentPane.add(combotipoutente, gbc_combotipoutente);
+		//gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore", "responsabile"}));
 		
 		JLabel lblVia = new JLabel("Via");
 		GridBagConstraints gbc_lblVia = new GridBagConstraints();
