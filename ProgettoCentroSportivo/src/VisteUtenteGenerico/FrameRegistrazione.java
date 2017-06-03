@@ -10,11 +10,15 @@ import javax.swing.border.EmptyBorder;
 
 import Listener.Listen;
 
+import ClassiDao.Reg_dao;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 
@@ -43,8 +47,8 @@ public class FrameRegistrazione extends JFrame {
 	private JTextField textnumciv;
 	private JTextField textmail;
 	private JTextField textnomeutente;
-	private JPasswordField passwordField;
-
+	private JPasswordField pass;
+	private boolean bool;
 	/**
 	 * Launch the application.
 	 */
@@ -212,14 +216,14 @@ public class FrameRegistrazione extends JFrame {
 		gbc_lblPassword.gridy = 5;
 		contentPane.add(lblPassword, gbc_lblPassword);
 		
-		passwordField = new JPasswordField();
+		pass = new JPasswordField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.gridwidth = 4;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordField.gridx = 5;
 		gbc_passwordField.gridy = 5;
-		contentPane.add(passwordField, gbc_passwordField);
+		contentPane.add(pass, gbc_passwordField);
 		
 		JLabel lblCitt = new JLabel("Citt\u00E0");
 		GridBagConstraints gbc_lblCitt = new GridBagConstraints();
@@ -254,7 +258,7 @@ public class FrameRegistrazione extends JFrame {
 		gbc_combotipoutente.gridx = 5;
 		gbc_combotipoutente.gridy = 6;
 		contentPane.add(combotipoutente, gbc_combotipoutente);
-		//gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore", "responsabile"}));
+		gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
 		
 		JLabel lblVia = new JLabel("Via");
 		GridBagConstraints gbc_lblVia = new GridBagConstraints();
@@ -296,6 +300,25 @@ public class FrameRegistrazione extends JFrame {
 		gbc_btnRegistratiAlNostro.gridx = 3;
 		gbc_btnRegistratiAlNostro.gridy = 9;
 		contentPane.add(btnRegistratiAlNostro, gbc_btnRegistratiAlNostro);
+		btnRegistratiAlNostro.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent arg0) {
+			if(combotipoutente.getSelectedIndex()!=1)
+				bool=Reg_dao.registra(pass.getText(),textnome.getText(), textcognome.getText(), textcodice.getText(), textcitta.getText(), textvia.getText(),textnumciv.getText(),  textmail.getText(), combotipoutente.getSelectedItem().toString(),textnomeutente.getText());
+			else bool=Reg_dao.registraistruttore(pass.getText(),textnome.getText(), textcognome.getText(), textcodice.getText(), textcitta.getText(), textvia.getText(),textnumciv.getText(), textmail.getText(), combotipoutente.getSelectedItem().toString(),textnomeutente.getText(), "Vuoto");
+			
+			if(bool)
+			{
+				frame.setVisible(false);
+				frame.dispose();
+				FrameIniziale.frame.setEnabled(true);
+				FrameIniziale.frame.setAlwaysOnTop(true);
+				FrameIniziale.frame.setAlwaysOnTop(false);
+		}
+			}
+			
+			
+		});
 	}
 }
 

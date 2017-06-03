@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 public class Reg_dao {
 	
-public static boolean registra(String nome, String cognome , String cod_fis , String citta, String via , int num_civ , String mail ,String user , String pass , String tipo){
+public static boolean registra(String nome, String cognome , String cod_fis , String citta, String via , String num_civ , String mail ,String user , String pass , String tipo){
 	 Connection con = DbConnection.db;
      Connection con2 = DbConnection.db;
      Statement st,st2;
@@ -51,7 +51,7 @@ catch (SQLException ex) {
 return false;
 }
 
-public static boolean registraistruttore(String nome, String cognome , String cod_fis , String citta, String via , int num_civ , String mail ,String user , String pass , String tipo, String telefonoist){
+public static boolean registraistruttore(String nome, String cognome , String cod_fis , String citta, String via , String num_civ , String mail ,String user , String pass , String tipo, String telefonoist){
 
 	
 	 Connection con = DbConnection.db;
