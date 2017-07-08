@@ -258,7 +258,7 @@ public class FrameRegistrazione extends JFrame {
 		gbc_combotipoutente.gridx = 5;
 		gbc_combotipoutente.gridy = 6;
 		contentPane.add(combotipoutente, gbc_combotipoutente);
-		gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
+	//	gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
 		
 		JLabel lblVia = new JLabel("Via");
 		GridBagConstraints gbc_lblVia = new GridBagConstraints();
