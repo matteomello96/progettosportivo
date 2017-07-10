@@ -77,7 +77,7 @@ public class FrameLogin extends JFrame {
 			frame.setJMenuBar(menuBar);
 			JMenuItem mnAccedi = new JMenuItem("Home");
 			menuBar.add(mnAccedi);
-			mnAccedi.addActionListener(new Listen(this));
+			//mnAccedi.addActionListener(new Listen(this));
 			mnAccedi.setActionCommand("Vai_home1");
 			
 
