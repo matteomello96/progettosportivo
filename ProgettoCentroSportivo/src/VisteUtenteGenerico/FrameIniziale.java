@@ -72,7 +72,11 @@ public class FrameIniziale extends JFrame {
 		MenuRegistra.setActionCommand("Vai_reg");
 		
 		JMenuItem MenuAccedi = new JMenuItem("Accedi al portale");
+		
+		
 		menuBar.add(MenuAccedi);
+		MenuAccedi.addActionListener(new Listen(this));
+		MenuAccedi.setActionCommand("Vai_log");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.setContentPane(contentPane);

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import VisteUtenteGenerico.FrameIniziale;
+import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameRegistrazione;
 
 
@@ -35,6 +36,21 @@ public class Listen implements ActionListener {
 			
         	  FrameRegistrazione.frame.setVisible(false);
         	  FrameRegistrazione.frame.dispose();
+			new FrameIniziale();
+			FrameIniziale.frame.setVisible(true);
+		}
+          
+          if ("Vai_log".equals(e.getActionCommand())){
+  			
+        	  FrameIniziale.frame.setVisible(false);
+        	  FrameIniziale.frame.dispose();
+			new FrameLogin();
+			FrameLogin.frame.setVisible(true);
+		}
+          if ("Vai_home1".equals(e.getActionCommand())){
+  			
+        	  FrameLogin.frame.setVisible(false);
+        	  FrameLogin.frame.dispose();
 			new FrameIniziale();
 			FrameIniziale.frame.setVisible(true);
 		}

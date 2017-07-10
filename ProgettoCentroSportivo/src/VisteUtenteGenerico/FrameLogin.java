@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.border.Border;
 
 import ClassiDao.ElencoDisciplineDAO;
+import Listener.Listen;
 
 import java.awt.Color;
 import ModelliTabelle.ModDiscIni;
@@ -43,12 +44,12 @@ public class FrameLogin extends JFrame {
 		//FrameLogin.setDefaultLookAndFeelDecorated(true);
 		
 		frame = new JFrame("Accesso centropolisportivo");
-		frame.setTitle("Pagina iniziale Centro Polisportivo");
-		frame.getContentPane().setBackground(new Color(0,205,215));
+		frame.setTitle("Pagina Login");
+		
 		frame.setResizable(true);
 		
-		frame.setBounds(0,0,1400, 800);
-		//frame.setMinimumSize(new Dimension(500, 300));
+		frame.setBounds(100, 100, 605, 391);
+		
 		
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
@@ -74,26 +75,20 @@ public class FrameLogin extends JFrame {
 
 		    JMenuBar menuBar = new JMenuBar();
 			frame.setJMenuBar(menuBar);
-			JMenu mnAccedi = new JMenu("Accedi");
+			JMenuItem mnAccedi = new JMenuItem("Home");
 			menuBar.add(mnAccedi);
+			mnAccedi.addActionListener(new Listen(this));
+			mnAccedi.setActionCommand("Vai_home1");
+			
 
-			JMenuItem mntmRegistra = new JMenuItem("Registrati al portale");
-			mntmRegistra.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					new FrameRegistrazione();
-					frame.setEnabled(false);
-				}
-			});
-			mnAccedi.add(mntmRegistra);
-
-		baccedi = new JButton("Registrati!");
+		baccedi = new JButton("Accedi");
 		baccedi.setEnabled(true);
 	
 		frame.getRootPane().setDefaultButton(baccedi); //RENDE ACCEDI PULSANTE PREDEFINITO PER ENTER
 
 		baccedi.setToolTipText("Esegui l'accesso");
 		baccedi.setFont(new Font("Dialog", Font.PLAIN, 12));
-		baccedi.setBounds(1215, 0, 150, 24);
+		baccedi.setBounds(253, 151, 89, 23);
 		frame.getContentPane().setLayout(null);
 		
 
@@ -106,13 +101,13 @@ public class FrameLogin extends JFrame {
 		
 
 		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1400, 800);
+		layeredPane.setBounds(0, 0, 579, 331);
 		frame.getContentPane().add(layeredPane);
 
 		final JLabel lblNomeUtente = new JLabel("Nome utente");
 		lblNomeUtente.setForeground(Color.GRAY);
 		lblNomeUtente.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNomeUtente.setBounds(912, 0, 150, 24);
+		lblNomeUtente.setBounds(253, 43, 86, 20);
 		layeredPane.add(lblNomeUtente,2,0);
 				
 
@@ -126,7 +121,7 @@ public class FrameLogin extends JFrame {
 		
 		CasellaNomeutente.setToolTipText("Inserire il nome utente");
 		CasellaNomeutente.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		CasellaNomeutente.setBounds(912, 0, 150, 24);
+		CasellaNomeutente.setBounds(253, 43, 86, 20);
 		layeredPane.add(CasellaNomeutente);
 		CasellaNomeutente.setColumns(10);
 		CasellaNomeutente.addFocusListener(new FocusAdapter() {
@@ -150,7 +145,7 @@ public class FrameLogin extends JFrame {
 
 
 		final JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(1075, 0, 150, 24);
+		lblPassword.setBounds(253, 95, 86, 20);
 		layeredPane.add(lblPassword,2,0);
 		lblPassword.setForeground(Color.GRAY);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -161,7 +156,7 @@ public class FrameLogin extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setEchoChar('•');
 		passwordField.setToolTipText("Inserire la password");
-		passwordField.setBounds(1065, 0, 150, 24);
+		passwordField.setBounds(253, 95, 86, 20);
 		passwordField.setBorder(border1);
 		layeredPane.add(passwordField);
 		passwordField.addFocusListener(new FocusAdapter() {
@@ -188,7 +183,7 @@ public class FrameLogin extends JFrame {
 		
 		
 			
-		//CasellaNomeutente.requestFocusInWindow();
+		;
 	
 		
 
@@ -231,7 +226,44 @@ public class FrameLogin extends JFrame {
 				}
 			}
 		});
+		CasellaNomeutente.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				
+				
+				
+				
+
+			}
+		public void focusLost(FocusEvent arg0) {
+			CasellaNomeutente.setBackground(Color.WHITE);
+			
+			if(CasellaNomeutente.getText().isEmpty())
+				lblNomeUtente.setBounds(253, 43, 86, 20);
+			
+
+		}
+	});
 		
+		
+		passwordField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				
+				
+				
+				
+
+			}
+		public void focusLost(FocusEvent arg0) {
+			passwordField.setBackground(Color.WHITE);
+			
+			if(passwordField.getText().isEmpty())
+				lblPassword.setBounds(253, 95, 86, 20);
+			
+
+		}
+	});		
 		
 		
 		
