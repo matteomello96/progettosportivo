@@ -9,8 +9,7 @@ public class TipoUtente {
 	public static String getTipo(String username, String password){
 		Vector<String[]> result=new Vector<String[]>();
 		result=null;
-		
-		result=DbConnection.getInstance().eseguiQuery("SELECT tipoutente FROM elencoutenti WHERE username='"+ username +"' and password='"+password+"'");
+		result=DbConnection.getInstance().eseguiQuery("SELECT tipoutente FROM elencoutenti where  username=\""+ username +"\" and password=\""+password+"\"");
 		String[] stringhe;
 		if(result!=null){
 			if(!result.isEmpty()){
@@ -24,14 +23,14 @@ public class TipoUtente {
 				if(stringhe[0].equals("R"))
 					return "R";
 
-				else return "T";
+				else return "";
 
 			}
 
-			else return "T";
+			else return "";
 
 		}
-		else return "T";
+		else return "";
 
 	}
 }
