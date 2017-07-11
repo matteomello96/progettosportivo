@@ -29,14 +29,14 @@ public class LoginListener implements ActionListener{
 		
 		
 		boolean utenteEsiste = UtenteBusiness.getInstance().verificaLogin(username, password);
-		String tipoUtente = TipoUtente.getTipo(username,password);
+	//	String tipoUtente = TipoUtente.getTipo(username,password);
 		if(utenteEsiste){
 		/*	if(Listen.imp!=null){
 				
 				Listen.imp.frame.setVisible(false);
 				Listen.imp.frame.dispose();
 				Listen.imp=null;
-				}*/
+				}
 			if(tipoUtente.equals("T"))
 			{
 				JOptionPane.showMessageDialog(null, "Accesso come tesserato!");
@@ -64,10 +64,10 @@ public class LoginListener implements ActionListener{
 
 				//JOptionPane.showMessageDialog(null, "Accesso come magazziniere!");
 			}
-		
+		*/
 			
 			//GetInfoDB.setUserStatus(true);
-			
+			JOptionPane.showMessageDialog(null, "Benvenuto!");
 		}
 
 		else{

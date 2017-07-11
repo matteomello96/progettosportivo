@@ -12,6 +12,7 @@ import VisteUtenteGenerico.FrameRegistrazione;
 public class Listen implements ActionListener {
 	public FrameIniziale finestraLogin;
 	public FrameRegistrazione finestrareg;
+	public FrameLogin framelogin;
 	
 	public Listen(FrameIniziale frame)
 	{
@@ -21,6 +22,11 @@ public class Listen implements ActionListener {
 	{
 		finestrareg=frame;
 	}
+	public Listen(FrameLogin frame)
+	{
+	  framelogin=frame;
+	}
+	
 	
 	
 	public void actionPerformed(ActionEvent e)

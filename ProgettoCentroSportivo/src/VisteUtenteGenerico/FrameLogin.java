@@ -16,6 +16,7 @@ import javax.swing.border.Border;
 
 import ClassiDao.ElencoDisciplineDAO;
 import Listener.Listen;
+import Listener.LoginListener;
 
 import java.awt.Color;
 import ModelliTabelle.ModDiscIni;
@@ -32,7 +33,7 @@ public class FrameLogin extends JFrame {
     private JTable tabelladisc;
 	public JTextField CasellaNomeutenteOLD;
 	//private JTextField nullfield;
-	public JPasswordField passwordField;
+	public JTextField passwordField;
 	private JScrollPane tablescroller;
 	public JTextField CasellaNomeutente;
 	public final JButton baccedi;
@@ -77,7 +78,7 @@ public class FrameLogin extends JFrame {
 			frame.setJMenuBar(menuBar);
 			JMenuItem mnAccedi = new JMenuItem("Home");
 			menuBar.add(mnAccedi);
-			//mnAccedi.addActionListener(new Listen(this));
+			mnAccedi.addActionListener(new Listen(this));
 			mnAccedi.setActionCommand("Vai_home1");
 			
 
@@ -93,7 +94,7 @@ public class FrameLogin extends JFrame {
 		
 
 		baccedi.setContentAreaFilled(true);
-
+        baccedi.addActionListener(new LoginListener(this));
 		frame.getContentPane().add(baccedi);
 
 		
@@ -153,8 +154,8 @@ public class FrameLogin extends JFrame {
 		
 		
 		
-		passwordField = new JPasswordField();
-		passwordField.setEchoChar('•');
+		passwordField = new JTextField();
+		
 		passwordField.setToolTipText("Inserire la password");
 		passwordField.setBounds(253, 95, 86, 20);
 		passwordField.setBorder(border1);
@@ -165,7 +166,7 @@ public class FrameLogin extends JFrame {
 				lblPassword.setBounds(0, 0, 0, 0);
 
 			}
-			@SuppressWarnings("deprecation")
+		
 			public void focusLost(FocusEvent arg0) {
 				passwordField.setBackground(Color.WHITE);
 			
@@ -192,7 +193,7 @@ public class FrameLogin extends JFrame {
 
 
 		passwordField.addKeyListener(new KeyAdapter() {
-			@SuppressWarnings("deprecation")
+		
 			public void keyReleased(KeyEvent e) { //ascolta i keystrokes
 				if(CasellaNomeutente.getText().isEmpty() || passwordField.getText().isEmpty())
 					baccedi.setEnabled(false);
@@ -216,7 +217,7 @@ public class FrameLogin extends JFrame {
 		
 
 		CasellaNomeutente.addKeyListener(new KeyAdapter() {
-			@SuppressWarnings("deprecation")
+			
 			public void keyReleased(KeyEvent e) { //ascolta i keystrokes
 				if(CasellaNomeutente.getText().isEmpty() || passwordField.getText().isEmpty())
 					baccedi.setEnabled(false);
@@ -268,12 +269,7 @@ public class FrameLogin extends JFrame {
 		
 		
 		
-		
-		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
-		
-		tabelladisc = new JTable(model);
-		frame.getContentPane().add(new JScrollPane(this.tabelladisc));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
                 
 		
 		

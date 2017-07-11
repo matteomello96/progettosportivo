@@ -2,10 +2,11 @@ package ClassiDao;
 
 import java.util.Vector;
 
-
+import javax.swing.JOptionPane;
 
 import DBInterfaccia.DbConnection;
 import Model.Utente;
+import VisteUtenteGenerico.FrameLogin;
 
 
 public class UtenteDao {
@@ -35,8 +36,10 @@ private static UtenteDao instance;
 		try{
 		
 		
-		result=DbConnection.getInstance().eseguiQuery("SELECT * FROM elencoutenti WHERE username='"+ username +"' and Password='"+password+"'");
-		//String[] stringhe;
+			
+result=DbConnection.getInstance().eseguiQuery("SELECT username,password FROM elencoutenti where  username=\""+ username +"\" and password=\""+password+"\"");
+				
+		
 		
 		if(result.isEmpty())
 		{
@@ -47,7 +50,10 @@ private static UtenteDao instance;
 		}
 		catch(Exception e)
 		{
+			JOptionPane.showMessageDialog(null, "Qualcuno vuole eseguire una SQL injection...?","SQL injection",JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		}
-}
+	
+}		 
+	
