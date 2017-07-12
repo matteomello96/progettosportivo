@@ -3,17 +3,21 @@ package VisteUtenteGenerico;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Listener.Listen;
+import Model.Home;
+import VisteUtenteGenerico.*;
 
 import ClassiDao.Reg_dao;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
@@ -33,9 +37,16 @@ import java.awt.Rectangle;
 import java.awt.Component;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 
+
+
+
+
+
 public class FrameRegistrazione extends JFrame {
+	
 	public static JFrame frame;
 	private JPanel contentPane;
 	
@@ -48,10 +59,10 @@ public class FrameRegistrazione extends JFrame {
 	private JTextField textmail;
 	private JTextField textnomeutente;
 	private JPasswordField pass;
+	private JTextField secondapass;
 	private boolean bool;
-	/**
-	 * Launch the application.
-	 */
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,16 +75,20 @@ public class FrameRegistrazione extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	public FrameRegistrazione() {
+		
 		frame = new JFrame("Registrazione");
+		
+		
 		frame.setTitle("Registrati al nostro portale");
+		if(FrameRegistrazione.frame==null)
+			frame.setLocationRelativeTo(null);
+			else
+			frame.setLocation(FrameRegistrazione.frame.getLocation());
 		frame.getContentPane().setBackground(Color.ORANGE);
 		frame.setResizable(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setVisible(true);
 		
@@ -121,6 +136,7 @@ public class FrameRegistrazione extends JFrame {
 		gbc_lblDatiutenza.gridy = 1;
 		contentPane.add(lblDatiutenza, gbc_lblDatiutenza);
 		
+		
 		JLabel lblNome = new JLabel("Nome");
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
 		gbc_lblNome.anchor = GridBagConstraints.EAST;
@@ -156,6 +172,8 @@ public class FrameRegistrazione extends JFrame {
 		contentPane.add(textmail, gbc_textmail);
 		textmail.setColumns(10);
 		
+		
+		
 		JLabel lblCognome = new JLabel("Cognome");
 		GridBagConstraints gbc_lblCognome = new GridBagConstraints();
 		gbc_lblCognome.anchor = GridBagConstraints.EAST;
@@ -190,6 +208,12 @@ public class FrameRegistrazione extends JFrame {
 		contentPane.add(textnomeutente, gbc_textnomeutente);
 		textnomeutente.setColumns(10);
 		
+		final JLabel inuso = new JLabel("Nome gi\u00E0 in uso");
+		inuso.setVisible(false);
+		inuso.setForeground(Color.RED);
+		inuso.setBounds(463, 148, 89, 14);
+		
+		
 		JLabel lblCodiceFiscale = new JLabel("Codice Fiscale");
 		GridBagConstraints gbc_lblCodiceFiscale = new GridBagConstraints();
 		gbc_lblCodiceFiscale.anchor = GridBagConstraints.EAST;
@@ -208,7 +232,6 @@ public class FrameRegistrazione extends JFrame {
 		textcodice.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.anchor = GridBagConstraints.EAST;
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -220,11 +243,30 @@ public class FrameRegistrazione extends JFrame {
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.gridwidth = 4;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
-		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField.fill = GridBagConstraints.EAST;
 		gbc_passwordField.gridx = 5;
 		gbc_passwordField.gridy = 5;
 		contentPane.add(pass, gbc_passwordField);
 		
+		JLabel lbl2Password = new JLabel("Ripeti Password");
+		GridBagConstraints gbc_lbl2Password = new GridBagConstraints();
+		gbc_lblPassword.anchor = GridBagConstraints.EAST;
+		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPassword.gridx = 4;
+		gbc_lblPassword.gridy = 5;
+		contentPane.add(lblPassword, gbc_lbl2Password);
+		
+		secondapass = new JPasswordField();
+		GridBagConstraints gbc_2passwordField = new GridBagConstraints();
+		gbc_passwordField.gridwidth = 4;
+		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
+		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField.gridx = 5;
+		gbc_passwordField.gridy = 5;
+		contentPane.add(pass, gbc_2passwordField);
+		
+		
+				
 		JLabel lblCitt = new JLabel("Citt\u00E0");
 		GridBagConstraints gbc_lblCitt = new GridBagConstraints();
 		gbc_lblCitt.anchor = GridBagConstraints.EAST;
@@ -249,15 +291,17 @@ public class FrameRegistrazione extends JFrame {
 		gbc_lblTipoUtente.gridy = 6;
 		contentPane.add(lblTipoUtente, gbc_lblTipoUtente);
 		
-		JComboBox combotipoutente = new JComboBox();
-		combotipoutente.setEditable(false);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Tesserato", "Istruttore"}));
+		comboBox.setVisible(true);
+		comboBox.setEditable(false);
 		GridBagConstraints gbc_combotipoutente = new GridBagConstraints();
 		gbc_combotipoutente.gridwidth = 4;
 		gbc_combotipoutente.insets = new Insets(0, 0, 5, 0);
 		gbc_combotipoutente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_combotipoutente.gridx = 5;
 		gbc_combotipoutente.gridy = 6;
-		contentPane.add(combotipoutente, gbc_combotipoutente);
+		contentPane.add(comboBox, gbc_combotipoutente);
 	//	gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
 		
 		JLabel lblVia = new JLabel("Via");
@@ -302,24 +346,108 @@ public class FrameRegistrazione extends JFrame {
 		contentPane.add(btnRegistratiAlNostro, gbc_btnRegistratiAlNostro);
 		btnRegistratiAlNostro.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {
-			if(combotipoutente.getSelectedIndex()!=1)
-				bool=Reg_dao.registra(pass.getText(),textnome.getText(), textcognome.getText(), textcodice.getText(), textcitta.getText(), textvia.getText(),textnumciv.getText(),  textmail.getText(), combotipoutente.getSelectedItem().toString(),textnomeutente.getText());
-			else bool=Reg_dao.registraistruttore(pass.getText(),textnome.getText(), textcognome.getText(), textcodice.getText(), textcitta.getText(), textvia.getText(),textnumciv.getText(), textmail.getText(), combotipoutente.getSelectedItem().toString(),textnomeutente.getText(), "Vuoto");
+			public void actionPerformed(ActionEvent arg0) {lblNome.setForeground(Color.BLACK);
+			lblNome.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			
-			if(bool)
+			lblCognome.setForeground(Color.BLACK);
+			lblCognome.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		
+			lblNomeutente.setForeground(Color.BLACK);
+			lblNomeutente.setFont(new Font("Tahoma", Font.PLAIN, 11));
+	
+			lblIndirizzoMail.setForeground(Color.BLACK);
+			lblIndirizzoMail.setFont(new Font("Tahoma", Font.PLAIN, 11));
+	
+			lblPassword.setForeground(Color.BLACK);
+			lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		
+			
+		
+		
+		if(textnome.getText().isEmpty()||textcognome.getText().isEmpty()||textnomeutente.getText().isEmpty()||textmail.getText().isEmpty()||pass.getText().isEmpty()||secondapass.getText().isEmpty()||textcodice.getText().isEmpty()||textcitta.getText().isEmpty()||textvia.getText().isEmpty()||textnumciv.getText().isEmpty())
+		{
+			
+			if(textnumciv.getText().isEmpty())
 			{
-				frame.setVisible(false);
-				frame.dispose();
-				FrameIniziale.frame.setEnabled(true);
-				FrameIniziale.frame.setAlwaysOnTop(true);
-				FrameIniziale.frame.setAlwaysOnTop(false);
-		}
+				lblNumeroCivico.setForeground(Color.RED);
+				lblNumeroCivico.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(textvia.getText().isEmpty())
+			{
+				lblVia.setForeground(Color.RED);
+				lblVia.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(textcitta.getText().isEmpty())
+			{
+				lblCitt.setForeground(Color.RED);
+				lblCitt.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(textcodice.getText().isEmpty())
+			{
+				lblCodiceFiscale.setForeground(Color.RED);
+				lblCodiceFiscale.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(textnome.getText().isEmpty())
+			{
+				lblNome.setForeground(Color.RED);
+				lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(textcognome.getText().isEmpty())
+			{
+				lblCognome.setForeground(Color.RED);
+				lblCognome.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(textnomeutente.getText().isEmpty())
+			{
+				lblNomeutente.setForeground(Color.RED);
+				lblNomeutente.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(textmail.getText().isEmpty())
+			{
+				lblIndirizzoMail.setForeground(Color.RED);
+				lblIndirizzoMail.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(pass.getText().isEmpty())
+			{
+				lblPassword.setForeground(Color.RED);
+				lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
+			if(secondapass.getText().isEmpty())
+			{
+				lbl2Password.setForeground(Color.RED);
+				lbl2Password.setFont(new Font("Tahoma", Font.BOLD, 11));
 			}
 			
-			
-		});
+			JOptionPane.showMessageDialog(frame, "Riempire tutti i campi obbligatori"," ",JOptionPane.WARNING_MESSAGE);
+		}
+		else if(!pass.getText().equals(secondapass.getText())){
+			lblPassword.setForeground(Color.RED);
+			lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+									
+			lbl2Password.setForeground(Color.RED);
+			lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+			JOptionPane.showMessageDialog(frame, "Le password inserite non coincidono"," ",JOptionPane.WARNING_MESSAGE);
+		}
+		else
+			if(comboBox.getSelectedIndex()!=1)
+			bool=Reg_dao.registra(textnome.getText(),textcognome.getText(),textcodice.getText(),textcitta.getText(),textvia.getText(),textnumciv.getText(), textmail.getText(),textnomeutente.getText(),pass.getText(), comboBox.getSelectedItem().toString());
+			else bool=Reg_dao.registraistruttore(textnome.getText(),textcognome.getText(),textcodice.getText(),textcitta.getText(),textvia.getText(),textnumciv.getText(), textmail.getText(),textnomeutente.getText(),pass.getText(), comboBox.getSelectedItem().toString());
+		
+		if(bool)
+		{
+			frame.setVisible(false);
+			frame.dispose();
+			FrameIniziale.frame.setEnabled(true);
+			FrameIniziale.frame.setAlwaysOnTop(true);
+			FrameIniziale.frame.setAlwaysOnTop(false);
 	}
-}
+								
+								
+		
+			}			
+	});
 
-	
+
+}}
+
