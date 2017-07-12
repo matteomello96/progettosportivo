@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import Business.UtenteBusiness;
 import ClassiDao.*;
 import VisteUtenteGenerico.FrameLogin;
+import VisteUtenteGenerico.FrameTesserato;
 
 
 
@@ -41,6 +42,7 @@ public class LoginListener implements ActionListener{
 			{
 				JOptionPane.showMessageDialog(null, "Accesso come tesserato!");
 				FrameLogin.frame.setVisible(false);
+				new FrameTesserato();
 				FrameLogin.frame.dispose();
 				
 				

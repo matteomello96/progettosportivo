@@ -62,6 +62,8 @@ public class FrameIniziale extends JFrame {
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		frame.setResizable(true);
+		
+		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
