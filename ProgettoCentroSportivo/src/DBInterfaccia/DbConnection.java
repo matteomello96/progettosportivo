@@ -3,37 +3,49 @@ package DBInterfaccia;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Vector;
+
+import javax.swing.JOptionPane;
+
+
 public class DbConnection {
 	   public static Connection db;       
 	   private static boolean connesso;    
 	   private static DbConnection instance;
 
+	   public static String nomebase="sql11184998";
+	   public static String rootu="sql11184998";
+	   public static String rootp="dbcentro100";
+	   public static String host="sql11.freemysqlhosting.net";
+	   
+	   
+	 
+	   
+	   
 	   public static DbConnection getInstance() {
 		   if(instance == null)
 			   instance = new DbConnection();
 		   if(connesso != true)
-				connetti("centropolisportivo", "root", "Furfudopfa81");
+				connetti(nomebase, rootu, rootp);
 		   return instance;
 	   }
 	   
-	   
+	   // Apre la connessione con il Database
 	   public static boolean connetti(String nomeDB, String nomeUtente, String pwdUtente) {
 
 		  connesso = false;
-	   try {
+	      try {
 
-	       
+	         // Carico il driver JDBC per la connessione con il database MySQL
 	         Class.forName("com.mysql.jdbc.Driver");
-	         db = DriverManager.getConnection("jdbc:mysql://127.0.0.1/" + nomeDB + "?user=" + nomeUtente + "&password=" + pwdUtente);
-	         connesso=true; 
+	         db = DriverManager.getConnection("jdbc:mysql://"+host+"/" + nomeDB + "?user=" + nomeUtente + "&password=" + pwdUtente);
 	         
-	      } catch (Exception e) { 
-	    	  
-	    	 
-	    	  e.printStackTrace(); 
-	    	 
+	         connesso=true;
+	         
+	         
+	      }catch (Exception e) {
+	    	  //e.printStackTrace(); VISUALIZZA GLI ERRORI SULLA CONSOLE
+	    	  JOptionPane.showMessageDialog(null,"<html>Accesso non riuscito per il database selezionato.<br>Cambiare le impostazioni di connessione e controllare che il server sia raggiungibile. <br> <br>  Errore: "+ e.getMessage(),"Non sono riuscito a collegarmi",JOptionPane.ERROR_MESSAGE);
 	     }
-	      
 	      return connesso;
 	     
 	   }  
