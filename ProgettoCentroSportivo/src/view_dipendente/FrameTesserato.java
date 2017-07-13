@@ -1,4 +1,4 @@
-package VisteUtenteGenerico;
+package view_dipendente;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -14,6 +14,8 @@ import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Listener.Listen;
 
 public class FrameTesserato extends JPanel {
 	private JTable table;
@@ -48,6 +50,8 @@ public class FrameTesserato extends JPanel {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
 		mnNewMenu.add(mntmNewMenuItem);
+		mntmNewMenuItem.addActionListener(new Listen(this));
+		mntmNewMenuItem.setActionCommand("ini");
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
 		mnNewMenu.add(mntmNewMenuItem_1);
@@ -68,18 +72,20 @@ public class FrameTesserato extends JPanel {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
+				{"Discipline", "Orari", "Livello"},
 				{null, null, null},
 				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
+			
 			},
 			new String[] {
 				"Disciplina ", "orari ", "Livello"
-			}
-		));
+			})
+			
+	        	
+			
+			
+			
+);
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.anchor = GridBagConstraints.NORTH;
 		gbc_table.gridx = 0;

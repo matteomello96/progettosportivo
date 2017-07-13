@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
 
 public class prova extends JPanel {
 	private JTable table;
@@ -43,9 +44,11 @@ public class prova extends JPanel {
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		table = new JTable();
+		table.setForeground(Color.BLACK);
+		table.setEnabled(false);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null},
+				{"Discipline", "Orari", "Livello"},
 				{null, null, null},
 				{null, null, null},
 				{null, null, null},
@@ -56,7 +59,14 @@ public class prova extends JPanel {
 			new String[] {
 				"Disciplina ", "orari ", "Livello"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.anchor = GridBagConstraints.NORTH;
 		gbc_table.gridx = 0;

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameRegistrazione;
+import view_dipendente.FrameTesserato;
 
 
 
@@ -13,6 +14,7 @@ public class Listen implements ActionListener {
 	public FrameIniziale finestraLogin;
 	public FrameRegistrazione finestrareg;
 	public FrameLogin framelogin;
+	public FrameTesserato frametesserato;
 	
 	public Listen(FrameIniziale frame)
 	{
@@ -26,7 +28,10 @@ public class Listen implements ActionListener {
 	{
 	  framelogin=frame;
 	}
-	
+	public Listen(FrameTesserato frame)
+	{
+	  frametesserato=frame;
+	}
 	
 	
 	public void actionPerformed(ActionEvent e)
@@ -57,6 +62,13 @@ public class Listen implements ActionListener {
   			
         	  FrameLogin.frame.setVisible(false);
         	  FrameLogin.frame.dispose();
+			new FrameIniziale();
+			FrameIniziale.frame.setVisible(true);
+		}
+          if ("ini".equals(e.getActionCommand())){
+    			
+        	  FrameLogin.frame.setVisible(false);
+        	  FrameTesserato.frame.dispose();
 			new FrameIniziale();
 			FrameIniziale.frame.setVisible(true);
 		}
