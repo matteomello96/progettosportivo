@@ -107,6 +107,7 @@ public class FrameIniziale extends JFrame {
 		contentPane.add(lblLeNostreDiscipline, gbc_lblLeNostreDiscipline);
 		
 		table = new JTable();
+		
 		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
 		JScrollPane scrollPane = new JScrollPane();
 		

@@ -8,6 +8,7 @@ private Float CostoMensile;
 private String Descrizione;
 private String ImmaginePath;
 private String Calendario;
+
 public String getNomeDisciplina() {
 	return NomeDisciplina;
 }

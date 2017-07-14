@@ -1,26 +1,37 @@
 package view_dipendente;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JMenu;
+
+import java.awt.ComponentOrientation;
 import java.awt.GridBagConstraints;
 import javax.swing.JMenuBar;
-import java.awt.Insets;
+
 import javax.swing.JMenuItem;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
 
-import java.awt.GridLayout;
+
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
+import ClassiDao.ElencoAttivitaDAO;
+import ClassiDao.ElencoDisciplineDAO;
 import Listener.Listen;
+import Model.ElencoAttivita;
+import ModelliTabelle.ModDiscIni;
+import ModelliTabelle.disc_tabella;
 
 public class FrameTesserato extends JPanel {
 	private JTable table;
 	public static JFrame frame;
 	private JPanel contentPane;
+	 private disc_tabella model;
 
 	/**
 	 * Create the panel.
@@ -38,12 +49,7 @@ public class FrameTesserato extends JPanel {
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		/*GridBagConstraints gbc_menuBar = new GridBagConstraints();
-		gbc_menuBar.anchor = GridBagConstraints.WEST;
-		gbc_menuBar.insets = new Insets(0, 0, 5, 0);
-		gbc_menuBar.gridx = 0;
-		gbc_menuBar.gridy = 0;
-		add(menuBar, gbc_menuBar);*/
+	
 		
 		JMenu mnNewMenu = new JMenu("home");
 		menuBar.add(mnNewMenu);
@@ -70,28 +76,20 @@ public class FrameTesserato extends JPanel {
 		
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Discipline", "Orari", "Livello"},
-				{null, null, null},
-				{null, null, null},
-			
-			},
-			new String[] {
-				"Disciplina ", "orari ", "Livello"
-			})
-			
-	        	
-			
-			
-			
-);
+		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());
+	 
+		
+		table.setCellSelectionEnabled(true);
+		table.setModel(model);
+		
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.anchor = GridBagConstraints.NORTH;
+		
 		gbc_table.gridx = 0;
 		gbc_table.gridy = 1;
 		contentPane.add(table, gbc_table);
-
+		
+	
 	}
 
 }

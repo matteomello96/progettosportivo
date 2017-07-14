@@ -34,20 +34,21 @@ public class ModDiscIni extends AbstractTableModel {
 	public int getColumnCount() {
 		return 7;
 	}
+	
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		//ArrayList<Utente>
 		//data binding
 		DisciplinaElenco d=dati.get(rowIndex);
-		if(columnIndex==0) return d.getNomeDisciplina();
+		
+		  if(columnIndex==0) return d.getNomeDisciplina();
 		else if(columnIndex==1) return d.getNomeLivello();
 		else if(columnIndex==2) return d.getMaxIscrittiTurno();
 		else if(columnIndex==3) return d.getCostoMensile();
 		else if(columnIndex==4) return d.getDescrizione();
 		else if(columnIndex==5) return d.getCalendario();
 		else if(columnIndex==6) return d.getImmaginePath();
-		
 		return null;
 	}
 
