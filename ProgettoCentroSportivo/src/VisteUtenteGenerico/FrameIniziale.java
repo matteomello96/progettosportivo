@@ -119,7 +119,7 @@ public class FrameIniziale extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setCellSelectionEnabled(true);
-		table.setModel(model);
+		table.setModel(model );
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.anchor = GridBagConstraints.NORTH;
 		gbc_table.gridwidth = 12;
