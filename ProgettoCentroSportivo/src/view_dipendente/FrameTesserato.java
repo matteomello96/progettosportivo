@@ -8,6 +8,8 @@ import java.awt.Insets;
 
 import javax.swing.JMenu;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.GridBagConstraints;
 import javax.swing.JMenuBar;
@@ -38,6 +40,7 @@ public class FrameTesserato extends JPanel {
 	 */
 	public FrameTesserato() {
 		
+		
 		frame = new JFrame("Tesserato");
 		frame.setTitle("Frame Tesserato");
 		frame.setResizable(true);
@@ -66,28 +69,38 @@ public class FrameTesserato extends JPanel {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.setContentPane(contentPane);
 		
-		GridBagLayout gridBagLayout = new GridBagLayout();
+		/*GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		contentPane.setLayout(gridBagLayout);*/
+		setForeground(new Color(0, 0, 0));
+		setBackground(new Color(240, 240, 240));
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{47, 225, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{50, 0, 0, 21, 33, 96, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gridBagLayout);
-		
 		
 		
 		table = new JTable();
 		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());
 	 
+	
 		
 		table.setCellSelectionEnabled(true);
 		table.setModel(model);
 		
 		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.anchor = GridBagConstraints.NORTH;
-		
-		gbc_table.gridx = 0;
+		gbc_table.insets = new Insets(0, 0, 5, 5);
+		gbc_table.anchor = GridBagConstraints.NORTHWEST;
+		gbc_table.gridx = 1;
 		gbc_table.gridy = 1;
+		contentPane.add(table.getTableHeader(), gbc_table);
 		contentPane.add(table, gbc_table);
+		
 		
 	
 	}

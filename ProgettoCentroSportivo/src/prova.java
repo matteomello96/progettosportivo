@@ -10,6 +10,9 @@ import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class prova extends JPanel {
 	private JTable table;
@@ -18,37 +21,20 @@ public class prova extends JPanel {
 	 * Create the panel.
 	 */
 	public prova() {
+		setForeground(new Color(0, 0, 0));
+		setBackground(new Color(240, 240, 240));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{47, 225, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{50, 0, 0, 21, 33, 96, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setToolTipText("");
-		GridBagConstraints gbc_menuBar = new GridBagConstraints();
-		gbc_menuBar.anchor = GridBagConstraints.WEST;
-		gbc_menuBar.insets = new Insets(0, 0, 5, 0);
-		gbc_menuBar.gridx = 0;
-		gbc_menuBar.gridy = 0;
-		add(menuBar, gbc_menuBar);
-		
-		JMenu mnNewMenu = new JMenu("home");
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
-		mnNewMenu.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
-		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		table = new JTable();
 		table.setForeground(Color.BLACK);
 		table.setEnabled(false);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Discipline", "Orari", "Livello"},
 				{null, null, null},
 				{null, null, null},
 				{null, null, null},
@@ -68,8 +54,9 @@ public class prova extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.anchor = GridBagConstraints.NORTH;
-		gbc_table.gridx = 0;
+		gbc_table.insets = new Insets(0, 0, 5, 5);
+		gbc_table.anchor = GridBagConstraints.NORTHWEST;
+		gbc_table.gridx = 1;
 		gbc_table.gridy = 1;
 		add(table, gbc_table);
 
