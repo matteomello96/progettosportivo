@@ -5,6 +5,8 @@ import javax.swing.JScrollPane;
 
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 
@@ -107,14 +109,22 @@ public class FrameTesserato extends JPanel {
 		table_1 = new JTable();
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null,null},
-				{null, null, null,null},
-				{null, null, null,null},
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column"
+				"Disciplina", "Livello", "MaxIscritti", "CostoMensile"
 			}
-		));
+		){
+			private static final long serialVersionUID = 1L;
+			@SuppressWarnings("rawtypes")
+			Class[] columnTypes = new Class[] {
+					String.class, String.class, Integer.class,Float.class
+				};
+				public Class<?> getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			
+		});
+		table_1.setAutoCreateRowSorter(true);
 		GridBagConstraints gbc_table_1 = new GridBagConstraints();
 		gbc_table_1.fill = GridBagConstraints.BOTH;
 		gbc_table_1.gridwidth = 4;
@@ -122,6 +132,12 @@ public class FrameTesserato extends JPanel {
 		gbc_table_1.gridx = 4;
 		gbc_table_1.gridy = 1;
 		contentPane.add(table_1, gbc_table_1);
+		JButton btnDettagliOrario = new JButton("Dettagli orario");
+		GridBagConstraints gbc_btnDettagliOrario = new GridBagConstraints();
+		gbc_btnDettagliOrario.insets = new Insets(0, 0, 5, 5);
+		gbc_btnDettagliOrario.gridx = 1;
+		gbc_btnDettagliOrario.gridy = 2;
+		contentPane.add(btnDettagliOrario, gbc_btnDettagliOrario);
 
 		JButton Aggiungi = new JButton("Aggiungi");
 		GridBagConstraints gbc_Aggiungi = new GridBagConstraints();
@@ -130,6 +146,31 @@ public class FrameTesserato extends JPanel {
 		gbc_Aggiungi.gridx = 2;
 		gbc_Aggiungi.gridy = 2;
 		contentPane.add(Aggiungi, gbc_Aggiungi);
+		Aggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow()!=-1){
+				Object[] dati = new Object[4];
+
+				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
+				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
+				dati[2]=table.getValueAt(table.getSelectedRow(), 2);
+				dati[3]=table.getValueAt(table.getSelectedRow(), 3);
+				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+
+				modello.addRow(dati);
+				}
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		JButton rimuovi = new JButton("rimuovi");
 		GridBagConstraints gbc_rimuovi = new GridBagConstraints();

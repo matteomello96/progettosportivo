@@ -89,6 +89,13 @@ public class prova extends JPanel {
 		gbc_table_1.gridy = 1;
 		add(table_1, gbc_table_1);
 		
+		JButton btnDettagliOrario = new JButton("Dettagli orario");
+		GridBagConstraints gbc_btnDettagliOrario = new GridBagConstraints();
+		gbc_btnDettagliOrario.insets = new Insets(0, 0, 5, 5);
+		gbc_btnDettagliOrario.gridx = 1;
+		gbc_btnDettagliOrario.gridy = 2;
+		add(btnDettagliOrario, gbc_btnDettagliOrario);
+		
 		JButton Aggiungi = new JButton("Aggiungi");
 		GridBagConstraints gbc_Aggiungi = new GridBagConstraints();
 		gbc_Aggiungi.gridwidth = 2;

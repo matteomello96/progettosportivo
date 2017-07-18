@@ -126,8 +126,8 @@ public class FrameIniziale extends JFrame {
 		gbc_table.fill = GridBagConstraints.HORIZONTAL;
 		gbc_table.gridx = 2;
 		gbc_table.gridy = 3;
-		String[] columnNames = new String[]{"nome", "email", "newsletter"};
-		contentPane.add(table.getTableHeader(), gbc_table);
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"};
+	contentPane.add(table.getTableHeader(), gbc_table);
 		contentPane.add(table,gbc_table);
 		
 	}
