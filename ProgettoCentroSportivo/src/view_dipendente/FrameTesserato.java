@@ -18,6 +18,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JMenuBar;
 
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -156,9 +157,58 @@ public class FrameTesserato extends JPanel {
 				dati[2]=table.getValueAt(table.getSelectedRow(), 2);
 				dati[3]=table.getValueAt(table.getSelectedRow(), 3);
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+				
+				int c=0;
+				boolean u=true;
+				
 
-				modello.addRow(dati);
+				for(c=0;c<table_1.getRowCount();c++)
+				{
+					if(table_1.getRowCount()>=1){
+						if(table.getValueAt(table.getSelectedRow(), 0).equals(table_1.getValueAt(c, 0))&&
+								table.getValueAt(table.getSelectedRow(), 1).equals(table_1.getValueAt(c, 1)))
+						{
+							u=false;
+							break;
+						}
+
+					}
+
+
 				}
+				
+				int pdisp = (Integer) table.getValueAt(table.getSelectedRow(),2);
+				if(pdisp==0){
+					 JOptionPane.showMessageDialog(null, "Posti attualmente non disponibili");
+					
+				}
+				else {
+					if(u)
+					{
+						modello.addRow(dati);						
+					}
+				
+					else{
+				
+					JOptionPane.showMessageDialog(null, "Non è possibile Aggiungere la stessa disciplina",null,JOptionPane.WARNING_MESSAGE);
+					
+					}
+					}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				}
+				
+				
 			}
 		});
 		
@@ -178,6 +228,16 @@ public class FrameTesserato extends JPanel {
 		gbc_rimuovi.gridx = 4;
 		gbc_rimuovi.gridy = 2;
 		contentPane.add(rimuovi, gbc_rimuovi);
+		rimuovi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+				if(table_1.getSelectedRow()!=-1){
+				modello.removeRow(table_1.getSelectedRow());
+				}
+			}
+		});
+		
+		
 		
 		JButton svuotacarrello = new JButton("svuotacarrello");
 		GridBagConstraints gbc_svuotacarrello = new GridBagConstraints();
@@ -185,6 +245,16 @@ public class FrameTesserato extends JPanel {
 		gbc_svuotacarrello.gridx = 5;
 		gbc_svuotacarrello.gridy = 2;
 		contentPane.add(svuotacarrello, gbc_svuotacarrello);
+		
+		svuotacarrello.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+				for(int x=modello.getRowCount()-1;x>=0;x--)
+				{
+					modello.removeRow(x);
+				}
+			}
+		});
 		
 		JButton invia = new JButton("invia");
 		GridBagConstraints gbc_invia = new GridBagConstraints();
