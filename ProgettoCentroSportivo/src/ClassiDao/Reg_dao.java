@@ -1,7 +1,7 @@
 
 
 package ClassiDao;
-import DBInterfaccia.*;
+import DBInterfaccia.DbConnection ;
 import VisteUtenteGenerico.FrameRegistrazione;
 
 
@@ -12,8 +12,15 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+
 public class Reg_dao {
 	
+private static Reg_dao instance;	
+public static synchronized Reg_dao getInstance() {
+	if(instance==null)
+		instance=new Reg_dao();
+	return instance;
+}	
 public static boolean registra(String nome, String cognome , String cod_fis , String citta, String via , String num_civ , String mail ,String user , String pass , String tipo){
 	 Connection con = DbConnection.db;
      Connection con2 = DbConnection.db;
@@ -106,9 +113,46 @@ catch (SQLException ex) {
 return false;
 }
      
+public static boolean esistenome(String nome)
+{
+
+    
+    Connection con = DbConnection.db;
+    Statement st;
+    
+    ResultSet rs;
+    
+   
+ 
+    
+    try {
+        
+        st = con.createStatement();
+        rs=st.executeQuery("SELECT elencoutenti.username,elencoutenti.mail FROM elencoutenti WHERE elencoutenti.username='"+nome+"'");
+      
+      if(rs.next())
+    	  return true;
+      else{
+       return false;
+      
+      
+      }
+      }
+       
+        
+ catch (SQLException ex) {
+       
+    }
+    return false;
+}
+
+
+
 
      
 }
+
+
 
 
 
