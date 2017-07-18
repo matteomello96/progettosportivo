@@ -43,22 +43,22 @@ public class prova extends JPanel {
 		//table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, new Integer(122)},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
 			},
 			new String[] {
-				"New column", "Disciplina ", "orari ", "Livello"
+				"New column", "New column", "Disciplina ", "orari ", "Livello"
 			}
 		) {
-			boolean[] columnEditables = new boolean[] {
-				true, false, false, false
+			Class[] columnTypes = new Class[] {
+				Object.class, Object.class, Object.class, Object.class, Integer.class
 			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
 			}
 		});
 		GridBagConstraints gbc_table = new GridBagConstraints();
