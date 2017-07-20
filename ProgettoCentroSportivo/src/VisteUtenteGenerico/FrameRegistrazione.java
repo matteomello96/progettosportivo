@@ -370,7 +370,7 @@ public class FrameRegistrazione extends JFrame {
 		contentPane.add(lblTipoUtente, gbc_lblTipoUtente);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Tesserato", "Istruttore"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Tesserato","Istruttore"}));
 		comboBox.setVisible(true);
 		comboBox.setEditable(false);
 		GridBagConstraints gbc_combotipoutente = new GridBagConstraints();
@@ -480,7 +480,7 @@ public class FrameRegistrazione extends JFrame {
 		}
 		else
 			if(comboBox.getSelectedIndex()!=1)
-			bool=Reg_dao.registra(textnome.getText(),textcognome.getText(),textcodice.getText(),textcitta.getText(),textvia.getText(),textnumciv.getText(), textmail.getText(),textnomeutente.getText(),pass.getText(), comboBox.getSelectedItem().toString());
+			bool=Reg_dao.registratesserato(textnome.getText(),textcognome.getText(),textcodice.getText(),textcitta.getText(),textvia.getText(),textnumciv.getText(), textmail.getText(),textnomeutente.getText(),pass.getText(), comboBox.getSelectedItem().toString());
 			else bool=Reg_dao.registraistruttore(textnome.getText(),textcognome.getText(),textcodice.getText(),textcitta.getText(),textvia.getText(),textnumciv.getText(), textmail.getText(),textnomeutente.getText(),pass.getText(), comboBox.getSelectedItem().toString());
 		
 		if(bool)
