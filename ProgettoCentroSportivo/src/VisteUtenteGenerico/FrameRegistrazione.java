@@ -485,7 +485,7 @@ public class FrameRegistrazione extends JFrame {
 		
 		if(bool)
 		{
-			frame.setVisible(false);
+			frame.setVisible(false); 
 			frame.dispose();
 			FrameIniziale.frame.setEnabled(true);
 			FrameIniziale.frame.setAlwaysOnTop(true);
