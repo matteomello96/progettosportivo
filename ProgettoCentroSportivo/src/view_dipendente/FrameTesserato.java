@@ -85,7 +85,7 @@ public class FrameTesserato extends JPanel {
 		setLayout(gridBagLayout);
 		
 		
-		final JLabel totord = new JLabel("TOTALE ARTICOLI:");
+		final JLabel totord = new JLabel("TOTALE ORDINE:");
 		totord.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		contentPane.add(totord);
 		
@@ -136,12 +136,7 @@ public class FrameTesserato extends JPanel {
 		gbc_table_1.gridx = 4;
 		gbc_table_1.gridy = 1;
 		contentPane.add(table_1, gbc_table_1);
-		JButton btnDettagliOrario = new JButton("Dettagli orario");
-		GridBagConstraints gbc_btnDettagliOrario = new GridBagConstraints();
-		gbc_btnDettagliOrario.insets = new Insets(0, 0, 5, 5);
-		gbc_btnDettagliOrario.gridx = 1;
-		gbc_btnDettagliOrario.gridy = 2;
-		contentPane.add(btnDettagliOrario, gbc_btnDettagliOrario);
+		
 
 		JButton Aggiungi = new JButton("Aggiungi");
 		GridBagConstraints gbc_Aggiungi = new GridBagConstraints();
@@ -291,7 +286,7 @@ public class FrameTesserato extends JPanel {
 				
 				}
 				//System.out.println("totale:  "+totale);
-				totord.setText("TOTALE ARTICOLI: "+df.format(totale)+" EUR  ");
+				totord.setText("TOTALE ORDINE: "+df.format(totale)+" EUR  ");
 				
 				if(table_1.getModel().getRowCount()>0)
 					invia.setEnabled(true);

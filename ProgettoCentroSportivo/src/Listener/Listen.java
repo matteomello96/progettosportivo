@@ -76,8 +76,7 @@ public class Listen implements ActionListener {
 		}
           if ("conf".equals(e.getActionCommand())){
   			
-        	  FrameTesserato.frame.setVisible(false);
-        	  FrameTesserato.frame.dispose();
+        	  
 			new Confermaordine();
 			Confermaordine.frame.setVisible(true);
 		}
