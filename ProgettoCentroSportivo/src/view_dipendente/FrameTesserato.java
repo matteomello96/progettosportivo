@@ -40,6 +40,9 @@ public class FrameTesserato extends JPanel {
 	 private disc_tabella model;
 	 public static float totale;
 	 public static JButton svuotacarrello;
+	 public static JButton Aggiungi;
+	 public static JButton rimuovi;
+	 public static JButton invia;
 	
 
 	/**
@@ -52,7 +55,7 @@ public class FrameTesserato extends JPanel {
 		frame.setTitle("Frame Tesserato");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 605, 391);
+		frame.setBounds(100, 100, 1334, 700);
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		
@@ -139,7 +142,7 @@ public class FrameTesserato extends JPanel {
 		contentPane.add(table_1, gbc_table_1);
 		
 
-		JButton Aggiungi = new JButton("Aggiungi");
+		Aggiungi = new JButton("Aggiungi");
 		GridBagConstraints gbc_Aggiungi = new GridBagConstraints();
 		gbc_Aggiungi.gridwidth = 2;
 		gbc_Aggiungi.insets = new Insets(0, 0, 5, 5);
@@ -221,7 +224,7 @@ public class FrameTesserato extends JPanel {
 		
 		
 		
-		JButton rimuovi = new JButton("rimuovi");
+		rimuovi = new JButton("rimuovi");
 		GridBagConstraints gbc_rimuovi = new GridBagConstraints();
 		gbc_rimuovi.insets = new Insets(0, 0, 5, 5);
 		gbc_rimuovi.gridx = 4;
@@ -255,7 +258,7 @@ public class FrameTesserato extends JPanel {
 			}
 		});
 		
-		JButton invia = new JButton("invia");
+	     invia = new JButton("invia");
 		GridBagConstraints gbc_invia = new GridBagConstraints();
 		gbc_invia.insets = new Insets(0, 0, 5, 5);
 		gbc_invia.gridx = 6;
