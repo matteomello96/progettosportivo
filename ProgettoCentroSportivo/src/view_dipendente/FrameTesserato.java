@@ -34,11 +34,12 @@ import ModelliTabelle.disc_tabella;
 
 public class FrameTesserato extends JPanel {
 	private JTable table;
-	private JTable table_1;
+	public static JTable table_1;
 	public static JFrame frame;
 	private JPanel contentPane;
 	 private disc_tabella model;
 	 public static float totale;
+	 public static JButton svuotacarrello;
 	
 
 	/**
@@ -237,7 +238,7 @@ public class FrameTesserato extends JPanel {
 		
 		
 		
-		JButton svuotacarrello = new JButton("svuotacarrello");
+	    svuotacarrello = new JButton("svuotacarrello");
 		GridBagConstraints gbc_svuotacarrello = new GridBagConstraints();
 		gbc_svuotacarrello.insets = new Insets(0, 0, 5, 5);
 		gbc_svuotacarrello.gridx = 5;

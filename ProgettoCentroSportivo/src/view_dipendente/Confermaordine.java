@@ -1,19 +1,36 @@
 package view_dipendente;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import org.apache.pdfbox.exceptions.COSVisitorException;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+
+import ClassiDao.GetInfoDB;
+import view_dipendente.FrameTesserato;
+
 
 
 
@@ -26,6 +43,15 @@ import javax.swing.SwingConstants;
 public class Confermaordine {
 	public JButton btnConferma;
 	public static Combocon ComboP;
+	private JLabel lblTotaleOrdineEur;
+	private JLabel part;
+	public JButton btnTornaAlCarrello;
+	private JLabel OraPoss;
+	public String nomedistinta="";
+	public String percorso="";
+	public static String testodistinta;
+	public static PDDocument documentoPDF=null;
+	public static boolean d=true;
 	
 	public static JDialog frame;
 	public Confermaordine(){
@@ -42,13 +68,13 @@ public class Confermaordine {
 		frame.setResizable(false);
 		
 
-		JLabel lblTotaleOrdineEur = new JLabel("TOTALE ORDINE:");
+		lblTotaleOrdineEur = new JLabel("TOTALE ORDINE:");
 		lblTotaleOrdineEur.setToolTipText("");
 		lblTotaleOrdineEur.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTotaleOrdineEur.setBounds(26, 46, 145, 14);
 		frame.getContentPane().add(lblTotaleOrdineEur);
 		
-		JLabel part = new JLabel("VALORE");
+		part = new JLabel("VALORE");
 		part.setHorizontalAlignment(SwingConstants.TRAILING);
 		part.setText(df.format(FrameTesserato.totale)+" EUR");
 		part.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -72,7 +98,7 @@ public class Confermaordine {
 		frame.getContentPane().add(ComboP);
 		
 		
-		JButton btnTornaAlCarrello = new JButton("Torna al carrello");
+		btnTornaAlCarrello = new JButton("Torna al carrello");
 		btnTornaAlCarrello.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnTornaAlCarrello.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -93,6 +119,194 @@ public class Confermaordine {
 		btnConferma.setEnabled(false);
 		btnConferma.setBounds(668, 295, 115, 28);
 		frame.getContentPane().add(btnConferma);
+		
+		
+		OraPoss = new JLabel("Genera file pdf .");
+		OraPoss.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		OraPoss.setBounds(211, 359, 372, 14);
+		frame.getContentPane().add(OraPoss);
+		
+		final JButton btnGeneraDistinta = new JButton("Genera distinta");
+		btnGeneraDistinta.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnGeneraDistinta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser fc = new JFileChooser();
+				 int sel = fc.showSaveDialog(frame);
+			      if (sel == JFileChooser.APPROVE_OPTION) {
+			         nomedistinta=(fc.getSelectedFile().getName());
+			         percorso =(fc.getCurrentDirectory().toString());
+			         File fdistinta = new File(percorso+"\\"+nomedistinta+"(TXT).txt");
+				     BufferedWriter writer = null;
+			         try {	     
+						writer = new BufferedWriter(new FileWriter(fdistinta));
+						writer.write(testodistinta);
+						writer.close();								
+						documentoPDF.save(percorso+"\\"+nomedistinta+"(PDF).pdf");
+						documentoPDF.close();
+						 String ObjButtons[] = {"        Sì        ","      No      "};
+					        int PromptResult = JOptionPane.showOptionDialog(frame,"Ho salvato la distinta in "+percorso+" in formato PDF e TXT.\r\nVuoi aprire adesso il documento PDF? \r\n","Distinta",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,ObjButtons,ObjButtons[0]);
+					        if(PromptResult==JOptionPane.YES_OPTION)
+					        {
+					        	if (Desktop.isDesktopSupported()) {
+								    try {
+								        File myFile = new File(percorso+"\\"+nomedistinta+"(PDF).pdf");
+								        Desktop.getDesktop().open(myFile);
+								    } catch (IOException ex) {
+								    	JOptionPane.showMessageDialog(frame,"Non sono riuscito ad aprire il file "+ex.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
+								    }
+						    	
+					        }
+
+						}
+
+						d=false;
+					} catch (COSVisitorException e2) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(frame,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e2.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
+						e2.printStackTrace();
+					} catch (IOException e2) {
+						JOptionPane.showMessageDialog(frame,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e2.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+			         
+			         
+		
+			      }
+			      
+			      
+			      else if (sel == JFileChooser.CANCEL_OPTION) {
+			        
+			      }
+			      }
+			
+		});
+		
+		
+
+		btnGeneraDistinta.setBounds(549, 352, 145, 28);
+		btnGeneraDistinta.setEnabled(false);
+		frame.getContentPane().add(btnGeneraDistinta);
+		
+		final JButton btnFine = new JButton("Fine");
+		btnFine.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnFine.setEnabled(false);
+		/*btnFine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(d){
+
+					BufferedWriter writer = null;
+
+					try {
+						// File fdistinta2 = new File(System.getProperty("user.home")+"\\desktop\\DISTINTA_"+GetInfoDB.getDateOnly()+"(TXT).txt");
+							writer = new BufferedWriter(new FileWriter(fdistinta2));
+							writer.write(testodistinta);
+							writer.close();
+							String nome=System.getProperty("user.home")+"\\desktop\\DISTINTA_"+GetInfoDB.getDateOnly()+"(PDF).pdf";
+						documentoPDF.save(nome);
+						documentoPDF.close();
+						 String ObjButtons[] = {"        Sì        ","      No      "};
+					        int PromptResult = JOptionPane.showOptionDialog(frame,"Ho salvato la distinta sul desktop in PDF e TXT.\r\nVuoi aprire adesso il documento PDF? \r\n","Distinta",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,ObjButtons,ObjButtons[0]);
+					        if(PromptResult==JOptionPane.YES_OPTION)
+					        {
+					        	if (Desktop.isDesktopSupported()) {
+								    try {
+								        File myFile = new File(nome);
+								        Desktop.getDesktop().open(myFile);
+								    } catch (IOException ex) {
+								    	JOptionPane.showMessageDialog(frame,"Non sono riuscito ad aprire il file "+ex.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
+								    }
+						    	
+					        }
+
+						}
+						//JOptionPane.showMessageDialog(frame,"Ho salvato la distinta PDF e TXT dell'ordine sul desktop. \r\n","Distinta", JOptionPane.INFORMATION_MESSAGE);
+						d=true;	
+					} catch (COSVisitorException | IOException e) {
+						JOptionPane.showMessageDialog(null,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
+						d2=false;
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+		      d=true;
+				if(d2){
+				Listen.conf=null;
+				frame.setVisible(false);
+				
+				frame.dispose();	
+				DipenFrame.frame.setEnabled(true);
+				DipenFrame.frame.setAlwaysOnTop(true);
+				DipenFrame.frame.setAlwaysOnTop(false);
+				DipenFrame.confermab.setEnabled(false);
+				DipenFrame.btnRimuoviTutto.doClick();
+				d2=true;
+				}
+				
+			
+			}});*/
+		btnFine.setBounds(698, 352, 89, 28);
+		frame.getContentPane().add(btnFine);
+		
+		
+
+		btnConferma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int idprogetto=GetInfoDB.getidProj(ComboP.getSelectedItem().toString());
+				TriggerOrdine.insOrdine(idprogetto);
+
+				int a0=0,a1=0;
+				String a2="",a3="";
+				for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
+				{
+					a0=(Integer)FrameTesserato.table_1.getValueAt(c, 0);
+					a1=(Integer)FrameTesserato.table_1.getValueAt(c, 2);	
+					a2=FrameTesserato.table_1.getValueAt(c,4).toString();
+					a3=FrameTesserato.table_1.getValueAt(c,5).toString();
+					TriggerOrdine.insDetOrd(a0, a1, a2, a3);
+					TriggerOrdine.remArt(a1, a3, a0);
+					ComboP.setEnabled(false);
+					frame.setAlwaysOnTop(false);
+					
+					
+				}
+				
+				frame.setBounds(100, 100, 803, 447);
+				frame.setLocationRelativeTo(null);
+				Point lp=frame.getLocation();
+				frame.setBounds(lp.x,lp.y+26 , 803, 419);
+				btnConferma.setEnabled(false);
+				btnConferma.setBounds(0,0,0,0);
+				btnTornaAlCarrello.setBounds(0, 0, 0, 0);
+				
+				btnGeneraDistinta.setEnabled(true);
+				btnFine.setEnabled(true);
+				OraPoss.setBounds(211, 359, 372, 14);
+				//fork.setBounds(0, 174, 825, 162);
+				testodistinta=TriggerOrdine.scriviDistinta();
+				documentoPDF = TriggerOrdine.scriviPDF();
+				try {
+					TriggerOrdine.scriviPDF().close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			//	FrameTesserato.tease();
+				
+				FrameTesserato.svuotacarrello.doClick();
+				
+				
+
+				
+				
+				
+				
+				
+			}
+		});
+		
 		
 	}
 }
