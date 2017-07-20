@@ -2,40 +2,34 @@ package view_dipendente;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import javax.swing.JMenu;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import javax.swing.JMenuBar;
-
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
-
+import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.TreeSelectionModel;
+
 
 
 
 import ClassiDao.ElencoAttivitaDAO;
-import ClassiDao.ElencoDisciplineDAO;
 import Listener.Listen;
-import Model.ElencoAttivita;
-import ModelliTabelle.ModDiscIni;
 import ModelliTabelle.disc_tabella;
 
 public class FrameTesserato extends JPanel {
@@ -44,6 +38,8 @@ public class FrameTesserato extends JPanel {
 	public static JFrame frame;
 	private JPanel contentPane;
 	 private disc_tabella model;
+	 public static float totale;
+	
 
 	/**
 	 * Create the panel.
@@ -89,6 +85,11 @@ public class FrameTesserato extends JPanel {
 		setLayout(gridBagLayout);
 		
 		
+		final JLabel totord = new JLabel("TOTALE ARTICOLI:");
+		totord.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		contentPane.add(totord);
+		
+		
 		table = new JTable();
 		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());
 	 
@@ -125,6 +126,8 @@ public class FrameTesserato extends JPanel {
 				}
 			
 		});
+		
+	
 		table_1.setAutoCreateRowSorter(true);
 		GridBagConstraints gbc_table_1 = new GridBagConstraints();
 		gbc_table_1.fill = GridBagConstraints.BOTH;
@@ -262,7 +265,48 @@ public class FrameTesserato extends JPanel {
 		gbc_invia.gridx = 6;
 		gbc_invia.gridy = 2;
 		contentPane.add(invia, gbc_invia);
-	
+		invia.addActionListener(new Listen(this));
+		invia.setActionCommand("conf");
+		invia.setEnabled(false);
+		
+		
+		
+		
+		final DecimalFormat df = new DecimalFormat("0.00");
+		df.setRoundingMode(RoundingMode.HALF_EVEN);
+		
+		table_1.getModel().addTableModelListener(new TableModelListener(){
+			public void tableChanged(TableModelEvent e) {
+				//System.out.println("CAMBIATO!!!");
+				
+			
+				
+				
+				
+				totale=0;
+				int c=0;
+				for (c=0;c<table_1.getModel().getRowCount();c++){
+		
+				totale=totale+((Float)(table_1.getModel().getValueAt(c, 3)));
+				
+				}
+				//System.out.println("totale:  "+totale);
+				totord.setText("TOTALE ARTICOLI: "+df.format(totale)+" EUR  ");
+				
+				if(table_1.getModel().getRowCount()>0)
+					invia.setEnabled(true);
+				else table_1.setEnabled(false);
+				if(table_1.getModel().getRowCount()<1)
+					invia.setEnabled(false);	
+				
+				
+				
+				
+					
+					
+		}}
+		);
+		
 	}
 
 }

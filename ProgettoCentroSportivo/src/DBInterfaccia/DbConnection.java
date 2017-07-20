@@ -12,12 +12,17 @@ public class DbConnection {
 	   private static boolean connesso;    
 	   private static DbConnection instance;
 
-	   public static String nomebase="sql11184998";
-	   public static String rootu="sql11184998";
-	   public static String rootp="dbcentro100";
-	   public static String host="sql11.freemysqlhosting.net";
+	 //  public static String nomebase="sql11184998";
+	 //  public static String rootu="sql11184998";
+	   //public static String rootp="dbcentro100";
+	  // public static String host="sql11.freemysqlhosting.net";
 	   
+	   public static String nomebase="centropolisportivo";
+	   public static String rootu="root";
+	  public static String rootp="Furfudopfa81";
+	   public static String host="127.0.0.1";
 	   
+	 
 	 
 	   
 	   

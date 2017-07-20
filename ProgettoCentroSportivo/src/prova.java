@@ -18,6 +18,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 import java.awt.Component;
+import javax.swing.JLabel;
 
 public class prova extends JPanel {
 	private JTable table;
@@ -124,6 +125,13 @@ public class prova extends JPanel {
 		gbc_invia.gridx = 6;
 		gbc_invia.gridy = 2;
 		add(invia, gbc_invia);
+		
+		JLabel lblNewLabel = new JLabel("COSTO CORSI:");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 4;
+		gbc_lblNewLabel.gridy = 3;
+		add(lblNewLabel, gbc_lblNewLabel);
 	
 
 	}
