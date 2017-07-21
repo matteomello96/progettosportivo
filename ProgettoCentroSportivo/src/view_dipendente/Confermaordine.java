@@ -29,6 +29,7 @@ import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import ClassiDao.GetInfoDB;
+import ClassiDaoTesserato.TriggerOrdine;
 import view_dipendente.FrameTesserato;
 
 
@@ -189,10 +190,10 @@ public class Confermaordine {
 		btnGeneraDistinta.setEnabled(false);
 		frame.getContentPane().add(btnGeneraDistinta);
 		
-		final JButton btnFine = new JButton("Fine");
+		/*final JButton btnFine = new JButton("Fine");
 		btnFine.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnFine.setEnabled(false);
-		/*btnFine.addActionListener(new ActionListener() {
+		btnFine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(d){
 
@@ -245,13 +246,13 @@ public class Confermaordine {
 				}
 				
 			
-			}});*/
+			}});
 		btnFine.setBounds(698, 352, 89, 28);
-		frame.getContentPane().add(btnFine);
+		frame.getContentPane().add(btnFine);*/
 		
 		
 
-		btnConferma.addActionListener(new ActionListener() {
+		/*	btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int idprogetto=GetInfoDB.getidProj(ComboP.getSelectedItem().toString());
 				TriggerOrdine.insOrdine(idprogetto);
@@ -305,7 +306,7 @@ public class Confermaordine {
 				
 				
 			}
-		});
+		});*/
 		
 		
 	}

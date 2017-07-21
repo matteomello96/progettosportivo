@@ -25,10 +25,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-
-
-
-import ClassiDao.ElencoAttivitaDAO;
+import ClassiDaoTesserato.ElencoAttivitaDAO;
 import Listener.Listen;
 import ModelliTabelle.disc_tabella;
 
