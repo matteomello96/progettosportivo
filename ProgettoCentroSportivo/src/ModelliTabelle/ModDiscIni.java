@@ -24,20 +24,28 @@ public class ModDiscIni extends AbstractTableModel {
 		this.dati = dati;
 	}
 
+	
 	@Override
+	public int getColumnCount() {
+		return 7;
+	}
+	
+	
+	private String[] tableHeaders = {"Nome Disciplina","Livello","Disponibilità","Prezzo","Descrizione","Calendario","Immagine"};
+	@Override
+	public String getColumnName(int columnIndex){
+		return tableHeaders[columnIndex];
+	}
+	
+    @Override
 	public int getRowCount() {
 		if(dati!=null) return dati.size();
 		else return 0;
 	}
 
 	@Override
-	public int getColumnCount() {
-		return 7;
-	}
-	
-
-	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
+		
 		//ArrayList<Utente>
 		//data binding
 		DisciplinaElenco d=dati.get(rowIndex);
@@ -78,4 +86,9 @@ public class ModDiscIni extends AbstractTableModel {
         
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
     }
-}
+	
+	
+	
+	}
+	
+

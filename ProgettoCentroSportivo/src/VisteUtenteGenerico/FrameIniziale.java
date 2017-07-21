@@ -17,6 +17,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 
 import ClassiDao.ElencoDisciplineDAO;
@@ -80,55 +81,50 @@ public class FrameIniziale extends JFrame {
 		MenuAccedi.addActionListener(new Listen(this));
 		MenuAccedi.setActionCommand("Vai_log");
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		frame.setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setBackground(new Color (64,224,208));
+		contentPane.setLayout(new GridBagLayout());
+		 
+		GridBagConstraints gbc = new GridBagConstraints();
+ 
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
 		
 		JLabel lblNewLabel = new JLabel("NuovoPolisportivo");
 		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 6;
-		gbc_lblNewLabel.gridy = 0;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 6;
+		gbc.gridy = 0;
+		contentPane.add(lblNewLabel, gbc);
 		
 		JLabel lblLeNostreDiscipline = new JLabel("Le nostre discipline");
 		lblLeNostreDiscipline.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblLeNostreDiscipline.setForeground(Color.ORANGE);
-		GridBagConstraints gbc_lblLeNostreDiscipline = new GridBagConstraints();
-		gbc_lblLeNostreDiscipline.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLeNostreDiscipline.gridx = 0;
-		gbc_lblLeNostreDiscipline.gridy = 1;
-		contentPane.add(lblLeNostreDiscipline, gbc_lblLeNostreDiscipline);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		contentPane.add(lblLeNostreDiscipline, gbc);
 		
 		table = new JTable();
-		
 		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
-		JScrollPane scrollPane = new JScrollPane();
-		
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 3;
-		contentPane.add(scrollPane, gbc_scrollPane);
+		table.setRowHeight(20);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setCellSelectionEnabled(true);
-		table.setModel(model );
-		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.anchor = GridBagConstraints.NORTH;
-		gbc_table.gridwidth = 12;
-		gbc_table.fill = GridBagConstraints.HORIZONTAL;
-		gbc_table.gridx = 2;
-		gbc_table.gridy = 3;
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"};
-	contentPane.add(table.getTableHeader(), gbc_table);
-		contentPane.add(table,gbc_table);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setModel(model);
+		
+		
+		JScrollPane pane2 = new JScrollPane(table);
+		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridwidth = 2;
+		gbc.gridx = 2;
+		gbc.gridy = 3;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		contentPane.add(pane2,gbc);
 		
 	}
 	

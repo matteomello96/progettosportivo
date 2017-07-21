@@ -166,7 +166,6 @@ public class FrameRegistrazione extends JFrame {
 		textnome.setColumns(10);
 		
 		JLabel lblCognome = new JLabel("Cognome");
-		GridBagConstraints gbc_lblCognome = new GridBagConstraints();
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
