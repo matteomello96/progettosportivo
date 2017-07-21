@@ -132,6 +132,15 @@ public class Confermaordine {
 		btnGeneraDistinta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				testodistinta=TriggerOrdine.scriviDistinta();
+				documentoPDF = TriggerOrdine.writePDF();
+				try {
+					TriggerOrdine.writePDF().close();
+				} catch (IOException f) {
+					// TODO Auto-generated catch block
+					f.printStackTrace();
+				}
+				
 				JFileChooser fc = new JFileChooser();
 				 int sel = fc.showSaveDialog(frame);
 			      if (sel == JFileChooser.APPROVE_OPTION) {
@@ -182,12 +191,15 @@ public class Confermaordine {
 			      }
 			      }
 			
+			
+		
+			
 		});
 		
-		
-
-		btnGeneraDistinta.setBounds(549, 352, 145, 28);
-		btnGeneraDistinta.setEnabled(false);
+	
+		btnGeneraDistinta.setBounds(100, 145, 301, 128);
+		//btnGeneraDistinta.setBounds(549, 352, 145, 28);
+		btnGeneraDistinta.setEnabled(true);
 		frame.getContentPane().add(btnGeneraDistinta);
 		
 		/*final JButton btnFine = new JButton("Fine");
