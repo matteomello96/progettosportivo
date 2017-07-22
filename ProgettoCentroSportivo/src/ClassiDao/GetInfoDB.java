@@ -10,7 +10,7 @@ import DBInterfaccia.DbConnection;
 
 
 public class GetInfoDB {
-	 public static int getidTess(String nomeutente){
+	 public static int getidTess(String username){
 
 	      
 	        
@@ -27,7 +27,7 @@ public class GetInfoDB {
 	            
 	            st = con.createStatement();
 	           
-	            rs = st.executeQuery("SELECT tesserato.Matricolatesserato FROM tesserato,elencoutenti WHERE elencoutenti.nomeutente='"+nomeutente+"' AND elencoutenti.idutente=tesserato.idutente"); 
+	            rs = st.executeQuery("SELECT tesserato.Matricolatesserato FROM tesserato,elencoutenti WHERE elencoutenti.username='"+username+"' AND elencoutenti.idutente=tesserato.idutente"); 
 	          
 	                rs.next();
 	                ris=rs.getInt("Matricolatesserato");
