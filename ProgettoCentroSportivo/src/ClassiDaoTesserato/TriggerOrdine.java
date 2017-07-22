@@ -14,6 +14,8 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import ClassiDao.GetInfoDB;
 import Model.Utente;
+
+import view_dipendente.Confermaordine;
 import view_dipendente.FrameTesserato;
 
 
@@ -21,13 +23,6 @@ import view_dipendente.FrameTesserato;
 
 public class TriggerOrdine {
 	public static String momento;
-	public static String getDate(){
-		   DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		  
-		   Calendar cal = Calendar.getInstance();
-		   String data=dateFormat.format(cal.getTime());
-		   return data;
-		}
 	
 	
 	 public static PDDocument writePDF() {
@@ -39,19 +34,18 @@ public class TriggerOrdine {
 				PDPage pagina = new PDPage(PDPage.PAGE_SIZE_A4);
 				text.addPage(pagina);
 				PDPageContentStream vers = new PDPageContentStream(text, pagina);
-				String s0,s1,s2,s3,s4;
+				String s0,s1,s3;
 	    		vers.beginText();
 	    		vers.setFont(PDType1Font.COURIER_BOLD, 20);
 	    		vers.moveTextPositionByAmount(20, 800);
 	    		vers.drawString(":: DISTINTA ISCRIZIONE DISCIPLINE ::\r\r\n");
 	    		vers.setFont(PDType1Font.HELVETICA, 8);
 				vers.moveTextPositionByAmount(5, -25);
-	    		vers.drawString("Data ordine: "+momento+"\r\n");
-	    		vers.moveTextPositionByAmount(0, -12);
-	    		vers.drawString("ID Tesserato: "+GetInfoDB.getidTess(Utente.getUsername())+"\r\n");
+				vers.drawString("ID Tesserato: "+GetInfoDB.getidTess(Utente.getUsername())+"\r\n");
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.drawString("Nome dipendente: "+Utente.getUsername()+"\r\n");
-	    	
+	    		
+	    		
 	    		
 	    		
 	    		
@@ -60,7 +54,7 @@ public class TriggerOrdine {
 	    		vers.drawString("__________________________________________________________________________________________________________________________\r\n");
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.setFont(PDType1Font.HELVETICA_BOLD, 8);
-	    		vers.drawString("Nome Disciplina                                                                      Prezzo Singola Attività (EUR)   ");
+	    		vers.drawString("Nome Disciplina                           Livello                                           Prezzo Singola Attività (EUR)   ");
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.setFont(PDType1Font.HELVETICA, 8);
 	    		vers.drawString("__________________________________________________________________________________________________________________________\r\n");
@@ -70,26 +64,29 @@ public class TriggerOrdine {
 	    		{
 	    		
 	    			s0=FrameTesserato.table_1.getValueAt(c, 0).toString();
+	    			s1=FrameTesserato.table_1.getValueAt(c, 1).toString();
 	    			s3=FrameTesserato.table_1.getValueAt(c,3).toString();
 	    		
 	    			
 	    			                   
 	    	    	vers.drawString(s0);
-	    			vers.moveTextPositionByAmount(45, 0);
+	    			vers.moveTextPositionByAmount(120, 0);
+	    			vers.drawString(s1);
+	    			vers.moveTextPositionByAmount(210, 0);
 	    			vers.drawString(s3);
 	    			
 	    			
 	    				
-	    			vers.moveTextPositionByAmount(-45-210-70-130, -12);
+	    			vers.moveTextPositionByAmount(-120-210, -12);
 	    			
 	    			 
 	    		}
 	    		
-	
-	    		vers.drawString("PREZZO TOTALE ORDINE: \t\t"+df.format(FrameTesserato.totale)+" EUR\r\n");
-	    		vers.moveTextPositionByAmount(0, -12);
-	    	
 	    		
+	    		vers.moveTextPositionByAmount(0, -12);
+	    		vers.moveTextPositionByAmount(0, -12);
+	    		vers.setFont(PDType1Font.HELVETICA_BOLD, 10);
+	    		vers.drawString("PREZZO TOTALE ORDINE: \t\t"+df.format(FrameTesserato.totale)+" EUR\r\n");
 	    			
 			
 				vers.endText();
@@ -112,7 +109,7 @@ public class TriggerOrdine {
 	 
 	 
 	 public static String scriviDistinta(){
- 		String s0,s3;
+ 		String s0,s1,s3;
  		String rigaord="",prezzototale;
  		
  		String tit=":: DISTINTA ORDINE ::\r\r\n";
@@ -121,15 +118,15 @@ public class TriggerOrdine {
  		String dataord="Data ordine: "+momento+"\r\n";
  		String datidip="ID Tesserato: "+GetInfoDB.getidTess(Utente.getUsername())+"\r\nNome tesserato: "+Utente.getUsername()+"\r\n";
  		
- 		String titoli="___________________________________________________________________________________________________\r\nID_ART     Nome articolo          Pezzi ordinati     Prezzo singolo art. (EUR)         Magazzino\r\n___________________________________________________________________________________________________\r\n";
+ 		String titoli="___________________________________________________________________________________________________\r\nnomedisciplina          livello      Prezzo singola attivita (EUR)      \r\n___________________________________________________________________________________________________\r\n";
  		for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
  		{
  		
  			s0=FrameTesserato.table_1.getValueAt(c, 0).toString();
- 			
+ 		    s1=FrameTesserato.table_1.getValueAt(c, 1).toString();
  			s3=FrameTesserato.table_1.getValueAt(c,3).toString();
  		
- 		rigaord=rigaord+s0+";                            "+s3+"\r\n";
+ 		rigaord=rigaord+s0+";               "+s1+";             "+s3+"\r\n";
  			
  			
  		}
