@@ -2,10 +2,9 @@ package ClassiDaoTesserato;
 
 import java.io.IOException;
 import java.math.RoundingMode;
-import java.text.DateFormat;
+
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -15,7 +14,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import ClassiDao.GetInfoDB;
 import Model.Utente;
 
-import view_dipendente.Confermaordine;
+
 import view_dipendente.FrameTesserato;
 
 

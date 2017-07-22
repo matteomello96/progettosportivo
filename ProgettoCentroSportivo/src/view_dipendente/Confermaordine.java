@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 
 import javax.swing.JDialog;
@@ -28,9 +28,10 @@ import org.apache.pdfbox.exceptions.COSVisitorException;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
-import ClassiDao.GetInfoDB;
+
 import ClassiDaoTesserato.TriggerOrdine;
 import view_dipendente.FrameTesserato;
+
 
 
 
@@ -197,8 +198,8 @@ public class Confermaordine {
 		});
 		
 	
-		btnGeneraDistinta.setBounds(100, 145, 301, 128);
-		//btnGeneraDistinta.setBounds(549, 352, 145, 28);
+		//btnGeneraDistinta.setBounds(100, 145, 301, 128);
+		btnGeneraDistinta.setBounds(549, 352, 145, 28);
 		btnGeneraDistinta.setEnabled(true);
 		frame.getContentPane().add(btnGeneraDistinta);
 		
