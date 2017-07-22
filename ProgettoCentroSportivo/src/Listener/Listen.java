@@ -8,6 +8,8 @@ import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameRegistrazione;
 import view_dipendente.Confermaordine;
 import view_dipendente.FrameTesserato;
+import visteadmin.FrameOrdini;
+import visteadmin.FrameResponsabile;
 
 
 
@@ -16,7 +18,7 @@ public class Listen implements ActionListener {
 	public FrameRegistrazione finestrareg;
 	public FrameLogin framelogin;
 	public FrameTesserato frametesserato;
-	
+	public FrameResponsabile frameresponsabile;
 	
 	public Listen(FrameIniziale frame)
 	{
@@ -34,7 +36,10 @@ public class Listen implements ActionListener {
 	{
 	  frametesserato=frame;
 	}
-	
+	public Listen(FrameResponsabile frame)
+	{
+	  frameresponsabile=frame;
+	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
@@ -52,7 +57,13 @@ public class Listen implements ActionListener {
 			new FrameIniziale();
 			FrameIniziale.frame.setVisible(true);
 		}
-          
+          if ("Vai_ord".equals(e.getActionCommand())){
+  			
+        	  FrameResponsabile.frame.setVisible(false);
+        	  FrameResponsabile.frame.dispose();
+			new FrameOrdini();
+			FrameOrdini.frame.setVisible(true);
+		}
           if ("Vai_log".equals(e.getActionCommand())){
   			
         	  FrameIniziale.frame.setVisible(false);
@@ -80,7 +91,13 @@ public class Listen implements ActionListener {
 			new Confermaordine();
 			Confermaordine.frame.setVisible(true);
 		}
-          
+          if ("iniresp".equals(e.getActionCommand())){
+  			
+        	  FrameResponsabile.frame.setVisible(false);
+        	  FrameResponsabile.frame.dispose();
+			new FrameIniziale();
+			FrameIniziale.frame.setVisible(true);
+		}
 		
 		
 		

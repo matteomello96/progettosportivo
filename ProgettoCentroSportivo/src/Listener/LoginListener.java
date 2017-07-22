@@ -9,6 +9,7 @@ import Business.UtenteBusiness;
 import ClassiDao.*;
 import VisteUtenteGenerico.FrameLogin;
 import view_dipendente.FrameTesserato;
+import visteadmin.FrameResponsabile;
 
 
 
@@ -40,7 +41,7 @@ public class LoginListener implements ActionListener{
 				}*/
 			if(tipoUtente.equals("T"))
 			{
-				JOptionPane.showMessageDialog(null, "Accesso come tesserato!");
+				JOptionPane.showMessageDialog(null, "Accesso come tesserato "+username +".Benvenuto!");
 				FrameLogin.frame.setVisible(false);
 				new FrameTesserato();
 				FrameLogin.frame.dispose();
@@ -50,7 +51,7 @@ public class LoginListener implements ActionListener{
 			if(tipoUtente.equals("I"))
 			{
 				
-				JOptionPane.showMessageDialog(null, "Accesso come istruttore!");
+				JOptionPane.showMessageDialog(null, "Accesso come istruttore "+username+".Benvenuto !");
 				FrameLogin.frame.setVisible(false);
 				
 				FrameLogin.frame.dispose();
@@ -58,10 +59,10 @@ public class LoginListener implements ActionListener{
 			}
 			if(tipoUtente.equals("R"))
 			{
-				JOptionPane.showMessageDialog(null, "Accesso come responsabile!");
+				JOptionPane.showMessageDialog(null, "Accesso come responsabile "+username+".Benvenuto!");
 				
 				FrameLogin.frame.setVisible(false);
-			
+				new FrameResponsabile();
 				FrameLogin.frame.dispose();
 
 				
@@ -73,7 +74,7 @@ public class LoginListener implements ActionListener{
 		}
 
 		else{
-			JOptionPane.showMessageDialog(null, "L'utente \""+username+"\" non esiste o password errata","",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "L'utente \""+username+"\" non esiste o la password è errata","",JOptionPane.WARNING_MESSAGE);
 		}
 
 	}

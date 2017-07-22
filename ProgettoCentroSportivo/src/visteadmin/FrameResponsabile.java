@@ -1,4 +1,4 @@
-package VisteUtenteGenerico;
+package visteadmin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -30,13 +30,15 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import Model.Home;
 import ModelliTabelle.ModDiscIni;
+import ModelliTabelle.ModElUtenti;
+import classiDAOResponsabile.ElencoUtentiDAO;
 import Listener.Listen;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
-public class FrameIniziale extends JFrame {
+public class FrameResponsabile extends JFrame {
 	/**
 	 * 
 	 */
@@ -48,7 +50,7 @@ public class FrameIniziale extends JFrame {
 	
 	public JPanel contentPane;
 	public JTable table;
-    private ModDiscIni model;
+    private ModElUtenti model;
 	/**
 	 * Launch the application.
 	 */
@@ -56,8 +58,8 @@ public class FrameIniziale extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameIniziale() {
-		frame = new JFrame("Pagina iniziale");
+	public FrameResponsabile() {
+		frame = new JFrame("Pagina iniziale Responsabile");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 605, 391);
 		frame.setVisible(true);
@@ -68,18 +70,25 @@ public class FrameIniziale extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenuItem MenuRegistra = new JMenuItem("Registrati al portale");
+		
 	
-		menuBar.add(MenuRegistra);
-		MenuRegistra.addActionListener(new Listen(this));
-		MenuRegistra.setActionCommand("Vai_reg");
+		JMenu mnNewMenu = new JMenu("Home");
+		menuBar.add(mnNewMenu);
 		
-		JMenuItem MenuAccedi = new JMenuItem("Accedi al portale");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		mnNewMenu.add(mntmNewMenuItem);
+		mntmNewMenuItem.addActionListener(new Listen(this));
+		mntmNewMenuItem.setActionCommand("iniresp");
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		JMenuItem MenuOrdini = new JMenuItem("Visualizza richieste di pagamento");
 		
 		
-		menuBar.add(MenuAccedi);
-		MenuAccedi.addActionListener(new Listen(this));
-		MenuAccedi.setActionCommand("Vai_log");
+		menuBar.add(MenuOrdini);
+		MenuOrdini.addActionListener(new Listen(this));
+		MenuOrdini.setActionCommand("Vai_ord");
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,193,20));
 		contentPane.setLayout(new GridBagLayout());
@@ -92,23 +101,17 @@ public class FrameIniziale extends JFrame {
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
 		
-		JLabel lblNewLabel = new JLabel("NuovoPolisportivo");
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 3;
-		gbc.gridy = 0;
-		contentPane.add(lblNewLabel, gbc);
 		
-		JLabel lblLeNostreDiscipline = new JLabel("Le nostre discipline");
-		lblLeNostreDiscipline.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblLeNostreDiscipline.setForeground(Color.WHITE);
+		JLabel lblUtenti = new JLabel("Elenco degli utenti");
+		lblUtenti.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUtenti.setForeground(Color.WHITE);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-		contentPane.add(lblLeNostreDiscipline, gbc);
+		contentPane.add(lblUtenti, gbc);
 		
 		table = new JTable();
-		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
+		model = new ModElUtenti(ElencoUtentiDAO.elencoiniziale());
 		table.setRowHeight(20);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setCellSelectionEnabled(true);

@@ -20,7 +20,8 @@ public class TipoUtente {
 					return "T";
 				if(stringhe[0].equals("I"))
 					return "I";
-				
+				if(stringhe[0].equals("R"))
+					return "R";
 
 				else return "";
 
