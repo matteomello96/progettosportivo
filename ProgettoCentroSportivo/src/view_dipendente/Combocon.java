@@ -29,13 +29,13 @@ public class Combocon extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("SELECT DISTINCT Nomemodalità  FROM modalitapagamento"); 
+            rs = st.executeQuery("SELECT DISTINCT Nomemodalita  FROM modalitapagamento"); 
             
     		
     		proj=(Object) " Seleziona una modalità di pagamento ";
     		this.addItem(proj);
             while(rs.next()){
-                proj=(Object) rs.getString("Nomemodalità ");
+                proj=(Object) rs.getString("Nomemodalita ");
                 this.addItem(proj);
                         
             }
