@@ -3,8 +3,12 @@ package Model;
 public class ElencoAttivita {
 	private String NomeDisciplina;
 	private String NomeLivello;
-	private Integer MaxIscrittiTurno;
-	private Float CostoMensile;
+	private Integer prenotazionidisponibili;
+	private Integer CostoMensile;
+	//private String 
+	
+	
+	
 	public String getNomeDisciplina() {
 		return NomeDisciplina;
 	}
@@ -17,17 +21,22 @@ public class ElencoAttivita {
 	public void setNomeLivello(String nomeLivello) {
 		NomeLivello = nomeLivello;
 	}
-	public Integer getMaxIscrittiTurno() {
-		return MaxIscrittiTurno;
+	public Integer getprenotazionidisponibili() {
+		return prenotazionidisponibili;
 	}
-	public void setMaxIscrittiTurno(Integer maxIscrittiTurno) {
-		MaxIscrittiTurno = maxIscrittiTurno;
+	public void setprenotazionidisponibili(Integer prenotazionidisponibili) {
+		this.prenotazionidisponibili = prenotazionidisponibili;
 	}
-	public Float getCostoMensile() {
+	public Integer getCostoMensile() {
 		return CostoMensile;
 	}
-	public void setCostoMensile(Float costoMensile) {
+	public void setCostoMensile(Integer costoMensile) {
 		CostoMensile = costoMensile;
 	}
+	
+	
+	
+	
+
 	
 }

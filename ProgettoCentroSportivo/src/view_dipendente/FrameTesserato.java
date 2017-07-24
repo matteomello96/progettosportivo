@@ -30,6 +30,10 @@ import Listener.Listen;
 import ModelliTabelle.disc_tabella;
 
 public class FrameTesserato extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	public static JTable table_1;
 	public static JFrame frame;
@@ -110,21 +114,26 @@ public class FrameTesserato extends JPanel {
 		contentPane.add(table, gbc_table);
 		
 		table_1 = new JTable();
+		
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Disciplina", "Livello", "MaxIscritti", "CostoMensile"
+				"Disciplina", "Livello", "CostoMensile", "prenotazionidis"
 			}
 		){
+			
 			private static final long serialVersionUID = 1L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-					String.class, String.class, Integer.class,Float.class
+					String.class, String.class, Integer.class,Integer.class
+					
 				};
+			
 				public Class<?> getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
 				}
+				
 			
 		});
 		
@@ -163,7 +172,7 @@ public class FrameTesserato extends JPanel {
 
 				for(c=0;c<table_1.getRowCount();c++)
 				{
-					if(table_1.getRowCount()>=1){
+				if(table_1.getRowCount()>=1){
 						if(table.getValueAt(table.getSelectedRow(), 0).equals(table_1.getValueAt(c, 0))&&
 								table.getValueAt(table.getSelectedRow(), 1).equals(table_1.getValueAt(c, 1)))
 						{
@@ -173,15 +182,14 @@ public class FrameTesserato extends JPanel {
 
 					}
 
-
 				}
 				
-				int pdisp = (Integer) table.getValueAt(table.getSelectedRow(),2);
+				int pdisp = (Integer) table.getValueAt(table.getSelectedRow(), 3);
 				if(pdisp==0){
 					 JOptionPane.showMessageDialog(null, "Posti attualmente non disponibili");
 					
 				}
-				else {
+				else{
 					if(u)
 					{
 						modello.addRow(dati);						
@@ -263,7 +271,7 @@ public class FrameTesserato extends JPanel {
 		contentPane.add(invia, gbc_invia);
 		invia.addActionListener(new Listen(this));
 		invia.setActionCommand("conf");
-		invia.setEnabled(false);
+		invia.setEnabled(true);
 		
 		
 		
@@ -273,7 +281,7 @@ public class FrameTesserato extends JPanel {
 		
 		table_1.getModel().addTableModelListener(new TableModelListener(){
 			public void tableChanged(TableModelEvent e) {
-				//System.out.println("CAMBIATO!!!");
+			
 				
 			
 				
@@ -283,10 +291,10 @@ public class FrameTesserato extends JPanel {
 				int c=0;
 				for (c=0;c<table_1.getModel().getRowCount();c++){
 		
-				totale=totale+((Float)(table_1.getModel().getValueAt(c, 3)));
+				totale=totale+((Integer)(table_1.getModel().getValueAt(c, 2)));
 				
 				}
-				//System.out.println("totale:  "+totale);
+			
 				totord.setText("TOTALE ORDINE: "+df.format(totale)+" EUR  ");
 				
 				if(table_1.getModel().getRowCount()>0)
