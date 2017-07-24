@@ -5,7 +5,8 @@ public class ElencoAttivita {
 	private String NomeLivello;
 	private Integer prenotazionidisponibili;
 	private Integer CostoMensile;
-	//private String 
+	private String Giornosettimana;
+	private String fasciaoraria;
 	
 	
 	
@@ -32,6 +33,18 @@ public class ElencoAttivita {
 	}
 	public void setCostoMensile(Integer costoMensile) {
 		CostoMensile = costoMensile;
+	}
+	public String getGiornosettimana() {
+		return Giornosettimana;
+	}
+	public void setGiornosettimana(String giornosettimana) {
+		Giornosettimana = giornosettimana;
+	}
+	public String getFasciaoraria() {
+		return fasciaoraria;
+	}
+	public void setFasciaoraria(String fasciaoraria) {
+		this.fasciaoraria = fasciaoraria;
 	}
 	
 	

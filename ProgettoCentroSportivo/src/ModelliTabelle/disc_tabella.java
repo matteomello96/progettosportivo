@@ -29,7 +29,7 @@ public class disc_tabella extends AbstractTableModel  {
 
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return 6;
 	}
 	
 
@@ -42,7 +42,10 @@ public class disc_tabella extends AbstractTableModel  {
 		  if(columnIndex==0) return d.getNomeDisciplina();
 		else if(columnIndex==1) return d.getNomeLivello();
 		else if(columnIndex==2) return d.getCostoMensile();
-		else if(columnIndex==3) return d.getprenotazionidisponibili();
+		else if(columnIndex==3) return d.getFasciaoraria();
+		else if(columnIndex==4) return d.getGiornosettimana();
+		else if(columnIndex==5) return d.getprenotazionidisponibili();
+		  
 		  return null;
 		  
 	}
@@ -60,7 +63,11 @@ public class disc_tabella extends AbstractTableModel  {
         if(columnIndex==0) dati.get(rowIndex).setNomeDisciplina(aValue.toString());
         if(columnIndex==1) dati.get(rowIndex).setNomeLivello(aValue.toString());
         if(columnIndex==2) dati.get(rowIndex).setCostoMensile((int)aValue);
-        if(columnIndex==3) dati.get(rowIndex).setprenotazionidisponibili((int)aValue);
+        if(columnIndex==3) dati.get(rowIndex).setFasciaoraria(aValue.toString());
+        if(columnIndex==4) dati.get(rowIndex).setGiornosettimana(aValue.toString());
+        if(columnIndex==5) dati.get(rowIndex).setprenotazionidisponibili((int)aValue);
+        
+		
        
         
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners

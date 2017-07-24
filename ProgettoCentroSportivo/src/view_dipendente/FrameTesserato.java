@@ -119,14 +119,14 @@ public class FrameTesserato extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				"Disciplina", "Livello", "CostoMensile", "prenotazionidis"
+				"Disciplina", "Livello", "CostoMensile","fasciaoraria", "giornosettimana","prenotazionidis"
 			}
 		){
 			
 			private static final long serialVersionUID = 1L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-					String.class, String.class, Integer.class,Integer.class
+					String.class, String.class, Integer.class,String.class,String.class,Integer.class
 					
 				};
 			
@@ -158,12 +158,14 @@ public class FrameTesserato extends JPanel {
 		Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1){
-				Object[] dati = new Object[4];
+				Object[] dati = new Object[6];
 
 				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
 				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
 				dati[2]=table.getValueAt(table.getSelectedRow(), 2);
 				dati[3]=table.getValueAt(table.getSelectedRow(), 3);
+				dati[4]=table.getValueAt(table.getSelectedRow(), 4);
+				dati[5]=table.getValueAt(table.getSelectedRow(), 5);
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				
 				int c=0;
@@ -184,7 +186,7 @@ public class FrameTesserato extends JPanel {
 
 				}
 				
-				int pdisp = (Integer) table.getValueAt(table.getSelectedRow(), 3);
+				int pdisp = (Integer) table.getValueAt(table.getSelectedRow(), 5);
 				if(pdisp==0){
 					 JOptionPane.showMessageDialog(null, "Posti attualmente non disponibili");
 					
@@ -271,7 +273,7 @@ public class FrameTesserato extends JPanel {
 		contentPane.add(invia, gbc_invia);
 		invia.addActionListener(new Listen(this));
 		invia.setActionCommand("conf");
-		invia.setEnabled(true);
+		invia.setEnabled(false);
 		
 		
 		
