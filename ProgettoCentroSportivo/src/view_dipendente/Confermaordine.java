@@ -1,6 +1,6 @@
 package view_dipendente;
 
-import java.awt.Color;
+
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Point;
@@ -48,7 +48,6 @@ public class Confermaordine {
 	private JLabel lblTotaleOrdineEur;
 	private JLabel part;
 	public JButton btnTornaAlCarrello;
-	private JLabel OraPoss;
 	public String nomedistinta="";
 	public String percorso="";
 	public static String testodistinta;
@@ -265,24 +264,23 @@ public class Confermaordine {
 
 			btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
-				
+		    TriggerOrdine.insOrdine();
 
 			//	int a0=0,a1=0;
 			//	String a2="",a3="";
-				for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
-				{
+				//for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
+			//	{
 					//a0=(Integer)FrameTesserato.table_1.getValueAt(c, 0);
 				//	a1=(Integer)FrameTesserato.table_1.getValueAt(c, 2);	
 					//a2=FrameTesserato.table_1.getValueAt(c,4).toString();
 				//	a3=FrameTesserato.table_1.getValueAt(c,5).toString();
-					TriggerOrdine.insOrdine();
+					
 					//TriggerOrdine.remArt(a1, a3, a0);
-					ComboP.setEnabled(false);
-					frame.setAlwaysOnTop(false);
+				//	ComboP.setEnabled(false);
+				//	frame.setAlwaysOnTop(false);
 					
 					
-				}
+				//}
 				
 				frame.setBounds(100, 100, 803, 447);
 				frame.setLocationRelativeTo(null);
@@ -294,8 +292,8 @@ public class Confermaordine {
 				
 				btnGeneraDistinta.setEnabled(true);
 				btnFine.setEnabled(true);
-				OraPoss.setBounds(211, 359, 372, 14);
-			//.setBounds(0, 174, 825, 162);
+			
+			
 				testodistinta=TriggerOrdine.scriviDistinta();
 				documentoPDF = TriggerOrdine.writePDF();
 				try {

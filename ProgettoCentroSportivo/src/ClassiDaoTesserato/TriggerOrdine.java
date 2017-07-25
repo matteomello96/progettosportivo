@@ -9,7 +9,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
@@ -17,6 +16,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import ClassiDao.GetInfoDB;
 import Model.Utente;
+
 import DBInterfaccia.DbConnection;
 import view_dipendente.FrameTesserato;
 
@@ -40,13 +40,9 @@ public class TriggerOrdine {
 	 public static void insOrdine(){	
 	        
 	        Connection con = DbConnection.db;
-	        
 	        Statement st;
 	        
-	        
-	        
 	       
-	        
 	        
 	        try {
 	        	st = con.createStatement();
@@ -54,8 +50,8 @@ public class TriggerOrdine {
 	        	 
 	            
 	        	
-	            st.executeUpdate("INSERT INTO ordine (idordine, matricolatesserato, dataconsegnaordine, prezzototale, confermato, annullato) "
-	            		+ "VALUES (NULL, '"+GetInfoDB.getidTess(Utente.getUsername())+"', '"+momento+"', '"+FrameTesserato.totale+"', '0', '0')"); 
+	            st.executeUpdate("INSERT INTO ordine (idordine,matricolatesserato,prezzototale,confermato,annullato,dataconsegnaordine) "
+	            		+ "VALUES (NULL, '"+GetInfoDB.getidTess(Utente.getUsername())+"','"+FrameTesserato.totale+"', '0', '0','"+momento+"')"); 
 	        } catch (SQLException ex) {
 	        }
 	    }
@@ -71,13 +67,15 @@ public class TriggerOrdine {
 				PDPage pagina = new PDPage(PDPage.PAGE_SIZE_A4);
 				text.addPage(pagina);
 				PDPageContentStream vers = new PDPageContentStream(text, pagina);
-				String s0,s1,s3,s2,s4;
+				String s0,s1,s2;
 	    		vers.beginText();
 	    		vers.setFont(PDType1Font.COURIER_BOLD, 20);
 	    		vers.moveTextPositionByAmount(20, 800);
 	    		vers.drawString("            DISTINTA ISCRIZIONE DISCIPLINE\r\r\n");
 	    		vers.setFont(PDType1Font.HELVETICA, 8);
 				vers.moveTextPositionByAmount(5, -25);
+				vers.drawString("Ordine n. "+GetInfoDB.getlastorder(momento)+" \r\n\r\n");
+				vers.moveTextPositionByAmount(0, -12);
 				vers.drawString("Data ordine: "+momento+"\r\n");
 				vers.moveTextPositionByAmount(0, -12);
 				vers.drawString("ID Tesserato: "+GetInfoDB.getidTess(Utente.getUsername())+"\r\n");
