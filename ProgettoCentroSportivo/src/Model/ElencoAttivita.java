@@ -3,10 +3,9 @@ package Model;
 public class ElencoAttivita {
 	private String NomeDisciplina;
 	private String NomeLivello;
-	private Integer prenotazionidisponibili;
+	
 	private Integer CostoMensile;
-	private String Giornosettimana;
-	private String fasciaoraria;
+	
 	
 	
 	
@@ -22,31 +21,14 @@ public class ElencoAttivita {
 	public void setNomeLivello(String nomeLivello) {
 		NomeLivello = nomeLivello;
 	}
-	public Integer getprenotazionidisponibili() {
-		return prenotazionidisponibili;
-	}
-	public void setprenotazionidisponibili(Integer prenotazionidisponibili) {
-		this.prenotazionidisponibili = prenotazionidisponibili;
-	}
+
 	public Integer getCostoMensile() {
 		return CostoMensile;
 	}
 	public void setCostoMensile(Integer costoMensile) {
 		CostoMensile = costoMensile;
 	}
-	public String getGiornosettimana() {
-		return Giornosettimana;
-	}
-	public void setGiornosettimana(String giornosettimana) {
-		Giornosettimana = giornosettimana;
-	}
-	public String getFasciaoraria() {
-		return fasciaoraria;
-	}
-	public void setFasciaoraria(String fasciaoraria) {
-		this.fasciaoraria = fasciaoraria;
-	}
-	
+
 	
 	
 	

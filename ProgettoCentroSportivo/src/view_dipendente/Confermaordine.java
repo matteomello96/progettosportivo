@@ -28,7 +28,7 @@ import org.apache.pdfbox.exceptions.COSVisitorException;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
-
+import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.TriggerOrdine;
 import view_dipendente.FrameTesserato;
 
@@ -53,7 +53,7 @@ public class Confermaordine {
 	public String percorso="";
 	public static String testodistinta;
 	public static PDDocument documentoPDF=null;
-	public static boolean d=true;
+	public static boolean d=true,d2=true;
 	
 	public static JDialog frame;
 	public Confermaordine(){
@@ -123,10 +123,9 @@ public class Confermaordine {
 		frame.getContentPane().add(btnConferma);
 		
 		
-		OraPoss = new JLabel("Genera file pdf .");
-		OraPoss.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		OraPoss.setBounds(211, 359, 372, 14);
-		frame.getContentPane().add(OraPoss);
+		
+	
+		
 		
 		final JButton btnGeneraDistinta = new JButton("Genera distinta");
 		btnGeneraDistinta.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -198,12 +197,12 @@ public class Confermaordine {
 		});
 		
 	
-		//btnGeneraDistinta.setBounds(100, 145, 301, 128);
+	//	btnGeneraDistinta.setBounds(100, 145, 301, 128);
 		btnGeneraDistinta.setBounds(549, 352, 145, 28);
 		btnGeneraDistinta.setEnabled(true);
 		frame.getContentPane().add(btnGeneraDistinta);
 		
-		/*final JButton btnFine = new JButton("Fine");
+		final JButton btnFine = new JButton("Fine");
 		btnFine.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnFine.setEnabled(false);
 		btnFine.addActionListener(new ActionListener() {
@@ -213,7 +212,7 @@ public class Confermaordine {
 					BufferedWriter writer = null;
 
 					try {
-						// File fdistinta2 = new File(System.getProperty("user.home")+"\\desktop\\DISTINTA_"+GetInfoDB.getDateOnly()+"(TXT).txt");
+						 File fdistinta2 = new File(System.getProperty("user.home")+"\\desktop\\DISTINTA_"+GetInfoDB.getDateOnly()+"(TXT).txt");
 							writer = new BufferedWriter(new FileWriter(fdistinta2));
 							writer.write(testodistinta);
 							writer.close();
@@ -235,7 +234,7 @@ public class Confermaordine {
 					        }
 
 						}
-						//JOptionPane.showMessageDialog(frame,"Ho salvato la distinta PDF e TXT dell'ordine sul desktop. \r\n","Distinta", JOptionPane.INFORMATION_MESSAGE);
+						
 						d=true;	
 					} catch (COSVisitorException | IOException e) {
 						JOptionPane.showMessageDialog(null,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
@@ -246,40 +245,39 @@ public class Confermaordine {
 				}
 		      d=true;
 				if(d2){
-				Listen.conf=null;
 				frame.setVisible(false);
 				
 				frame.dispose();	
-				DipenFrame.frame.setEnabled(true);
-				DipenFrame.frame.setAlwaysOnTop(true);
-				DipenFrame.frame.setAlwaysOnTop(false);
-				DipenFrame.confermab.setEnabled(false);
-				DipenFrame.btnRimuoviTutto.doClick();
+				FrameTesserato.frame.setEnabled(true);
+				FrameTesserato.frame.setAlwaysOnTop(true);
+				FrameTesserato.frame.setAlwaysOnTop(false);
+				FrameTesserato.invia.setEnabled(false);
+				FrameTesserato.svuotacarrello.doClick();
 				d2=true;
 				}
 				
 			
 			}});
 		btnFine.setBounds(698, 352, 89, 28);
-		frame.getContentPane().add(btnFine);*/
+		frame.getContentPane().add(btnFine);
 		
 		
 
-		/*	btnConferma.addActionListener(new ActionListener() {
+			btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int idprogetto=GetInfoDB.getidProj(ComboP.getSelectedItem().toString());
-				TriggerOrdine.insOrdine(idprogetto);
+			
+				
 
-				int a0=0,a1=0;
-				String a2="",a3="";
+			//	int a0=0,a1=0;
+			//	String a2="",a3="";
 				for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
 				{
-					a0=(Integer)FrameTesserato.table_1.getValueAt(c, 0);
-					a1=(Integer)FrameTesserato.table_1.getValueAt(c, 2);	
-					a2=FrameTesserato.table_1.getValueAt(c,4).toString();
-					a3=FrameTesserato.table_1.getValueAt(c,5).toString();
-					TriggerOrdine.insDetOrd(a0, a1, a2, a3);
-					TriggerOrdine.remArt(a1, a3, a0);
+					//a0=(Integer)FrameTesserato.table_1.getValueAt(c, 0);
+				//	a1=(Integer)FrameTesserato.table_1.getValueAt(c, 2);	
+					//a2=FrameTesserato.table_1.getValueAt(c,4).toString();
+				//	a3=FrameTesserato.table_1.getValueAt(c,5).toString();
+					TriggerOrdine.insOrdine();
+					//TriggerOrdine.remArt(a1, a3, a0);
 					ComboP.setEnabled(false);
 					frame.setAlwaysOnTop(false);
 					
@@ -297,11 +295,11 @@ public class Confermaordine {
 				btnGeneraDistinta.setEnabled(true);
 				btnFine.setEnabled(true);
 				OraPoss.setBounds(211, 359, 372, 14);
-				//fork.setBounds(0, 174, 825, 162);
+			//.setBounds(0, 174, 825, 162);
 				testodistinta=TriggerOrdine.scriviDistinta();
-				documentoPDF = TriggerOrdine.scriviPDF();
+				documentoPDF = TriggerOrdine.writePDF();
 				try {
-					TriggerOrdine.scriviPDF().close();
+					TriggerOrdine.writePDF().close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -309,7 +307,7 @@ public class Confermaordine {
 				
 			//	FrameTesserato.tease();
 				
-				FrameTesserato.svuotacarrello.doClick();
+			//	FrameTesserato.svuotacarrello.doClick();
 				
 				
 
@@ -319,7 +317,7 @@ public class Confermaordine {
 				
 				
 			}
-		});*/
+		});
 		
 		
 	}

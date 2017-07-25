@@ -21,7 +21,7 @@ public static ArrayList<ElencoAttivita> elencoiniziale() {
 		
         ArrayList<ElencoAttivita> dati= new ArrayList<ElencoAttivita>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT  C.NomeDisciplina,B.NomeLivello,A.CostoMensile,E.fasciaoraria,E.giornosettimana,E.prenotazionidisponibili from disciplinedisponibili as A INNER JOIN livello as B ON A.Livello=B.NomeLivello INNER JOIN disciplina as C ON A.Disciplina=C.NomeDisciplina  INNER JOIN gestioneturno as E ON A.Combinazionelivdis = E.Combinazionelivdis ;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT  C.NomeDisciplina,B.NomeLivello,A.CostoMensile from disciplinedisponibili as A INNER JOIN livello as B ON A.Livello=B.NomeLivello INNER JOIN disciplina as C ON A.Disciplina=C.NomeDisciplina ;");
         Iterator<String[]> i = res.iterator();
         while(i.hasNext())  {
         	String[] riga = i.next();
@@ -29,9 +29,7 @@ public static ArrayList<ElencoAttivita> elencoiniziale() {
         	d.setNomeDisciplina(riga[0]);
         	d.setNomeLivello(riga[1]);
         	d.setCostoMensile(Integer.parseInt(riga[2]));
-        	d.setFasciaoraria(riga[3]);
-        	d.setGiornosettimana(riga[4]);
-        	d.setprenotazionidisponibili(Integer.parseInt(riga[5]));
+        	
 
         	
        

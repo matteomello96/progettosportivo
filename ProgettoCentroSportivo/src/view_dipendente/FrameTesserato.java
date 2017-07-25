@@ -75,6 +75,8 @@ public class FrameTesserato extends JPanel {
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
 		mnNewMenu.add(mntmNewMenuItem_1);
+		JMenuItem scelta_orario= new JMenuItem("Scegli turno");
+		menuBar.add(scelta_orario);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -119,14 +121,14 @@ public class FrameTesserato extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				"Disciplina", "Livello", "CostoMensile","fasciaoraria", "giornosettimana","prenotazionidis"
+				"Disciplina", "Livello", "CostoMensile"
 			}
 		){
 			
 			private static final long serialVersionUID = 1L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-					String.class, String.class, Integer.class,String.class,String.class,Integer.class
+					String.class, String.class, Integer.class,Integer.class
 					
 				};
 			
@@ -158,14 +160,11 @@ public class FrameTesserato extends JPanel {
 		Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1){
-				Object[] dati = new Object[6];
+				Object[] dati = new Object[3];
 
 				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
 				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
 				dati[2]=table.getValueAt(table.getSelectedRow(), 2);
-				dati[3]=table.getValueAt(table.getSelectedRow(), 3);
-				dati[4]=table.getValueAt(table.getSelectedRow(), 4);
-				dati[5]=table.getValueAt(table.getSelectedRow(), 5);
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				
 				int c=0;
@@ -186,12 +185,8 @@ public class FrameTesserato extends JPanel {
 
 				}
 				
-				int pdisp = (Integer) table.getValueAt(table.getSelectedRow(), 5);
-				if(pdisp==0){
-					 JOptionPane.showMessageDialog(null, "Posti attualmente non disponibili");
-					
-				}
-				else{
+				
+				
 					if(u)
 					{
 						modello.addRow(dati);						
@@ -202,7 +197,7 @@ public class FrameTesserato extends JPanel {
 					JOptionPane.showMessageDialog(null, "Non è possibile Aggiungere la stessa disciplina",null,JOptionPane.WARNING_MESSAGE);
 					
 					}
-					}
+					
 				
 				
 				
