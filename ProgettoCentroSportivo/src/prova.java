@@ -23,115 +23,78 @@ import javax.swing.JLabel;
 public class prova extends JPanel {
 	private JTable table;
 	private JTable table_1;
-
+	
 	/**
 	 * Create the panel.
 	 */
 	public prova() {
-		setForeground(new Color(0, 0, 0));
-		setBackground(new Color(240, 240, 240));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{47, 225, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{50, 0, 0, 21, 33, 96, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{83, 76, 73, 0, 102, 117, 0};
+		gridBagLayout.rowHeights = new int[]{0, 78, 148, 97, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		JLabel lblNewLabel = new JLabel("New label");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.gridwidth = 2;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 0;
+		add(lblNewLabel, gbc_lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New labela");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.gridwidth = 2;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_1.gridx = 3;
+		gbc_lblNewLabel_1.gridy = 0;
+		add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
 		table = new JTable();
-		table.setForeground(Color.BLACK);
-		table.setEnabled(false);
-		//table.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		//table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, new Integer(122)},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "Disciplina ", "orari ", "Livello"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Object.class, Object.class, Object.class, Object.class, Integer.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
 		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.gridwidth = 4;
-		gbc_table.fill = GridBagConstraints.HORIZONTAL;
+		gbc_table.gridwidth = 2;
 		gbc_table.insets = new Insets(0, 0, 5, 5);
-		gbc_table.anchor = GridBagConstraints.NORTH;
-		gbc_table.gridx = 0;
-		gbc_table.gridy = 1;
+		gbc_table.fill = GridBagConstraints.BOTH;
+		gbc_table.gridx = 1;
+		gbc_table.gridy = 2;
 		add(table, gbc_table);
 		
 		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column"
-			}
-		));
 		GridBagConstraints gbc_table_1 = new GridBagConstraints();
+		gbc_table_1.gridwidth = 2;
+		gbc_table_1.insets = new Insets(0, 0, 5, 0);
 		gbc_table_1.fill = GridBagConstraints.BOTH;
-		gbc_table_1.gridwidth = 4;
-		gbc_table_1.insets = new Insets(0, 0, 5, 5);
 		gbc_table_1.gridx = 4;
-		gbc_table_1.gridy = 1;
+		gbc_table_1.gridy = 2;
 		add(table_1, gbc_table_1);
 		
-		JButton btnDettagliOrario = new JButton("Dettagli orario");
-		GridBagConstraints gbc_btnDettagliOrario = new GridBagConstraints();
-		gbc_btnDettagliOrario.insets = new Insets(0, 0, 5, 5);
-		gbc_btnDettagliOrario.gridx = 1;
-		gbc_btnDettagliOrario.gridy = 2;
-		add(btnDettagliOrario, gbc_btnDettagliOrario);
+		JButton btnNewButton = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 3;
+		add(btnNewButton, gbc_btnNewButton);
 		
-		JButton Aggiungi = new JButton("Aggiungi");
-		GridBagConstraints gbc_Aggiungi = new GridBagConstraints();
-		gbc_Aggiungi.gridwidth = 2;
-		gbc_Aggiungi.insets = new Insets(0, 0, 5, 5);
-		gbc_Aggiungi.gridx = 2;
-		gbc_Aggiungi.gridy = 2;
-		add(Aggiungi, gbc_Aggiungi);
+		JButton btnNewButton_1 = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_1.gridx = 2;
+		gbc_btnNewButton_1.gridy = 3;
+		add(btnNewButton_1, gbc_btnNewButton_1);
 		
-		JButton rimuovi = new JButton("rimuovi");
-		GridBagConstraints gbc_rimuovi = new GridBagConstraints();
-		gbc_rimuovi.insets = new Insets(0, 0, 5, 5);
-		gbc_rimuovi.gridx = 4;
-		gbc_rimuovi.gridy = 2;
-		add(rimuovi, gbc_rimuovi);
+		JButton btnNewButton_2 = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_2.gridx = 4;
+		gbc_btnNewButton_2.gridy = 3;
+		add(btnNewButton_2, gbc_btnNewButton_2);
 		
-		JButton svuotacarrello = new JButton("svuotacarrello");
-		GridBagConstraints gbc_svuotacarrello = new GridBagConstraints();
-		gbc_svuotacarrello.insets = new Insets(0, 0, 5, 5);
-		gbc_svuotacarrello.gridx = 5;
-		gbc_svuotacarrello.gridy = 2;
-		add(svuotacarrello, gbc_svuotacarrello);
-		
-		JButton invia = new JButton("invia");
-		GridBagConstraints gbc_invia = new GridBagConstraints();
-		gbc_invia.insets = new Insets(0, 0, 5, 5);
-		gbc_invia.gridx = 6;
-		gbc_invia.gridy = 2;
-		add(invia, gbc_invia);
-		
-		JLabel lblNewLabel = new JLabel("COSTO CORSI:");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 4;
-		gbc_lblNewLabel.gridy = 3;
-		add(lblNewLabel, gbc_lblNewLabel);
+		JButton btnNewButton_3 = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
+		gbc_btnNewButton_3.gridx = 5;
+		gbc_btnNewButton_3.gridy = 3;
+		add(btnNewButton_3, gbc_btnNewButton_3);
 	
 
 	}
