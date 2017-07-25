@@ -75,8 +75,14 @@ public class FrameTesserato extends JPanel {
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
 		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		
 		JMenuItem scelta_orario= new JMenuItem("Scegli turno");
-		menuBar.add(scelta_orario);
+		mnNewMenu.add(scelta_orario);
+		scelta_orario.addActionListener(new Listen(this));
+		scelta_orario.setActionCommand("turn");
+		
+		
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

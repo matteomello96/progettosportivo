@@ -60,7 +60,7 @@ public class GetInfoDB {
 		            
 		            st = con.createStatement();
 		           
-		            rs = st.executeQuery("select idordine from ordine WHERE ordine.datacreazioneordine='"+num+"'"); 
+		            rs = st.executeQuery("select ordine.idordine from ordine WHERE ordine.datacreazioneordine='"+num+"'"); 
 		           
 		                rs.next();
 		                ris=rs.getInt("idordine");
@@ -92,5 +92,7 @@ public class GetInfoDB {
 		 	   String data=dateFormat.format(cal.getTime());
 		 	   return data;
 		 	}
+	    
+	    
 	    
 }

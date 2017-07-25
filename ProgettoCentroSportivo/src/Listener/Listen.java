@@ -8,6 +8,7 @@ import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameRegistrazione;
 import view_dipendente.Confermaordine;
 import view_dipendente.FrameTesserato;
+import view_dipendente.FrameTurno;
 import visteadmin.FrameOrdini;
 import visteadmin.FrameResponsabile;
 
@@ -19,6 +20,7 @@ public class Listen implements ActionListener {
 	public FrameLogin framelogin;
 	public FrameTesserato frametesserato;
 	public FrameResponsabile frameresponsabile;
+	public FrameTurno frameturno;
 	
 	public Listen(FrameIniziale frame)
 	{
@@ -40,6 +42,15 @@ public class Listen implements ActionListener {
 	{
 	  frameresponsabile=frame;
 	}
+	public Listen(FrameTurno frame)
+	{
+	  frameturno=frame;
+	}
+	
+	
+	
+	
+	
 	
 	public void actionPerformed(ActionEvent e)
 	{
@@ -99,7 +110,13 @@ public class Listen implements ActionListener {
 			FrameIniziale.frame.setVisible(true);
 		}
 		
-		
+          if ("turn".equals(e.getActionCommand())){
+    			
+        	 
+        	 
+			new FrameTurno();
+			FrameTurno.frame.setVisible(true);
+		}
 		
 	}
 }

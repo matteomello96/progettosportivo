@@ -53,9 +53,10 @@ public class Confermaordine {
 	public static String testodistinta;
 	public static PDDocument documentoPDF=null;
 	public static boolean d=true,d2=true;
+    public static JDialog frame;
 	
-	public static JDialog frame;
-	public Confermaordine(){
+
+public Confermaordine(){
 		final DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
 		

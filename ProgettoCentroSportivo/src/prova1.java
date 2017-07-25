@@ -1,14 +1,21 @@
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
+
+import javax.swing.JLabel;
+
+import java.awt.Font;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JComboBox;
 
 public class prova1 extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
+	private JLabel lblNewLabel;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -28,26 +35,39 @@ public class prova1 extends JDialog {
 	 */
 	public prova1() {
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+			lblNewLabel = new JLabel("                                                     Sei iscritto alle discipline");
+			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNewLabel.setToolTipText("");
+			lblNewLabel.setLabelFor(this);
+			getContentPane().add(lblNewLabel, BorderLayout.NORTH);
 		}
+		{
+			table = new JTable();
+			table.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, null},
+					{null, null},
+				},
+				new String[] {
+					"IdDisciplina", "Nomedisciplina"
+				}
+			));
+			getContentPane().add(table, BorderLayout.WEST);
+		}
+		{
+			JComboBox comboBox = new JComboBox();
+			getContentPane().add(comboBox, BorderLayout.CENTER);
+		}
+		{
+			JComboBox comboBox = new JComboBox();
+			getContentPane().add(comboBox, BorderLayout.EAST);
+		}
+		{
+			JButton btnNewButton = new JButton("Conferma");
+			getContentPane().add(btnNewButton, BorderLayout.SOUTH);
+		}
+	
 	}
 
 }
