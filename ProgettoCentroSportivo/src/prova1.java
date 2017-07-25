@@ -12,10 +12,18 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
+import java.awt.GridLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class prova1 extends JDialog {
-	private JLabel lblNewLabel;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -35,39 +43,20 @@ public class prova1 extends JDialog {
 	 */
 	public prova1() {
 		setBounds(100, 100, 450, 300);
-		{
-			lblNewLabel = new JLabel("                                                     Sei iscritto alle discipline");
-			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			lblNewLabel.setToolTipText("");
-			lblNewLabel.setLabelFor(this);
-			getContentPane().add(lblNewLabel, BorderLayout.NORTH);
-		}
-		{
-			table = new JTable();
-			table.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null},
-					{null, null},
-				},
-				new String[] {
-					"IdDisciplina", "Nomedisciplina"
-				}
-			));
-			getContentPane().add(table, BorderLayout.WEST);
-		}
-		{
-			JComboBox comboBox = new JComboBox();
-			getContentPane().add(comboBox, BorderLayout.CENTER);
-		}
-		{
-			JComboBox comboBox = new JComboBox();
-			getContentPane().add(comboBox, BorderLayout.EAST);
-		}
-		{
-			JButton btnNewButton = new JButton("Conferma");
-			getContentPane().add(btnNewButton, BorderLayout.SOUTH);
-		}
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 97, 139, 69, 32, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		getContentPane().setLayout(gridBagLayout);
+		
+		JComboBox comboBox = new JComboBox();
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox.gridx = 5;
+		gbc_comboBox.gridy = 2;
+		getContentPane().add(comboBox, gbc_comboBox);
 	
 	}
-
 }

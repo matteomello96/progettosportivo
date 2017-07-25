@@ -134,6 +134,7 @@ public Confermaordine(){
 				
 				testodistinta=TriggerOrdine.scriviDistinta();
 				documentoPDF = TriggerOrdine.writePDF();
+				
 				try {
 					TriggerOrdine.writePDF().close();
 				} catch (IOException f) {

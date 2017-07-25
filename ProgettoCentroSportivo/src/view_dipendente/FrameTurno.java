@@ -7,22 +7,21 @@ import javax.swing.JDialog;
 
 import javax.swing.JLabel;
 
-import java.awt.BorderLayout;
+
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JComboBox;
 
 public class FrameTurno {
 	private JLabel lblNewLabel;
-	private JTable table;
-	public JComboBox<Object> comboBox ;
 	public JButton btnNewButton;
 	public static JDialog frame;
-
+	public static Comboorario Comboorario;
+	public static Combogiorno Combogiorno;
 	/**
 	 * Launch the application.
 	 */
@@ -37,43 +36,53 @@ public class FrameTurno {
 		
 		frame = new JDialog(FrameTesserato.frame,true);
 		frame.setTitle("Scegli orario e giorno");
-		frame.setBounds(100, 100, 803, 364);
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		
-		
-		frame.setResizable(false);
+		frame.setResizable(true);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 97, 139, 69, 32, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		frame.getContentPane().setLayout(gridBagLayout);
 		
 		{
 			lblNewLabel = new JLabel("                                                     Sei iscritto alle discipline");
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNewLabel.setBounds(26, 46, 145, 14);
 
-			frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
+			frame.getContentPane().add(lblNewLabel);
 		}
+	
+	
 		{
-			table = new JTable();
-			table.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null},
-					{null, null},
-				},
-				new String[] {
-					"IdDisciplina", "Nomedisciplina"
-				}
-			));
-			frame.getContentPane().add(table, BorderLayout.WEST);
+		//	btnNewButton = new JButton("Conferma");
+			//frame.getContentPane().add(btnNewButton);
 		}
-		{
-			 comboBox = new JComboBox<Object>();
-			frame.getContentPane().add(comboBox, BorderLayout.CENTER);
-		}
-		{
-			comboBox = new JComboBox<Object>();
-			frame.getContentPane().add(comboBox, BorderLayout.EAST);
-		}
-		{
-			btnNewButton = new JButton("Conferma");
-			frame.getContentPane().add(btnNewButton, BorderLayout.SOUTH);
-		}
+		
+
+		 Comboorario = new Comboorario();
+		 Comboorario.setEnabled(true);
+			GridBagConstraints gbc_comboBox = new GridBagConstraints();
+			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+			gbc_comboBox.gridx = 5;
+			gbc_comboBox.gridy = 2;
+		// Comboorario.addItemListener(new ItemListener() {
+			//public void itemStateChanged(ItemEvent e) {
+			//	if(Comboorario.getSelectedIndex()<=0)
+				//	btnConferma.setEnabled(false);
+				//else btnConferma.setEnabled(true);
+			//}
+		//});
+		
+		
+		
+		frame.getContentPane().add(Comboorario,gbc_comboBox);
+		
+		 Combogiorno = new Combogiorno();
+		 Combogiorno.setEnabled(true);
+		 frame.getContentPane().add(Combogiorno);
 	
 	}
 
