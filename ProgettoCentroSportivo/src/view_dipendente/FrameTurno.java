@@ -123,7 +123,7 @@ public class FrameTurno extends JPanel {
 			gbc_btnNewButton.gridx = 2;
 			gbc_btnNewButton.gridy = 6;
 			frame.add(btnNewButton, gbc_btnNewButton);
-	
+			
 			
 			frame.addWindowListener(new java.awt.event.WindowAdapter() {
 				   @Override

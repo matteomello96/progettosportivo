@@ -26,7 +26,7 @@ public class prova extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 42, 70, 0, 37, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 177, 81, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -65,6 +65,14 @@ public class prova extends JPanel {
 		gbc_comboBox.gridx = 1;
 		gbc_comboBox.gridy = 4;
 		add(comboBox, gbc_comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_1.gridx = 4;
+		gbc_comboBox_1.gridy = 4;
+		add(comboBox_1, gbc_comboBox_1);
 		
 		JButton btnNewButton = new JButton("New button");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
