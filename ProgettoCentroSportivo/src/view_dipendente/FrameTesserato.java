@@ -10,6 +10,9 @@ import java.text.DecimalFormat;
 import javax.swing.JMenu;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -39,7 +42,7 @@ public class FrameTesserato extends JPanel {
 	private JTable table;
 	public static JTable table_1;
 	public static JFrame frame;
-	private JPanel contentPane;
+	
 	 private disc_tabella model;
 	 public static float totale;
 	 public static JButton svuotacarrello;
@@ -61,6 +64,13 @@ public class FrameTesserato extends JPanel {
 		frame.setBounds(100, 100, 1334, 700);
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
+		
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{0, 110, 101, 106, 138, 88, 105, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 213, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		frame.setLayout(gridBagLayout);
 		
 	
 		
@@ -110,19 +120,22 @@ public class FrameTesserato extends JPanel {
 		
 		
 		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		frame.setContentPane(contentPane);
+		
+		;
 		
 		setForeground(new Color(0, 0, 0));
 		setBackground(new Color(240, 240, 240));
 		
 		
 		
-		final JLabel totord = new JLabel("TOTALE ORDINE:");
-		totord.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		totord.setBounds(101, 101, 131, 101);
-		contentPane.add(totord);
+		JLabel totord = new JLabel("TOTALE ORDINE:");
+		totord.setFont(new Font("Tahoma", Font.BOLD, 18));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.gridwidth = 3;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 3;
+		gbc_lblNewLabel.gridy = 0;
+		frame.add(totord, gbc_lblNewLabel);
 		
 		
 		table = new JTable();
@@ -132,7 +145,14 @@ public class FrameTesserato extends JPanel {
 		
 		table.setCellSelectionEnabled(true);
 		table.setModel(model);
-		contentPane.add(table);
+		GridBagConstraints gbc_table_1 = new GridBagConstraints();
+		gbc_table_1.gridwidth = 2;
+		gbc_table_1.insets = new Insets(0, 0, 5, 5);
+		gbc_table_1.fill = GridBagConstraints.BOTH;
+		gbc_table_1.gridx = 2;
+		gbc_table_1.gridy = 2;
+		frame.add(table, gbc_table_1);
+		
 		
 		table_1 = new JTable();
 		
@@ -160,11 +180,26 @@ public class FrameTesserato extends JPanel {
 		
 	
 		table_1.setAutoCreateRowSorter(true);
-		contentPane.add(table_1);
+		GridBagConstraints gbc_table_2 = new GridBagConstraints();
+		gbc_table_2.gridwidth = 2;
+		gbc_table_2.insets = new Insets(0, 0, 5, 5);
+		gbc_table_2.fill = GridBagConstraints.BOTH;
+		gbc_table_2.gridx = 5;
+		gbc_table_2.gridy = 2;
+		frame.add(table_1, gbc_table_2);
+		
 		
 
 		Aggiungi = new JButton("Aggiungi");
-		contentPane.add(Aggiungi);
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 2;
+		gbc_btnNewButton.gridy = 4;
+		frame.add(Aggiungi,gbc_btnNewButton);
+		
+		
+		
 		Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1){
@@ -235,8 +270,14 @@ public class FrameTesserato extends JPanel {
 		
 		
 		rimuovi = new JButton("rimuovi");
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 3;
+		gbc_btnNewButton_1.gridy = 4;
+		frame.add(rimuovi, gbc_btnNewButton_1);
 		
-		contentPane.add(rimuovi);
+		
+		
 		rimuovi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
@@ -249,8 +290,12 @@ public class FrameTesserato extends JPanel {
 		
 		
 	    svuotacarrello = new JButton("svuotacarrello");
-	    
-		contentPane.add(svuotacarrello);
+	    GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_2.gridx = 4;
+		gbc_btnNewButton_2.gridy = 4;
+		frame.add(svuotacarrello, gbc_btnNewButton_2);
+		
 		
 		svuotacarrello.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -263,7 +308,13 @@ public class FrameTesserato extends JPanel {
 		});
 		
 	     invia = new JButton("invia");
-		contentPane.add(invia);
+	     GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
+			gbc_btnNewButton_3.anchor = GridBagConstraints.WEST;
+			gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
+			gbc_btnNewButton_3.gridx = 5;
+			gbc_btnNewButton_3.gridy = 4;
+			frame.add(invia, gbc_btnNewButton_3);
+		
 		invia.addActionListener(new Listen(this));
 		invia.setActionCommand("conf");
 		invia.setEnabled(false);
