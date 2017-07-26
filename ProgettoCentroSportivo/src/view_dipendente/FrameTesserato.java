@@ -1,9 +1,7 @@
 package view_dipendente;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.RoundingMode;
@@ -12,7 +10,7 @@ import java.text.DecimalFormat;
 import javax.swing.JMenu;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -30,6 +28,7 @@ import ClassiDaoTesserato.ElencoAttivitaDAO;
 import Listener.Listen;
 import ModelliTabelle.disc_tabella;
 import VisteUtenteGenerico.FrameCambia;
+import view_dipendente.FrameTurno;
 
 
 public class FrameTesserato extends JPanel {
@@ -88,9 +87,26 @@ public class FrameTesserato extends JPanel {
 		
 		
 		JMenuItem scelta_orario= new JMenuItem("Scegli turno");
+		scelta_orario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameTurno();
+				frame.setEnabled(false);
+			}
+		});
 		mnNewMenu.add(scelta_orario);
-		scelta_orario.addActionListener(new Listen(this));
-		scelta_orario.setActionCommand("turn");
+		//scelta_orario.addActionListener(new Listen(this));
+		//scelta_orario.setActionCommand("turn");
+		
+		JMenuItem test= new JMenuItem("Testimonianze");
+		test.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameTestimonianze();
+				frame.setEnabled(false);
+			}
+		});
+		mnNewMenu.add(test);
+		//test.addActionListener(new Listen(this));
+		//test.setActionCommand("testimon");
 		
 		
 		

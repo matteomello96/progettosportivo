@@ -21,6 +21,12 @@ public class FrameCambia {
 	private JTextField pass0;
 	private JTextField pass1;
 	private JTextField reinsert;
+	
+	
+	
+	
+	
+	
 	public FrameCambia(){
 		frame = new JDialog();
 		frame.setTitle("Cambia password utente");
@@ -30,6 +36,8 @@ public class FrameCambia {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setAlwaysOnTop(true);
+		
+		
 		pass0 = new JTextField();
 		pass0.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		pass0.setBounds(10, 47, 235, 25);
