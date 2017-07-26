@@ -12,6 +12,8 @@ import java.awt.Insets;
 
 
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 
@@ -30,6 +32,7 @@ public class FrameTestimonianze extends JPanel {
 	 */
 	
 	public static JFrame frame;
+	public static Combotest combotest;
 	
 	
 	
@@ -40,7 +43,7 @@ public class FrameTestimonianze extends JPanel {
 		
 		frame = new JFrame("Testimonianze");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(100, 100, 605, 391);
+		frame.setBounds(100, 100, 705, 391);
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		frame.setResizable(true);
@@ -48,10 +51,10 @@ public class FrameTestimonianze extends JPanel {
 		
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 78, 96, 83, 42, 94, 89, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 177, 43, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 42, 70, 0, 37, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 177, 81, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.setLayout(gridBagLayout);
 		
 		
@@ -64,24 +67,42 @@ public class FrameTestimonianze extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		frame.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JEditorPane editorPane = new JEditorPane();
-		GridBagConstraints gbc_editorPane = new GridBagConstraints();
-		gbc_editorPane.gridwidth = 6;
-		gbc_editorPane.insets = new Insets(0, 0, 5, 5);
-		gbc_editorPane.fill = GridBagConstraints.BOTH;
-		gbc_editorPane.gridx = 2;
-		gbc_editorPane.gridy = 3;
-		frame.add(editorPane, gbc_editorPane);
+		 JEditorPane editorPane = new JEditorPane();
+			GridBagConstraints gbc_editorPane = new GridBagConstraints();
+			gbc_editorPane.gridwidth = 7;
+			gbc_editorPane.insets = new Insets(0, 0, 5, 5);
+			gbc_editorPane.fill = GridBagConstraints.BOTH;
+			gbc_editorPane.gridx = 0;
+			gbc_editorPane.gridy = 3;
+			frame.add(editorPane, gbc_editorPane);
 		
-		JLabel lblNewLabel_1 = new JLabel("Inserisci la tua testimonianza");
-		lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.gridwidth = 3;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_1.gridx = 2;
-		gbc_lblNewLabel_1.gridy = 4;
-		frame.add(lblNewLabel_1, gbc_lblNewLabel_1);
+			JLabel lblNewLabel_1 = new JLabel("Inserisci la tua testimonianza");
+			lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+			gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+			gbc_lblNewLabel_1.gridwidth = 4;
+			gbc_lblNewLabel_1.gridx = 7;
+			gbc_lblNewLabel_1.gridy = 3;
+			frame.add(lblNewLabel_1, gbc_lblNewLabel_1);
+			
+			
+			
+			combotest = new Combotest();
+			 combotest.setEnabled(true);
+			GridBagConstraints gbc_comboBox = new GridBagConstraints();
+			gbc_comboBox.gridwidth = 3;
+			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+			gbc_comboBox.gridx = 1;
+			gbc_comboBox.gridy = 4;
+			frame.add(combotest, gbc_comboBox);
 	
+			JButton btnNewButton = new JButton("Invia");
+			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+			gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+			gbc_btnNewButton.gridx = 5;
+			gbc_btnNewButton.gridy = 4;
+			frame.add(btnNewButton, gbc_btnNewButton);
 
 		
 	frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -93,6 +114,9 @@ public class FrameTestimonianze extends JPanel {
 		    
 		    }
 		});
+	
+	
+	
 	}
 
 }
