@@ -1,4 +1,4 @@
-package view_dipendente;
+package view_tesserato;
 
 
 import javax.swing.JButton;

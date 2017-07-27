@@ -1,4 +1,4 @@
-package view_dipendente;
+package view_tesserato;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

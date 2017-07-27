@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 import Model.Utente;
-import view_dipendente.FrameTestimonianze;
+import view_tesserato.FrameTesserato;
+import view_tesserato.FrameTestimonianze;
 
 public class TestimnianzaDao {
 
@@ -51,6 +52,8 @@ public class TestimnianzaDao {
            st.executeUpdate("INSERT INTO testimonianza (CodiceTestimonianza,Commento,DataAzione,Tesserato,combinazionelivdis) "
            		+"VALUES (NULL, '"+commento+"','"+momento+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+a+"')"); 
             JOptionPane.showMessageDialog(FrameTestimonianze.frame, "Testimonianza inviata"," ",JOptionPane.INFORMATION_MESSAGE);
+            FrameTestimonianze.frame.dispose();
+            FrameTesserato.frame.setEnabled(true);
         } catch (SQLException ex) {
         }
 		

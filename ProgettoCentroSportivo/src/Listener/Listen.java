@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameRegistrazione;
-import view_dipendente.Confermaordine;
-import view_dipendente.FrameTesserato;
-import view_dipendente.FrameTestimonianze;
-import view_dipendente.FrameTurno;
+import view_tesserato.Confermaordine;
+import view_tesserato.FrameTesserato;
+import view_tesserato.FrameTestimonianze;
+import view_tesserato.FrameTurno;
 import visteadmin.FrameOrdini;
 import visteadmin.FrameResponsabile;
 

@@ -1,4 +1,4 @@
-package view_dipendente;
+package view_tesserato;
 
 
 import java.awt.Desktop;
@@ -30,7 +30,6 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.TriggerOrdine;
-import view_dipendente.FrameTesserato;
 
 
 

@@ -1,4 +1,4 @@
-package view_dipendente;
+package view_tesserato;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +9,8 @@ import javax.swing.JComboBox;
 
 import DBInterfaccia.DbConnection;
 
-public class Comboliv  extends JComboBox<Object>{
+
+public class Combocon extends JComboBox<Object>{
 	private static final long serialVersionUID = 1L;
 
 	Connection con = DbConnection.db;
@@ -17,7 +18,7 @@ public class Comboliv  extends JComboBox<Object>{
     Statement st;
     
     ResultSet rs;
-    public  Comboliv(){
+    public  Combocon(){
     	super();
 
 
@@ -28,13 +29,13 @@ public class Comboliv  extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select distinct Livello from disciplinedisponibili;"); 
+            rs = st.executeQuery("SELECT DISTINCT Nomemodalita  FROM modalitapagamento"); 
             
     		
-    		proj=(Object) " Seleziona livello ";
+    		proj=(Object) " Seleziona una modalità di pagamento ";
     		this.addItem(proj);
             while(rs.next()){
-                proj=(Object) rs.getString("Livello");
+                proj=(Object) rs.getString("Nomemodalita ");
                 this.addItem(proj);
                         
             }
@@ -50,4 +51,6 @@ public class Comboliv  extends JComboBox<Object>{
   
 
     }
+    
+    
 }

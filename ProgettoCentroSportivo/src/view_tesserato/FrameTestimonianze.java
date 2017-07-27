@@ -1,4 +1,4 @@
-package view_dipendente;
+package view_tesserato;
 
 import javax.swing.JPanel;
 
@@ -131,6 +131,7 @@ public class FrameTestimonianze extends JPanel {
 					commento=editorPane.getText();
 //JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina+"\" e\\o l'email \""+commento+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
 			   TestimnianzaDao.instest(disciplina,livello,commento);
+			   
 				
 				}
 			});

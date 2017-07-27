@@ -16,9 +16,8 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import ClassiDao.GetInfoDB;
 import Model.Utente;
-
+import view_tesserato.FrameTesserato;
 import DBInterfaccia.DbConnection;
-import view_dipendente.FrameTesserato;
 
 
 

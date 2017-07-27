@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import Business.UtenteBusiness;
 import ClassiDao.*;
 import VisteUtenteGenerico.FrameLogin;
-import view_dipendente.FrameTesserato;
+import view_tesserato.FrameTesserato;
 import visteadmin.FrameResponsabile;
 
 

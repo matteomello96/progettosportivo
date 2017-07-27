@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import DBInterfaccia.DbConnection;
 import Model.Utente;
 import VisteUtenteGenerico.FrameCambia;
-import view_dipendente.FrameTesserato;
+import view_tesserato.FrameTesserato;
 public class PasswordChanged {
 	
 	

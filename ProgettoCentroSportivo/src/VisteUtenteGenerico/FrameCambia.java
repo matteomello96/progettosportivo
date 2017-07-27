@@ -12,8 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ClassiDao.PasswordChanged;
-
-import view_dipendente.FrameTesserato;
+import view_tesserato.FrameTesserato;
 
 
 public class FrameCambia {

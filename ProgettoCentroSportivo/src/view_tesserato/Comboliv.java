@@ -1,4 +1,4 @@
-package view_dipendente;
+package view_tesserato;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import javax.swing.JComboBox;
 
 import DBInterfaccia.DbConnection;
 
-public class Combogiorno  extends JComboBox<Object>{
+public class Comboliv  extends JComboBox<Object>{
 	private static final long serialVersionUID = 1L;
 
 	Connection con = DbConnection.db;
@@ -17,7 +17,7 @@ public class Combogiorno  extends JComboBox<Object>{
     Statement st;
     
     ResultSet rs;
-    public  Combogiorno(){
+    public  Comboliv(){
     	super();
 
 
@@ -28,13 +28,13 @@ public class Combogiorno  extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select giornosettimana from gestioneturno;"); 
+            rs = st.executeQuery("select distinct Livello from disciplinedisponibili;"); 
             
     		
-    		proj=(Object) " Seleziona il giorno ";
+    		proj=(Object) " Seleziona livello ";
     		this.addItem(proj);
             while(rs.next()){
-                proj=(Object) rs.getString("giornosettimana");
+                proj=(Object) rs.getString("Livello");
                 this.addItem(proj);
                         
             }

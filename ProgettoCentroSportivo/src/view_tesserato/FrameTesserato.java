@@ -1,4 +1,4 @@
-package view_dipendente;
+package view_tesserato;
 
 import javax.swing.JPanel;
 
@@ -31,7 +31,6 @@ import ClassiDaoTesserato.ElencoAttivitaDAO;
 import Listener.Listen;
 import ModelliTabelle.disc_tabella;
 import VisteUtenteGenerico.FrameCambia;
-import view_dipendente.FrameTurno;
 
 
 public class FrameTesserato extends JPanel {
