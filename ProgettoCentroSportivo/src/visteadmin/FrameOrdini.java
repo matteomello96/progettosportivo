@@ -4,17 +4,22 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import ClassiDaoTesserato.TestimnianzaDao;
 import Model.ModelRichiestaIscrizione;
 import ModelliTabelle.ModElUtenti;
 import ModelliTabelle.modelisc;
+import classiDAOResponsabile.ConfermaDao;
 import classiDAOResponsabile.ElencoUtentiDAO;
 import classiDAOResponsabile.RichiesteDao;
 
@@ -25,6 +30,7 @@ public class FrameOrdini extends JPanel {
 	public JTable table_2;
 	private modelisc model;
 	
+	
 	public FrameOrdini() {
 		frame = new JFrame("Iscrizione");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -32,7 +38,7 @@ public class FrameOrdini extends JPanel {
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		frame.setResizable(true);
-		frame.setAlwaysOnTop(true);
+		//frame.setAlwaysOnTop(true);
 		
 		
 		
@@ -73,6 +79,49 @@ public class FrameOrdini extends JPanel {
 		gbc_btnNewButton.gridx = 2;
 		gbc_btnNewButton.gridy = 4;
 		frame.add(btnNewButton, gbc_btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Annulla Iscrizione");
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 4;
+		gbc_btnNewButton_1.gridy = 4;
+		frame.add(btnNewButton_1, gbc_btnNewButton_1);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int a;
+				
+				a=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
+				
+				
+				
+			
+//JOptionPane.showMessageDialog(null, "Il nome utente \""+a+"\" e\\o l'email \""+a+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
+		   ConfermaDao.Confermaiscrizione(a);
+		   
+			
+			}
+		});
+		
+		
+		
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int a;
+				
+				a=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
+				
+				
+				
+			
+//JOptionPane.showMessageDialog(null, "Il nome utente \""+a+"\" e\\o l'email \""+a+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
+		   ConfermaDao.Confermaiscrizione(a);
+		   
+			
+			}
+		});
 	
 
 	}

@@ -69,6 +69,14 @@ public class prova extends JPanel {
 		gbc_btnNewButton.gridx = 2;
 		gbc_btnNewButton.gridy = 4;
 		add(btnNewButton, gbc_btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Annulla Iscrizione");
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 4;
+		gbc_btnNewButton_1.gridy = 4;
+		add(btnNewButton_1, gbc_btnNewButton_1);
 	
 
 	}
