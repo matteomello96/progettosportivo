@@ -70,13 +70,7 @@ public class Listen implements ActionListener {
 			new FrameIniziale();
 			FrameIniziale.frame.setVisible(true);
 		}
-          if ("Vai_ord".equals(e.getActionCommand())){
-  			
-        	  FrameResponsabile.frame.setVisible(false);
-        	  FrameResponsabile.frame.dispose();
-			new FrameOrdini();
-			FrameOrdini.frame.setVisible(true);
-		}
+		
           if ("Vai_log".equals(e.getActionCommand())){
   			
         	  FrameIniziale.frame.setVisible(false);

@@ -31,6 +31,7 @@ import java.beans.PropertyChangeEvent;
 import Model.Home;
 import ModelliTabelle.ModDiscIni;
 import ModelliTabelle.ModElUtenti;
+import VisteUtenteGenerico.FrameCambia;
 import classiDAOResponsabile.ElencoUtentiDAO;
 import Listener.Listen;
 
@@ -61,7 +62,7 @@ public class FrameResponsabile extends JFrame {
 	public FrameResponsabile() {
 		frame = new JFrame("Pagina iniziale Responsabile");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 605, 391);
+		frame.setBounds(100, 100, 1000, 1000);
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		frame.setResizable(true);
@@ -84,11 +85,17 @@ public class FrameResponsabile extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenuItem MenuOrdini = new JMenuItem("Visualizza richieste di pagamento");
+		MenuOrdini.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameOrdini();
+				//frame.setEnabled(false);
+				//frame.setVisible(false);
+			}
+		});
 		
 		
 		menuBar.add(MenuOrdini);
-		MenuOrdini.addActionListener(new Listen(this));
-		MenuOrdini.setActionCommand("Vai_ord");
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,193,20));
 		contentPane.setLayout(new GridBagLayout());
