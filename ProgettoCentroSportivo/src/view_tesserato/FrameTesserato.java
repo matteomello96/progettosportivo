@@ -48,6 +48,7 @@ public class FrameTesserato extends JPanel {
 	 public static JButton Aggiungi;
 	 public static JButton rimuovi;
 	 public static JButton invia;
+	 public String a;
 	
 
 	/**
@@ -98,8 +99,11 @@ public class FrameTesserato extends JPanel {
 		JMenuItem scelta_orario= new JMenuItem("Scegli turno");
 		scelta_orario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new FrameTurno();
+				
+				a="null";
+				new FrameTurno(a,null,null,null);
 				frame.setEnabled(false);
+				
 			}
 		});
 		mnNewMenu.add(scelta_orario);

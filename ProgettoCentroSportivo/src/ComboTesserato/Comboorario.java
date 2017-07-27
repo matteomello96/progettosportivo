@@ -31,7 +31,7 @@ public class Comboorario extends JComboBox<Object> {
             rs = st.executeQuery("select fasciaoraria from gestioneturno;"); 
             
     		
-    		proj=(Object) " Seleziona l'orario ";
+    		proj=(Object) "orario";
     		this.addItem(proj);
             while(rs.next()){
                 proj=(Object) rs.getString("fasciaoraria");

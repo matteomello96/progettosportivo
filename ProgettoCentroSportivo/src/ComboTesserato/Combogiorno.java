@@ -31,7 +31,7 @@ public class Combogiorno  extends JComboBox<Object>{
             rs = st.executeQuery("select giornosettimana from gestioneturno;"); 
             
     		
-    		proj=(Object) " Seleziona il giorno ";
+    		proj=(Object) "giorno";
     		this.addItem(proj);
             while(rs.next()){
                 proj=(Object) rs.getString("giornosettimana");

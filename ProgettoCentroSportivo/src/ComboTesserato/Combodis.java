@@ -33,7 +33,7 @@ import Model.Utente;
             rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili,iscrizionedisciplina where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and iscrizionedisciplina.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;"); 
             
     		
-    		proj=(Object) " Seleziona la disciplina ";
+    		proj=(Object) "disciplina";
     		this.addItem(proj);
             while(rs.next()){
                 proj=(Object) rs.getString("Disciplina");
