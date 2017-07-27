@@ -46,7 +46,7 @@ public class FrameTurno extends JPanel {
 	
 	
 
-	public FrameTurno(String disciplina2, String livello2, String ora2, String giorno2) {
+	public FrameTurno(String disciplina2, String livello2, String giorno2, String ora2) {
 		final DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
 		
@@ -122,23 +122,24 @@ public class FrameTurno extends JPanel {
 				frame.add(Combolivello, gbc_comboBox_3);
 				
 				
-				JLabel lblNewLabel_3 = new JLabel("Orario:");
-				lblNewLabel_3.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-				gbc_lblNewLabel_3.gridwidth = 2;
-				gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_3.gridx = 0;
-				gbc_lblNewLabel_3.gridy = 4;
-				frame.add(lblNewLabel_3, gbc_lblNewLabel_3);
+				JLabel lblNewLabel_4 = new JLabel("Orario:");
+				lblNewLabel_4.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+				GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+				gbc_lblNewLabel_4.gridwidth = 2;
+				gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNewLabel_4.gridx = 0;
+				gbc_lblNewLabel_4.gridy = 5;
+				frame.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 		 Comboorario = new Comboorario();
 		 Comboorario.setEnabled(false);
-		 GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-			gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox_1.gridx = 2;
-			gbc_comboBox_1.gridy = 4;
-			frame.add(Comboorario, gbc_comboBox_1);
+		 
+		 GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
+			gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
+			gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
+			gbc_comboBox_2.gridx = 2;
+			gbc_comboBox_2.gridy = 5;
+			frame.add(Comboorario, gbc_comboBox_2);
 		// Comboorario.addItemListener(new ItemListener() {
 			//public void itemStateChanged(ItemEvent e) {
 			//	if(Comboorario.getSelectedIndex()<=0)
@@ -147,26 +148,26 @@ public class FrameTurno extends JPanel {
 			//}
 		//});
 		
-			JLabel lblNewLabel_4 = new JLabel("Giorno:");
-			lblNewLabel_4.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-			GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-			gbc_lblNewLabel_4.gridwidth = 2;
-			gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel_4.gridx = 0;
-			gbc_lblNewLabel_4.gridy = 5;
-			frame.add(lblNewLabel_4, gbc_lblNewLabel_4);
+			JLabel lblNewLabel_3 = new JLabel("Giorno:");
+			lblNewLabel_3.setFont(new Font("Sylfaen", Font.PLAIN, 18));
+			GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+			gbc_lblNewLabel_3.gridwidth = 2;
+			gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_3.gridx = 0;
+			gbc_lblNewLabel_3.gridy = 4;
+			frame.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		
 		
-		
-		 Combogiorno = new Combogiorno();
-		 Combogiorno.setEnabled(false);
-		 GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-			gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox_2.gridx = 2;
-			gbc_comboBox_2.gridy = 5;
-			frame.add(Combogiorno, gbc_comboBox_2);
+		      Combogiorno = new Combogiorno();
+		      Combogiorno.setEnabled(false);
+		      GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+				gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+				gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+				gbc_comboBox_1.gridx = 2;
+				gbc_comboBox_1.gridy = 4;
+				frame.add(Combogiorno, gbc_comboBox_1);
+				
 			
 
 			JButton btnNewButton = new JButton("step successivo>>");
@@ -198,7 +199,7 @@ public class FrameTurno extends JPanel {
 					if(disciplina2=="null"){
 					frame.dispose();
 				  
-					new FrameTurno(disciplina,livello,ora,giorno);	
+					new FrameTurno(disciplina,livello,giorno,ora);	
 					Combodis.setEnabled(false);
 					Combolivello.setEnabled(true);
 					Comboorario.setEnabled(false);
@@ -206,14 +207,14 @@ public class FrameTurno extends JPanel {
 					} 
 					else if(livello2=="livello"){
 						frame.dispose();
-						new FrameTurno(disciplina2,livello,ora,giorno);	
+						new FrameTurno(disciplina2,livello,giorno,ora);	
 						Combodis.setEnabled(false);
 						Combolivello.setEnabled(false);
-						Comboorario.setEnabled(true);
-						Combogiorno.setEnabled(false);
+						Comboorario.setEnabled(false);
+						Combogiorno.setEnabled(true);
 					}
 					
-					else if(ora2=="orario"&& livello=="livello"){
+				/*	else if(ora2=="orario"&& livello=="livello"){
 						frame.dispose();
 						
 						new FrameTurno(disciplina2,livello2,ora,giorno);	
@@ -233,7 +234,27 @@ public class FrameTurno extends JPanel {
 						btnNewButton_1.setEnabled(true);
 						JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina2+"\" e\\o l'email \""+livello2+"\" sono già in uso, sceglierne altri  \""+ora2+"\"  \""+giorno+"\""," ",JOptionPane.WARNING_MESSAGE);
 					}
+						*/
+					else if(giorno2=="giorno"&& livello=="livello"){
+						frame.dispose();
 						
+						new FrameTurno(disciplina2,livello2,giorno,ora);	
+						Combodis.setEnabled(false);
+						Combolivello.setEnabled(false);
+						Comboorario.setEnabled(true);
+						Combogiorno.setEnabled(false);
+						
+					}
+					else{
+						frame.dispose();
+						new FrameTurno(disciplina2,livello2,giorno2,ora);
+						Combodis.setEnabled(false);
+						Combolivello.setEnabled(false);
+						Comboorario.setEnabled(false);
+						Combogiorno.setEnabled(false);
+						
+						JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina2+"\" e\\o l'email \""+livello2+"\" sono già in uso, sceglierne altri  \""+ora2+"\"  \""+giorno+"\""," ",JOptionPane.WARNING_MESSAGE);
+					}
 					
 					
 //JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina2+"\" e\\o l'email \""+livello2+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
