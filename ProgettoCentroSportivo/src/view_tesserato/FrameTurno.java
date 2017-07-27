@@ -1,18 +1,23 @@
 package view_tesserato;
 
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
+import ComboTesserato.Combodis;
+import ComboTesserato.Combogiorno;
+import ComboTesserato.Comboorario;
 
 
 public class FrameTurno extends JPanel {
@@ -27,15 +32,10 @@ public class FrameTurno extends JPanel {
 	public static JFrame frame;
 	public static Comboorario Comboorario;
 	public static Combogiorno Combogiorno;
+	public static Combodis Combodis;
+	
 	private JTable table;
-	/**
-	 * Launch the application.
-	 */
 
-
-	/**
-	 * Create the dialog.
-	 */
 	public FrameTurno() {
 		final DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
@@ -52,10 +52,10 @@ public class FrameTurno extends JPanel {
 		
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{42, 0, 158, 0, 79, 75, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 36, 76, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{42, 0, 158, 0, 148, 75, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 36, 40, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.setLayout(gridBagLayout);
 		
 		
@@ -76,26 +76,39 @@ public class FrameTurno extends JPanel {
 		gbc_lblNewLabel_1.gridx = 0;
 		gbc_lblNewLabel_1.gridy = 3;
 		frame.add(lblNewLabel_1, gbc_lblNewLabel_1);
+			
 		
 		
-		table = new JTable();
-		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.gridheight = 2;
-		gbc_table.insets = new Insets(0, 0, 5, 5);
-		gbc_table.fill = GridBagConstraints.BOTH;
-		gbc_table.gridx = 2;
-		gbc_table.gridy = 3;
-		frame.add(table, gbc_table);
+	
 		
 
-		 Comboorario = new Comboorario();
-		 Comboorario.setEnabled(true);
+		
+		 Combodis = new Combodis();
+		 Combodis.setEnabled(true);
 		 GridBagConstraints gbc_comboBox = new GridBagConstraints();
 			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox.gridx = 4;
+			gbc_comboBox.gridx = 2;
 			gbc_comboBox.gridy = 3;
-			frame.add(Comboorario, gbc_comboBox);
+			frame.add(Combodis, gbc_comboBox);
+		
+			
+			JComboBox comboBox_3 = new JComboBox();
+			GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
+			gbc_comboBox_3.insets = new Insets(0, 0, 5, 5);
+			gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
+			gbc_comboBox_3.gridx = 4;
+			gbc_comboBox_3.gridy = 3;
+			frame.add(comboBox_3, gbc_comboBox_3);
+		
+		 Comboorario = new Comboorario();
+		 Comboorario.setEnabled(true);
+		 GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+			gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+			gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+			gbc_comboBox_1.gridx = 2;
+			gbc_comboBox_1.gridy = 4;
+			frame.add(Comboorario, gbc_comboBox_1);
 		// Comboorario.addItemListener(new ItemListener() {
 			//public void itemStateChanged(ItemEvent e) {
 			//	if(Comboorario.getSelectedIndex()<=0)
@@ -110,18 +123,18 @@ public class FrameTurno extends JPanel {
 		
 		 Combogiorno = new Combogiorno();
 		 Combogiorno.setEnabled(true);
-		 GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-			gbc_comboBox_1.insets = new Insets(0, 0, 5, 0);
-			gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox_1.gridx = 5;
-			gbc_comboBox_1.gridy = 3;
-			frame.add(Combogiorno, gbc_comboBox_1);
+		 GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
+			gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
+			gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
+			gbc_comboBox_2.gridx = 2;
+			gbc_comboBox_2.gridy = 5;
+			frame.add(Combogiorno, gbc_comboBox_2);
 			
 			JButton btnNewButton = new JButton("Conferma");
 			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 			gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 			gbc_btnNewButton.gridx = 2;
-			gbc_btnNewButton.gridy = 6;
+			gbc_btnNewButton.gridy = 7;
 			frame.add(btnNewButton, gbc_btnNewButton);
 			
 			

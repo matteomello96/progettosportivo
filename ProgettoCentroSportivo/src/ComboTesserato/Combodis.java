@@ -1,4 +1,4 @@
-package view_tesserato;
+package ComboTesserato;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,9 +7,11 @@ import java.sql.Statement;
 
 import javax.swing.JComboBox;
 
+import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
+import Model.Utente;
 
-public class Comboliv  extends JComboBox<Object>{
+    public class Combodis extends JComboBox<Object> {
 	private static final long serialVersionUID = 1L;
 
 	Connection con = DbConnection.db;
@@ -17,7 +19,7 @@ public class Comboliv  extends JComboBox<Object>{
     Statement st;
     
     ResultSet rs;
-    public  Comboliv(){
+    public  Combodis(){
     	super();
 
 
@@ -28,13 +30,13 @@ public class Comboliv  extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select distinct Livello from disciplinedisponibili;"); 
+            rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili,iscrizionedisciplina where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and iscrizionedisciplina.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;"); 
             
     		
-    		proj=(Object) " Seleziona livello ";
+    		proj=(Object) " Seleziona la disciplina ";
     		this.addItem(proj);
             while(rs.next()){
-                proj=(Object) rs.getString("Livello");
+                proj=(Object) rs.getString("Disciplina");
                 this.addItem(proj);
                         
             }

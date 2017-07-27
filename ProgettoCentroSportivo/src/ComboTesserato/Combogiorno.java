@@ -1,4 +1,4 @@
-package view_tesserato;
+package ComboTesserato;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

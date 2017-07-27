@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 
 import ClassiDaoTesserato.TestimnianzaDao;
 import ClassiDaoTesserato.TriggerOrdine;
+import ComboTesserato.Comboliv;
+import ComboTesserato.Combotest;
 
 import java.awt.GridBagLayout;
 

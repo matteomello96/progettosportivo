@@ -1,4 +1,4 @@
-package view_tesserato;
+package ComboTesserato;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import javax.swing.JComboBox;
 
 import DBInterfaccia.DbConnection;
 
-public class Comboorario extends JComboBox<Object> {
+public class Combotest  extends JComboBox<Object>{
 	private static final long serialVersionUID = 1L;
 
 	Connection con = DbConnection.db;
@@ -17,7 +17,7 @@ public class Comboorario extends JComboBox<Object> {
     Statement st;
     
     ResultSet rs;
-    public  Comboorario(){
+    public  Combotest(){
     	super();
 
 
@@ -28,13 +28,13 @@ public class Comboorario extends JComboBox<Object> {
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select fasciaoraria from gestioneturno;"); 
+            rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili;"); 
             
     		
-    		proj=(Object) " Seleziona l'orario ";
+    		proj=(Object) " Seleziona disciplina ";
     		this.addItem(proj);
             while(rs.next()){
-                proj=(Object) rs.getString("fasciaoraria");
+                proj=(Object) rs.getString("Disciplina");
                 this.addItem(proj);
                         
             }

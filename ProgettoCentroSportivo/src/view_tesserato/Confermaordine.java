@@ -30,6 +30,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.TriggerOrdine;
+import ComboTesserato.Combocon;
 
 
 
