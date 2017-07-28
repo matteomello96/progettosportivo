@@ -131,7 +131,7 @@ public class FrameTurno extends JPanel {
 				gbc_lblNewLabel_4.gridy = 5;
 				frame.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		 Comboorario = new Comboorario();
+		 Comboorario = new Comboorario(livello2,disciplina2,giorno2);
 		 Comboorario.setEnabled(false);
 		 
 		 GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
@@ -159,7 +159,7 @@ public class FrameTurno extends JPanel {
 		
 		
 		
-		      Combogiorno = new Combogiorno();
+		      Combogiorno = new Combogiorno(livello2,disciplina2);
 		      Combogiorno.setEnabled(false);
 		      GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 				gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);

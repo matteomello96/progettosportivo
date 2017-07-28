@@ -17,7 +17,7 @@ public class Combogiorno  extends JComboBox<Object>{
     Statement st;
     
     ResultSet rs;
-    public  Combogiorno(){
+    public  Combogiorno(String livello,String disciplina){
     	super();
 
 
@@ -28,7 +28,7 @@ public class Combogiorno  extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select giornosettimana from gestioneturno;"); 
+            rs = st.executeQuery("select distinct Giornosettimana from gestioneturno,disciplinedisponibili where Livello='"+livello+"' and Disciplina='"+disciplina+"' and gestioneturno.Combinazionelivdis=disciplinedisponibili.Combinazionelivdis;"); 
             
     		
     		proj=(Object) "giorno";

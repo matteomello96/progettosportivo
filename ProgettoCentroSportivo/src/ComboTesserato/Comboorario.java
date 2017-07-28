@@ -17,7 +17,7 @@ public class Comboorario extends JComboBox<Object> {
     Statement st;
     
     ResultSet rs;
-    public  Comboorario(){
+    public  Comboorario(String livello,String disciplina,String giorno){
     	super();
 
 
@@ -28,7 +28,7 @@ public class Comboorario extends JComboBox<Object> {
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select fasciaoraria from gestioneturno;"); 
+            rs = st.executeQuery("select distinct fasciaoraria from gestioneturno,disciplinedisponibili where Livello='"+livello+"' and Disciplina='"+disciplina+"' and Giornosettimana='"+giorno+"'  and gestioneturno.Combinazionelivdis=disciplinedisponibili.Combinazionelivdis;"); 
             
     		
     		proj=(Object) "orario";
