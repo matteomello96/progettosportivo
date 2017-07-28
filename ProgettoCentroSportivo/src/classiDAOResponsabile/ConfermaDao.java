@@ -58,7 +58,7 @@ public class ConfermaDao {
 	            	
 	            	st2.executeUpdate("UPDATE ordine SET confermato=0 WHERE ordine.idordine='"+idordine+"'");
 		        	st.executeUpdate("UPDATE ordine SET annullato=1 WHERE ordine.idordine='"+idordine+"'");
-		        	JOptionPane.showMessageDialog(FrameCambia.frame, "Ordine Confermato"," ",JOptionPane.INFORMATION_MESSAGE);
+		        	JOptionPane.showMessageDialog(FrameCambia.frame, "Ordine Annullato"," ",JOptionPane.INFORMATION_MESSAGE);
 		        	
 		        		FrameResponsabile.frame.setEnabled(true);
 				   	

@@ -10,6 +10,7 @@ import DBInterfaccia.DbConnection;
 import Model.Utente;
 import VisteUtenteGenerico.FrameCambia;
 import view_tesserato.FrameTesserato;
+import visteadmin.FrameResponsabile;
 public class PasswordChanged {
 	
 	
@@ -33,8 +34,8 @@ public class PasswordChanged {
 	        	JOptionPane.showMessageDialog(FrameCambia.frame, "Password cambiata"," ",JOptionPane.INFORMATION_MESSAGE);
 	        	if(FrameTesserato.frame!=null)
 	        		FrameTesserato.frame.setEnabled(true);
-			    	//if(MagFrame.frame!=null)
-			    	//	MagFrame.frame.setEnabled(true);
+			    	if(FrameResponsabile.frame!=null)
+			    		FrameResponsabile.frame.setEnabled(true);
 			    	//if(CapFrame.frame!=null)
 			    	//	CapFrame.frame.setEnabled(true);
 			    	//if(AdminFrame.frame!=null)

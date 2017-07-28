@@ -82,6 +82,12 @@ public class FrameResponsabile extends JFrame {
 		mntmNewMenuItem.setActionCommand("iniresp");
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameCambia();
+				frame.setEnabled(false);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenuItem MenuOrdini = new JMenuItem("Visualizza richieste di pagamento");
