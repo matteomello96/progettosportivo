@@ -54,6 +54,7 @@ public class Confermaordine {
 	public static PDDocument documentoPDF=null;
 	public static boolean d=true,d2=true;
     public static JDialog frame;
+    public String pagamento;
 	
 
 public Confermaordine(){
@@ -131,12 +132,12 @@ public Confermaordine(){
 		btnGeneraDistinta.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnGeneraDistinta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				pagamento=ComboP.getSelectedItem().toString();
 				testodistinta=TriggerOrdine.scriviDistinta();
-				documentoPDF = TriggerOrdine.writePDF();
+				documentoPDF = TriggerOrdine.writePDF(pagamento);
 				
 				try {
-					TriggerOrdine.writePDF().close();
+					TriggerOrdine.writePDF(pagamento).close();
 				} catch (IOException f) {
 					// TODO Auto-generated catch block
 					f.printStackTrace();
@@ -208,6 +209,7 @@ public Confermaordine(){
 		btnFine.setEnabled(false);
 		btnFine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				if(d){
 
 					BufferedWriter writer = null;
@@ -266,7 +268,10 @@ public Confermaordine(){
 
 			btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-		    TriggerOrdine.insOrdine();
+				
+			pagamento=ComboP.getSelectedItem().toString();
+			
+		    TriggerOrdine.insOrdine(pagamento);
 
 			//	int a0=0,a1=0;
 			//	String a2="",a3="";
@@ -297,9 +302,9 @@ public Confermaordine(){
 			
 			
 				testodistinta=TriggerOrdine.scriviDistinta();
-				documentoPDF = TriggerOrdine.writePDF();
+				documentoPDF = TriggerOrdine.writePDF(pagamento);
 				try {
-					TriggerOrdine.writePDF().close();
+					TriggerOrdine.writePDF(pagamento).close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

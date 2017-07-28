@@ -9,6 +9,9 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import javax.swing.JOptionPane;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
@@ -36,7 +39,7 @@ public class TriggerOrdine {
 	
 	
 	
-	 public static void insOrdine(){	
+	 public static void insOrdine(String pag){	
 	        
 	        Connection con = DbConnection.db;
 	        Statement st;
@@ -48,16 +51,14 @@ public class TriggerOrdine {
 	        	momento=TriggerOrdine.getDate();
 	        	 
 	            
-	        	
-	            st.executeUpdate("INSERT INTO ordine (idordine,matricolatesserato,prezzototale,confermato,annullato,dataconsegnaordine) "
-	            		+ "VALUES (NULL, '"+GetInfoDB.getidTess(Utente.getUsername())+"','"+FrameTesserato.totale+"', '0', '0','"+momento+"')"); 
+	        	//JOptionPane.showMessageDialog(null, "Il nome utente \""+FrameTesserato.totale+"\" e\\o l'email \""+momento+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
+	            st.executeUpdate("INSERT INTO iscrizionedisciplina (codiceiscrizionedisciplina,dataazione,tesserato,modalitapagamento,prezzotot,confermato,annullato) "
+	            		+ "VALUES (NULL,'"+momento+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+pag+"','"+FrameTesserato.totale+"', '0', '0')"); 
 	        } catch (SQLException ex) {
 	        }
 	    }
-	
-	
-	
-	 public static PDDocument writePDF() {
+
+	 public static PDDocument writePDF(String pagamento) {
      	final DecimalFormat df = new DecimalFormat("0.00");
  		df.setRoundingMode(RoundingMode.HALF_EVEN);
 			try {
@@ -80,6 +81,8 @@ public class TriggerOrdine {
 				vers.drawString("ID Tesserato: "+GetInfoDB.getidTess(Utente.getUsername())+"\r\n");
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.drawString("Nome dipendente: "+Utente.getUsername()+"\r\n");
+	    		vers.moveTextPositionByAmount(0, -12);
+	    		vers.drawString("Hai effettuato il pagamento con:: "+pagamento+"\r\n");
 	    		
 	    		
 	    		
