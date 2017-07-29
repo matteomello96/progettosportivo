@@ -6,15 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -24,8 +30,10 @@ import ClassiDao.ElencoDisciplineDAO;
 
 
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 
 import ModelliTabelle.ModDiscIni;
+
 import Listener.Listen;
 import javax.swing.JScrollPane;
 
@@ -39,8 +47,8 @@ public class FrameIniziale extends JFrame {
 	 */
 	public static JFrame frame;
 	
-	public JPanel contentPane;
-	public JTable table;
+	public JPanel contentPane,tabellaPnl;
+	public static JTable table;
     private ModDiscIni model;
 	/**
 	 * Launch the application.
@@ -88,7 +96,7 @@ public class FrameIniziale extends JFrame {
 		JLabel lblNewLabel = new JLabel("NuovoPolisportivo");
 		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
 		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 3;
+		gbc.gridx = 2;
 		gbc.gridy = 0;
 		contentPane.add(lblNewLabel, gbc);
 		
@@ -97,7 +105,7 @@ public class FrameIniziale extends JFrame {
 		lblLeNostreDiscipline.setForeground(Color.WHITE);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 2;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		contentPane.add(lblLeNostreDiscipline, gbc);
 		
 		table = new JTable();
@@ -108,16 +116,33 @@ public class FrameIniziale extends JFrame {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setModel(model);
 		
-		
-		JScrollPane pane2 = new JScrollPane(table);
-		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		gbc.anchor = GridBagConstraints.LINE_END;
+		Dimension d = table.getPreferredSize();
+		table.setPreferredSize(d);
+		gbc.insets= new Insets(0,0,5,5);
+		gbc.gridx =2;
+		gbc.gridy =3;
+		tabellaPnl = new JPanel();
+		tabellaPnl.setLayout(new GridLayout(2, 1));
+		tabellaPnl.add(table.getTableHeader());
+		tabellaPnl.add(table);
+		contentPane.add(tabellaPnl, gbc);
+		 
+		JButton btnNewButton = new JButton("Dettagli Disciplina");
+		btnNewButton.setMnemonic('d');
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow()!=-1)
+				new DetDisciplina();
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridwidth = 2;
-		gbc.gridx = 2;
-		gbc.gridy = 3;
+		gbc.gridx = 1;
+		gbc.gridy = 5;
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		contentPane.add(pane2,gbc);
+		contentPane.add(btnNewButton,gbc);
 		
 	}
 	
