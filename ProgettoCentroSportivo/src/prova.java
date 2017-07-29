@@ -52,15 +52,17 @@ public class prova extends JPanel {
 			
 			
 		
-		JEditorPane editorPane = new JEditorPane();
-		GridBagConstraints gbc_editorPane = new GridBagConstraints();
-		gbc_editorPane.gridwidth = 7;
-		gbc_editorPane.insets = new Insets(0, 0, 5, 5);
-		gbc_editorPane.fill = GridBagConstraints.BOTH;
-		gbc_editorPane.gridx = 0;
-		gbc_editorPane.gridy = 3;
+		JEditorPane dtrpnScriviUnCommento = new JEditorPane();
+		dtrpnScriviUnCommento.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		dtrpnScriviUnCommento.setText("Scrivi un commento...");
+		GridBagConstraints gbc_dtrpnScriviUnCommento = new GridBagConstraints();
+		gbc_dtrpnScriviUnCommento.gridwidth = 7;
+		gbc_dtrpnScriviUnCommento.insets = new Insets(0, 0, 5, 5);
+		gbc_dtrpnScriviUnCommento.fill = GridBagConstraints.BOTH;
+		gbc_dtrpnScriviUnCommento.gridx = 0;
+		gbc_dtrpnScriviUnCommento.gridy = 3;
 		
-		add(editorPane, gbc_editorPane);
+		add(dtrpnScriviUnCommento, gbc_dtrpnScriviUnCommento);
 			
 			JComboBox comboBox_3 = new JComboBox();
 			GridBagConstraints gbc_comboBox = new GridBagConstraints();

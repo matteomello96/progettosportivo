@@ -55,7 +55,7 @@ public class TestimnianzaDao {
             FrameTestimonianze.frame.dispose();
             FrameTesserato.frame.setEnabled(true);
         } catch (SQLException ex) {
-        	JOptionPane.showMessageDialog(null, "Hai già lasciato una recensione per questa disciplina"," ",JOptionPane.WARNING_MESSAGE);				
+        	JOptionPane.showMessageDialog(FrameTestimonianze.frame, "Hai già lasciato una recensione per questa disciplina"," ",JOptionPane.WARNING_MESSAGE);				
         	 FrameTesserato.frame.setEnabled(true);
         	 FrameTestimonianze.frame.dispose();
         }

@@ -197,6 +197,11 @@ public class FrameTurno extends JPanel {
 					giorno=Combogiorno.getSelectedItem().toString();
 					
 					if(disciplina2=="null"){
+					if(disciplina=="disciplina"){
+						JOptionPane.showMessageDialog(FrameTurno.frame, "perfavore inserisci una disciplina"," ",JOptionPane.WARNING_MESSAGE);				
+					}	
+						
+					else{		
 					frame.dispose();
 				  
 					new FrameTurno(disciplina,livello,giorno,ora);	
@@ -204,38 +209,30 @@ public class FrameTurno extends JPanel {
 					Combolivello.setEnabled(true);
 					Comboorario.setEnabled(false);
 					Combogiorno.setEnabled(false);
+					}
 					} 
 					else if(livello2=="livello"){
+						
+						if(livello=="livello"){
+							JOptionPane.showMessageDialog(FrameTurno.frame, "perfavore inserisci un livello"," ",JOptionPane.WARNING_MESSAGE);				
+						}	
+						else{
 						frame.dispose();
 						new FrameTurno(disciplina2,livello,giorno,ora);	
 						Combodis.setEnabled(false);
 						Combolivello.setEnabled(false);
 						Comboorario.setEnabled(false);
 						Combogiorno.setEnabled(true);
+						}
 					}
 					
-				/*	else if(ora2=="orario"&& livello=="livello"){
-						frame.dispose();
-						
-						new FrameTurno(disciplina2,livello2,ora,giorno);	
-						Combodis.setEnabled(false);
-						Combolivello.setEnabled(false);
-						Comboorario.setEnabled(false);
-						Combogiorno.setEnabled(true);
-						
-					}
-					else{
-						frame.dispose();
-						new FrameTurno(disciplina2,livello2,ora2,giorno);
-						Combodis.setEnabled(false);
-						Combolivello.setEnabled(false);
-						Comboorario.setEnabled(false);
-						Combogiorno.setEnabled(false);
-						btnNewButton_1.setEnabled(true);
-						JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina2+"\" e\\o l'email \""+livello2+"\" sono già in uso, sceglierne altri  \""+ora2+"\"  \""+giorno+"\""," ",JOptionPane.WARNING_MESSAGE);
-					}
-						*/
+			
 					else if(giorno2=="giorno"&& livello=="livello"){
+						
+						if(giorno=="giorno"){
+							JOptionPane.showMessageDialog(FrameTurno.frame, "perfavore inserisci correttamente il giorno"," ",JOptionPane.WARNING_MESSAGE);				
+						}	
+						else{
 						frame.dispose();
 						
 						new FrameTurno(disciplina2,livello2,giorno,ora);	
@@ -243,21 +240,25 @@ public class FrameTurno extends JPanel {
 						Combolivello.setEnabled(false);
 						Comboorario.setEnabled(true);
 						Combogiorno.setEnabled(false);
+						}
 						
 					}
 					else{
+						if(ora=="orario"){
+							JOptionPane.showMessageDialog(FrameTurno.frame, "perfavore inserisci un orario corretto"," ",JOptionPane.WARNING_MESSAGE);				
+						}
+						else{
 						frame.dispose();
 						new FrameTurno(disciplina2,livello2,giorno2,ora);
 						Combodis.setEnabled(false);
 						Combolivello.setEnabled(false);
 						Comboorario.setEnabled(false);
 						Combogiorno.setEnabled(false);
-						
-					//	JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina2+"\" e\\o l'email \""+livello2+"\" sono già in uso, sceglierne altri  \""+ora2+"\"  \""+giorno+"\""," ",JOptionPane.WARNING_MESSAGE);
+						}
 					}
 					
 					
-//JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina2+"\" e\\o l'email \""+livello2+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
+
         
 		
 				
