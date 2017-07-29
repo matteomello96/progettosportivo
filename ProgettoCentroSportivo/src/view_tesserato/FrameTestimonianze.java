@@ -76,7 +76,7 @@ public class FrameTestimonianze extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		frame.add(lblNewLabel, gbc_lblNewLabel);
 		
-	    JEditorPane editorPane = new JEditorPane();
+		JEditorPane editorPane = new JEditorPane();
 		GridBagConstraints gbc_editorPane = new GridBagConstraints();
 		gbc_editorPane.gridwidth = 7;
 		gbc_editorPane.insets = new Insets(0, 0, 5, 5);
@@ -86,38 +86,32 @@ public class FrameTestimonianze extends JPanel {
 		
 		frame.add(editorPane, gbc_editorPane);
 		
-		JLabel lblNewLabel_1 = new JLabel("Inserisci la tua testimonianza");
-		lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_1.gridwidth = 4;
-		gbc_lblNewLabel_1.gridx = 7;
-		gbc_lblNewLabel_1.gridy = 3;
-		frame.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
 			
 			
 			
 			combotest = new Combotest();
 			 combotest.setEnabled(true);
-			 GridBagConstraints gbc_comboBox = new GridBagConstraints();
+				GridBagConstraints gbc_comboBox = new GridBagConstraints();
 				gbc_comboBox.gridwidth = 3;
 				gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 				gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 				gbc_comboBox.gridx = 1;
 				gbc_comboBox.gridy = 4;
 				frame.add(combotest, gbc_comboBox);
+		
 				
 				comboliv = new Comboliv(disciplina);
 				 comboliv.setEnabled(true);
-				GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-				gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-				gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-				gbc_comboBox_1.gridx = 4;
-				gbc_comboBox_1.gridy = 4;
-				frame.add(comboliv, gbc_comboBox_1);
+				 GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+					gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+					gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+					gbc_comboBox_1.gridx = 4;
+					gbc_comboBox_1.gridy = 4;
+					frame.add(comboliv, gbc_comboBox_1);
 				combotest.setEnabled(true);
 				comboliv.setEnabled(false);
-			//	editorPane.setVisible(false);
+		
 				
 				
 				JButton btnNewButton = new JButton("invia");
@@ -125,8 +119,41 @@ public class FrameTestimonianze extends JPanel {
 				gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 				gbc_btnNewButton.gridx = 5;
 				gbc_btnNewButton.gridy = 4;
-				frame.add(btnNewButton, gbc_btnNewButton);
+			frame.add(btnNewButton, gbc_btnNewButton);
 
+			
+			JLabel lblNewLabel_1 = new JLabel("seleziona disciplina");
+			lblNewLabel_1.setForeground(Color.RED);
+			lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+			gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
+			gbc_lblNewLabel_1.gridwidth = 4;
+			gbc_lblNewLabel_1.gridx = 3;
+			gbc_lblNewLabel_1.gridy = 5;
+			frame.add(lblNewLabel_1, gbc_lblNewLabel_1);
+			lblNewLabel_1.setVisible(true);
+			
+			JLabel lblNewLabel_2 = new JLabel("seleziona livello");
+			lblNewLabel_2.setForeground(Color.RED);
+			lblNewLabel_2.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+			gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
+			gbc_lblNewLabel_2.gridwidth = 4;
+			gbc_lblNewLabel_2.gridx = 3;
+			gbc_lblNewLabel_2.gridy = 5;
+			frame.add(lblNewLabel_2, gbc_lblNewLabel_2);
+			lblNewLabel_2.setVisible(false);
+			
+			JLabel lblNewLabel_3 = new JLabel("Inserisci la tua testimonianza");
+			lblNewLabel_3.setForeground(Color.RED);
+			lblNewLabel_3.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+			GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+			gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
+			gbc_lblNewLabel_3.gridwidth = 4;
+			gbc_lblNewLabel_3.gridx = 3;
+			gbc_lblNewLabel_3.gridy = 5;
+			frame.add(lblNewLabel_3, gbc_lblNewLabel_3);
+			lblNewLabel_3.setVisible(false);
 			
 			
 			
@@ -155,7 +182,7 @@ public class FrameTestimonianze extends JPanel {
 				
 				combotest.setEnabled(false);
 				comboliv.setEnabled(false);
-				
+				lblNewLabel_1.setVisible(true);
 				//JOptionPane.showMessageDialog(null, "Il nome utente \""+Commento+"\" e\\o l'email \""+Livello+"\" sono già in uso, sceglierne altri \""+Disciplina+"\" "," ",JOptionPane.WARNING_MESSAGE);			
 			}
 		if (Commento==null && Livello!=null && Disciplina!=null){
