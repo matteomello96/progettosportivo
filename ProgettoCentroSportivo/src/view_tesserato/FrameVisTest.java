@@ -86,6 +86,16 @@ public class FrameVisTest extends JPanel {
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 4;
 		frame.add(btnNewButton, gbc_btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Ricarica");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_1.gridwidth = 2;
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 5;
+		gbc_btnNewButton_1.gridy = 4;
+		frame.add(btnNewButton_1, gbc_btnNewButton_1);
 
 			
 		btnNewButton.addActionListener(new ActionListener() {
@@ -96,5 +106,13 @@ public class FrameVisTest extends JPanel {
 			}
 			
 		});
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				frame.dispose();
+				new FrameVisTest();
+			}
+			
+		});	
 	}
 }

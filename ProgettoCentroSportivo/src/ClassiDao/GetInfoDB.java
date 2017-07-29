@@ -111,7 +111,7 @@ public class GetInfoDB {
 	            
 	            st = con.createStatement();
 	           
-	            rs = st.executeQuery("SELECT combinazionelivdis FROM disciplinedisponibili, WHERE disciplinedisponibili.Disciplina='"+disciplina+"' and disciplinedisponibili.Livello='"+livello+"'"); 
+	            rs = st.executeQuery("SELECT Combinazionelivdis FROM disciplinedisponibili where Disciplina='"+disciplina+"' and Livello='"+livello+"'"); 
 	          
 	                rs.next();
 	                ris=rs.getInt("combinazionelivdis");
