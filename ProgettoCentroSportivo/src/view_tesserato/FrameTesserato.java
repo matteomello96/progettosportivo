@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 
 import ClassiDaoTesserato.ElencoAttivitaDAO;
 import Listener.Listen;
-import ModelliTabelle.disc_tabella;
+import ModelliTabelle_Tesserato.disc_tabella;
 import VisteUtenteGenerico.FrameCambia;
 
 
@@ -81,6 +81,9 @@ public class FrameTesserato extends JPanel {
 		JMenu mnNewMenu = new JMenu("home");
 		menuBar.add(mnNewMenu);
 		
+		JMenu mnNewMenu_1 = new JMenu("visualizza");
+		menuBar.add(mnNewMenu_1);
+		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
@@ -107,8 +110,16 @@ public class FrameTesserato extends JPanel {
 			}
 		});
 		mnNewMenu.add(scelta_orario);
-		//scelta_orario.addActionListener(new Listen(this));
-		//scelta_orario.setActionCommand("turn");
+
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Tue testimonianze");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_2);
+		
+	
 		
 		JMenuItem test= new JMenuItem("Testimonianze");
 		test.addActionListener(new ActionListener() {
@@ -119,8 +130,6 @@ public class FrameTesserato extends JPanel {
 			}
 		});
 		mnNewMenu.add(test);
-		//test.addActionListener(new Listen(this));
-		//test.setActionCommand("testimon");
 		
 		
 		
@@ -132,7 +141,7 @@ public class FrameTesserato extends JPanel {
 		
 		
 		
-		JLabel totord = new JLabel("TOTALE ORDINE:");
+		JLabel totord = new JLabel("TOTALE ISCRIZIONI:");
 		totord.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridwidth = 3;
@@ -345,7 +354,7 @@ public class FrameTesserato extends JPanel {
 				
 				}
 			
-				totord.setText("TOTALE ORDINE: "+df.format(totale)+" EUR  ");
+				totord.setText("TOTALE ISCRIZIONI: "+df.format(totale)+" EUR  ");
 				
 				if(table_1.getModel().getRowCount()>0)
 					invia.setEnabled(true);
