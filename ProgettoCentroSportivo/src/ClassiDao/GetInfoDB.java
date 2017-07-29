@@ -94,5 +94,36 @@ public class GetInfoDB {
 		 	}
 	    
 	    
+ public static int getcombinazionelivdis(String disciplina,String livello){
+
+	      
+	        
+	        Connection con = DbConnection.db;
+	        
+	        Statement st;
+	        
+	        ResultSet rs;
+	        
+	 
+	        int ris=1;
+	        
+	        try {
+	            
+	            st = con.createStatement();
+	           
+	            rs = st.executeQuery("SELECT combinazionelivdis FROM disciplinedisponibili, WHERE disciplinedisponibili.Disciplina='"+disciplina+"' and disciplinedisponibili.Livello='"+livello+"'"); 
+	          
+	                rs.next();
+	                ris=rs.getInt("combinazionelivdis");
+	                		
+	            return ris; 
+	        } catch (SQLException ex) {
+	        
+	        }
+	        return ris;
+
+	}
+	    
+	    
 	    
 }

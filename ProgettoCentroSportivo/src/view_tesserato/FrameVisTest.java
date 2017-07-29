@@ -5,14 +5,17 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-
+import ClassiDaoTesserato.DistruggiTestimonianza;
 import ClassiDaoTesserato.ElencoTestDao;
 import ModelliTabelle_Tesserato.disc_testimonianza;
 
@@ -21,6 +24,8 @@ public class FrameVisTest extends JPanel {
 	private JTable table_1;
 	public static JFrame frame;
 	 private disc_testimonianza model;
+	 public String disciplina;
+	 public String livello;
 	/**
 	 * Create the panel.
 	 */
@@ -71,6 +76,7 @@ public class FrameVisTest extends JPanel {
 		gbc_table_1.gridy = 2;
 		frame.add(table_1, gbc_table_1);
 		
+		
 		JButton btnNewButton = new JButton("EliminaTestimonianza");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -82,8 +88,13 @@ public class FrameVisTest extends JPanel {
 		frame.add(btnNewButton, gbc_btnNewButton);
 
 			
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				disciplina=(String) table_1.getValueAt(table_1.getSelectedRow(), 0);
+				livello=(String) table_1.getValueAt(table_1.getSelectedRow(), 1);
+				DistruggiTestimonianza.EliminaTest(disciplina,livello);
+			}
 			
-			
-			
+		});
 	}
 }
