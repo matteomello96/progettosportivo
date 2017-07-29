@@ -71,7 +71,7 @@ public class FrameOrdini extends JPanel {
 		gbc_table_2.gridy = 2;
 		frame.add(table_2, gbc_table_2);
 		
-		JButton btnNewButton = new JButton("Conferma Iscrizione");
+		JButton btnNewButton = new JButton("Conferma/Annulla Iscrizione");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridwidth = 2;
 		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
@@ -80,13 +80,13 @@ public class FrameOrdini extends JPanel {
 		gbc_btnNewButton.gridy = 4;
 		frame.add(btnNewButton, gbc_btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Annulla Iscrizione");
+		/*JButton btnNewButton_1 = new JButton("Annulla Iscrizione");
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_1.gridx = 4;
 		gbc_btnNewButton_1.gridy = 4;
-		frame.add(btnNewButton_1, gbc_btnNewButton_1);
+		frame.add(btnNewButton_1, gbc_btnNewButton_1);*/
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -95,7 +95,6 @@ public class FrameOrdini extends JPanel {
 				a=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
 				
 				
-				
 			
 //JOptionPane.showMessageDialog(null, "Il nome utente \""+a+"\" e\\o l'email \""+a+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
 		   ConfermaDao.Confermaiscrizione(a);
@@ -107,7 +106,7 @@ public class FrameOrdini extends JPanel {
 		
 		
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
+		/*btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int a;
 				
@@ -121,7 +120,7 @@ public class FrameOrdini extends JPanel {
 		   
 			
 			}
-		});
+		});*/
 	
 
 	}

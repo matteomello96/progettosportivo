@@ -48,7 +48,8 @@ public class FrameTestimonianze extends JPanel {
 	
 	
 	
-	public FrameTestimonianze() {
+	
+	public FrameTestimonianze(String Disciplina,String Livello,String Commento) {
 		
 		frame = new JFrame("Testimonianze");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -82,6 +83,7 @@ public class FrameTestimonianze extends JPanel {
 		gbc_editorPane.fill = GridBagConstraints.BOTH;
 		gbc_editorPane.gridx = 0;
 		gbc_editorPane.gridy = 3;
+		
 		frame.add(editorPane, gbc_editorPane);
 		
 		JLabel lblNewLabel_1 = new JLabel("Inserisci la tua testimonianza");
@@ -105,7 +107,7 @@ public class FrameTestimonianze extends JPanel {
 				gbc_comboBox.gridy = 4;
 				frame.add(combotest, gbc_comboBox);
 				
-				comboliv = new Comboliv();
+				comboliv = new Comboliv(disciplina);
 				 comboliv.setEnabled(true);
 				GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 				gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
@@ -113,7 +115,9 @@ public class FrameTestimonianze extends JPanel {
 				gbc_comboBox_1.gridx = 4;
 				gbc_comboBox_1.gridy = 4;
 				frame.add(comboliv, gbc_comboBox_1);
-				
+				combotest.setEnabled(true);
+				comboliv.setEnabled(false);
+			//	editorPane.setVisible(false);
 				
 				
 				JButton btnNewButton = new JButton("invia");
@@ -131,12 +135,48 @@ public class FrameTestimonianze extends JPanel {
 					disciplina=combotest.getSelectedItem().toString();
 					livello=comboliv.getSelectedItem().toString();
 					commento=editorPane.getText();
-//JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina+"\" e\\o l'email \""+commento+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
-			   TestimnianzaDao.instest(disciplina,livello,commento);
-			   
+					
+//JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina+"\" e\\o l'email \""+commento+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);		
+					
+			if(Disciplina==null && Livello==null && Commento==null)		{
+				frame.dispose();
+				  
+				new FrameTestimonianze(disciplina,Livello,Commento);	
+				combotest.setEnabled(false);
+				comboliv.setEnabled(true);
+				
+			//	JOptionPane.showMessageDialog(null, "Il nome utente \""+Commento+"\" e\\o l'email \""+Livello+"\" sono già in uso, sceglierne altri \""+Disciplina+"\" "," ",JOptionPane.WARNING_MESSAGE);			
+			
+			}
+			if(Livello==null && Disciplina!=null && Commento==null){
+				
+				frame.dispose();
+				new FrameTestimonianze(Disciplina,livello,Commento);
+				
+				combotest.setEnabled(false);
+				comboliv.setEnabled(false);
+				
+				//JOptionPane.showMessageDialog(null, "Il nome utente \""+Commento+"\" e\\o l'email \""+Livello+"\" sono già in uso, sceglierne altri \""+Disciplina+"\" "," ",JOptionPane.WARNING_MESSAGE);			
+			}
+		if (Commento==null && Livello!=null && Disciplina!=null){
+			
+			frame.dispose();
+			  
+			new FrameTestimonianze(Disciplina,Livello,commento);
+			
+			    combotest.setEnabled(false);
+				comboliv.setEnabled(false);
+				
+			//	JOptionPane.showMessageDialog(null, "Il nome utente \""+commento+"\" e\\o l'email \""+Livello+"\" sono già in uso, sceglierne altri \""+Disciplina+"\" "," ",JOptionPane.WARNING_MESSAGE);	
+				TestimnianzaDao.instest(Disciplina,Livello,commento);
+				frame.dispose();
+			}
+
 				
 				}
 			});
+			
+			
 			
 			
 	frame.addWindowListener(new java.awt.event.WindowAdapter() {

@@ -113,8 +113,9 @@ public class FrameTesserato extends JPanel {
 		JMenuItem test= new JMenuItem("Testimonianze");
 		test.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new FrameTestimonianze();
+				new FrameTestimonianze(null,null,null);
 				frame.setEnabled(false);
+							
 			}
 		});
 		mnNewMenu.add(test);

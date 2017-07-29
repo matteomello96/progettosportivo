@@ -7,7 +7,9 @@ import java.sql.Statement;
 
 import javax.swing.JComboBox;
 
+import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
+import Model.Utente;
 
 public class Comboliv  extends JComboBox<Object>{
 	private static final long serialVersionUID = 1L;
@@ -17,7 +19,7 @@ public class Comboliv  extends JComboBox<Object>{
     Statement st;
     
     ResultSet rs;
-    public  Comboliv(){
+    public  Comboliv(String Disciplina){
     	super();
 
 
@@ -28,10 +30,10 @@ public class Comboliv  extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select distinct Livello from disciplinedisponibili;"); 
+            rs = st.executeQuery("select distinct Livello from disciplinedisponibili,detiscr where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and Disciplina='"+Disciplina+"' and detiscr.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;");  
             
     		
-    		proj=(Object) " Seleziona livello ";
+    		proj=(Object) "livello";
     		this.addItem(proj);
             while(rs.next()){
                 proj=(Object) rs.getString("Livello");

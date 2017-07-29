@@ -29,7 +29,7 @@ public class modelisc extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return 5;
 	}
 	
 
@@ -39,10 +39,11 @@ public class modelisc extends AbstractTableModel {
 		//data binding
 		ModelRichiestaIscrizione d=dati.get(rowIndex);
 		
-		  if(columnIndex==0) return d.getIdordine();
-		else if(columnIndex==1) return d.getMatricolatesserato();
-		else if(columnIndex==2) return d.getPrezzototale();
-		else if(columnIndex==3) return d.getDataconsegnaordine();
+		  if(columnIndex==0) return d.getCodiceiscrizionedisciplina();
+		else if(columnIndex==1) return d.getDataazione();
+		else if(columnIndex==2) return d.getTesserato();
+		else if(columnIndex==3) return d.getModalitapagamento();
+		else if(columnIndex==4) return d.getPrezzotot();
 		  
 		  return null;
 		  
@@ -58,11 +59,11 @@ public class modelisc extends AbstractTableModel {
 
 	@Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        if(columnIndex==0) dati.get(rowIndex).setIdordine((int)aValue);
-        if(columnIndex==1) dati.get(rowIndex).setMatricolatesserato((int)aValue);
-        if(columnIndex==2) dati.get(rowIndex).setPrezzototale((int)aValue);
-        if(columnIndex==3) dati.get(rowIndex).setDataconsegnaordine(aValue.toString());
-        
+        if(columnIndex==0) dati.get(rowIndex).setCodiceiscrizionedisciplina((int)aValue);
+        if(columnIndex==1) dati.get(rowIndex).setDataazione(aValue.toString());
+        if(columnIndex==2) dati.get(rowIndex).setTesserato((int)aValue);
+        if(columnIndex==3) dati.get(rowIndex).setModalitapagamento(aValue.toString());
+        if(columnIndex==4) dati.get(rowIndex).setPrezzotot((int)aValue);
 		
        
         

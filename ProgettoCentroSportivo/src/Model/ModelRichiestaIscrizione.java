@@ -1,37 +1,45 @@
 package Model;
 
 public class ModelRichiestaIscrizione {
-private int idordine;
-private int matricolatesserato;
-private int prezzototale;
-private String dataconsegnaordine;
+private int codiceiscrizionedisciplina;
+private String dataazione;
+private int tesserato;
+private String modalitapagamento;
+private int prezzotot;
+
+
+public int getCodiceiscrizionedisciplina() {
+	return codiceiscrizionedisciplina;
+}
+public void setCodiceiscrizionedisciplina(int codiceiscrizionedisciplina) {
+	this.codiceiscrizionedisciplina = codiceiscrizionedisciplina;
+}
+public String getDataazione() {
+	return dataazione;
+}
+public void setDataazione(String dataazione) {
+	this.dataazione = dataazione;
+}
+public int getTesserato() {
+	return tesserato;
+}
+public void setTesserato(int tesserato) {
+	this.tesserato = tesserato;
+}
+public String getModalitapagamento() {
+	return modalitapagamento;
+}
+public void setModalitapagamento(String modalitapagamento) {
+	this.modalitapagamento = modalitapagamento;
+}
+public int getPrezzotot() {
+	return prezzotot;
+}
+public void setPrezzotot(int prezzotot) {
+	this.prezzotot = prezzotot;
+}
 
 
 
-
-public int getIdordine() {
-	return idordine;
-}
-public void setIdordine(int idordine) {
-	this.idordine = idordine;
-}
-public int getMatricolatesserato() {
-	return matricolatesserato;
-}
-public void setMatricolatesserato(int matricolatesserato) {
-	this.matricolatesserato = matricolatesserato;
-}
-public int getPrezzototale() {
-	return prezzototale;
-}
-public void setPrezzototale(int prezzototale) {
-	this.prezzototale = prezzototale;
-}
-public String getDataconsegnaordine() {
-	return dataconsegnaordine;
-}
-public void setDataconsegnaordine(String dataconsegnaordine) {
-	this.dataconsegnaordine = dataconsegnaordine;
-}
 
 }

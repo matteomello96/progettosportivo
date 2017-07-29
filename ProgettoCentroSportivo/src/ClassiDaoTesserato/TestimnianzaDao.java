@@ -48,13 +48,16 @@ public class TestimnianzaDao {
         	 rs=st2.executeQuery("select Combinazionelivdis from disciplinedisponibili where Disciplina='"+disciplina+"' and Livello='"+livello+"'");
         	 rs.next();
              a=rs.getInt("combinazionelivdis");
-            // JOptionPane.showMessageDialog(null, "Il nome utente \""+GetInfoDB.getidTess(Utente.getUsername())+"\" e\\o l'email \""+commento+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
-           st.executeUpdate("INSERT INTO testimonianza (CodiceTestimonianza,Commento,DataAzione,Tesserato,combinazionelivdis) "
-           		+"VALUES (NULL, '"+commento+"','"+momento+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+a+"')"); 
+       //   JOptionPane.showMessageDialog(null, "Il nome utente \""+momento+"\" e\\o l'email \""+livello+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
+           st.executeUpdate("INSERT INTO testimonianza(CodiceTestimonianza,Commento,DataAzione,Tesserato,combinazionelivdis) "
+           		+"VALUES (NULL,'"+commento+"','"+momento+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+a+"')"); 
             JOptionPane.showMessageDialog(FrameTestimonianze.frame, "Testimonianza inviata"," ",JOptionPane.INFORMATION_MESSAGE);
             FrameTestimonianze.frame.dispose();
             FrameTesserato.frame.setEnabled(true);
         } catch (SQLException ex) {
+        	JOptionPane.showMessageDialog(null, "Hai già lasciato una recensione per questa disciplina"," ",JOptionPane.WARNING_MESSAGE);				
+        	 FrameTesserato.frame.setEnabled(true);
+        	 FrameTestimonianze.frame.dispose();
         }
 		
 		

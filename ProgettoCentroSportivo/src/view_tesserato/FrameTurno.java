@@ -253,7 +253,7 @@ public class FrameTurno extends JPanel {
 						Comboorario.setEnabled(false);
 						Combogiorno.setEnabled(false);
 						
-						JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina2+"\" e\\o l'email \""+livello2+"\" sono già in uso, sceglierne altri  \""+ora2+"\"  \""+giorno+"\""," ",JOptionPane.WARNING_MESSAGE);
+					//	JOptionPane.showMessageDialog(null, "Il nome utente \""+disciplina2+"\" e\\o l'email \""+livello2+"\" sono già in uso, sceglierne altri  \""+ora2+"\"  \""+giorno+"\""," ",JOptionPane.WARNING_MESSAGE);
 					}
 					
 					

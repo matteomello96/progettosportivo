@@ -7,7 +7,9 @@ import java.sql.Statement;
 
 import javax.swing.JComboBox;
 
+import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
+import Model.Utente;
 
 public class Combotest  extends JComboBox<Object>{
 	private static final long serialVersionUID = 1L;
@@ -28,7 +30,7 @@ public class Combotest  extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili;"); 
+            rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili,detiscr where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and detiscr.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;");  
             
     		
     		proj=(Object) " Seleziona disciplina ";

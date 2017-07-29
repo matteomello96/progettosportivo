@@ -94,7 +94,7 @@ public class FrameResponsabile extends JFrame {
 		MenuOrdini.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameOrdini();
-				frame.setEnabled(false);
+				
 				//frame.setVisible(false);
 			}
 		});

@@ -26,7 +26,7 @@ private static RichiesteDao instance;
 		
         ArrayList<ModelRichiestaIscrizione> dati= new ArrayList<ModelRichiestaIscrizione>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT ordine.idordine,ordine.matricolatesserato,ordine.prezzototale,ordine.dataconsegnaordine from ordine ; ");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot from iscrizionedisciplina ; ");
        
         Iterator<String[]> i = res.iterator();
        
@@ -34,11 +34,11 @@ private static RichiesteDao instance;
         	String[] riga = i.next();
         	
         	ModelRichiestaIscrizione fa=new ModelRichiestaIscrizione(); 	
-        	fa.setIdordine(Integer.parseInt(riga[0]));
-        	fa.setMatricolatesserato(Integer.parseInt(riga[1]));
-        	fa.setPrezzototale(Integer.parseInt(riga[2]));
-        	fa.setDataconsegnaordine(riga[3]); 
-        	
+        	fa.setCodiceiscrizionedisciplina(Integer.parseInt(riga[0]));
+        	fa.setDataazione(riga[1]);
+        	fa.setTesserato(Integer.parseInt(riga[2]));
+        	fa.setModalitapagamento(riga[3]); 
+        	fa.setPrezzotot(Integer.parseInt(riga[4])); 
 			
 			
        
