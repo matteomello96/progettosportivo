@@ -1,45 +1,50 @@
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
+package view_tesserato;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
-
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-
-
-
-
-import javax.swing.JLabel;
-import javax.swing.JEditorPane;
-
-import java.awt.Component;
-import java.awt.Font;
-import javax.swing.JTable;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 
-import ComboTesserato.Combogiorno;
-import ComboTesserato.Comboorario;
-import view_tesserato.FrameTesserato;
-import java.awt.Color;
 
-public class prova extends JPanel {
+import ClassiDaoTesserato.ElencoTestDao;
+import ModelliTabelle_Tesserato.disc_testimonianza;
+
+public class FrameVisTest extends JPanel {
 	
 	private JTable table_1;
-	
+	public static JFrame frame;
+	 private disc_testimonianza model;
 	/**
 	 * Create the panel.
 	 */
-	public prova() {
-		setBackground(Color.CYAN);
-		setForeground(Color.CYAN);
+	public FrameVisTest() {
+		
+		
+		frame = new JFrame("Visualizza Testimonianze");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setBounds(100, 100, 705, 391);
+		frame.setVisible(true);
+		frame.setAutoRequestFocus(true);
+		frame.setResizable(true);
+		frame.setAlwaysOnTop(true);
+		
+		
+		
+		//frame.setBackground(Color.CYAN);
+		//frame.setForeground(Color.CYAN);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 80, 70, 0, 37, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 123, 95, 49, 64, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
+		frame.setLayout(gridBagLayout);
 		
 			
 			
@@ -51,9 +56,12 @@ public class prova extends JPanel {
 		gbc_lblNewLabel_1.gridwidth = 4;
 		gbc_lblNewLabel_1.gridx = 3;
 		gbc_lblNewLabel_1.gridy = 0;
-		add(lblNewLabel_1, gbc_lblNewLabel_1);
+		frame.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		table_1 = new JTable();
+		model = new disc_testimonianza(ElencoTestDao.elencoiniziale());
+		table_1.setCellSelectionEnabled(true);
+		table_1.setModel(model);
 		GridBagConstraints gbc_table_1 = new GridBagConstraints();
 		gbc_table_1.gridheight = 2;
 		gbc_table_1.gridwidth = 5;
@@ -61,7 +69,7 @@ public class prova extends JPanel {
 		gbc_table_1.fill = GridBagConstraints.BOTH;
 		gbc_table_1.gridx = 3;
 		gbc_table_1.gridy = 2;
-		add(table_1, gbc_table_1);
+		frame.add(table_1, gbc_table_1);
 		
 		JButton btnNewButton = new JButton("EliminaTestimonianza");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -71,7 +79,7 @@ public class prova extends JPanel {
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 4;
-		add(btnNewButton, gbc_btnNewButton);
+		frame.add(btnNewButton, gbc_btnNewButton);
 
 			
 			
