@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-
-import Model.ElencoAttivita;
+import Model_Tesserato.ElencoAttivita;
 
 public class disc_tabella extends AbstractTableModel  {
 

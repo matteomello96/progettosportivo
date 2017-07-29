@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import Model.ElencoAttivita;
 import Model.ModelRichiestaIscrizione;
+import Model_Tesserato.ElencoAttivita;
 
 public class modelisc extends AbstractTableModel {
 	private ArrayList<ModelRichiestaIscrizione> dati;

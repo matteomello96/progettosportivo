@@ -1,4 +1,4 @@
-package Model;
+package Model_Tesserato;
 
 public class ElencoAttivita {
 	private String NomeDisciplina;

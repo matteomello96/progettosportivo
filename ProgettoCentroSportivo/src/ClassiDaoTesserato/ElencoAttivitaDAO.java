@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 import DBInterfaccia.DbConnection;
-import Model.ElencoAttivita;
+import Model_Tesserato.ElencoAttivita;
 public class ElencoAttivitaDAO {
 	
 private static ElencoAttivitaDAO instance;
