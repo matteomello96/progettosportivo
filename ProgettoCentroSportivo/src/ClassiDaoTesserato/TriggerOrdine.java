@@ -82,7 +82,7 @@ public class TriggerOrdine {
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.drawString("Nome dipendente: "+Utente.getUsername()+"\r\n");
 	    		vers.moveTextPositionByAmount(0, -12);
-	    		vers.drawString("Hai effettuato il pagamento con:: "+pagamento+"\r\n");
+	    		vers.drawString("Hai effettuato il pagamento con: "+pagamento+"\r\n");
 	    		
 	    		
 	    		

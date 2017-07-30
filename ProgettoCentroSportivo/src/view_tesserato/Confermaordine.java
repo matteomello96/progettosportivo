@@ -71,7 +71,7 @@ public Confermaordine(){
 		frame.setResizable(false);
 		
 
-		lblTotaleOrdineEur = new JLabel("TOTALE ORDINE:");
+		lblTotaleOrdineEur = new JLabel("TOTALE ISCRIZIONE:");
 		lblTotaleOrdineEur.setToolTipText("");
 		lblTotaleOrdineEur.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTotaleOrdineEur.setBounds(26, 46, 145, 14);

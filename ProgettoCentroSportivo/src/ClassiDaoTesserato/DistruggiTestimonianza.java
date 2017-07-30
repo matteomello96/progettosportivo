@@ -36,7 +36,7 @@ public class DistruggiTestimonianza {
             st = con.createStatement();
             
             
-            JOptionPane.showMessageDialog(FrameVisTest.frame," '"+GetInfoDB.getcombinazionelivdis(disciplina,livello)+"''"+disciplina+"','"+livello+"'","",JOptionPane.WARNING_MESSAGE);
+           // JOptionPane.showMessageDialog(FrameVisTest.frame," '"+GetInfoDB.getcombinazionelivdis(disciplina,livello)+"''"+disciplina+"','"+livello+"'","",JOptionPane.WARNING_MESSAGE);
             String ObjButtons[] = {"        Sì        ","      No      "};
 	        int PromptResult = JOptionPane.showOptionDialog(FrameVisTest.frame,"Sei sicuro di voler cancellare la testimonianza. Non potrai più recuperarla!!!","Cancellazione Testimonianza",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 	        if(PromptResult==JOptionPane.YES_OPTION)

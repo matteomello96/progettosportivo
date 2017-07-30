@@ -2,10 +2,12 @@ package view_tesserato;
 
 import javax.swing.JPanel;
 
+import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.TestimnianzaDao;
 import ClassiDaoTesserato.TriggerOrdine;
 import ComboTesserato.Comboliv;
 import ComboTesserato.Combotest;
+import Model.Utente;
 
 import java.awt.GridBagLayout;
 
@@ -159,11 +161,23 @@ public class FrameTestimonianze extends JPanel {
 			frame.add(lblNewLabel_3, gbc_lblNewLabel_3);
 			
 			
+			JLabel lblNewLabel_4 = new JLabel("Conferma l'invio testimonianza");
+			lblNewLabel_4.setForeground(Color.RED);
+			lblNewLabel_4.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+			GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+			gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
+			gbc_lblNewLabel_4.gridwidth = 4;
+			gbc_lblNewLabel_4.gridx = 3;
+			gbc_lblNewLabel_4.gridy = 5;
+			frame.add(lblNewLabel_4, gbc_lblNewLabel_4);
+			
+			
 	if(Disciplina==null && Livello==null && Commento==null)		{	
 			
 			lblNewLabel_3.setVisible(false);
 			lblNewLabel_1.setVisible(true);
 			lblNewLabel_2.setVisible(false);
+			lblNewLabel_4.setVisible(false);
 			editorPane.setVisible(false);
 	}
 	
@@ -173,6 +187,7 @@ public class FrameTestimonianze extends JPanel {
 	lblNewLabel_1.setVisible(false);
 	lblNewLabel_2.setVisible(true);
 	editorPane.setVisible(false);
+	lblNewLabel_4.setVisible(false);
 	}
 	
 	if (Commento==null && Livello!=null && Disciplina!=null){
@@ -181,6 +196,7 @@ public class FrameTestimonianze extends JPanel {
 		lblNewLabel_1.setVisible(false);
 		lblNewLabel_2.setVisible(false);
 		editorPane.setVisible(true);
+		lblNewLabel_4.setVisible(false);
 	}
 
 	
@@ -191,6 +207,7 @@ public class FrameTestimonianze extends JPanel {
 		lblNewLabel_1.setVisible(false);
 		lblNewLabel_2.setVisible(false);
 		editorPane.setVisible(false);
+		lblNewLabel_4.setVisible(true);
 	}
 
 
@@ -234,26 +251,37 @@ public class FrameTestimonianze extends JPanel {
 				combotest.setEnabled(false);
 				comboliv.setEnabled(false);
 				}
-				//JOptionPane.showMessageDialog(null, "Il nome utente \""+Commento+"\" e\\o l'email \""+Livello+"\" sono già in uso, sceglierne altri \""+Disciplina+"\" "," ",JOptionPane.WARNING_MESSAGE);			
+				//JOptionPane.showMessageDialog(FrameTestimonianze.frame, "Il nome utente \""+Commento+"\" e\\o l'email \""+Livello+"\" sono già in uso, sceglierne altri \""+Disciplina+"\" "," ",JOptionPane.WARNING_MESSAGE);			
 			}
 		if (Commento==null && Livello!=null && Disciplina!=null){
 			
 		
 			frame.dispose();
-			  
+		
 			new FrameTestimonianze(Disciplina,Livello,commento);
-			
+	
 			    combotest.setEnabled(false);
 				comboliv.setEnabled(false);
 				
 		
-				TestimnianzaDao.instest(Disciplina,Livello,commento);
-				frame.dispose();
+				
+				
 			
 			}
 
 		
-		
+		if (Commento!=null && Livello!=null && Disciplina!=null){
+			
+			  String ObjButtons[] = {"        Sì        ","      No      "};
+		        int PromptResult = JOptionPane.showOptionDialog(FrameTestimonianze.frame,"Vuoi procedere con l'invio. Potrai visualizzare e modificare il tuo commento in seguito. ","",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		        	TestimnianzaDao.instest(Disciplina,Livello,Commento);
+		        }	
+			FrameTesserato.frame.setEnabled(true);
+			frame.dispose();
+			
+		}
 		
 		
 		
