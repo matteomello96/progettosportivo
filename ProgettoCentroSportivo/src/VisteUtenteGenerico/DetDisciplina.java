@@ -4,10 +4,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import VisteUtenteGenerico.FrameIniziale;
-
-
-import Model.ModDetOrari;
-import Model.ModDetTest;
 import ClassiDao.DettagliIstruttoreDAO;
 import ClassiDao.DettagliLivelloDAO;
 import ClassiDao.DettagliOrariDAO;
@@ -15,6 +11,8 @@ import ClassiDao.DettagliTestimonianzeDAO;
 import ClassiDao.ElencoDisciplineDAO;
 import ModelliTabelle.ModDetIstr;
 import ModelliTabelle.ModDetLiv;
+import ModelliTabelle.ModDetOrari;
+import ModelliTabelle.ModDetTest;
 import ModelliTabelle.ModDiscIni;
 
 import javax.swing.JLabel;

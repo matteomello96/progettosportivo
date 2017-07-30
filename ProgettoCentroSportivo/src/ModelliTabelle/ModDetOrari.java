@@ -1,8 +1,10 @@
-package Model;
+package ModelliTabelle;
 
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
+
+import Model.DettagliOrari;
 
 public class ModDetOrari extends AbstractTableModel {
 	   /**

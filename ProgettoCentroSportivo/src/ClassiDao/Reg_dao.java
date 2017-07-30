@@ -30,7 +30,7 @@ public static boolean registratesserato(String nome, String cognome , String cod
     ResultSet rs;
 	
 	
-     String nometipo=tipo;
+     String nometipo = tipo;
      
      if (tipo.equals("Tesserato"))
      	tipo="T";
@@ -55,7 +55,7 @@ public static boolean registratesserato(String nome, String cognome , String cod
          rs=st.executeQuery("SELECT elencoutenti.idutente FROM elencoutenti WHERE elencoutenti.nome='"+nome+"'");
          
          rs.next();
-         int userid=rs.getInt("idutente");
+         int userid= rs.getInt("idutente");
          st2.executeUpdate("INSERT INTO `tesserato` (`idutente`) VALUES ('"+userid+"')");
             
          JOptionPane.showMessageDialog(FrameRegistrazione.frame,"Ciao "+nome+"! Ti sei registrato come "+nometipo+" ","Registrazione completata ",JOptionPane.INFORMATION_MESSAGE);
@@ -65,7 +65,7 @@ public static boolean registratesserato(String nome, String cognome , String cod
            
            
 catch (SQLException ex) {
-    
+    JOptionPane.showMessageDialog(FrameRegistrazione.frame, ex);
 }
 return false;
 }
@@ -105,15 +105,15 @@ public static boolean registraistruttore(String nome, String cognome , String co
          rs=st.executeQuery("SELECT elencoutenti.idutente FROM elencoutenti WHERE elencoutenti.nome='"+nome+"'");
          
          rs.next();
-         int userid=rs.getInt("idutente");
-         st2.executeUpdate("INSERT INTO `istruttore` (`idutente`,`telefonoist`) VALUES ('"+userid+"','NULL')");
+         int userid=rs.getInt("idutente"); 
+         st2.executeUpdate("INSERT INTO `istruttore`(`idutente`,`telefonoist`) VALUES ('"+userid+"','NULL')");
             
          JOptionPane.showMessageDialog(FrameRegistrazione.frame,"Ciao "+nome+"! Ti sei registrato come "+nometipo+" ","Registrazione completata ",JOptionPane.INFORMATION_MESSAGE);
          return true;
         }
             }
 catch (SQLException ex) {
-    
+	JOptionPane.showMessageDialog(FrameRegistrazione.frame, ex);
 }
 return false;
 }
@@ -146,7 +146,7 @@ public static boolean esistenome(String nome)
        
         
  catch (SQLException ex) {
-       
+	 JOptionPane.showMessageDialog(FrameRegistrazione.frame, ex);
     }
     return false;
 }

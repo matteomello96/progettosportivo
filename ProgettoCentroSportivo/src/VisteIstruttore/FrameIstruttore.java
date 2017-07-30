@@ -1,11 +1,13 @@
-package VisteUtenteGenerico;
+package VisteIstruttore;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ClassiDAOIstruttore.ElencoEventiDAO;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
@@ -27,17 +29,24 @@ import javax.swing.ScrollPaneConstants;
 
 
 import ClassiDao.ElencoDisciplineDAO;
-
+import ClassiDao.GetInfoDB;
+import ClassiDao.UtenteDao;
 
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
 import ModelliTabelle.ModDiscIni;
-
+import ModelliTabelleIstruttore.ModElEventiIstr;
+import VisteUtenteGenerico.DetDisciplina;
+import VisteUtenteGenerico.FrameCambia;
+import VisteUtenteGenerico.FrameIniziale;
+import VisteUtenteGenerico.FrameLogin;
 import Listener.Listen;
+import Model.Utente;
+
 import javax.swing.JScrollPane;
 
-public class FrameIniziale extends JFrame {
+public class FrameIstruttore extends JFrame {
 	/**
 	 * 
 	 */
@@ -49,16 +58,17 @@ public class FrameIniziale extends JFrame {
 	
 	public JPanel contentPane,tabellaPnl;
 	public static JTable table;
-    private ModDiscIni model;
-	/**
-	 * Launch the application.
-	 */
+    private ModElEventiIstr model;
+	
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public FrameIniziale() {
-		frame = new JFrame("Pagina iniziale");
+	public FrameIstruttore() {
+		frame = new JFrame();
+		String username=""+Utente.getUsername()+"";
+		frame.setTitle("Benvenuto istruttore "+username+"");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 605, 391);
 		frame.setVisible(true);
@@ -69,22 +79,31 @@ public class FrameIniziale extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenuItem MenuRegistra = new JMenuItem("Registrati al portale");
-	
-		menuBar.add(MenuRegistra);
-		MenuRegistra.addActionListener(new Listen(this));
-		MenuRegistra.setActionCommand("Vai_reg");
+		JMenu mnNewMenu = new JMenu("home");
+		menuBar.add(mnNewMenu);
 		
-		JMenuItem MenuAccedi = new JMenuItem("Accedi al portale");
+		JMenu mnNewMenu_1 = new JMenu("visualizza");
+		menuBar.add(mnNewMenu_1);
 		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		mnNewMenu.add(mntmNewMenuItem);
+		mntmNewMenuItem.addActionListener(new Listen(this));
+		mntmNewMenuItem.setActionCommand("iniistr");
 		
-		menuBar.add(MenuAccedi);
-		MenuAccedi.addActionListener(new Listen(this));
-		MenuAccedi.setActionCommand("Vai_log");
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameCambia();
+				frame.setEnabled(false);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,193,20));
+		contentPane.setBackground(new Color (64,224,208));
 		contentPane.setLayout(new GridBagLayout());
-		 
+		
+		
 		GridBagConstraints gbc = new GridBagConstraints();
  
 		JScrollPane scroll = new JScrollPane(contentPane);
@@ -93,24 +112,18 @@ public class FrameIniziale extends JFrame {
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
 		
-		JLabel lblNewLabel = new JLabel("NuovoPolisportivo");
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 0;
 		
-		contentPane.add(lblNewLabel, gbc);
-		
-		JLabel lblLeNostreDiscipline = new JLabel("Le nostre discipline");
-		lblLeNostreDiscipline.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblLeNostreDiscipline.setForeground(Color.WHITE);
+		JLabel lblEventi = new JLabel("Elenco dei tuoi eventi");
+		lblEventi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEventi.setForeground(Color.BLACK);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 2;
 		gbc.gridy = 2;
-		contentPane.add(lblLeNostreDiscipline, gbc);
+		contentPane.add(lblEventi, gbc);
+		int matricola = GetInfoDB.getidIstr(username);
 		
 		table = new JTable();
-		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
+		model = new ModElEventiIstr(ElencoEventiDAO.elencoiniziale(matricola));
 		table.setRowHeight(20);
 		table.setRowHeight(3, 50);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -129,14 +142,14 @@ public class FrameIniziale extends JFrame {
 		tabellaPnl.add(table);
 		contentPane.add(tabellaPnl, gbc);
 		 
-		JButton btnNewButton = new JButton("Dettagli Disciplina");
+		JButton btnNewButton = new JButton("Dettagli Evento");
 		btnNewButton.setMnemonic('d');
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1)
 				new DetDisciplina();
 				else
-					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
 		gbc.anchor = GridBagConstraints.LINE_START;

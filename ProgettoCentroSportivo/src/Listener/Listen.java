@@ -3,6 +3,7 @@ package Listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import VisteIstruttore.FrameIstruttore;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameRegistrazione;
@@ -23,7 +24,7 @@ public class Listen implements ActionListener {
 	public FrameResponsabile frameresponsabile;
 	public FrameTurno frameturno;
 	public FrameTestimonianze frametestimonianze;
-	
+	public FrameIstruttore framevediev;
 	
 	
 	
@@ -47,11 +48,10 @@ public class Listen implements ActionListener {
 	{
 	  frameresponsabile=frame;
 	}
-
-
 	
-	
-	
+	public Listen(FrameIstruttore frame) {
+		framevediev=frame;
+	}
 	
 	
 	public void actionPerformed(ActionEvent e)
@@ -98,7 +98,13 @@ public class Listen implements ActionListener {
 			Confermaordine.frame.setVisible(true);
 		}
           
-          
+          if ("iniistr".equals(e.getActionCommand())){
+  			
+        	  FrameIstruttore.frame.setVisible(false);
+        	  FrameIstruttore.frame.dispose();
+			new FrameIniziale();
+			FrameIniziale.frame.setVisible(true);
+		}
           
           
           

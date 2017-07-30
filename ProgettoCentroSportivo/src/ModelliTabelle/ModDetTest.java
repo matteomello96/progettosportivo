@@ -1,8 +1,10 @@
-package Model;
+package ModelliTabelle;
 
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
+
+import Model.DettagliTestimonianze;
 
 public class ModDetTest extends AbstractTableModel {
 	   /**

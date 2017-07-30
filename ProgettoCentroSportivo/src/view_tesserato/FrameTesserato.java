@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 
 import ClassiDaoTesserato.ElencoAttivitaDAO;
 import Listener.Listen;
+import Model.Utente;
 import ModelliTabelle_Tesserato.disc_tabella;
 import VisteUtenteGenerico.FrameCambia;
 
@@ -58,7 +59,8 @@ public class FrameTesserato extends JPanel {
 		
 		
 		frame = new JFrame("Tesserato");
-		frame.setTitle("Frame Tesserato");
+		String username=""+Utente.getUsername()+"";
+		frame.setTitle("Benvenuto tesserato "+username+"");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 1334, 700);

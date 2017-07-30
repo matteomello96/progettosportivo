@@ -1,4 +1,4 @@
-package VisteUtenteGenerico;
+package VisteIstruttore;
 
 
 import java.awt.BorderLayout;
@@ -52,7 +52,7 @@ import javax.swing.JButton;
 
 
 
-public class FrameRegistrazione extends JFrame {
+public class FrameInserisciEv extends JFrame {
 	
 	/**
 	 * 
@@ -78,7 +78,7 @@ public class FrameRegistrazione extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrameRegistrazione frame = new FrameRegistrazione();
+					FrameInserisciEv frame = new FrameInserisciEv();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -87,7 +87,7 @@ public class FrameRegistrazione extends JFrame {
 		});
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public FrameRegistrazione() {
+	public FrameInserisciEv() {
 		
 		frame = new JFrame("Registrazione");
 		frame.setResizable(true);
@@ -95,10 +95,10 @@ public class FrameRegistrazione extends JFrame {
 		frame.setLocation(100, 100);
 		frame.setSize(450, 300);
         frame.setTitle("Registrati al nostro portale");
-		if(FrameRegistrazione.frame==null)
+		if(FrameInserisciEv.frame==null)
 			frame.setLocationRelativeTo(null);
 			else
-			frame.setLocation(FrameRegistrazione.frame.getLocation());
+			frame.setLocation(FrameInserisciEv.frame.getLocation());
 		
 		
 		
@@ -436,9 +436,9 @@ public class FrameRegistrazione extends JFrame {
 		{
 			frame.setVisible(false); 
 			frame.dispose();
-			FrameIniziale.frame.setVisible(true);
-			FrameIniziale.frame.setEnabled(true);
-			
+			FrameIstruttore.frame.setEnabled(true);
+			FrameIstruttore.frame.setAlwaysOnTop(true);
+			FrameIstruttore.frame.setAlwaysOnTop(false);
 	}
 								
 		

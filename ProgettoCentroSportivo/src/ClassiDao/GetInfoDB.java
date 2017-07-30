@@ -124,6 +124,35 @@ public class GetInfoDB {
 
 	}
 	    
-	    
+ public static int getidIstr(String username){
+
+     
+     
+     Connection con = DbConnection.db;
+     
+     Statement st;
+     
+     ResultSet rs;
+     
+
+     int ris=1;
+     
+     try {
+         
+         st = con.createStatement();
+        
+         rs = st.executeQuery("SELECT istruttore.matricolaistruttore FROM istruttore,elencoutenti WHERE elencoutenti.username='"+username+"' AND elencoutenti.idutente=istruttore.idutente"); 
+       
+             rs.next();
+             ris=rs.getInt("matricolaistruttore");
+             		
+         return ris; 
+     } catch (SQLException ex) {
+     
+     }
+     return ris;
+
+}
+
 	    
 }

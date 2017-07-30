@@ -29,6 +29,7 @@ import java.awt.event.InputMethodEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import Model.Home;
+import Model.Utente;
 import ModelliTabelle.ModDiscIni;
 import ModelliTabelle.ModElUtenti;
 import VisteUtenteGenerico.FrameCambia;
@@ -61,6 +62,8 @@ public class FrameResponsabile extends JFrame {
 	 */
 	public FrameResponsabile() {
 		frame = new JFrame("Pagina iniziale Responsabile");
+		String username=""+Utente.getUsername()+"";
+		frame.setTitle("Benvenuto responsabile "+username+"");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 1000, 1000);
 		frame.setVisible(true);

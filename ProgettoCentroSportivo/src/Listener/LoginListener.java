@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import Business.UtenteBusiness;
 import ClassiDao.*;
+import VisteIstruttore.FrameIstruttore;
 import VisteUtenteGenerico.FrameLogin;
 import view_tesserato.FrameTesserato;
 import visteadmin.FrameResponsabile;
@@ -53,7 +54,7 @@ public class LoginListener implements ActionListener{
 				
 				JOptionPane.showMessageDialog(null, "Accesso come istruttore "+username+".Benvenuto !");
 				FrameLogin.frame.setVisible(false);
-				
+				new FrameIstruttore();
 				FrameLogin.frame.dispose();
 				
 			}
