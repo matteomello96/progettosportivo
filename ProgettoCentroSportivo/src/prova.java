@@ -35,7 +35,7 @@ public class prova extends JPanel {
 		setBackground(Color.CYAN);
 		setForeground(Color.CYAN);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 80, 70, 0, 37, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 80, 96, 67, 37, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 123, 95, 49, 64, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -56,7 +56,7 @@ public class prova extends JPanel {
 		table_1 = new JTable();
 		GridBagConstraints gbc_table_1 = new GridBagConstraints();
 		gbc_table_1.gridheight = 2;
-		gbc_table_1.gridwidth = 5;
+		gbc_table_1.gridwidth = 6;
 		gbc_table_1.insets = new Insets(0, 0, 5, 5);
 		gbc_table_1.fill = GridBagConstraints.BOTH;
 		gbc_table_1.gridx = 3;
@@ -82,6 +82,16 @@ public class prova extends JPanel {
 		gbc_btnNewButton_1.gridx = 5;
 		gbc_btnNewButton_1.gridy = 4;
 		add(btnNewButton_1, gbc_btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Modifica Commento");
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.gridwidth = 2;
+		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_2.gridx = 7;
+		gbc_btnNewButton_2.gridy = 4;
+		add(btnNewButton_2, gbc_btnNewButton_2);
 
 			
 			

@@ -15,8 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.DistruggiTestimonianza;
 import ClassiDaoTesserato.ElencoTestDao;
+import ClassiDaoTesserato.ModificaCommDao;
+import Model.Utente;
 import ModelliTabelle_Tesserato.disc_testimonianza;
 
 public class FrameVisTest extends JPanel {
@@ -26,6 +29,9 @@ public class FrameVisTest extends JPanel {
 	 private disc_testimonianza model;
 	 public String disciplina;
 	 public String livello;
+	 public String commento;
+	
+	
 	/**
 	 * Create the panel.
 	 */
@@ -45,7 +51,7 @@ public class FrameVisTest extends JPanel {
 		//frame.setBackground(Color.CYAN);
 		//frame.setForeground(Color.CYAN);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 80, 70, 0, 37, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 80, 96, 67, 37, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 123, 95, 49, 64, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -69,7 +75,7 @@ public class FrameVisTest extends JPanel {
 		table_1.setModel(model);
 		GridBagConstraints gbc_table_1 = new GridBagConstraints();
 		gbc_table_1.gridheight = 2;
-		gbc_table_1.gridwidth = 5;
+		gbc_table_1.gridwidth = 6;
 		gbc_table_1.insets = new Insets(0, 0, 5, 5);
 		gbc_table_1.fill = GridBagConstraints.BOTH;
 		gbc_table_1.gridx = 3;
@@ -96,6 +102,16 @@ public class FrameVisTest extends JPanel {
 		gbc_btnNewButton_1.gridx = 5;
 		gbc_btnNewButton_1.gridy = 4;
 		frame.add(btnNewButton_1, gbc_btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Modifica Commento");
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.gridwidth = 2;
+		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_2.gridx = 7;
+		gbc_btnNewButton_2.gridy = 4;
+		frame.add(btnNewButton_2, gbc_btnNewButton_2);
 
 			
 		btnNewButton.addActionListener(new ActionListener() {
@@ -103,6 +119,8 @@ public class FrameVisTest extends JPanel {
 				disciplina=(String) table_1.getValueAt(table_1.getSelectedRow(), 0);
 				livello=(String) table_1.getValueAt(table_1.getSelectedRow(), 1);
 				DistruggiTestimonianza.EliminaTest(disciplina,livello);
+				frame.dispose();
+				new FrameVisTest();
 			}
 			
 		});
@@ -114,5 +132,21 @@ public class FrameVisTest extends JPanel {
 			}
 			
 		});	
+		
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent f) {
+				commento=(String) table_1.getValueAt(table_1.getSelectedRow(), 2);
+				disciplina=(String) table_1.getValueAt(table_1.getSelectedRow(), 0);
+				livello=(String) table_1.getValueAt(table_1.getSelectedRow(), 1);
+				JOptionPane.showMessageDialog(FrameVisTest.frame, " '"+commento+"' ,'"+disciplina+"','"+livello+"' "," ",JOptionPane.INFORMATION_MESSAGE);
+				ModificaCommDao.Mod_Comm(commento,disciplina,livello);
+				
+			
+			}
+			
+		});	
+		
+		
+		
 	}
 }
