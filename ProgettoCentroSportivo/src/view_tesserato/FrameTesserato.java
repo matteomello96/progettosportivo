@@ -100,6 +100,16 @@ public class FrameTesserato extends JPanel {
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Visualizza eventi");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameEventi();
+				frame.setEnabled(false);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_4);
+		
+		
 		
 		JMenuItem scelta_orario= new JMenuItem("Scegli turno");
 		scelta_orario.addActionListener(new ActionListener() {

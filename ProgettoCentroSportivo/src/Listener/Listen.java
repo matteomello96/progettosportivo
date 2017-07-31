@@ -8,6 +8,7 @@ import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameRegistrazione;
 import view_tesserato.Confermaordine;
+import view_tesserato.FrameEventi;
 import view_tesserato.FrameTesserato;
 import view_tesserato.FrameTestimonianze;
 import view_tesserato.FrameTurno;
@@ -25,7 +26,7 @@ public class Listen implements ActionListener {
 	public FrameTurno frameturno;
 	public FrameTestimonianze frametestimonianze;
 	public FrameIstruttore framevediev;
-	
+	public FrameEventi frameeventi;
 	
 	
 	public Listen(FrameIniziale frame)
@@ -53,6 +54,10 @@ public class Listen implements ActionListener {
 		framevediev=frame;
 	}
 	
+	
+	public Listen(FrameEventi frame) {
+		frameeventi= frame;
+	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
