@@ -153,6 +153,40 @@ public class GetInfoDB {
      return ris;
 
 }
+ 
+ 
+/*public static int getidcomm(String username,String codice){
+
+     
+     
+     Connection con = DbConnection.db;
+     
+     Statement st;
+     
+     ResultSet rs;
+     
+
+     int ris=1;
+     
+     try {
+         
+         st = con.createStatement();
+        
+         rs = st.executeQuery("SELECT CodiceTestimonianza FROM testimonianza WHERE Tesserato='"+username+"'and CodiceTestimonianza='"+codice+"' "); 
+       
+             rs.next();
+             ris=rs.getInt("CodiceTestimonianza");
+             		
+         return ris; 
+     } catch (SQLException ex) {
+     
+     }
+     return ris;
+
+}*/
+ 
+ 
+ 
 
 	    
 }

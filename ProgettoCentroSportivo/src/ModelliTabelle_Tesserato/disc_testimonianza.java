@@ -47,10 +47,12 @@ public class disc_testimonianza extends AbstractTableModel  {
 	}
 
 
-	
+	boolean[] columnEditables = new boolean[] {
+			false, false, true
+		};
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
+		return columnEditables[columnIndex];
 	}
 	
 
