@@ -23,16 +23,22 @@ public class ModificaCommDao {
  try {
 	            
 	            st = con.createStatement();
-	           JOptionPane.showMessageDialog(FrameVisTest.frame, " '"+commento+"' ,'"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"','"+GetInfoDB.getidTess(Utente.getUsername())+"' "," ",JOptionPane.INFORMATION_MESSAGE);
+	         
 	            
-	        
-	     st.executeUpdate("UPDATE testimonianza SET Commento='"+commento+"' WHERE testimonianza.CodiceTestimonianza='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and Tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'   ");
-	     JOptionPane.showMessageDialog(FrameVisTest.frame, "Commento Modificato"," ",JOptionPane.INFORMATION_MESSAGE);
+	           String ObjButtons[] = {"        Sì        ","      No      "};
+		        int PromptResult = JOptionPane.showOptionDialog(FrameVisTest.frame,"Sei sicuro di voler modificare la testimonianza. ","Testimonianza modificata",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION){
+	             st.executeUpdate("UPDATE testimonianza SET testimonianza.Commento='"+commento+"' WHERE testimonianza.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and Tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");  
+		        }
 	 	FrameVisTest.frame.dispose();
 		new FrameVisTest();     
-	            
-	        } catch (SQLException ex) {
+		         
+	        } 
+ 
+ catch (SQLException ex) {
 	           
-	        }
+	        } 
+ 
+ 
 	}
 	}

@@ -138,7 +138,6 @@ public class FrameVisTest extends JPanel {
 				commento=(String) table_1.getValueAt(table_1.getSelectedRow(), 2);
 				disciplina=(String) table_1.getValueAt(table_1.getSelectedRow(), 0);
 				livello=(String) table_1.getValueAt(table_1.getSelectedRow(), 1);
-				JOptionPane.showMessageDialog(FrameVisTest.frame, " '"+commento+"' ,'"+disciplina+"','"+livello+"' "," ",JOptionPane.INFORMATION_MESSAGE);
 				ModificaCommDao.Mod_Comm(commento,disciplina,livello);
 				
 			
