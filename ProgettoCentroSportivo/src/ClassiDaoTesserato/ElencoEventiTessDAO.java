@@ -39,7 +39,7 @@ public class ElencoEventiTessDAO {
         	d.setTipoEvento(riga[2]);
         	d.setNomeIstruttore(riga[3]);
         	d.setCognomeIstruttore(riga[4]);
-            d.setFasciaoOraria(riga[5]);
+            d.setFasciaOraria(riga[5]);
             d.setGiornoSettimana(riga[6]);
         	
         	
