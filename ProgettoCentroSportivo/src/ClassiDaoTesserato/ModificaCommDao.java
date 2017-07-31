@@ -26,7 +26,7 @@ public class ModificaCommDao {
 	           JOptionPane.showMessageDialog(FrameVisTest.frame, " '"+commento+"' ,'"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"','"+GetInfoDB.getidTess(Utente.getUsername())+"' "," ",JOptionPane.INFORMATION_MESSAGE);
 	            
 	        
-	     st.executeUpdate("UPDATE testimonianza SET Commento='"+commento+"' WHERE testimonianza.CodiceTestimonianza='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and Tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
+	     st.executeUpdate("UPDATE testimonianza SET Commento='"+commento+"' WHERE testimonianza.CodiceTestimonianza='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and Tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'   ");
 	     JOptionPane.showMessageDialog(FrameVisTest.frame, "Commento Modificato"," ",JOptionPane.INFORMATION_MESSAGE);
 	 	FrameVisTest.frame.dispose();
 		new FrameVisTest();     

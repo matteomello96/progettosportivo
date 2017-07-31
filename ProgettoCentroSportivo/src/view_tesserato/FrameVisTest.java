@@ -134,7 +134,7 @@ public class FrameVisTest extends JPanel {
 		});	
 		
 		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent f) {
+			public void actionPerformed(ActionEvent e) {
 				commento=(String) table_1.getValueAt(table_1.getSelectedRow(), 2);
 				disciplina=(String) table_1.getValueAt(table_1.getSelectedRow(), 0);
 				livello=(String) table_1.getValueAt(table_1.getSelectedRow(), 1);
