@@ -21,7 +21,7 @@ public static ArrayList<ElencoAttivita> elencoiniziale() {
 		
         ArrayList<ElencoAttivita> dati= new ArrayList<ElencoAttivita>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT  C.NomeDisciplina,B.NomeLivello,A.CostoMensile from disciplinedisponibili as A INNER JOIN livello as B ON A.Livello=B.NomeLivello INNER JOIN disciplina as C ON A.Disciplina=C.NomeDisciplina ;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT Livello,Disciplina,CostoMensile from disciplinedisponibili,gestioneturno where disciplinedisponibili.combinazionelivdis=gestioneturno.combinazionelivdis ;");
         Iterator<String[]> i = res.iterator();
         while(i.hasNext())  {
         	String[] riga = i.next();
