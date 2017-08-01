@@ -11,8 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent.KeyBinding;
 
+import ClassiDAOIstruttore.InserisciEventoDAO;
 import Listener.Listen;
 import Model.Home;
+import ModelliTabelleIstruttore.ComboSpazio;
 import VisteUtenteGenerico.*;
 
 import ClassiDao.Reg_dao;
@@ -61,40 +63,28 @@ public class FrameInserisciEv extends JFrame {
 	public static JFrame frame;
 	private JPanel contentPane;
 	
-	private JTextField textnome;
-	private JTextField textcognome;
-	private JTextField textcodice;
-	private JTextField textcitta;
-	private JTextField textvia;
-	private JTextField textnumciv;
-	private JTextField textmail;
-	private JTextField textnomeutente;
-	private JPasswordField pass;
-	private JTextField secondapass;
+	private JTextField textnomeevento;
+	private JTextField textdescrizione;
+	private JTextField textcostoev;
+	private JComboBox comboinfopag;
+	private JComboBox  combotipoev;
+	private JComboBox  combobiscert;
+	private JComboBox combofasciaor;
+	private JComboBox combogiornoset;
+	private JTextField comboprendisp;
 	private boolean bool;
+	public static ComboSpazio combospazio;
 	
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameInserisciEv frame = new FrameInserisciEv();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	
 	public FrameInserisciEv() {
 		
-		frame = new JFrame("Registrazione");
+		frame = new JFrame("Inserimento eventi");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocation(100, 100);
 		frame.setSize(450, 300);
-        frame.setTitle("Registrati al nostro portale");
+        frame.setTitle("Inserisci un nuovo evento");
 		if(FrameInserisciEv.frame==null)
 			frame.setLocationRelativeTo(null);
 			else
@@ -131,314 +121,259 @@ public class FrameInserisciEv extends JFrame {
 	
 		mnNewMenu.add(mntmTornaAllaPagina);
 		mntmTornaAllaPagina.addActionListener(new Listen(this));
-		mntmTornaAllaPagina.setActionCommand("Vai_home");
+		mntmTornaAllaPagina.setActionCommand("Vai_home3");
 		
 		
 		
-		JLabel lblFormDiRegistrazione = new JLabel("Form di registrazione");
+		JLabel lblFormDiInserimento = new JLabel("Form di Inserimento dell'Evento");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblFormDiRegistrazione, gbc);
+		contentPane.add(lblFormDiInserimento, gbc);
 		
-		JLabel lblDatiAnagrafici = new JLabel("Dati Anagrafici");
+		JLabel lblDatiEvento= new JLabel("Dati dell'evento");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblDatiAnagrafici, gbc);
+		contentPane.add(lblDatiEvento, gbc);
 		
 		
 		
-		JLabel lblNome = new JLabel("Nome");
+		JLabel lblNomeEvento = new JLabel("Nome dell'evento");
 		gbc.anchor =  GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 2;
-		contentPane.add(lblNome, gbc);
+		contentPane.add(lblNomeEvento, gbc);
 		
-		textnome = new JTextField();
+		textnomeevento = new JTextField();
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(textnome, gbc);
-		textnome.setColumns(10);
+		contentPane.add(textnomeevento, gbc);
+		textnomeevento.setColumns(10);
 		
-		JLabel lblCognome = new JLabel("Cognome");
+		JLabel lblDescrizione = new JLabel("Descrizione dell'evento");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
 		gbc.gridy = 3;
-		contentPane.add(lblCognome, gbc);
+		contentPane.add(lblDescrizione, gbc);
 		
-		textcognome = new JTextField();
+		textdescrizione = new JTextField();
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(textcognome, gbc);
-		textcognome.setColumns(10);
+		contentPane.add(textdescrizione, gbc);
+		textdescrizione.setColumns(10);
 		
-		JLabel lblCodiceFiscale = new JLabel("Codice Fiscale");
+		JLabel lblInfopag = new JLabel("Info pagamento");
+		gbc.insets = new Insets(5, 0, 0, 10);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		contentPane.add(lblInfopag, gbc);
+		
+		comboinfopag = new JComboBox();
+		comboinfopag.setModel(new DefaultComboBoxModel(new String[] {"Gratuito","A pagamento"}));
+		comboinfopag.setEnabled(true);
+		comboinfopag.setVisible(true);
+		comboinfopag.setEditable(false);
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		contentPane.add(comboinfopag, gbc);
+		
+		
+		JLabel lblCostoEv = new JLabel("Costo dell'evento");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 4;
-		contentPane.add(lblCodiceFiscale, gbc);
-		
-		textcodice = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 4;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(textcodice, gbc);
-		textcodice.setColumns(10);
-		
-		
-		JLabel lblCitt = new JLabel("Citta");
-		
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
 		gbc.gridy = 5;
-		contentPane.add(lblCitt, gbc);
+		contentPane.add(lblCostoEv, gbc);
 		
-		textcitta = new JTextField();
-		gbc.anchor = GridBagConstraints.LINE_START;
+		textcostoev = new JTextField();
 		gbc.gridx = 1;
 		gbc.gridy = 5;
-		contentPane.add(textcitta, gbc);
-		textcitta.setColumns(10);
+		gbc.anchor = GridBagConstraints.LINE_START;
+		contentPane.add(textcostoev, gbc);
+		textcostoev.setColumns(10);
 		
-		JLabel lblVia = new JLabel("Via");
+		JLabel lblTipoEvento = new JLabel("Tipo evento");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
 		gbc.gridy = 6;
-		contentPane.add(lblVia, gbc);
+		contentPane.add(lblTipoEvento, gbc);
 		
-		textvia = new JTextField();
+		combotipoev = new JComboBox();
+		combotipoev.setModel(new DefaultComboBoxModel(new String[] {"Gara","Stage"}));
+		combotipoev.setVisible(true);
+		combotipoev.setEnabled(true);
+		combotipoev.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
 		gbc.gridy = 6;
-		contentPane.add(textvia, gbc);
-		textvia.setColumns(10);
+		contentPane.add(combotipoev, gbc);
 		
-		JLabel lblNumeroCivico = new JLabel("Numero Civico");
-		gbc.anchor = GridBagConstraints.LINE_END;
+		JLabel lblBiscert = new JLabel("Bisogno certificato");
 		gbc.insets = new Insets(5, 0, 0, 10);
+		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
 		gbc.gridy = 7;
-		contentPane.add(lblNumeroCivico, gbc);
+		contentPane.add(lblBiscert, gbc);
 		
-		textnumciv = new JTextField();
+		combobiscert = new JComboBox();
+		combobiscert.setModel(new DefaultComboBoxModel(new String[] {"Si","No"}));
+		combobiscert.setEnabled(true);
+		combobiscert.setVisible(true);
+		combobiscert.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
 		gbc.gridy = 7;
-		contentPane.add(textnumciv, gbc);
-		textnumciv.setColumns(10);
+		contentPane.add(combobiscert, gbc);
 		
-		JLabel lblDatiutenza = new JLabel("Dati di Accesso");
+		
+		
+		
+		JLabel lblDatiorario = new JLabel("Dati sull'orario");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 8;
-		contentPane.add(lblDatiutenza, gbc);
+		contentPane.add(lblDatiorario, gbc);
 		
 		
-		JLabel lblIndirizzoMail = new JLabel("Indirizzo mail");
+		JLabel lblFasciaoraria = new JLabel("Fascia oraria");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 9;
-		contentPane.add(lblIndirizzoMail, gbc);
+		contentPane.add(lblFasciaoraria, gbc);
 		
-		textmail = new JTextField();
+		combofasciaor = new JComboBox();
+		combofasciaor.setModel(new DefaultComboBoxModel(new String[] {"08:30-09:30","09:30-10:30","10:30-11:30","11:30-12:30","12:30-13:30","15:30-16:30","16:30-17:30","17:30-18:30","18:30-19:30","19:30-20:30","20:30-21:30",}));
+		combofasciaor.setVisible(true);
+		combofasciaor.setEnabled(true);
+		combofasciaor.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
 		gbc.gridy = 9;
-		contentPane.add(textmail, gbc);
-		textmail.setColumns(10);
+		contentPane.add(combofasciaor, gbc);
 		
-		JLabel lblNomeutente = new JLabel("Nome Utente");
+		JLabel lblGiornoset = new JLabel("Giorno della settimana");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 10;
-		contentPane.add(lblNomeutente, gbc);
+		contentPane.add(lblGiornoset, gbc);
 			
-		textnomeutente = new JTextField();
-	    gbc.anchor = GridBagConstraints.LINE_START;
+		combogiornoset = new JComboBox();
+		combogiornoset.setModel(new DefaultComboBoxModel(new String[] {"lunedi","martedi","mercoledi","giovedi","venerdi","sabato"}));
+		combogiornoset.setVisible(true);
+		combogiornoset.setEnabled(true);
+		combogiornoset.setEditable(false);
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
 		gbc.gridy = 10;
-		textnomeutente.setColumns(10);
-		contentPane.add(textnomeutente, gbc);
-		
-		JLabel inuso = new JLabel("Nome utente in uso");
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 2;
-		gbc.gridy = 10;
-		contentPane.add(inuso, gbc);
-		inuso.setVisible(false);
+		contentPane.add(combogiornoset, gbc);
 		
 	
-		
-		
-		JLabel lblPassword = new JLabel("Password");
+		JLabel lblSpazio = new JLabel("Spazio");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 11;
-		contentPane.add(lblPassword, gbc);
+		contentPane.add(lblSpazio, gbc);
 		
-		pass = new JPasswordField();
+		combospazio = new ComboSpazio();
+		combospazio.setEnabled(true);
+		combospazio.setVisible(true);
+		combospazio.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
 		gbc.gridy = 11;
-		pass.setColumns(10);
-		contentPane.add(pass, gbc);
+		contentPane.add(combospazio, gbc);
 		
-		
-		
-		
-		JLabel lbl2Password = new JLabel("Ripeti Password");
-		gbc.insets = new Insets(5, 0, 0, 10);
+		JLabel lblPrenDisp = new JLabel("Prenotazioni disponibili");
 		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 12;
-		contentPane.add(lbl2Password, gbc);
+		contentPane.add(lblPrenDisp, gbc);
 		
-		secondapass = new JPasswordField();
-		gbc.anchor = GridBagConstraints.LINE_START;
+		comboprendisp = new JTextField();
 		gbc.gridx = 1;
 		gbc.gridy = 12;
-		secondapass.setColumns(10);
-		contentPane.add(secondapass, gbc);
-		
-		
-		JLabel lblTipoUtente = new JLabel("Tipo utente");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 13;
-		contentPane.add(lblTipoUtente, gbc);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Tesserato","Istruttore"}));
-		comboBox.setVisible(true);
-		comboBox.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 13;
-		contentPane.add(comboBox, gbc);
-		
-	//	gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
+		contentPane.add(comboprendisp, gbc);
+		comboprendisp.setColumns(10);
+
 		
 		
-		
-		
-		JButton btnRegistratiAlNostro = new JButton("Registrati al nostro portale!");
+		JButton btnRegistratiAlNostro = new JButton("Inserisci il nuovo evento");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 14;
 		contentPane.add(btnRegistratiAlNostro, gbc);
+		
 		btnRegistratiAlNostro.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {lblNome.setForeground(Color.BLACK);
-			lblNome.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			public void actionPerformed(ActionEvent arg0) {
+			lblNomeEvento.setForeground(Color.BLACK);
+			lblNomeEvento.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			
-			lblCognome.setForeground(Color.BLACK);
-			lblCognome.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblDescrizione.setForeground(Color.BLACK);
+			lblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
-			lblNomeutente.setForeground(Color.BLACK);
-			lblNomeutente.setFont(new Font("Tahoma", Font.PLAIN, 11));
-	
-			lblIndirizzoMail.setForeground(Color.BLACK);
-			lblIndirizzoMail.setFont(new Font("Tahoma", Font.PLAIN, 11));
-	
-			lblPassword.setForeground(Color.BLACK);
-			lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		
+			lblCostoEv.setForeground(Color.BLACK);
+			lblCostoEv.setFont(new Font("Tahoma", Font.PLAIN, 11));
+
+			lblPrenDisp.setForeground(Color.BLACK);
+			lblPrenDisp.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			
 		
 		
-		if(textnome.getText().isEmpty()||textcognome.getText().isEmpty()||textnomeutente.getText().isEmpty()||textmail.getText().isEmpty()||pass.getText().isEmpty()||secondapass.getText().isEmpty()||textcodice.getText().isEmpty()||textcitta.getText().isEmpty()||textvia.getText().isEmpty()||textnumciv.getText().isEmpty())
+		if(textnomeevento.getText().isEmpty()||textdescrizione.getText().isEmpty()||textcostoev.getText().isEmpty()||comboprendisp.getText().isEmpty())
 		{
 			
-			if(textnumciv.getText().isEmpty())
+			if(textnomeevento.getText().isEmpty())
 			{
-				lblNumeroCivico.setForeground(Color.RED);
-				lblNumeroCivico.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblNomeEvento.setForeground(Color.RED);
+				lblNomeEvento.setFont(new Font("Tahoma", Font.BOLD, 11));
 			}
-			if(textvia.getText().isEmpty())
+			if(textdescrizione.getText().isEmpty())
 			{
-				lblVia.setForeground(Color.RED);
-				lblVia.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblDescrizione.setForeground(Color.RED);
+				lblDescrizione.setFont(new Font("Tahoma", Font.BOLD, 11));
 			}
-			if(textcitta.getText().isEmpty())
+			if(textcostoev.getText().isEmpty())
 			{
-				lblCitt.setForeground(Color.RED);
-				lblCitt.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblCostoEv.setForeground(Color.RED);
+				lblCostoEv.setFont(new Font("Tahoma", Font.BOLD, 11));
 			}
-			if(textcodice.getText().isEmpty())
+			if(comboprendisp.getText().isEmpty())
 			{
-				lblCodiceFiscale.setForeground(Color.RED);
-				lblCodiceFiscale.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblPrenDisp.setForeground(Color.RED);
+				lblPrenDisp.setFont(new Font("Tahoma", Font.BOLD, 11));
 			}
-			if(textnome.getText().isEmpty())
-			{
-				lblNome.setForeground(Color.RED);
-				lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			if(textcognome.getText().isEmpty())
-			{
-				lblCognome.setForeground(Color.RED);
-				lblCognome.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			if(textnomeutente.getText().isEmpty())
-			{
-				lblNomeutente.setForeground(Color.RED);
-				lblNomeutente.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			if(textmail.getText().isEmpty())
-			{
-				lblIndirizzoMail.setForeground(Color.RED);
-				lblIndirizzoMail.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			if(pass.getText().isEmpty())
-			{
-				lblPassword.setForeground(Color.RED);
-				lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			if(secondapass.getText().isEmpty())
-			{
-				lbl2Password.setForeground(Color.RED);
-				lbl2Password.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			
 			JOptionPane.showMessageDialog(frame, "Riempire tutti i campi obbligatori"," ",JOptionPane.WARNING_MESSAGE);
 		}
-		else if(!pass.getText().equals(secondapass.getText())){
-			lblPassword.setForeground(Color.RED);
-			lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-									
-			lbl2Password.setForeground(Color.RED);
-			lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
-			JOptionPane.showMessageDialog(frame, "Le password inserite non coincidono"," ",JOptionPane.WARNING_MESSAGE);
-		}
 		else
-			if(comboBox.getSelectedIndex()!=1)
-			bool=Reg_dao.registratesserato(textnome.getText(),textcognome.getText(),textcodice.getText(),textcitta.getText(),textvia.getText(),textnumciv.getText(), textmail.getText(),textnomeutente.getText(),pass.getText(), comboBox.getSelectedItem().toString());
-			else bool=Reg_dao.registraistruttore(textnome.getText(),textcognome.getText(),textcodice.getText(),textcitta.getText(),textvia.getText(),textnumciv.getText(), textmail.getText(),textnomeutente.getText(),pass.getText(), comboBox.getSelectedItem().toString());
+			
+			bool=InserisciEventoDAO.registraevento(textnomeevento.getText(),textdescrizione.getText(),textcostoev.getText(),comboinfopag.getSelectedItem().toString(),combotipoev.getSelectedItem().toString(),combobiscert.getSelectedItem().toString(),combofasciaor.getSelectedItem().toString(),combogiornoset.getSelectedItem().toString(),combospazio.getSelectedItem().toString(),comboprendisp.getText());
+			
 		
 		if(bool)
 		{
 			frame.setVisible(false); 
 			frame.dispose();
+			FrameIstruttore.frame.setVisible(true);
 			FrameIstruttore.frame.setEnabled(true);
-			FrameIstruttore.frame.setAlwaysOnTop(true);
-			FrameIstruttore.frame.setAlwaysOnTop(false);
+			
 	}
 								
 		
@@ -448,7 +383,12 @@ public class FrameInserisciEv extends JFrame {
 		
 		
 		;
-
+		
+		
+		
+	//	gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
+		
+		
 
 }}
 
