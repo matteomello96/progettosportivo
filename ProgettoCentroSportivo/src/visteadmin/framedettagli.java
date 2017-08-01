@@ -4,30 +4,28 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import ModelliTabelleRespo.modelisc;
-import classiDAOResponsabile.ConfermaDao;
-import classiDAOResponsabile.RichiesteDao;
 
-public class FrameOrdini extends JPanel {
+import ModelliTabelleRespo.modellidettagli;
+
+import classiDAOResponsabile.dettagliiscrizionedao;
+
+public class framedettagli {
 
 	public static JFrame frame;
 	
 	public JTable table_2;
-	private modelisc model;
+	private modellidettagli model;
 	
 	
-	public FrameOrdini() {
-		frame = new JFrame("FrameOrdini");
+	public framedettagli(int cod) {
+		frame = new JFrame("FrameDettagli");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 700, 400);
 		frame.setVisible(true);
@@ -44,7 +42,7 @@ public class FrameOrdini extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.setLayout(gridBagLayout);
 		
-		JLabel lblNewLabel = new JLabel("Richieste iscrizione dai Tesserati");
+		JLabel lblNewLabel = new JLabel("Info");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridwidth = 4;
@@ -54,8 +52,10 @@ public class FrameOrdini extends JPanel {
 		frame.add(lblNewLabel, gbc_lblNewLabel);
 		
 		
+	
+		
 		table_2 = new JTable();
-		model = new modelisc(RichiesteDao.elencoiniziale());
+		model = new modellidettagli(dettagliiscrizionedao.elencoiniziale(cod));
 		table_2.setCellSelectionEnabled(true);
 		table_2.setModel(model);
 		GridBagConstraints gbc_table_2 = new GridBagConstraints();
@@ -75,15 +75,9 @@ public class FrameOrdini extends JPanel {
 		gbc_btnNewButton.gridy = 4;
 		frame.add(btnNewButton, gbc_btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Dettagli Ordine");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 4;
-		gbc_btnNewButton_1.gridy = 4;
-		frame.add(btnNewButton_1, gbc_btnNewButton_1);
 		
-		btnNewButton.addActionListener(new ActionListener() {
+		
+	/*	btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int a;
 				
@@ -97,28 +91,13 @@ public class FrameOrdini extends JPanel {
 		   new FrameOrdini();
 			
 			}
-		});
+		});*/
 		
 		
 		
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int a;
-				
-				a=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
-				
-				
-				new framedettagli(a);
-			
 
-		   
-		   
-			
-			}
-		});
 	
 
 	}
-
 }

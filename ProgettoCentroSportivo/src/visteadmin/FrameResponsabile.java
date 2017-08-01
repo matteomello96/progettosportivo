@@ -18,20 +18,13 @@ import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.table.DefaultTableModel;
 
-import ClassiDao.ElencoDisciplineDAO;
 
-import java.awt.Scrollbar;
+
 import java.awt.ComponentOrientation;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import Model.Home;
+
 import Model.Utente;
-import ModelliTabelle.ModDiscIni;
-import ModelliTabelle.ModElUtenti;
+import ModelliTabelleRespo.ModElUtenti;
 import VisteUtenteGenerico.FrameCambia;
 import classiDAOResponsabile.ElencoUtentiDAO;
 import Listener.Listen;

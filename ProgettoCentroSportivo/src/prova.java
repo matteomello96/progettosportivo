@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import ComboTesserato.Combogiorno;
 import ComboTesserato.Comboorario;
-import ModelliTabelle.modelisc;
+import ModelliTabelleRespo.modelisc;
 import classiDAOResponsabile.RichiesteDao;
 import view_tesserato.FrameTesserato;
 import java.awt.Color;
