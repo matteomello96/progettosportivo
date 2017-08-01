@@ -104,10 +104,20 @@ public class FrameTesserato extends JPanel {
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameEventi();
-				frame.setEnabled(false);
+				
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Visualizza Attività attive");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameDiscAttive();
+				
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_5);
+		
 		
 		
 		

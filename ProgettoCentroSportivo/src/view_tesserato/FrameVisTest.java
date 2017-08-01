@@ -11,19 +11,22 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.DistruggiTestimonianza;
 import ClassiDaoTesserato.ElencoTestDao;
 import ClassiDaoTesserato.ModificaCommDao;
-import Model.Utente;
+
 import ModelliTabelle_Tesserato.disc_testimonianza;
 
 public class FrameVisTest extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable table_1;
 	public static JFrame frame;
 	 private disc_testimonianza model;
