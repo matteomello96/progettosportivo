@@ -26,7 +26,7 @@ public class ElencoEventiTessDAO {
 		
         ArrayList<ElencoEventiTes> dati= new ArrayList<ElencoEventiTes>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select evento.nomeevento,evento.descrizione,evento.Tipoevento,elencoutenti.nome,elencoutenti.cognome,gestioneturnoevento.fasciaoraria,gestioneturnoevento.giornosettimana from evento inner join gestioneturnoevento on gestioneturnoevento.evento=evento.codiceevento inner join istruttoridisponibiliperdisciplina on evento.Istruttoredisp=istruttoridisponibiliperdisciplina.combinazioneistrdis inner join istruttore on istruttore.Matricolaistruttore=istruttoridisponibiliperdisciplina.istruttore inner join elencoutenti on istruttore.idutente=elencoutenti.idutente");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select evento.nomeevento,evento.descrizione,evento.Tipoevento,elencoutenti.nome,elencoutenti.cognome,gestioneturnoevento.fasciaoraria,gestioneturnoevento.giornosettimana,gestioneturnoevento.prenotazionidisponibili from evento inner join gestioneturnoevento on gestioneturnoevento.evento=evento.codiceevento inner join istruttoridisponibiliperdisciplina on evento.Istruttoredisp=istruttoridisponibiliperdisciplina.combinazioneistrdis inner join istruttore on istruttore.Matricolaistruttore=istruttoridisponibiliperdisciplina.istruttore inner join elencoutenti on istruttore.idutente=elencoutenti.idutente");
         
         Iterator<String[]> i = res.iterator();
        
@@ -41,7 +41,7 @@ public class ElencoEventiTessDAO {
         	d.setCognomeIstruttore(riga[4]);
             d.setFasciaOraria(riga[5]);
             d.setGiornoSettimana(riga[6]);
-        	
+        	d.setPostidisp(Integer.parseInt(riga[7]));
         	
         	
         	dati.add(d);

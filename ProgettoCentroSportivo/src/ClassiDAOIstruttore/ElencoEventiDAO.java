@@ -32,7 +32,7 @@ public class ElencoEventiDAO {
 		
         ArrayList<ElencoEventi> dati= new ArrayList<ElencoEventi>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select evento.nomeevento,evento.descrizione,evento.Tipoevento from evento inner join istruttoridisponibiliperdisciplina on evento.Istruttoredisp=istruttoridisponibiliperdisciplina.combinazioneistrdis inner join istruttore on istruttore.Matricolaistruttore=istruttoridisponibiliperdisciplina.istruttore  where istruttore.matricolaistruttore='"+matricola+"'");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select evento.nomeevento,evento.descrizione,evento.Tipoevento from evento inner join istruttoridisponibiliperdisciplina on evento.Istruttoredisp=istruttoridisponibiliperdisciplina.combinazioneistrdis inner join istruttore on istruttore.Matricolaistruttore=istruttoridisponibiliperdisciplina.istruttore  where evento.istruttoredisp='"+matricola+"'");
         
         Iterator<String[]> i = res.iterator();
        
