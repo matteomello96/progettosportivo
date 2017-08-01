@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import Model.ModelRichiestaIscrizione;
-import Model_Tesserato.ElencoAttivita;
+import Model_Responsabile.ModelRichiestaIscrizione;
+
 
 public class modelisc extends AbstractTableModel {
 	private ArrayList<ModelRichiestaIscrizione> dati;
@@ -29,7 +29,7 @@ public class modelisc extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 5;
+		return 7;
 	}
 	
 
@@ -44,7 +44,8 @@ public class modelisc extends AbstractTableModel {
 		else if(columnIndex==2) return d.getTesserato();
 		else if(columnIndex==3) return d.getModalitapagamento();
 		else if(columnIndex==4) return d.getPrezzotot();
-		  
+		else if(columnIndex==5) return d.getConfermato();
+		else if(columnIndex==6) return d.getAnnullato();
 		  return null;
 		  
 	}
@@ -64,8 +65,8 @@ public class modelisc extends AbstractTableModel {
         if(columnIndex==2) dati.get(rowIndex).setTesserato((int)aValue);
         if(columnIndex==3) dati.get(rowIndex).setModalitapagamento(aValue.toString());
         if(columnIndex==4) dati.get(rowIndex).setPrezzotot((int)aValue);
-		
-       
+        if(columnIndex==5) dati.get(rowIndex).setConfermato((int)aValue);
+        if(columnIndex==6) dati.get(rowIndex).setAnnullato((int)aValue);
         
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
     }

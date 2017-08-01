@@ -8,11 +8,9 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 import DBInterfaccia.DbConnection;
-import Model.Utente;
+
 import VisteUtenteGenerico.FrameCambia;
-import view_tesserato.FrameTesserato;
-import visteadmin.FrameOrdini;
-import visteadmin.FrameResponsabile;
+
 
 public class ConfermaDao {
 	
@@ -23,15 +21,21 @@ public class ConfermaDao {
 		
 		   Connection con = DbConnection.db;
 	        Connection con2 = DbConnection.db;
-	        Statement st,st2;
-	        ResultSet rs;
-	        ResultSet rs1;
+	        Connection con3 = DbConnection.db;
+	        Connection con4 = DbConnection.db;
+	        
+	        Statement st,st2,st3,st4;
+	   
+	        ResultSet rs,rs1;
+	        
 	         int conf,ann;
 	        try {
 	            
 	            st= con.createStatement();
 	            st2 = con2.createStatement();
-	       
+	            st3 = con3.createStatement();
+	            st4 = con4.createStatement();
+	            
 	            rs=st2.executeQuery("select confermato from iscrizionedisciplina where codiceiscrizionedisciplina='"+idordine+"'");
 	        	 rs.next();
 	             conf=rs.getInt("confermato");
@@ -47,6 +51,10 @@ public class ConfermaDao {
 	                       	
 	            	st2.executeUpdate("UPDATE iscrizionedisciplina SET confermato=0 WHERE iscrizionedisciplina.codiceiscrizionedisciplina='"+idordine+"'");
 		        	st.executeUpdate("UPDATE iscrizionedisciplina SET annullato=1 WHERE iscrizionedisciplina.codiceiscrizionedisciplina='"+idordine+"'");
+		        	st3.executeUpdate("UPDATE detiscr SET confermato=0 WHERE detiscr.idiscrizione='"+idordine+"'");
+		        	st4.executeUpdate("UPDATE detiscr SET annullato=1 WHERE detiscr.idiscrizione='"+idordine+"'");
+		        	
+		        	
 		        	JOptionPane.showMessageDialog(FrameCambia.frame, "Ordine Annullato"," ",JOptionPane.INFORMATION_MESSAGE);
 		        	
 		        	
@@ -60,6 +68,9 @@ public class ConfermaDao {
 	            else{
 		        	st2.executeUpdate("UPDATE iscrizionedisciplina SET confermato=1 WHERE iscrizionedisciplina.codiceiscrizionedisciplina='"+idordine+"'");
 		        	st.executeUpdate("UPDATE iscrizionedisciplina SET annullato=0 WHERE iscrizionedisciplina.codiceiscrizionedisciplina='"+idordine+"'");
+		        	st3.executeUpdate("UPDATE detiscr SET confermato=1 WHERE detiscr.idiscrizione='"+idordine+"'");
+		        	st4.executeUpdate("UPDATE detiscr SET annullato=0 WHERE detiscr.idiscrizione='"+idordine+"'");
+		        	
 		        	JOptionPane.showMessageDialog(FrameCambia.frame, "Ordine Confermato"," ",JOptionPane.INFORMATION_MESSAGE);
 		        	
 		        		

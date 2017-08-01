@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import DBInterfaccia.DbConnection;
 import Model.ElencoUtenti;
-import Model.ModelRichiestaIscrizione;
+import Model_Responsabile.ModelRichiestaIscrizione;
 
 public class RichiesteDao {
 	
@@ -26,7 +26,7 @@ private static RichiesteDao instance;
 		
         ArrayList<ModelRichiestaIscrizione> dati= new ArrayList<ModelRichiestaIscrizione>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot from iscrizionedisciplina ; ");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot,iscrizionedisciplina.Confermato,iscrizionedisciplina.Annullato from iscrizionedisciplina ; ");
        
         Iterator<String[]> i = res.iterator();
        
@@ -39,7 +39,8 @@ private static RichiesteDao instance;
         	fa.setTesserato(Integer.parseInt(riga[2]));
         	fa.setModalitapagamento(riga[3]); 
         	fa.setPrezzotot(Integer.parseInt(riga[4])); 
-			
+        	fa.setConfermato(Integer.parseInt(riga[5])); 
+        	fa.setAnnullato(Integer.parseInt(riga[6])); 
 			
        
       

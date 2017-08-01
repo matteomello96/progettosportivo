@@ -10,17 +10,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
-import ClassiDaoTesserato.TestimnianzaDao;
-import Model.ModelRichiestaIscrizione;
-import ModelliTabelle.ModElUtenti;
+
+
 import ModelliTabelle.modelisc;
 import classiDAOResponsabile.ConfermaDao;
-import classiDAOResponsabile.ElencoUtentiDAO;
 import classiDAOResponsabile.RichiesteDao;
 
 public class FrameOrdini extends JPanel {
@@ -80,13 +77,13 @@ public class FrameOrdini extends JPanel {
 		gbc_btnNewButton.gridy = 4;
 		frame.add(btnNewButton, gbc_btnNewButton);
 		
-		/*JButton btnNewButton_1 = new JButton("Annulla Iscrizione");
+		JButton btnNewButton_1 = new JButton("Dettagli Ordine");
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_1.gridx = 4;
 		gbc_btnNewButton_1.gridy = 4;
-		frame.add(btnNewButton_1, gbc_btnNewButton_1);*/
+		frame.add(btnNewButton_1, gbc_btnNewButton_1);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -98,7 +95,8 @@ public class FrameOrdini extends JPanel {
 			
 //JOptionPane.showMessageDialog(null, "Il nome utente \""+a+"\" e\\o l'email \""+a+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
 		   ConfermaDao.Confermaiscrizione(a);
-		   
+		   frame.dispose();
+		   new FrameOrdini();
 			
 			}
 		});

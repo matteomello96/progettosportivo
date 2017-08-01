@@ -1,4 +1,4 @@
-package Model;
+package Model_Responsabile;
 
 public class ModelRichiestaIscrizione {
 private int codiceiscrizionedisciplina;
@@ -6,6 +6,8 @@ private String dataazione;
 private int tesserato;
 private String modalitapagamento;
 private int prezzotot;
+private int confermato;
+private int annullato;
 
 
 public int getCodiceiscrizionedisciplina() {
@@ -37,6 +39,18 @@ public int getPrezzotot() {
 }
 public void setPrezzotot(int prezzotot) {
 	this.prezzotot = prezzotot;
+}
+public int getConfermato() {
+	return confermato;
+}
+public void setConfermato(int confermato) {
+	this.confermato = confermato;
+}
+public int getAnnullato() {
+	return annullato;
+}
+public void setAnnullato(int annullato) {
+	this.annullato = annullato;
 }
 
 
