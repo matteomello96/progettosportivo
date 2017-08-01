@@ -16,7 +16,7 @@ import ModelliTabelleRespo.modellidettagli;
 
 import classiDAOResponsabile.dettagliiscrizionedao;
 
-public class framedettagli {
+public class framediscdisp {
 
 	public static JFrame frame;
 	
@@ -24,7 +24,7 @@ public class framedettagli {
 	private modellidettagli model;
 	
 	
-	public framedettagli(int cod) {
+	public framediscdisp() {
 		frame = new JFrame("FrameDettagli");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 700, 400);
@@ -55,7 +55,7 @@ public class framedettagli {
 	
 		
 		table_2 = new JTable();
-		model = new modellidettagli(dettagliiscrizionedao.elencoiniziale(cod));
+		model = new modellidettagli(dettagliiscrizionedao.elencoiniziale());
 		table_2.setCellSelectionEnabled(true);
 		table_2.setModel(model);
 		GridBagConstraints gbc_table_2 = new GridBagConstraints();

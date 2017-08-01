@@ -16,14 +16,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import javax.swing.JTable;
 
 import ClassiDaoTesserato.Invia_Turno_Dao;
-
+import ClassiDaoTesserato.elencoattivitaattivedao;
+import ClassiDaoTesserato.elencononattividao;
 import ComboTesserato.Combodis;
 import ComboTesserato.Combogiorno;
 import ComboTesserato.Comboorario;
 import ComboTesserato.combolivello;
+import ModelliTabelle_Tesserato.disc_attive;
 
 
 
@@ -46,7 +48,8 @@ public class FrameTurno extends JPanel {
 	public String ora;
 	public String giorno;
 	public JButton btnNewButton_1;
-	
+	private JTable table;
+	private disc_attive model;
 
 	public FrameTurno(String disciplina2, String livello2, String giorno2, String ora2) {
 		final DecimalFormat df = new DecimalFormat("0.00");
@@ -64,10 +67,10 @@ public class FrameTurno extends JPanel {
 		
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{42, 0, 158, 0, 148, 75, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 36, 40, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{42, 0, 158, 72, 148, 75, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 36, 40, 0, 0, 0, 0, 119, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.setLayout(gridBagLayout);	
 		
 		JLabel lblNewLabel = new JLabel("Scelta turno");
@@ -180,6 +183,19 @@ public class FrameTurno extends JPanel {
 			gbc_btnNewButton.gridy = 7;
 			  btnNewButton.setEnabled(true);
 			frame.add(btnNewButton, gbc_btnNewButton);
+			
+			
+			table = new JTable();
+			model = new disc_attive(elencononattividao.elencoiniziale());
+			table.setCellSelectionEnabled(true);
+			table.setModel(model);
+			GridBagConstraints gbc_table = new GridBagConstraints();
+			gbc_table.gridwidth = 3;
+			gbc_table.insets = new Insets(0, 0, 0, 5);
+			gbc_table.fill = GridBagConstraints.BOTH;
+			gbc_table.gridx = 2;
+			gbc_table.gridy = 9;
+			frame.add(table, gbc_table);
 			
 			
 			

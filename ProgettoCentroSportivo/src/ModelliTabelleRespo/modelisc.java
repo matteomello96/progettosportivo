@@ -16,6 +16,7 @@ public class modelisc extends AbstractTableModel {
 	}
 	
 	
+
 	public modelisc(ArrayList<ModelRichiestaIscrizione> dati) {
 		super();
 		this.dati = dati;

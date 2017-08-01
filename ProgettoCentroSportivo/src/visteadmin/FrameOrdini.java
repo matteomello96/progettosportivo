@@ -1,8 +1,10 @@
 package visteadmin;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +26,7 @@ public class FrameOrdini extends JPanel {
 	
 	public JTable table_2;
 	private modelisc model;
-	
+
 	
 	public FrameOrdini() {
 		frame = new JFrame("FrameOrdini");
@@ -35,10 +37,10 @@ public class FrameOrdini extends JPanel {
 		frame.setResizable(true);
 		//frame.setAlwaysOnTop(true);
 		
-		
+	
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 110, 101, 106, 138, 88, 105, 0, 0, 0};
+	   gridBagLayout.columnWidths = new int[]{0, 110, 101, 106, 138, 88, 105, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 213, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -64,7 +66,12 @@ public class FrameOrdini extends JPanel {
 		gbc_table_2.fill = GridBagConstraints.BOTH;
 		gbc_table_2.gridx = 2;
 		gbc_table_2.gridy = 2;
+		
+		
+		
+		
 		frame.add(table_2, gbc_table_2);
+
 		
 		JButton btnNewButton = new JButton("Conferma/Annulla Iscrizione");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

@@ -81,7 +81,7 @@ public class FrameResponsabile extends JFrame {
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameCambia();
-				frame.setEnabled(false);
+			
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
@@ -91,12 +91,22 @@ public class FrameResponsabile extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameOrdini();
 				
-				//frame.setVisible(false);
+				
+			}
+		});
+		mnNewMenu.add(MenuOrdini);
+
+		JMenuItem MenuDiscipline = new JMenuItem("Discipline");
+		MenuDiscipline.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new framediscdisp();
+				
+			
 			}
 		});
 		
 		
-		menuBar.add(MenuOrdini);
+		mnNewMenu.add(MenuDiscipline);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,193,20));
