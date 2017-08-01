@@ -117,7 +117,7 @@ public class FrameTesserato extends JPanel {
 				
 				a="null";
 				new FrameTurno(a,null,null,null);
-				frame.setEnabled(false);
+				
 				
 			}
 		});

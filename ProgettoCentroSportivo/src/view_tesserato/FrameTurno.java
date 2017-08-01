@@ -16,13 +16,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 
-import ClassiDaoTesserato.TestimnianzaDao;
+
+import ClassiDaoTesserato.Invia_Turno_Dao;
+
 import ComboTesserato.Combodis;
 import ComboTesserato.Combogiorno;
 import ComboTesserato.Comboorario;
 import ComboTesserato.combolivello;
+
 
 
 public class FrameTurno extends JPanel {
@@ -43,7 +45,7 @@ public class FrameTurno extends JPanel {
 	public String livello;
 	public String ora;
 	public String giorno;
-	
+	public JButton btnNewButton_1;
 	
 
 	public FrameTurno(String disciplina2, String livello2, String giorno2, String ora2) {
@@ -170,24 +172,19 @@ public class FrameTurno extends JPanel {
 				
 			
 
-			JButton btnNewButton = new JButton("step successivo>>");
+			btnNewButton = new JButton("step successivo>>");
 			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 			gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
 			gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 			gbc_btnNewButton.gridx = 2;
 			gbc_btnNewButton.gridy = 7;
+			  btnNewButton.setEnabled(true);
 			frame.add(btnNewButton, gbc_btnNewButton);
 			
 			
-			JButton btnNewButton_1 = new JButton("Invia ");
-			GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-			gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-			gbc_btnNewButton_1.gridx = 4;
-			gbc_btnNewButton_1.gridy = 7;
-			btnNewButton_1.setEnabled(false);
-			frame.add(btnNewButton_1, gbc_btnNewButton_1);
 			
+			
+
 			
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -195,6 +192,8 @@ public class FrameTurno extends JPanel {
 					livello=Combolivello.getSelectedItem().toString();
 					ora=Comboorario.getSelectedItem().toString();
 					giorno=Combogiorno.getSelectedItem().toString();
+				
+					  btnNewButton.setEnabled(true);
 					
 					if(disciplina2=="null"){
 					if(disciplina=="disciplina"){
@@ -209,6 +208,7 @@ public class FrameTurno extends JPanel {
 					Combolivello.setEnabled(true);
 					Comboorario.setEnabled(false);
 					Combogiorno.setEnabled(false);
+					
 					}
 					} 
 					else if(livello2=="livello"){
@@ -223,6 +223,7 @@ public class FrameTurno extends JPanel {
 						Combolivello.setEnabled(false);
 						Comboorario.setEnabled(false);
 						Combogiorno.setEnabled(true);
+						
 						}
 					}
 					
@@ -240,31 +241,30 @@ public class FrameTurno extends JPanel {
 						Combolivello.setEnabled(false);
 						Comboorario.setEnabled(true);
 						Combogiorno.setEnabled(false);
+					  
 						}
 						
 					}
 					else{
+						
 						if(ora=="orario"){
 							JOptionPane.showMessageDialog(FrameTurno.frame, "perfavore inserisci un orario corretto"," ",JOptionPane.WARNING_MESSAGE);				
 						}
 						else{
-						frame.dispose();
-						new FrameTurno(disciplina2,livello2,giorno2,ora);
-						Combodis.setEnabled(false);
-						Combolivello.setEnabled(false);
-						Comboorario.setEnabled(false);
-						Combogiorno.setEnabled(false);
+					   Invia_Turno_Dao.Invia(disciplina2,livello2,giorno2,ora);
+						
+					
+						
+						
+				
 						}
 					}
-					
-					
-
-        
-		
 				
 				}
 			});
 			
+			
+
 			
 			frame.addWindowListener(new java.awt.event.WindowAdapter() {
 				   @Override
