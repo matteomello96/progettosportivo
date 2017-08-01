@@ -55,6 +55,7 @@ public class Confermaordine {
 	public static boolean d=true,d2=true;
     public static JDialog frame;
     public String pagamento;
+    public String momento;
 	
 
 public Confermaordine(){
@@ -134,10 +135,10 @@ public Confermaordine(){
 			public void actionPerformed(ActionEvent e) {
 				pagamento=ComboP.getSelectedItem().toString();
 				testodistinta=TriggerOrdine.scriviDistinta();
-				documentoPDF = TriggerOrdine.writePDF(pagamento);
+				documentoPDF = TriggerOrdine.writePDF(pagamento,momento);
 				
 				try {
-					TriggerOrdine.writePDF(pagamento).close();
+					TriggerOrdine.writePDF(pagamento,momento).close();
 				} catch (IOException f) {
 					// TODO Auto-generated catch block
 					f.printStackTrace();
@@ -268,26 +269,26 @@ public Confermaordine(){
 
 			btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				// String momento="";
+				momento=TriggerOrdine.getDate();	
 			pagamento=ComboP.getSelectedItem().toString();
 			
 		    TriggerOrdine.insOrdine(pagamento);
 
-			//	int a0=0,a1=0;
-			//	String a2="",a3="";
-				//for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
-			//	{
-					//a0=(Integer)FrameTesserato.table_1.getValueAt(c, 0);
-				//	a1=(Integer)FrameTesserato.table_1.getValueAt(c, 2);	
-					//a2=FrameTesserato.table_1.getValueAt(c,4).toString();
-				//	a3=FrameTesserato.table_1.getValueAt(c,5).toString();
+			
+				String a2="",a3="";
+				for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
+				{
+						
+					a2=FrameTesserato.table_1.getValueAt(c,0).toString();
+					a3=FrameTesserato.table_1.getValueAt(c,1).toString();
+		//JOptionPane.showMessageDialog(Confermaordine.frame, " \""+a2+"\" \\o \""+a3+"\" "," ",JOptionPane.WARNING_MESSAGE);	
+					TriggerOrdine.insdetiscr(a2, a3,momento);
+				
+				
 					
-					//TriggerOrdine.remArt(a1, a3, a0);
-				//	ComboP.setEnabled(false);
-				//	frame.setAlwaysOnTop(false);
 					
-					
-				//}
+				}
 				
 				frame.setBounds(100, 100, 803, 447);
 				frame.setLocationRelativeTo(null);
@@ -302,9 +303,9 @@ public Confermaordine(){
 			
 			
 				testodistinta=TriggerOrdine.scriviDistinta();
-				documentoPDF = TriggerOrdine.writePDF(pagamento);
+				documentoPDF = TriggerOrdine.writePDF(pagamento,momento);
 				try {
-					TriggerOrdine.writePDF(pagamento).close();
+					TriggerOrdine.writePDF(pagamento,momento).close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -60,10 +60,10 @@ public class GetInfoDB {
 		            
 		            st = con.createStatement();
 		           
-		            rs = st.executeQuery("select ordine.idordine from ordine WHERE ordine.datacreazioneordine='"+num+"'"); 
+		            rs = st.executeQuery("select iscrizionedisciplina.codiceiscrizionedisciplina from iscrizionedisciplina WHERE iscrizionedisciplina.dataazione='"+num+"'"); 
 		           
 		                rs.next();
-		                ris=rs.getInt("idordine");
+		                ris=rs.getInt("codiceiscrizionedisciplina");
 		                		
 		            return ris; 
 		        } catch (SQLException ex) {

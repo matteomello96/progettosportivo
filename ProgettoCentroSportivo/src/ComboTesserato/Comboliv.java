@@ -30,7 +30,7 @@ public class Comboliv  extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select distinct Livello from disciplinedisponibili,detiscr where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and Disciplina='"+Disciplina+"' and detiscr.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;");  
+            rs = st.executeQuery("select distinct Livello from disciplinedisponibili,detiscr where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and Disciplina='"+Disciplina+"' and confermato='1' and detiscr.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;");  
             
     		
     		proj=(Object) "livello";

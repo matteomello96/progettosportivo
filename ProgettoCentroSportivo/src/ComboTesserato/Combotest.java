@@ -30,7 +30,7 @@ public class Combotest  extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili,detiscr where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and detiscr.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;");  
+            rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili,detiscr where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and confermato='1' and detiscr.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;");  
             
     		
     		proj=(Object) "disciplina";

@@ -19,6 +19,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import ClassiDao.GetInfoDB;
 import Model.Utente;
+import view_tesserato.Confermaordine;
 import view_tesserato.FrameTesserato;
 import DBInterfaccia.DbConnection;
 
@@ -57,8 +58,32 @@ public class TriggerOrdine {
 	        } catch (SQLException ex) {
 	        }
 	    }
+	 
+	 
+	 
+	 public static void insdetiscr(String disciplina,String livello,String momento){	
+	        
+	        Connection con = DbConnection.db;
+	        Statement st;
+	        
+	       
+	        
+	        try {
+	        	st = con.createStatement();
+	        	//momento=TriggerOrdine.getDate();
+	        	 
+	    //  JOptionPane.showMessageDialog(Confermaordine.frame, " \""+momento+"\" \\o \""+GetInfoDB.getlastorder(momento)+"\" "," ",JOptionPane.WARNING_MESSAGE);	
+			
+	            st.executeUpdate("INSERT INTO detiscr (iddet,combinazionelivdis,idiscrizione,tesserato,confermato,annullato) "
+	            		+ "VALUES (NULL,'"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"', '"+GetInfoDB.getlastorder(momento)+"' ,'"+GetInfoDB.getidTess(Utente.getUsername())+"','0','0')"); 
+	        } catch (SQLException ex) {
+	        }
+	    }
 
-	 public static PDDocument writePDF(String pagamento) {
+	 
+	 
+	 
+	 public static PDDocument writePDF(String pagamento,String momento) {
      	final DecimalFormat df = new DecimalFormat("0.00");
  		df.setRoundingMode(RoundingMode.HALF_EVEN);
 			try {
