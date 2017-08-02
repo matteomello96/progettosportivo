@@ -110,6 +110,17 @@ public class FrameIstruttore extends JFrame {
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Inserisci una nuova attività");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameInserisciAtt();
+				frame.dispose();
+				
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (64,224,208));
 		contentPane.setLayout(new GridBagLayout());
