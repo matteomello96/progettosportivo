@@ -30,7 +30,7 @@ import Model.Utente;
             
             st = con.createStatement();
             
-            rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili,detiscr where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and confermato=1 and detiscr.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;"); 
+            rs = st.executeQuery("select distinct Disciplina from disciplinedisponibili,detiscr where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and confermato=0 and detiscr.combinazionelivdis=disciplinedisponibili.Combinazionelivdis;"); 
             
     		
     		proj=(Object) "disciplina";

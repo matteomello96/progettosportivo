@@ -9,7 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import DBInterfaccia.DbConnection;
+import view_tesserato.Confermaordine;
+
 
 
 
@@ -62,7 +66,7 @@ public class GetInfoDB {
 		           
 		            rs = st.executeQuery("select iscrizionedisciplina.codiceiscrizionedisciplina from iscrizionedisciplina WHERE iscrizionedisciplina.dataazione='"+num+"'"); 
 		           
-		                rs.next();
+		                rs.next();     
 		                ris=rs.getInt("codiceiscrizionedisciplina");
 		                		
 		            return ris; 
@@ -94,32 +98,31 @@ public class GetInfoDB {
 		 	}
 	    
 	    
- public static int getcombinazionelivdis(String disciplina,String livello){
-
-	      
-	        
+ public static int getcombinazionelivdis(String disciplina , String livello){
+   
 	        Connection con = DbConnection.db;
-	        
+	    
 	        Statement st;
 	        
 	        ResultSet rs;
 	        
 	 
-	        int ris=1;
+	      int ris=-1;
 	        
 	        try {
 	            
 	            st = con.createStatement();
-	           
-	            rs = st.executeQuery("SELECT Combinazionelivdis FROM disciplinedisponibili where Disciplina='"+disciplina+"' and Livello='"+livello+"'"); 
 	          
-	                rs.next();
-	                ris=rs.getInt("combinazionelivdis");
-	                		
-	            return ris; 
-	        } catch (SQLException ex) {
+	            rs = st.executeQuery("select combinazionelivdis from disciplinedisponibili where Disciplina='"+disciplina+"' and Livello='"+livello+"'  "); 
+	            rs.next();	               
+	            ris=rs.getInt("combinazionelivdis");    
+	            return ris;
+	        } 
 	        
+	        catch (SQLException ex) {
+	        	
 	        }
+			
 	        return ris;
 
 	}

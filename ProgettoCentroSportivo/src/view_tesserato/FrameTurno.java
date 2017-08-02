@@ -11,21 +11,21 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
+
 
 import ClassiDaoTesserato.Invia_Turno_Dao;
-import ClassiDaoTesserato.elencoattivitaattivedao;
+
 
 import ComboTesserato.Combodis;
 import ComboTesserato.Combogiorno;
 import ComboTesserato.Comboorario;
 import ComboTesserato.combolivello;
-import ModelliTabelle_Tesserato.disc_attive;
+
 
 
 
