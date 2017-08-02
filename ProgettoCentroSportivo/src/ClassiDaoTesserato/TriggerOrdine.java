@@ -72,7 +72,7 @@ public class TriggerOrdine {
 	        	st = con.createStatement();
 
 	        	 
-	  JOptionPane.showMessageDialog(Confermaordine.frame, " \""+GetInfoDB.getcombinazionelivdis(disciplina,livello)+"\" \\o \""+livello+"\","+disciplina+" "," ",JOptionPane.INFORMATION_MESSAGE);	
+	  //JOptionPane.showMessageDialog(Confermaordine.frame, " \""+GetInfoDB.getcombinazionelivdis(disciplina,livello)+"\" \\o \""+livello+"\","+disciplina+" "," ",JOptionPane.INFORMATION_MESSAGE);	
 			
 	        st.executeUpdate("INSERT INTO detiscr (iddet,combinazionelivdis,idiscrizione,tesserato,confermato,annullato) "
 	        		+ "VALUES (NULL,'"+GetInfoDB.getcombinazionelivdis(disciplina,livello)+"','"+GetInfoDB.getlastorder(momento)+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','0','0')"); 

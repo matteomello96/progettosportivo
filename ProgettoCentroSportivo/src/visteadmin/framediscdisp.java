@@ -55,7 +55,7 @@ public class framediscdisp {
 	
 		
 		table_2 = new JTable();
-		model = new modellidettagli(dettagliiscrizionedao.elencoiniziale());
+	//	model = new modellidettagli(dettagliiscrizionedao.elencoiniziale());
 		table_2.setCellSelectionEnabled(true);
 		table_2.setModel(model);
 		GridBagConstraints gbc_table_2 = new GridBagConstraints();

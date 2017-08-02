@@ -90,15 +90,7 @@ public class prova extends JPanel {
 			
 			
 			
-			JComboBox Combolivello=new combolivello();
-			 Combolivello.setEnabled(false);
-			 GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
-				gbc_comboBox_3.insets = new Insets(0, 0, 5, 5);
-				gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
-				gbc_comboBox_3.gridx = 2;
-				gbc_comboBox_3.gridy = 3;
-				add(Combolivello, gbc_comboBox_3);
-				
+	
 				
 				JLabel lblNewLabel_4 = new JLabel("Orario:");
 				lblNewLabel_4.setFont(new Font("Sylfaen", Font.PLAIN, 18));
@@ -109,22 +101,13 @@ public class prova extends JPanel {
 				gbc_lblNewLabel_4.gridy = 5;
 				add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-				JComboBox Comboorario = new Comboorario();
-		 Comboorario.setEnabled(false);
-		 
+			
 		 GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
 			gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
 			gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
 			gbc_comboBox_2.gridx = 2;
 			gbc_comboBox_2.gridy = 5;
-			add(Comboorario, gbc_comboBox_2);
-		// Comboorario.addItemListener(new ItemListener() {
-			//public void itemStateChanged(ItemEvent e) {
-			//	if(Comboorario.getSelectedIndex()<=0)
-				//	btnConferma.setEnabled(false);
-				//else btnConferma.setEnabled(true);
-			//}
-		//});
+		
 		
 			JLabel lblNewLabel_3 = new JLabel("Giorno:");
 			lblNewLabel_3.setFont(new Font("Sylfaen", Font.PLAIN, 18));
@@ -136,15 +119,6 @@ public class prova extends JPanel {
 			add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		
-		
-			JComboBox Combogiorno = new Combogiorno();
-		      Combogiorno.setEnabled(false);
-		      GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-				gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-				gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-				gbc_comboBox_1.gridx = 2;
-				gbc_comboBox_1.gridy = 4;
-			add(Combogiorno, gbc_comboBox_1);
 				
 			
 
