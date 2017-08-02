@@ -76,7 +76,7 @@ public class FrameOrdini extends JPanel {
 		frame.add(table_2, gbc_table_2);
 
 		
-		JButton btnNewButton = new JButton("Conferma/Annulla Iscrizione");
+		JButton btnNewButton = new JButton("Conferma/Annulla Pagamento");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridwidth = 2;
 		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
@@ -85,7 +85,7 @@ public class FrameOrdini extends JPanel {
 		gbc_btnNewButton.gridy = 4;
 		frame.add(btnNewButton, gbc_btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Dettagli Ordine");
+		JButton btnNewButton_1 = new JButton("Conferma modifiche iscrizioni ");
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);

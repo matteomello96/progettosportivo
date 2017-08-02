@@ -37,7 +37,7 @@ private static UtenteDao instance;
 		
 		
 			
-result=DbConnection.getInstance().eseguiQuery("SELECT username,password FROM elencoutenti where  username=\""+ username +"\" and password=\""+password+"\"");
+result=DbConnection.getInstance().eseguiQuery("SELECT username,password FROM elencoutenti where  username=\""+ username +"\" and password=\""+password+"\" and attivita=1");
 				
 		
 		

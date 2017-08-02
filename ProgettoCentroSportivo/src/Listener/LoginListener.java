@@ -75,7 +75,7 @@ public class LoginListener implements ActionListener{
 		}
 
 		else{
-			JOptionPane.showMessageDialog(null, "L'utente \""+username+"\" non esiste o la password è errata","",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "L'utente \""+username+"\" Utente ancora non acettato o credenziali errate","",JOptionPane.WARNING_MESSAGE);
 		}
 
 	}

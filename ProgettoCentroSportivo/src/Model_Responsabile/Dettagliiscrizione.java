@@ -5,6 +5,8 @@ private String disciplina;
 private String livello;
 private int conferma;
 private int annullla;
+private String giorno;
+private String orario;
 public String getDisciplina() {
 	return disciplina;
 }
@@ -28,5 +30,17 @@ public int getAnnullla() {
 }
 public void setAnnullla(int annullla) {
 	this.annullla = annullla;
+}
+public String getGiorno() {
+	return giorno;
+}
+public void setGiorno(String giorno) {
+	this.giorno = giorno;
+}
+public String getOrario() {
+	return orario;
+}
+public void setOrario(String orario) {
+	this.orario = orario;
 }
 }
