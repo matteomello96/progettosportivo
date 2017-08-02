@@ -25,7 +25,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-
+import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.ElencoAttivitaDAO;
 import Listener.Listen;
 import Model.Utente;
@@ -108,7 +108,7 @@ public class FrameTesserato extends JPanel {
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_4);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Visualizza Attività attive");
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Stato Iscrizione");
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameDiscAttive();
@@ -246,8 +246,27 @@ public class FrameTesserato extends JPanel {
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				
 				int c=0;
+				int q;
+				int ris=0;
 				boolean u=true;
 				
+				
+				new FrameDiscAttive();
+				FrameDiscAttive.frame.dispose();
+				for(q=0;q<FrameDiscAttive.table_1.getRowCount();q++){
+					
+				
+					if(GetInfoDB.getcombinazionelivdis(FrameDiscAttive.table_1.getValueAt(q,0).toString(), FrameDiscAttive.table_1.getValueAt(q,1).toString()) == GetInfoDB.getcombinazionelivdis(table.getValueAt(table.getSelectedRow() , 1).toString(),table.getValueAt(table.getSelectedRow() , 0).toString())){
+					
+						ris=1;
+					}
+					else{
+						
+						
+					}
+					
+					
+				}
 
 				for(c=0;c<table_1.getRowCount();c++)
 				{
@@ -267,12 +286,19 @@ public class FrameTesserato extends JPanel {
 				
 					if(u)
 					{
-						modello.addRow(dati);						
+						
+						if(ris==1){
+							JOptionPane.showMessageDialog(FrameTesserato.frame, "Hai già un iscrizione in stato di avanzamento",null,JOptionPane.WARNING_MESSAGE);
+							
+						}
+						else{
+						modello.addRow(dati);
+						}
 					}
 				
 					else{
 				
-					JOptionPane.showMessageDialog(null, "Non è possibile Aggiungere la stessa disciplina",null,JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(FrameTesserato.frame, "Non è possibile Aggiungere la stessa disciplina",null,JOptionPane.WARNING_MESSAGE);
 					
 					}
 					
@@ -290,6 +316,8 @@ public class FrameTesserato extends JPanel {
 				
 				}
 				
+			
+	
 				
 			}
 		});

@@ -6,6 +6,7 @@ public class ElencoAttivita {
 	private Integer CostoMensile;
 	private String giorno;
 	private String orario;
+	private int confermato;
 	
 	
 	
@@ -39,6 +40,12 @@ public class ElencoAttivita {
 	}
 	public void setOrario(String orario) {
 		this.orario = orario;
+	}
+	public int getConfermato() {
+		return confermato;
+	}
+	public void setConfermato(int confermato) {
+		this.confermato = confermato;
 	}
 
 	

@@ -11,14 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import ClassiDaoTesserato.ElencoTestDao;
+
 import ClassiDaoTesserato.elencoattivitaattivedao;
 import ModelliTabelle_Tesserato.disc_attive;
-import ModelliTabelle_Tesserato.disc_testimonianza;
+
 
 public class FrameDiscAttive extends JPanel {
 
-private JTable table_1;
+public static JTable table_1;
 public static JFrame frame;
 private disc_attive model;
 /**
@@ -28,7 +28,7 @@ public FrameDiscAttive() {
 	
 	
 	
-	frame = new JFrame("Testimonianze");
+	frame = new JFrame("Riepilogo");
 	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	frame.setBounds(100, 100, 605, 391);
 	frame.setVisible(true);
@@ -46,7 +46,7 @@ public FrameDiscAttive() {
 	
 		
 		
-	JLabel lblNewLabel_1 = new JLabel("ISCRIZIONI ATTIVE");
+	JLabel lblNewLabel_1 = new JLabel("STATO ISCRIZIONE");
 	lblNewLabel_1.setForeground(Color.BLACK);
 	lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 23));
 	GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();

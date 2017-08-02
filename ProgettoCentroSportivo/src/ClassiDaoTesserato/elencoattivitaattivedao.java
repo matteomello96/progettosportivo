@@ -21,7 +21,7 @@ public static ArrayList<ElencoAttivita> elencoiniziale() {
 		
         ArrayList<ElencoAttivita> dati= new ArrayList<ElencoAttivita>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select Disciplina,Livello,giorno,orario from detiscr,disciplinedisponibili where confermato=1 and giorno!='null' and orario!='null' and detiscr.combinazionelivdis=disciplinedisponibili.combinazionelivdis;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select Disciplina,Livello,giorno,orario,confermato from detiscr,disciplinedisponibili where detiscr.combinazionelivdis=disciplinedisponibili.combinazionelivdis;");
         Iterator<String[]> i = res.iterator();
         while(i.hasNext())  {
         	String[] riga = i.next();
@@ -30,6 +30,7 @@ public static ArrayList<ElencoAttivita> elencoiniziale() {
         	d.setNomeLivello(riga[1]);
         	d.setGiorno(riga[2]);
         	d.setOrario(riga[3]);
+        	d.setConfermato(Integer.parseInt(riga[4]));
         	
 
         	

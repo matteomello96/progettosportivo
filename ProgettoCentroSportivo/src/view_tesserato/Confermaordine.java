@@ -282,7 +282,7 @@ public Confermaordine(){
 						
 					a2=FrameTesserato.table_1.getValueAt(c,0).toString();
 					a3=FrameTesserato.table_1.getValueAt(c,1).toString();
-		JOptionPane.showMessageDialog(Confermaordine.frame, " "+a2+","+a3+" "," ",JOptionPane.WARNING_MESSAGE);	
+	//	JOptionPane.showMessageDialog(Confermaordine.frame, " "+a2+","+a3+" "," ",JOptionPane.WARNING_MESSAGE);	
 					TriggerOrdine.insdetiscr(a3 , a2 , momento);
 				
 				

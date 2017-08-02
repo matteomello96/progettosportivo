@@ -28,7 +28,7 @@ public class disc_attive extends AbstractTableModel  {
 
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return 5;
 	}
 	
 
@@ -42,7 +42,7 @@ public class disc_attive extends AbstractTableModel  {
 		else if(columnIndex==1) return d.getNomeLivello();
 		else if(columnIndex==2) return d.getGiorno();
 		else if(columnIndex==3) return d.getOrario();
-		  
+		else if(columnIndex==4) return d.getConfermato();
 		  return null;
 		  
 	}
@@ -61,6 +61,7 @@ public class disc_attive extends AbstractTableModel  {
         if(columnIndex==1) dati.get(rowIndex).setNomeLivello(aValue.toString());
         if(columnIndex==2) dati.get(rowIndex).setGiorno(aValue.toString());
         if(columnIndex==3) dati.get(rowIndex).setOrario(aValue.toString());
+        if(columnIndex==4) dati.get(rowIndex).setConfermato((int)aValue);
       
         
 		
