@@ -12,13 +12,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import ClassiDao.GetInfoDB;
 import ModelliTabelleRespo.modelisc;
 import classiDAOResponsabile.ConfermaDao;
 import classiDAOResponsabile.RichiesteDao;
+import view_tesserato.FrameDiscAttive;
+import view_tesserato.FrameTesserato;
 
 public class FrameOrdini extends JPanel {
 
@@ -126,6 +129,10 @@ public class FrameOrdini extends JPanel {
 		});
 	
 
+		
+		
+	
+		
 	}
 
 }

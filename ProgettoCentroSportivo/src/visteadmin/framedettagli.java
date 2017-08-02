@@ -20,7 +20,7 @@ public class framedettagli {
 
 	public static JFrame frame;
 	
-	public JTable table_2;
+	public static JTable table_2;
 	private modellidettagli model;
 	
 	
