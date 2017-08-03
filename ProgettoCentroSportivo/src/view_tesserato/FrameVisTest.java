@@ -13,7 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 
 import ClassiDaoTesserato.DistruggiTestimonianza;
 import ClassiDaoTesserato.ElencoTestDao;
@@ -33,7 +35,7 @@ public class FrameVisTest extends JPanel {
 	 public String disciplina;
 	 public String livello;
 	 public String commento;
-	
+	 public JPanel contentPane;
 	
 	/**
 	 * Create the panel.
@@ -49,72 +51,73 @@ public class FrameVisTest extends JPanel {
 		frame.setResizable(true);
 		frame.setAlwaysOnTop(true);
 		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (255,36,0));
+		contentPane.setLayout(new GridBagLayout());
 		
 		
-		//frame.setBackground(Color.CYAN);
-		//frame.setForeground(Color.CYAN);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 80, 96, 67, 37, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 123, 95, 49, 64, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.setLayout(gridBagLayout);
+		
+		
+		
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
+	    
+	    GridBagConstraints gbc = new GridBagConstraints();
 		
 			
 			
 		JLabel lblNewLabel_1 = new JLabel("Le tue testimonianze");
 		lblNewLabel_1.setForeground(Color.BLACK);
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 23));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridwidth = 4;
-		gbc_lblNewLabel_1.gridx = 3;
-		gbc_lblNewLabel_1.gridy = 0;
-		frame.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridwidth = 4;
+		gbc.gridx = 3;
+		gbc.gridy = 0;
+		contentPane.add(lblNewLabel_1, gbc);
 		
 		table_1 = new JTable();
 		model = new disc_testimonianza(ElencoTestDao.elencoiniziale());
 		table_1.setCellSelectionEnabled(true);
 		table_1.setModel(model);
-		GridBagConstraints gbc_table_1 = new GridBagConstraints();
-		gbc_table_1.gridheight = 2;
-		gbc_table_1.gridwidth = 6;
-		gbc_table_1.insets = new Insets(0, 0, 5, 5);
-		gbc_table_1.fill = GridBagConstraints.BOTH;
-		gbc_table_1.gridx = 3;
-		gbc_table_1.gridy = 2;
-		frame.add(table_1, gbc_table_1);
+		
+		JScrollPane pane2 = new JScrollPane(table_1);
+		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridheight = 2;
+		gbc.gridwidth = 6;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 3;
+		gbc.gridy = 2;
+		contentPane.add(pane2, gbc);
 		
 		
 		JButton btnNewButton = new JButton("EliminaTestimonianza");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.gridwidth = 2;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 3;
-		gbc_btnNewButton.gridy = 4;
-		frame.add(btnNewButton, gbc_btnNewButton);
+	
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridwidth = 2;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 3;
+		gbc.gridy = 4;
+		contentPane.add(btnNewButton, gbc);
 		
-		JButton btnNewButton_1 = new JButton("Ricarica");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1.gridwidth = 2;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 5;
-		gbc_btnNewButton_1.gridy = 4;
-		frame.add(btnNewButton_1, gbc_btnNewButton_1);
+	
 		
 		JButton btnNewButton_2 = new JButton("Modifica Commento");
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.gridwidth = 2;
-		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_2.gridx = 7;
-		gbc_btnNewButton_2.gridy = 4;
-		frame.add(btnNewButton_2, gbc_btnNewButton_2);
+	
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 7;
+		gbc.gridy = 4;
+		contentPane.add(btnNewButton_2, gbc);
 
 			
 		btnNewButton.addActionListener(new ActionListener() {
@@ -128,14 +131,7 @@ public class FrameVisTest extends JPanel {
 			
 		});
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
-				frame.dispose();
-				new FrameVisTest();
-			}
-			
-		});	
-		
+
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				commento=(String) table_1.getValueAt(table_1.getSelectedRow(), 2);

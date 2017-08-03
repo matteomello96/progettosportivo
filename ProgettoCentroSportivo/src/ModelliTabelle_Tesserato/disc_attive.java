@@ -19,7 +19,13 @@ public class disc_attive extends AbstractTableModel  {
 		super();
 		this.dati = dati;
 	}
-
+	
+	private String[] tableHeaders = {"Disciplina", "Livello", "Giorno", "Orario", "Confermato"};
+	@Override
+	public String getColumnName(int columnIndex){
+		return tableHeaders[columnIndex];
+	}
+	
 	@Override
 	public int getRowCount() {
 		if(dati!=null) return dati.size();

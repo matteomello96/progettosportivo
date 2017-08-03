@@ -19,6 +19,12 @@ public class disc_tabella extends AbstractTableModel  {
 		super();
 		this.dati = dati;
 	}
+	
+	private String[] tableHeaders = {"Disciplina", "Livello", "CostoMensile"};
+	@Override
+	public String getColumnName(int columnIndex){
+		return tableHeaders[columnIndex];
+	}
 
 	@Override
 	public int getRowCount() {

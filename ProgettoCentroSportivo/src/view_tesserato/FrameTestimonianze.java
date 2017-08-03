@@ -1,6 +1,8 @@
 package view_tesserato;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.TestimnianzaDao;
@@ -46,7 +48,7 @@ public class FrameTestimonianze extends JPanel {
 	public static Comboliv comboliv;
 	public static String livello;
 	public static String commento;
-	
+	public JPanel contentPane;
 	
 	
 	
@@ -62,33 +64,39 @@ public class FrameTestimonianze extends JPanel {
 		frame.setAlwaysOnTop(true);
 		
 		
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 93, 96, 83, 42, 70, 0, 37, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 177, 81, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.setLayout(gridBagLayout);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (255,36,0));
+		contentPane.setLayout(new GridBagLayout());
+		
+		
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
+		
+		GridBagConstraints gbc = new GridBagConstraints();
 		
 		JLabel lblNewLabel = new JLabel("Testimonianze");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 2;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 4;
-		gbc_lblNewLabel.gridy = 0;
-		frame.add(lblNewLabel, gbc_lblNewLabel);
+	
+		gbc.gridwidth = 2;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 4;
+		gbc.gridy = 0;
+		contentPane.add(lblNewLabel, gbc);
 		
 		JEditorPane editorPane = new JEditorPane();
-		GridBagConstraints gbc_editorPane = new GridBagConstraints();
+		
 		editorPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		editorPane.setText("Scrivi un commento...");
-		gbc_editorPane.gridwidth = 7;
-		gbc_editorPane.insets = new Insets(0, 0, 5, 5);
-		gbc_editorPane.fill = GridBagConstraints.BOTH;
-		gbc_editorPane.gridx = 0;
-		gbc_editorPane.gridy = 3;
+		gbc.gridwidth = 7;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 3;
 		
-		frame.add(editorPane, gbc_editorPane);
+		contentPane.add(editorPane, gbc);
 		
 		
 			
@@ -96,23 +104,24 @@ public class FrameTestimonianze extends JPanel {
 			
 			combotest = new Combotest();
 			 combotest.setEnabled(true);
-				GridBagConstraints gbc_comboBox = new GridBagConstraints();
-				gbc_comboBox.gridwidth = 3;
-				gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-				gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-				gbc_comboBox.gridx = 1;
-				gbc_comboBox.gridy = 4;
-				frame.add(combotest, gbc_comboBox);
+				
+				gbc.gridwidth = 3;
+				gbc.insets = new Insets(0, 0, 5, 5);
+				gbc.fill = GridBagConstraints.HORIZONTAL;
+				gbc.gridx = 1;
+				gbc.gridy = 4;
+				contentPane.add(combotest, gbc);
 		
 				
 				comboliv = new Comboliv(disciplina);
 				 comboliv.setEnabled(true);
-				 GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-					gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-					gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-					gbc_comboBox_1.gridx = 4;
-					gbc_comboBox_1.gridy = 4;
-					frame.add(comboliv, gbc_comboBox_1);
+				
+					gbc.insets = new Insets(0, 0, 5, 5);
+					gbc.fill = GridBagConstraints.HORIZONTAL;
+					gbc.gridx = 4;
+					gbc.gridy = 4;
+					contentPane.add(comboliv, gbc);
+					
 				combotest.setEnabled(true);
 				comboliv.setEnabled(false);
 				disciplina=combotest.getSelectedItem().toString();
@@ -121,55 +130,55 @@ public class FrameTestimonianze extends JPanel {
 				
 				
 				JButton btnNewButton = new JButton("invia");
-				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-				gbc_btnNewButton.gridx = 5;
-				gbc_btnNewButton.gridy = 4;
-			frame.add(btnNewButton, gbc_btnNewButton);
+				
+				gbc.insets = new Insets(0, 0, 5, 5);
+				gbc.gridx = 5;
+				gbc.gridy = 7;
+				contentPane.add(btnNewButton, gbc);
 
 			
 			JLabel lblNewLabel_1 = new JLabel("seleziona disciplina");
-			lblNewLabel_1.setForeground(Color.RED);
+			lblNewLabel_1.setForeground(Color.black);
 			lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-			gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
-			gbc_lblNewLabel_1.gridwidth = 4;
-			gbc_lblNewLabel_1.gridx = 3;
-			gbc_lblNewLabel_1.gridy = 5;
-			frame.add(lblNewLabel_1, gbc_lblNewLabel_1);
+			
+			gbc.insets = new Insets(0, 0, 0, 5);
+			gbc.gridwidth = 4;
+			gbc.gridx = 3;
+			gbc.gridy = 5;
+			contentPane.add(lblNewLabel_1, gbc);
 			lblNewLabel_1.setVisible(true);
 			
 			JLabel lblNewLabel_2 = new JLabel("seleziona livello");
-			lblNewLabel_2.setForeground(Color.RED);
+			lblNewLabel_2.setForeground(Color.black);
 			lblNewLabel_2.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-			gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
-			gbc_lblNewLabel_2.gridwidth = 4;
-			gbc_lblNewLabel_2.gridx = 3;
-			gbc_lblNewLabel_2.gridy = 5;
-			frame.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+			gbc.insets = new Insets(0, 0, 0, 5);
+			gbc.gridwidth = 4;
+			gbc.gridx = 3;
+			gbc.gridy = 5;
+			contentPane.add(lblNewLabel_2, gbc);
 			
 			
 			JLabel lblNewLabel_3 = new JLabel("Inserisci la tua testimonianza");
-			lblNewLabel_3.setForeground(Color.RED);
+			lblNewLabel_3.setForeground(Color.black);
 			lblNewLabel_3.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-			GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-			gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
-			gbc_lblNewLabel_3.gridwidth = 4;
-			gbc_lblNewLabel_3.gridx = 3;
-			gbc_lblNewLabel_3.gridy = 5;
-			frame.add(lblNewLabel_3, gbc_lblNewLabel_3);
+			
+			gbc.insets = new Insets(0, 0, 0, 5);
+			gbc.gridwidth = 4;
+			gbc.gridx = 3;
+			gbc.gridy = 5;
+			contentPane.add(lblNewLabel_3, gbc);
 			
 			
 			JLabel lblNewLabel_4 = new JLabel("Conferma l'invio testimonianza");
-			lblNewLabel_4.setForeground(Color.RED);
+			lblNewLabel_4.setForeground(Color.black);
 			lblNewLabel_4.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-			GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-			gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
-			gbc_lblNewLabel_4.gridwidth = 4;
-			gbc_lblNewLabel_4.gridx = 3;
-			gbc_lblNewLabel_4.gridy = 5;
-			frame.add(lblNewLabel_4, gbc_lblNewLabel_4);
+			
+			gbc.insets = new Insets(0, 0, 0, 5);
+			gbc.gridwidth = 4;
+			gbc.gridx = 3;
+			gbc.gridy = 5;
+			contentPane.add(lblNewLabel_4, gbc);
 			
 			
 	if(Disciplina==null && Livello==null && Commento==null)		{	

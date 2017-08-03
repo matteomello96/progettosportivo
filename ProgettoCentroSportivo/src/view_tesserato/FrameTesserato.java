@@ -1,6 +1,7 @@
 package view_tesserato;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +43,7 @@ public class FrameTesserato extends JPanel {
 	private JTable table;
 	public static JTable table_1;
 	public static JFrame frame;
-	
+	public JPanel contentPane;
 	 private disc_tabella model;
 	 public static float totale;
 	 public static JButton svuotacarrello;
@@ -56,6 +58,9 @@ public class FrameTesserato extends JPanel {
 	 */
 	public FrameTesserato() {
 		
+
+
+		
 		
 		frame = new JFrame("Tesserato");
 		String username=""+Utente.getUsername()+"";
@@ -66,13 +71,11 @@ public class FrameTesserato extends JPanel {
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 110, 101, 106, 138, 88, 105, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 213, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.setLayout(gridBagLayout);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (255,36,0));
+		contentPane.setLayout(new GridBagLayout());
 		
+
 	
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -158,35 +161,43 @@ public class FrameTesserato extends JPanel {
 		
 		;
 		
-		setForeground(new Color(0, 0, 0));
-		setBackground(new Color(240, 240, 240));
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
 		
 		
 		
 		JLabel totord = new JLabel("TOTALE ISCRIZIONI:");
 		totord.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 3;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 3;
-		gbc_lblNewLabel.gridy = 0;
-		frame.add(totord, gbc_lblNewLabel);
+		gbc.gridwidth = 3;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 3;
+		gbc.gridy = 0;
+		contentPane.add(totord, gbc_lblNewLabel);
 		
 		
 		table = new JTable();
 		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());
-		
-	
-		
 		table.setCellSelectionEnabled(true);
 		table.setModel(model);
-		GridBagConstraints gbc_table_1 = new GridBagConstraints();
-		gbc_table_1.gridwidth = 2;
-		gbc_table_1.insets = new Insets(0, 0, 5, 5);
-		gbc_table_1.fill = GridBagConstraints.BOTH;
-		gbc_table_1.gridx = 2;
-		gbc_table_1.gridy = 2;
-		frame.add(table, gbc_table_1);
+		
+		
+		
+		JScrollPane pane2 = new JScrollPane(table);
+		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridwidth = 2;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 2;
+		gbc.gridy = 2;
+		contentPane.add(pane2, gbc);
 		
 		
 		table_1 = new JTable();
@@ -215,23 +226,29 @@ public class FrameTesserato extends JPanel {
 		
 	
 		table_1.setAutoCreateRowSorter(true);
-		GridBagConstraints gbc_table_2 = new GridBagConstraints();
-		gbc_table_2.gridwidth = 2;
-		gbc_table_2.insets = new Insets(0, 0, 5, 5);
-		gbc_table_2.fill = GridBagConstraints.BOTH;
-		gbc_table_2.gridx = 5;
-		gbc_table_2.gridy = 2;
-		frame.add(table_1, gbc_table_2);
+		
+		
+		
+
+		JScrollPane pane = new JScrollPane(table_1);
+		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridwidth = 2;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 5;
+		gbc.gridy = 2;
+		contentPane.add(pane, gbc);
 		
 		
 
 		Aggiungi = new JButton("Aggiungi");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 4;
-		frame.add(Aggiungi,gbc_btnNewButton);
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 2;
+		gbc.gridy = 4;
+		contentPane.add(Aggiungi,gbc);
 		
 		
 		
@@ -333,11 +350,10 @@ public class FrameTesserato extends JPanel {
 		
 		
 		rimuovi = new JButton("rimuovi");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 3;
-		gbc_btnNewButton_1.gridy = 4;
-		frame.add(rimuovi, gbc_btnNewButton_1);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 3;
+		gbc.gridy = 5;
+		contentPane.add(rimuovi, gbc);
 		
 		
 		
@@ -353,11 +369,11 @@ public class FrameTesserato extends JPanel {
 		
 		
 	    svuotacarrello = new JButton("svuotacarrello");
-	    GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_2.gridx = 4;
-		gbc_btnNewButton_2.gridy = 4;
-		frame.add(svuotacarrello, gbc_btnNewButton_2);
+	   
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 4;
+		gbc.gridy = 4;
+		contentPane.add(svuotacarrello, gbc);
 		
 		
 		svuotacarrello.addActionListener(new ActionListener() {
@@ -371,12 +387,12 @@ public class FrameTesserato extends JPanel {
 		});
 		
 	     invia = new JButton("invia");
-	     GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-			gbc_btnNewButton_3.anchor = GridBagConstraints.WEST;
-			gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
-			gbc_btnNewButton_3.gridx = 5;
-			gbc_btnNewButton_3.gridy = 4;
-			frame.add(invia, gbc_btnNewButton_3);
+
+			gbc.anchor = GridBagConstraints.WEST;
+			gbc.insets = new Insets(0, 0, 5, 5);
+			gbc.gridx = 5;
+			gbc.gridy = 4;
+			contentPane.add(invia, gbc);
 		
 		invia.addActionListener(new Listen(this));
 		invia.setActionCommand("conf");

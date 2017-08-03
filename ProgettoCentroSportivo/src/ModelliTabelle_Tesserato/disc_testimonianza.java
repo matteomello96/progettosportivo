@@ -29,7 +29,12 @@ public class disc_testimonianza extends AbstractTableModel  {
 	public int getColumnCount() {
 		return 3;
 	}
-	
+
+	private String[] tableHeaders = {"Disciplina", "Livello", "Commento"};
+	@Override
+	public String getColumnName(int columnIndex){
+		return tableHeaders[columnIndex];
+	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
