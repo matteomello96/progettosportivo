@@ -31,7 +31,7 @@ public class ComboLivelloIs extends JComboBox<Object> {
             
             st = con.createStatement();
             
-            rs = st.executeQuery("SELECT livello FROM disciplinedisponibili inner join istruttoridisponibiliperdisciplina on disciplinedisponibili.combinazionelivdis=istruttoridisponibiliperdisciplina.combinazionelivdis where istruttoridisponibiliperdisciplina.istruttore='"+matricola+"' AND disciplinedisponibili.disciplina='"+disciplina+"';"); 
+            rs = st.executeQuery("SELECT livello FROM disciplinedisponibili inner join istruttoridisponibiliperdisciplina on disciplinedisponibili.combinazionelivdis=istruttoridisponibiliperdisciplina.combinazionelivdis where istruttoridisponibiliperdisciplina.istruttore='"+matricola+"' ;"); 
             
     		
     		

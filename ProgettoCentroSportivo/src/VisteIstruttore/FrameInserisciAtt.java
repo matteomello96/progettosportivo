@@ -10,17 +10,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent.KeyBinding;
+import javax.swing.tree.TreeSelectionModel;
 
+import ClassiDAOIstruttore.ElencoLivDisDAO;
 import ClassiDAOIstruttore.InserisciAttDAO;
 import ClassiDAOIstruttore.InserisciEventoDAO;
 import Listener.Listen;
 import Model.Home;
 import Model.Utente;
+import ModelliTabelle.ModDetLiv;
 import ModelliTabelleIstruttore.ComboDis;
 import ModelliTabelleIstruttore.ComboLivelloIs;
 import ModelliTabelleIstruttore.ComboSpazio;
 import ModelliTabelleIstruttore.ComboSpazioAltro;
+import ModelliTabelleIstruttore.ModLivDis;
 import VisteUtenteGenerico.*;
+import ClassiDao.DettagliLivelloDAO;
 import ClassiDao.GetInfoDB;
 import ClassiDao.Reg_dao;
 import ComboTesserato.Comboliv;
@@ -40,16 +45,24 @@ import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
 import java.awt.ScrollPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import java.awt.Rectangle;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -67,9 +80,9 @@ public class FrameInserisciAtt extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
-	private JPanel contentPane;
-	
-	public String disciplina="";
+	private JPanel contentPane,tabellaPnl;
+	public ModLivDis model1;
+	public static JTable table1;
 	private JComboBox combofasciaor;
 	private JComboBox combogiornoset;
 	private JTextField comboprendisp;
@@ -77,7 +90,8 @@ public class FrameInserisciAtt extends JFrame {
 	public static ComboSpazioAltro combospazio;
 	public static ComboDis combodis;
 	public static ComboLivelloIs combolivellois;
-	
+	public String disciplina="";
+	public String livello="";
 	
 	
 	public FrameInserisciAtt() {
@@ -135,61 +149,36 @@ public class FrameInserisciAtt extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		contentPane.add(lblFormDiInserimento, gbc);
 		
-		JLabel lblInsDisciplina= new JLabel("Dati della disciplina");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
+		JLabel lblDatiDisc = new JLabel("Dati sulle discipline disponibili");
 		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblInsDisciplina, gbc);
-		
-		
-		
-		JLabel lblDisciplina = new JLabel("Nome della disciplina");
-		gbc.anchor =  GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		contentPane.add(lblDisciplina, gbc);
-		
-		combodis = new ComboDis(matricola);
-		combodis.setEnabled(true);
-		combodis.setVisible(true);
-		combodis.setEditable(false);
-		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
 		gbc.gridy = 2;
-		contentPane.add(combodis, gbc);
+		contentPane.add(lblDatiDisc, gbc);
+				
+		table1 = new JTable();
+		model1 = new ModLivDis(ElencoLivDisDAO.elencoiniziale(matricola));
+		table1.setRowHeight(20);
+		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		table1.setCellSelectionEnabled(true);
+		table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table1.setModel(model1);
 		
-        
-        
-        
-		JLabel lblLivello = new JLabel("Livello");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		contentPane.add(lblLivello, gbc);
-		if (combodis.getSelectedIndex()!=-1)
-		{
-			
-         disciplina = ""+combodis.getSelectedItem().toString()+"";
-		
-		
-		combolivellois = new ComboLivelloIs(disciplina,matricola);
-		combolivellois.setEnabled(true);
-		combolivellois.setVisible(true);
-		combolivellois.setEditable(false);
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 3;
-		contentPane.add(combolivellois, gbc);
-		}
+		Dimension b = table1.getPreferredSize();
+		table1.setPreferredSize(b);
+		gbc.insets= new Insets(0,0,5,5);
+		gbc.gridx =0;
+		gbc.gridy =3;
+		tabellaPnl = new JPanel();
+		tabellaPnl.setLayout(new GridLayout(2, 1));
+		tabellaPnl.add(table1.getTableHeader());
+		tabellaPnl.add(table1);
+		contentPane.add(tabellaPnl, gbc);
 		
 		
-		
-		
-		
-		
+	
 		
 		JLabel lblDatiorario = new JLabel("Dati sull'orario");
 		gbc.anchor = GridBagConstraints.LINE_END;
@@ -247,19 +236,19 @@ public class FrameInserisciAtt extends JFrame {
 		combospazio.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 9;
+		gbc.gridy = 8;
 		contentPane.add(combospazio, gbc);
 		
 		JLabel lblPrenDisp = new JLabel("Prenotazioni disponibili");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 10;
+		gbc.gridy =9;
 		contentPane.add(lblPrenDisp, gbc);
 		
 		comboprendisp = new JTextField();
 		gbc.gridx = 1;
-		gbc.gridy = 10;
+		gbc.gridy = 9;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		contentPane.add(comboprendisp, gbc);
 		comboprendisp.setColumns(10);
@@ -296,7 +285,7 @@ public class FrameInserisciAtt extends JFrame {
 		
 		else
 	
-			bool=InserisciAttDAO.registraatt(combodis.getSelectedItem().toString(),combolivellois.getSelectedItem().toString(),combofasciaor.getSelectedItem().toString(),combogiornoset.getSelectedItem().toString(),combospazio.getSelectedItem().toString(),comboprendisp.getText());
+			bool=InserisciAttDAO.registraatt((String)FrameInserisciAtt.table1.getValueAt(FrameInserisciAtt.table1.getSelectedRow(), 0),(String)FrameInserisciAtt.table1.getValueAt(FrameInserisciAtt.table1.getSelectedRow(),1),combofasciaor.getSelectedItem().toString(),combogiornoset.getSelectedItem().toString(),combospazio.getSelectedItem().toString(),comboprendisp.getText());
 			
 		
 		if(bool)
