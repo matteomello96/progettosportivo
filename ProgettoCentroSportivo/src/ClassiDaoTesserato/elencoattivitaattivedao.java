@@ -5,7 +5,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
+
+import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
+import Model.Utente;
 import Model_Tesserato.ElencoAttivita;
 public class elencoattivitaattivedao{
 	
@@ -21,7 +24,7 @@ public static ArrayList<ElencoAttivita> elencoiniziale() {
 		
         ArrayList<ElencoAttivita> dati= new ArrayList<ElencoAttivita>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select Disciplina,Livello,giorno,orario,confermato from detiscr,disciplinedisponibili where detiscr.combinazionelivdis=disciplinedisponibili.combinazionelivdis;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select Disciplina,Livello,giorno,orario,confermato from detiscr,disciplinedisponibili where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and detiscr.combinazionelivdis=disciplinedisponibili.combinazionelivdis;");
         Iterator<String[]> i = res.iterator();
         while(i.hasNext())  {
         	String[] riga = i.next();
