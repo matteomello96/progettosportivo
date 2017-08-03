@@ -129,6 +129,13 @@ public class FrameOrdini extends JPanel {
 		});
 	
 
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+			   @Override
+			   public void windowClosing(java.awt.event.WindowEvent windowEvent) 
+			    {
+			    FrameResponsabile.frame.setVisible(true);
+			    }
+			});
 		
 		
 	
