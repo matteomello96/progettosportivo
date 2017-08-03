@@ -1,6 +1,7 @@
 package view_tesserato;
 
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Point;
@@ -70,7 +71,7 @@ public Confermaordine(){
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		
+		frame.getContentPane().setBackground(new Color (255,36,0));
 
 		lblTotaleOrdineEur = new JLabel("TOTALE ISCRIZIONE:");
 		lblTotaleOrdineEur.setToolTipText("");

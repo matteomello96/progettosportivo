@@ -5,19 +5,23 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
+import ClassiDao.GetInfoDB;
 import ModelliTabelleRespo.modellidettagli;
 
 import classiDAOResponsabile.dettagliiscrizionedao;
+import classiDAOResponsabile.modificaordinedao;
 
 public class framedettagli extends JFrame {
 
@@ -87,7 +91,7 @@ public class framedettagli extends JFrame {
 		gbc.gridy = 2;
 		contentPane.add(pane2,gbc);
 		
-        bottone= new JButton("Conferma Modifiche");
+        bottone= new JButton("Conferma/Annulla Modifiche");
         bottone.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		bottone.setForeground(Color.BLACK);
 		gbc.anchor = GridBagConstraints.LINE_END;
@@ -97,7 +101,30 @@ public class framedettagli extends JFrame {
 		contentPane.add(bottone,gbc);
 		
 		
+	bottone.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			int a;
+			String b,c;
+			b= (String) table_2.getValueAt(table_2.getSelectedRow(), 0);
+					c=(String) table_2.getValueAt(table_2.getSelectedRow(), 1);
+			a= GetInfoDB.getiddet(b,c);
+			// JOptionPane.showMessageDialog(framedettagli.frame, "'"+a+"','"+b+"','"+c+"',");
+				modificaordinedao.modifica(a);
+				frame.dispose();
+				new framedettagli(cod);
 		
+		}
+	}
+			);	
+	
+	
+	frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		   @Override
+		   public void windowClosing(java.awt.event.WindowEvent windowEvent) 
+		    {
+		    FrameOrdini.frame.setVisible(true);
+		    }
+		});
 		
 		
 

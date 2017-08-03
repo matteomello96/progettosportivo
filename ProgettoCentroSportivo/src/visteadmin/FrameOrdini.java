@@ -29,7 +29,7 @@ public class FrameOrdini extends JPanel {
 
 	public static JFrame frame;
 	
-	public JTable table_2;
+	public static JTable table_2;
 	private modelisc model;
 	public JPanel contentPane;
 
@@ -147,7 +147,7 @@ public class FrameOrdini extends JPanel {
 				
 				
 				new framedettagli(a);
-			
+			frame.setVisible(false);
 
 		   
 		   

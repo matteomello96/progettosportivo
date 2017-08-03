@@ -12,7 +12,10 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import DBInterfaccia.DbConnection;
+import Model.Utente;
 import view_tesserato.Confermaordine;
+import visteadmin.FrameOrdini;
+import visteadmin.framedettagli;
 
 
 
@@ -156,6 +159,42 @@ public class GetInfoDB {
      return ris;
 
 }
+ 
+ 
+ 
+public static int getiddet(String disciplina,String livello){
+
+     
+     
+     Connection con = DbConnection.db;
+     
+     Statement st;
+     
+     ResultSet rs;
+     
+
+     int ris=-1;
+     
+     try {
+         
+         st = con.createStatement();
+         int a;
+       a =(int) FrameOrdini.table_2.getValueAt(FrameOrdini.table_2.getSelectedRow(),2 );
+       
+    //   JOptionPane.showMessageDialog(framedettagli.frame, " '"+a+"','"+disciplina+"','"+livello+"','"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' "," ",JOptionPane.WARNING_MESSAGE);				
+         rs = st.executeQuery("SELECT iddet FROM detiscr WHERE tesserato='"+a+"' and combinazionelivdis= '"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"'  "); 
+       
+             rs.next();
+             ris=rs.getInt("iddet");
+             		
+         return ris; 
+     } catch (SQLException ex) {
+     
+     }
+     return ris;
+
+}
+ 
  
  
 /*public static int getidcomm(String username,String codice){
