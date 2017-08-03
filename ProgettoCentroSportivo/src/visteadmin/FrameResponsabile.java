@@ -154,7 +154,7 @@ public class FrameResponsabile extends JFrame {
 		contentPane.add(pane2,gbc);
 		
 		
-		bottone= new JButton("Conferma Richieste Credenziali");
+		bottone= new JButton("Conferma/Nega Richieste Credenziali");
 		bottone.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		bottone.setForeground(Color.BLACK);
 		gbc.anchor = GridBagConstraints.LINE_END;
@@ -169,22 +169,20 @@ public class FrameResponsabile extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				int a,b;
-				a= (int) table.getValueAt(table.getSelectedRow(), 11);
+				int b;
+			
 				b= (int) table.getValueAt(table.getSelectedRow(), 0);
-		if(a==0 ){
+		
 			credenzialidao.credenziali(b);
-			
+			frame.dispose();
+			new FrameResponsabile();
 			
 		}
-		else{
-			
-		JOptionPane.showMessageDialog(frame, "Utente già attivo");
-		}
+
 					
 				
 				
-			}
+			
 		
 		
 			
