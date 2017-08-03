@@ -5,9 +5,13 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,10 +23,15 @@ import ModelliTabelle_Tesserato.disc_attive;
 
 public class FrameDiscAttive extends JPanel {
 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 public static JTable table_1;
 public static JFrame frame;
 private disc_attive model;
 public JPanel contentPane;
+public JButton bottone;
 /**
  * Create the panel.
  */
@@ -84,7 +93,42 @@ public FrameDiscAttive() {
 	contentPane.add(pane2, gbc);
 
 		
-		
+	bottone = new JButton("Modifica Iscrizione");
+	gbc.anchor = GridBagConstraints.WEST;
+	gbc.insets = new Insets(0, 0, 5, 5);
+	gbc.gridx = 2;
+	gbc.gridy = 4;
+	contentPane.add(bottone,gbc);
+	
+
+	bottone.addActionListener(new ActionListener(){
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String a,b;
+			a=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 0);
+			b=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 1);
+		//	JOptionPane.showMessageDialog(frame, "'"+a+"','"+b+"'");
+		new framemodificaturno(a,b,null,null);
+		frame.setVisible(false);
+			
+		}
+	});
+	
+	
+	
+	
+	
+	frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		   @Override
+		   public void windowClosing(java.awt.event.WindowEvent windowEvent) 
+		    {
+			   FrameTesserato.frame.setVisible(true);
+		    
+		    }
+		});
+	
+	
 		
 		
 }

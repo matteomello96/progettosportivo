@@ -19,7 +19,7 @@ public class DbConnection {
 	   
 	   public static String nomebase="centropolisportivo";
 	   public static String rootu="root";
-	  public static String rootp="Bla.bla.12";
+	  public static String rootp="Furfudopfa81";
 	   public static String host="127.0.0.1";
 	   
 	 

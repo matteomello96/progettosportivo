@@ -280,6 +280,7 @@ public class FrameTurno extends JPanel {
 				    {
 				    	if(FrameTesserato.frame!=null)
 				    		FrameTesserato.frame.setEnabled(true);
+				    	FrameTesserato.frame.setVisible(true);
 				    
 				    }
 				});
