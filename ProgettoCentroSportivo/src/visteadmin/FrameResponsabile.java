@@ -6,9 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -27,6 +29,7 @@ import Model.Utente;
 import ModelliTabelleRespo.ModElUtenti;
 import VisteUtenteGenerico.FrameCambia;
 import classiDAOResponsabile.ElencoUtentiDAO;
+import classiDAOResponsabile.credenzialidao;
 import Listener.Listen;
 
 import java.awt.event.ActionListener;
@@ -46,6 +49,7 @@ public class FrameResponsabile extends JFrame {
 	public JPanel contentPane;
 	public JTable table;
     private ModElUtenti model;
+    public JButton bottone;
 	/**
 	 * Launch the application.
 	 */
@@ -147,6 +151,43 @@ public class FrameResponsabile extends JFrame {
 		gbc.gridy = 3;
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		contentPane.add(pane2,gbc);
+		
+		
+		bottone= new JButton("Conferma Richieste Credenziali");
+		bottone.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		bottone.setForeground(Color.BLACK);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridwidth = 2;
+		gbc.gridx = 2;
+		gbc.gridy = 4;
+		contentPane.add(bottone,gbc);
+		
+		
+		bottone.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				int a,b;
+				a= (int) table.getValueAt(table.getSelectedRow(), 11);
+				b= (int) table.getValueAt(table.getSelectedRow(), 0);
+		if(a==0 ){
+			credenzialidao.credenziali(b);
+			
+			
+		}
+		else{
+			
+		JOptionPane.showMessageDialog(frame, "Utente già attivo");
+		}
+					
+				
+				
+			}
+		
+		
+			
+		});
 		
 	}
 	
