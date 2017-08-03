@@ -14,7 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 
 import ClassiDao.GetInfoDB;
 import ModelliTabelleRespo.modelisc;
@@ -29,6 +31,7 @@ public class FrameOrdini extends JPanel {
 	
 	public JTable table_2;
 	private modelisc model;
+	public JPanel contentPane;
 
 	
 	public FrameOrdini() {
@@ -42,56 +45,80 @@ public class FrameOrdini extends JPanel {
 		
 	
 		
-		GridBagLayout gridBagLayout = new GridBagLayout();
+	/*	GridBagLayout gridBagLayout = new GridBagLayout();
 	   gridBagLayout.columnWidths = new int[]{0, 110, 101, 106, 138, 88, 105, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 213, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.setLayout(gridBagLayout);
+		frame.setLayout(gridBagLayout);*/
 		
+
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (255,193,20));
+		contentPane.setLayout(new GridBagLayout());
+		
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		
+		
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
+	    
+	    
+	    
 		JLabel lblNewLabel = new JLabel("Richieste iscrizione dai Tesserati");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 4;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 2;
-		gbc_lblNewLabel.gridy = 0;
-		frame.add(lblNewLabel, gbc_lblNewLabel);
+		
+		gbc.gridwidth = 4;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		contentPane.add(lblNewLabel, gbc);
 		
 		
 		table_2 = new JTable();
 		model = new modelisc(RichiesteDao.elencoiniziale());
 		table_2.setCellSelectionEnabled(true);
 		table_2.setModel(model);
-		GridBagConstraints gbc_table_2 = new GridBagConstraints();
-		gbc_table_2.gridwidth = 3;
-		gbc_table_2.insets = new Insets(0, 0, 5, 5);
-		gbc_table_2.fill = GridBagConstraints.BOTH;
-		gbc_table_2.gridx = 2;
-		gbc_table_2.gridy = 2;
+
 		
 		
+		JScrollPane pane2 = new JScrollPane(table_2);
+		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridwidth = 3;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 2;
+		gbc.gridy = 2;
 		
-		
-		frame.add(table_2, gbc_table_2);
+		contentPane.add(pane2, gbc);
 
 		
 		JButton btnNewButton = new JButton("Conferma/Annulla Pagamento");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridwidth = 2;
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 4;
-		frame.add(btnNewButton, gbc_btnNewButton);
+		btnNewButton .setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton .setForeground(Color.BLACK);
+		gbc.gridwidth = 2;
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 2;
+		gbc.gridy = 4;
+		contentPane.add(btnNewButton, gbc);
 		
 		JButton btnNewButton_1 = new JButton("Conferma modifiche iscrizioni ");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 4;
-		gbc_btnNewButton_1.gridy = 4;
-		frame.add(btnNewButton_1, gbc_btnNewButton_1);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_1.setForeground(Color.BLACK);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 4;
+		gbc.gridy = 4;
+		contentPane.add(btnNewButton_1, gbc);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

@@ -33,6 +33,13 @@ public class modellidettagli extends AbstractTableModel {
 		return 6;
 	}
 	
+	
+	private String[] tableHeaders = {"Disciplina","Livello","Confermato","Annullato","Giorno","Orario"};
+	@Override
+	public String getColumnName(int columnIndex){
+		return tableHeaders[columnIndex];
+	}
+	
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {

@@ -21,6 +21,13 @@ public class modelisc extends AbstractTableModel {
 		super();
 		this.dati = dati;
 	}
+	
+	private String[] tableHeaders = {"Id Ordine","Data","Tesserato","Modalità Pagamento","Prezzo Totale","Conferma","Annulla"};
+	@Override
+	public String getColumnName(int columnIndex){
+		return tableHeaders[columnIndex];
+	}
+
 
 	@Override
 	public int getRowCount() {

@@ -15,6 +15,7 @@ public class ModElUtenti extends AbstractTableModel {
 
 	private ArrayList<ElencoUtenti> dati;
 	
+	
 	public ArrayList<ElencoUtenti> getDati() {
 		return dati;
 	}
