@@ -6,7 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ClassiDAOIstruttore.ElencoAttDAO;
 import ClassiDAOIstruttore.ElencoEventiDAO;
+import ClassiDAOIstruttore.EliminaEventoDAO;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,6 +25,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -36,6 +39,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
 import ModelliTabelle.ModDiscIni;
+import ModelliTabelleIstruttore.ModElAttIstr;
 import ModelliTabelleIstruttore.ModElEventiIstr;
 import VisteUtenteGenerico.DetDisciplina;
 import VisteUtenteGenerico.FrameCambia;
@@ -56,9 +60,10 @@ public class FrameIstruttore extends JFrame {
 	 */
 	public static JFrame frame;
 	
-	public JPanel contentPane,tabellaPnl;
-	public static JTable table;
+	public JPanel contentPane,tabellaPnl,tabellaPnl2,bottoniPnl1,bottoniPnl2;
+	public static JTable table,table2;
     private ModElEventiIstr model;
+    private ModElAttIstr model2;
 	
 	
 
@@ -139,7 +144,7 @@ public class FrameIstruttore extends JFrame {
 		lblEventi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEventi.setForeground(Color.BLACK);
 		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
+		gbc.gridx = 0;
 		gbc.gridy = 2;
 		contentPane.add(lblEventi, gbc);
 		int matricola = GetInfoDB.getidIstr(username);
@@ -156,20 +161,35 @@ public class FrameIstruttore extends JFrame {
 		Dimension d = table.getPreferredSize();
 		table.setPreferredSize(d);
 		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =2;
+		gbc.gridx =0;
 		gbc.gridy =3;
-		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(2, 1));
-		tabellaPnl.add(table.getTableHeader());
-		tabellaPnl.add(table);
-		contentPane.add(tabellaPnl, gbc);
-		 
+				
+		bottoniPnl1 = new JPanel();
+		
 		JButton btnNewButton = new JButton("Dettagli Evento");
-		btnNewButton.setMnemonic('d');
+		btnNewButton.setMnemonic('c');
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1)
-				new DetDisciplina();
+				new DetEv();
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl1.add(btnNewButton,gbc);
+		
+		
+		JButton btnNewButton3 = new JButton("Modifica Evento");
+		btnNewButton3.setMnemonic('d');
+		btnNewButton3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow()!=-1)
+				new FrameModificaEv();
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
 			}
@@ -177,11 +197,119 @@ public class FrameIstruttore extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		contentPane.add(btnNewButton,gbc);
+		bottoniPnl1.add(btnNewButton3,gbc);
 		
-	}
+		JButton btnNewButton4 = new JButton("Elimina Evento");
+		btnNewButton4.setMnemonic('e');
+		btnNewButton4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow()!=-1)
+				EliminaEventoDAO.eliminaevento((String) FrameIstruttore.table.getValueAt(FrameIstruttore.table.getSelectedRow(), 0));
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx = 2;
+		gbc.gridy = 6;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl1.add(btnNewButton4,gbc);
 	
+		tabellaPnl = new JPanel();
+		tabellaPnl.setLayout(new GridLayout(3, 1));
+		tabellaPnl.add(table.getTableHeader());
+		tabellaPnl.add(table);
+		tabellaPnl.add(bottoniPnl1,gbc);
+		contentPane.add(tabellaPnl, gbc);
+		
 
+		
+		
+		JLabel lblDisc = new JLabel("Elenco delle tue attività");
+		lblDisc.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDisc.setForeground(Color.BLACK);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		contentPane.add(lblDisc, gbc);
+		
+		table2 = new JTable();
+		model2 = new ModElAttIstr(ElencoAttDAO.elencoiniziale(matricola));
+		table2.setRowHeight(20);
+		table2.setRowHeight(3, 50);
+		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		table2.setCellSelectionEnabled(true);
+		table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table2.setModel(model2);
+		
+		Dimension e = table2.getPreferredSize();
+		table2.setPreferredSize(e);
+		gbc.insets= new Insets(0,0,5,5);
+		gbc.gridx =0;
+		gbc.gridy =8;
+        bottoniPnl2 = new JPanel();
+		
+		JButton btnNewButton5 = new JButton("Dettagli Attività");
+		btnNewButton5.setMnemonic('f');
+		btnNewButton5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table2.getSelectedRow()!=-1)
+				new DetEv();
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl2.add(btnNewButton5,gbc);
+		
+		
+		JButton btnNewButton6 = new JButton("Modifica Attività");
+		btnNewButton6.setMnemonic('g');
+		btnNewButton6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table2.getSelectedRow()!=-1)
+				new FrameModificaEv();
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx = 1;
+		gbc.gridy = 9;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl2.add(btnNewButton6,gbc);
+		
+		JButton btnNewButton7 = new JButton("Elimina Evento");
+		btnNewButton7.setMnemonic('i');
+		btnNewButton7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table2.getSelectedRow()!=-1)
+				EliminaEventoDAO.eliminaevento((String) FrameIstruttore.table.getValueAt(FrameIstruttore.table.getSelectedRow(), 0));
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx = 2;
+		gbc.gridy = 9;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl2.add(btnNewButton7,gbc);
+	
+		tabellaPnl2 = new JPanel();
+		tabellaPnl2.setLayout(new GridLayout(3 , 1));
+		tabellaPnl2.add(table2.getTableHeader());
+		tabellaPnl2.add(table2);
+		tabellaPnl2.add(bottoniPnl2,gbc);
+		contentPane.add(tabellaPnl2, gbc);
+	
+	}
 }

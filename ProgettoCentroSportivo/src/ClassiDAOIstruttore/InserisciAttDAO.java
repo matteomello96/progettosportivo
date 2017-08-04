@@ -48,8 +48,7 @@ public static boolean registraatt(String disc, String liv , String fasciaor ,Str
          
          
         rs= st.executeQuery("SELECT * FROM gestioneturno WHERE gestioneturno.giornosettimana='"+giornoset+"' AND gestioneturno.fasciaoraria='"+fasciaor+"' AND gestioneturno.spazio='"+spazio+"' ");
-        
-        if(rs.next())
+          if(rs.next())
       	  JOptionPane.showMessageDialog(null, "L'attività che si svolge il \""+giornoset+"\" nella fascia oraria \""+fasciaor+"\" nello spazio "+spazio+" è già stato creato, sceglierne un altro"," ",JOptionPane.WARNING_MESSAGE);
         
         else{

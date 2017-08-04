@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import VisteIstruttore.FrameInserisciAtt;
 import VisteIstruttore.FrameInserisciEv;
 import VisteIstruttore.FrameIstruttore;
+import VisteIstruttore.FrameModificaEv;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameRegistrazione;
@@ -31,7 +32,7 @@ public class Listen implements ActionListener {
 	public FrameEventi frameeventi;
 	public FrameInserisciEv frameinserisciev;
 	public FrameInserisciAtt frameinserisciatt;
-	
+	public FrameModificaEv framemodificaev;
 	
 	public Listen(FrameIniziale frame)
 	{
@@ -69,8 +70,20 @@ public class Listen implements ActionListener {
 	public Listen(FrameInserisciAtt frame) {
 		frameinserisciatt = frame;
 	}
+	public Listen(FrameModificaEv frame) {
+		 framemodificaev = frame;
+	}
 	public void actionPerformed(ActionEvent e)
 	{
+if ("Vai_istr".equals(e.getActionCommand())){
+			
+			FrameModificaEv.frame.setVisible(false);
+			FrameModificaEv.frame.dispose();
+			new FrameIstruttore();
+			FrameIstruttore.frame.setVisible(true);
+		}
+		
+		
 		if ("Vai_reg".equals(e.getActionCommand())){
 			
 			FrameIniziale.frame.setVisible(false);

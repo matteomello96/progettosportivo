@@ -50,7 +50,32 @@ public class GetInfoDB {
 	        return ris;
 
 	}
+	 public static float getcosto(String evento ){
+		   
+	     Connection con = DbConnection.db;
 	 
+	     Statement st;
+	     
+	     ResultSet rs;
+	     
+
+	  Float ris = null;
+	     
+	     try {
+	         
+	         st = con.createStatement();
+	       
+	         rs = st.executeQuery("select costoevento from evento where nomeevento='"+evento+"';  "); 
+	         rs.next();	               
+	         ris=rs.getFloat("costoevento");    
+	         return ris;
+	     } 
+	     
+	     catch (SQLException ex) {
+	     	
+	     }
+			
+	     return ris;}
 	 
 	 
 	  public static int getlastorder(String num){
