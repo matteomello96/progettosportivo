@@ -122,14 +122,14 @@ public class FrameOrdini extends JPanel {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int a;
+				int idordine;
 				
-				a=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
+				idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
 				
 				
 			
 //JOptionPane.showMessageDialog(null, "Il nome utente \""+a+"\" e\\o l'email \""+a+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
-		   ConfermaDao.Confermaiscrizione(a);
+		   ConfermaDao.Confermaiscrizione(idordine);
 		   frame.dispose();
 		   new FrameOrdini();
 			
@@ -141,18 +141,15 @@ public class FrameOrdini extends JPanel {
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int a,b;
+				int idordine;
 				
-				a=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
-				b=(int) table_2.getValueAt(table_2.getSelectedRow(), 6);
-				if(b==1){
-					JOptionPane.showMessageDialog(frame, "non à possibilie modificare i dettagli delle attività. Il pagamento è annullato!! ");
-				}
-				else{
-				new framedettagli(a);
+				idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
+				
+				
+				new framedettagli(idordine);
 			frame.setVisible(false);
 
-				}
+				
 		   
 			
 			}
