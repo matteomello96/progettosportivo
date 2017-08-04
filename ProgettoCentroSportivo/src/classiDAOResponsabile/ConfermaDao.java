@@ -68,8 +68,7 @@ public class ConfermaDao {
 	            else{
 		        	st2.executeUpdate("UPDATE iscrizionedisciplina SET confermato=1 WHERE iscrizionedisciplina.codiceiscrizionedisciplina='"+idordine+"'");
 		        	st.executeUpdate("UPDATE iscrizionedisciplina SET annullato=0 WHERE iscrizionedisciplina.codiceiscrizionedisciplina='"+idordine+"'");
-		        	st3.executeUpdate("UPDATE detiscr SET confermato=1 WHERE detiscr.giorno!='null' and detiscr.orario!='null' and detiscr.idiscrizione='"+idordine+"'");
-		        	st4.executeUpdate("UPDATE detiscr SET annullato=0 WHERE detiscr.giorno!='null' and detiscr.orario!='null' and detiscr.idiscrizione='"+idordine+"'");
+		        
 		        	
 		        	JOptionPane.showMessageDialog(FrameCambia.frame, "Ordine Confermato"," ",JOptionPane.INFORMATION_MESSAGE);
 		        	
