@@ -7,13 +7,15 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
+import visteadmin.FrameOrdini;
 import visteadmin.FrameResponsabile;
 import visteadmin.framedettagli;
 
 public class modificaordinedao {
 	
-	public static void modifica(int idiscrizione){
+	public static void modifica(int idiscrizione,int tesserato,int codiceturno){
 		
 		Connection con =DbConnection.db;
 		Connection con1 =DbConnection.db;
@@ -41,10 +43,10 @@ public class modificaordinedao {
              //JOptionPane.showMessageDialog(framedettagli.frame, "'"+idiscrizione+"','"+conf+"','"+ann+"',");
              
              if(conf==0 && ann==1){
-			
 			st.executeUpdate("UPDATE detiscr SET confermato=1 WHERE iddet='"+idiscrizione+"'");
 			st1.executeUpdate("UPDATE detiscr SET annullato=0 WHERE iddet='"+idiscrizione+"'");
-			
+		st2.executeUpdate("INSERT iscrizioniperturno (Codiceturnotesserato,codiceturno,tesserato)"+
+			"VALUES(NULL,'"+codiceturno+"','"+tesserato+"')");
 	JOptionPane.showMessageDialog(framedettagli.frame, "Modifica accettata");
 	
              }
@@ -53,7 +55,7 @@ public class modificaordinedao {
             	 
             	 st2.executeUpdate("UPDATE detiscr SET confermato=0 WHERE iddet='"+idiscrizione+"'");
      			st3.executeUpdate("UPDATE detiscr SET annullato=1 WHERE iddet='"+idiscrizione+"'");
-     			
+     			st1.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+tesserato+"' and codiceturno='"+codiceturno+"' ");
      	JOptionPane.showMessageDialog(framedettagli.frame, "Modifica negata");	 
              
              }

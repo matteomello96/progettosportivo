@@ -103,13 +103,22 @@ public class framedettagli extends JFrame {
 		
 	bottone.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			int a;
-			String b,c;
-			b= (String) table_2.getValueAt(table_2.getSelectedRow(), 0);
-					c=(String) table_2.getValueAt(table_2.getSelectedRow(), 1);
-			a= GetInfoDB.getiddet(b,c);
-			// JOptionPane.showMessageDialog(framedettagli.frame, "'"+a+"','"+b+"','"+c+"',");
-				modificaordinedao.modifica(a);
+			int iddet,tesserato,codiceturno;
+			String disciplina,livello,giorno,orario;
+			
+			disciplina= (String) table_2.getValueAt(table_2.getSelectedRow(), 0);
+					livello=(String) table_2.getValueAt(table_2.getSelectedRow(), 1);
+					tesserato=(int) FrameOrdini.table_2.getValueAt(FrameOrdini.table_2.getSelectedRow(), 2);
+		
+			giorno=(String) table_2.getValueAt(table_2.getSelectedRow(), 4);
+			orario=(String) table_2.getValueAt(table_2.getSelectedRow(), 5);
+			iddet= GetInfoDB.getiddet(disciplina,livello,tesserato);
+			codiceturno= GetInfoDB.getcodiceturno(disciplina, livello, giorno, orario);
+			
+			
+			
+		
+				modificaordinedao.modifica(iddet,tesserato,codiceturno);
 				frame.dispose();
 				new framedettagli(cod);
 		
