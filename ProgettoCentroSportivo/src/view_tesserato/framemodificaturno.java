@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import ClassiDaoTesserato.Invia_Turno_Dao;
 import ComboTesserato.Combogiorno;
 import ComboTesserato.Comboorario;
 
@@ -174,11 +175,20 @@ public class framemodificaturno extends JPanel {
 					JOptionPane.showMessageDialog(frame,"inserisci l'orario");
 				}
 				else{
+					JOptionPane.showMessageDialog(frame,"'"+orario2+"','"+giorno+"'");
+					Invia_Turno_Dao.Invia(livello,disciplina,giorno,orario2);
+					
+			JOptionPane.showMessageDialog(frame,"Le modifiche sono state apportate.Attendi la conferma delle modifiche!!");
 					frame.dispose();
-					new framemodificaturno(livello,disciplina,giorno,orario2);
-				//	JOptionPane.showMessageDialog(frame, "  '"+disciplina+"','"+livello+"','"+giorno+"','"+orario2+"',  ");
+					new FrameTesserato();
+					
+	
 				}	
 				}
+				
+				
+				
+				
 						
 					}
 					

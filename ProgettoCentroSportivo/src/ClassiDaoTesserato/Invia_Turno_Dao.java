@@ -24,18 +24,23 @@ public class Invia_Turno_Dao {
 		
 		
 		Connection con = DbConnection.db;
-		  
-	        Connection con2 = DbConnection.db;
-	        Statement st2,st;
+	    Connection con2 = DbConnection.db;
+	    Connection con3 = DbConnection.db;
+	    Connection con4 = DbConnection.db;
+	        Statement st2,st,st3,st4;
 	      
 	        try {
 	            
 	        
-	            st2 = con2.createStatement();
-	            st = con.createStatement(); 
-	        	st2.executeUpdate("UPDATE detiscr SET giorno = '"+giorno+"' WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"'");
-	        	st.executeUpdate("UPDATE detiscr SET orario = '"+orario+"' WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"'"); 
-	        	JOptionPane.showMessageDialog(FrameTurno.frame, "Giorno e orario inseriti"," ",JOptionPane.INFORMATION_MESSAGE);
+	    st2 = con2.createStatement();
+	    st = con.createStatement(); 
+	    st3 = con3.createStatement();
+	    st4 = con4.createStatement(); 
+	    st2.executeUpdate("UPDATE detiscr SET giorno = '"+giorno+"' WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
+	    st.executeUpdate("UPDATE detiscr SET orario = '"+orario+"' WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'"); 
+	    st3.executeUpdate("UPDATE detiscr SET confermato=0 WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
+	    st4.executeUpdate("UPDATE detiscr SET annullato=1  WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
+	   
 	        	
 				FrameTesserato.frame.setEnabled(true);
 				FrameTurno.frame.dispose();

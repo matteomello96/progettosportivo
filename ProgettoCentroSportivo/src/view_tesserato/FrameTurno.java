@@ -260,7 +260,7 @@ public class FrameTurno extends JPanel {
 						}
 						else{
 					   Invia_Turno_Dao.Invia(disciplina2,livello2,giorno2,ora);
-						
+					   JOptionPane.showMessageDialog(FrameTurno.frame, "Giorno e orario inseriti"," ",JOptionPane.INFORMATION_MESSAGE);
 					
 						
 						

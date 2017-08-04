@@ -105,12 +105,14 @@ public FrameDiscAttive() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String a,b;
+			String a="aaa",b="";
+		
 			a=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 0);
 			b=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 1);
-		//	JOptionPane.showMessageDialog(frame, "'"+a+"','"+b+"'");
+		
 		new framemodificaturno(a,b,null,null);
 		frame.setVisible(false);
+		
 			
 		}
 	});
