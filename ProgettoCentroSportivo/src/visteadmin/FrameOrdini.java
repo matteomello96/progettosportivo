@@ -141,15 +141,18 @@ public class FrameOrdini extends JPanel {
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int a;
+				int a,b;
 				
 				a=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
-				
-				
+				b=(int) table_2.getValueAt(table_2.getSelectedRow(), 6);
+				if(b==1){
+					JOptionPane.showMessageDialog(frame, "non à possibilie modificare i dettagli delle attività. Il pagamento è annullato!! ");
+				}
+				else{
 				new framedettagli(a);
 			frame.setVisible(false);
 
-		   
+				}
 		   
 			
 			}
