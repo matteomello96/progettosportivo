@@ -108,7 +108,6 @@ public class FrameTesserato extends JPanel {
 				new FrameEventi();
 				frame.setVisible(false);
 				
-				
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_4);
