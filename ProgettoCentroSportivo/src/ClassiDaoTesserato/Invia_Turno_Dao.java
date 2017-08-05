@@ -42,8 +42,7 @@ public class Invia_Turno_Dao {
 	    st4.executeUpdate("UPDATE detiscr SET annullato=1  WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
 	   
 	        	
-				FrameTesserato.frame.setEnabled(true);
-				FrameTurno.frame.dispose();
+
 	        	
 	         }
 	           

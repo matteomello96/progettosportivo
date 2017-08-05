@@ -105,7 +105,7 @@ public FrameDiscAttive() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String a="aaa",b="";
+			String a="",b="";
 		
 			a=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 0);
 			b=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 1);
