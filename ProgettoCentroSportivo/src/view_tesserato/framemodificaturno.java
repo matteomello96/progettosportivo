@@ -150,6 +150,9 @@ public class framemodificaturno extends JPanel {
 				  btnNewButton.setEnabled(true);
 				contentPane.add(btnNewButton, gbc);
 				
+				
+			
+				
 	
 			
 				btnNewButton.addActionListener(new ActionListener(){
@@ -188,9 +191,10 @@ public class framemodificaturno extends JPanel {
 					if(postidisponibili==0){
 						JOptionPane.showMessageDialog(FrameTurno.frame, "Posti massimi raggiunti"," ",JOptionPane.WARNING_MESSAGE);	
 						frame.dispose();
-						new framemodificaturno(disciplina,livello,null,null);
+						new framemodificaturno(livello,disciplina,null,null);
 					}
 					else{
+					
 					Invia_Turno_Dao.Invia(livello,disciplina,giorno,orario2);
 					
 			JOptionPane.showMessageDialog(frame,"Le modifiche sono state apportate.Attendi la conferma delle modifiche!!");
