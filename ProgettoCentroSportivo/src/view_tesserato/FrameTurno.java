@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.Invia_Turno_Dao;
 
 
@@ -51,6 +52,8 @@ public class FrameTurno extends JPanel {
 	public String giorno;
 	public JButton btnNewButton_1;
     public JPanel contentPane;
+	private int codiceturno;
+	private int postidisponibili;
 
 	public FrameTurno(String disciplina2, String livello2, String giorno2, String ora2) {
 		final DecimalFormat df = new DecimalFormat("0.00");
@@ -259,9 +262,18 @@ public class FrameTurno extends JPanel {
 							JOptionPane.showMessageDialog(FrameTurno.frame, "perfavore inserisci un orario corretto"," ",JOptionPane.WARNING_MESSAGE);				
 						}
 						else{
+						
+						codiceturno=GetInfoDB.getcodiceturno(disciplina2, livello2, giorno2, ora);
+						postidisponibili= GetInfoDB.getcodiceturno(codiceturno)	;
+						if(postidisponibili==0){
+							JOptionPane.showMessageDialog(FrameTurno.frame, "Posti massimi raggiunti"," ",JOptionPane.WARNING_MESSAGE);	
+							frame.dispose();
+							new FrameTurno(null,null,null,null);
+						}
+						else{
 					   Invia_Turno_Dao.Invia(disciplina2,livello2,giorno2,ora);
 					   JOptionPane.showMessageDialog(FrameTurno.frame, "Giorno e orario inseriti"," ",JOptionPane.INFORMATION_MESSAGE);
-					
+						}
 						
 						
 				

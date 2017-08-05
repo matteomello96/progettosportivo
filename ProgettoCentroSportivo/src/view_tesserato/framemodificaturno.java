@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.Invia_Turno_Dao;
 import ComboTesserato.Combogiorno;
 import ComboTesserato.Comboorario;
@@ -49,6 +50,11 @@ public class framemodificaturno extends JPanel {
     public JPanel contentPane;
     public String giorno2;
 	public String orario2;
+	
+	private int codiceturno;
+	private int postidisponibili;
+	
+	
 	public framemodificaturno(String disciplina, String livello,String giorno,String orario) {
 		final DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
@@ -175,13 +181,22 @@ public class framemodificaturno extends JPanel {
 					JOptionPane.showMessageDialog(frame,"inserisci l'orario");
 				}
 				else{
-					JOptionPane.showMessageDialog(frame,"'"+orario2+"','"+giorno+"'");
+			
+				    codiceturno = GetInfoDB.getcodiceturno(livello, disciplina, giorno, orario2);
+			
+					postidisponibili = GetInfoDB.getcodiceturno(codiceturno);
+					if(postidisponibili==0){
+						JOptionPane.showMessageDialog(FrameTurno.frame, "Posti massimi raggiunti"," ",JOptionPane.WARNING_MESSAGE);	
+						frame.dispose();
+						new framemodificaturno(disciplina,livello,null,null);
+					}
+					else{
 					Invia_Turno_Dao.Invia(livello,disciplina,giorno,orario2);
 					
 			JOptionPane.showMessageDialog(frame,"Le modifiche sono state apportate.Attendi la conferma delle modifiche!!");
 					frame.dispose();
 					new FrameTesserato();
-					
+					}	
 	
 				}	
 				}

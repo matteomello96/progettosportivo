@@ -66,7 +66,7 @@ public class disc_tabella extends AbstractTableModel  {
         if(columnIndex==0) dati.get(rowIndex).setNomeDisciplina(aValue.toString());
         if(columnIndex==1) dati.get(rowIndex).setNomeLivello(aValue.toString());
         if(columnIndex==2) dati.get(rowIndex).setCostoMensile((int)aValue);
-      
+     
         
 		
        

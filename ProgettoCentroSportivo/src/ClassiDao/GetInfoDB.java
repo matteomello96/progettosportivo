@@ -252,6 +252,39 @@ public static int getcodiceturno(String disciplina,String livello,String giorno,
     return ris;
 
 }
+
+
+
+public static int getcodiceturno(int codiceturno){
+
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+
+    int ris=-1;
+    
+    try {
+        
+        st = con.createStatement();
+     
+				
+        rs = st.executeQuery("select prenotazionidisponibili from gestioneturno where codiceturno='"+codiceturno+"'");
+      
+            rs.next();
+            ris=rs.getInt("prenotazionidisponibili");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+    
+    }
+    return ris;
+
+}
  
  
  

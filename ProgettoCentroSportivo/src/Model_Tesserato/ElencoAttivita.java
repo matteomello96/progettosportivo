@@ -7,6 +7,7 @@ public class ElencoAttivita {
 	private String giorno;
 	private String orario;
 	private int confermato;
+
 	
 	
 	

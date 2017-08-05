@@ -32,9 +32,9 @@ public class PasswordChanged {
 	         if(rs.next()){
 	        	st2.executeUpdate("UPDATE elencoutenti SET password = '"+Nuovapass+"' WHERE elencoutenti.username='"+Utente.getUsername()+"'");
 	        	JOptionPane.showMessageDialog(FrameCambia.frame, "Password cambiata"," ",JOptionPane.INFORMATION_MESSAGE);
-	        	if(FrameTesserato.frame!=null)
-	        		FrameTesserato.frame.setEnabled(true);
-			    	if(FrameResponsabile.frame!=null)
+	        if(FrameTesserato.frame!=null)
+	        FrameTesserato.frame.setEnabled(true);
+			   if(FrameResponsabile.frame!=null)
 			    		FrameResponsabile.frame.setEnabled(true);
 			    	//if(CapFrame.frame!=null)
 			    	//	CapFrame.frame.setEnabled(true);

@@ -106,6 +106,8 @@ public class FrameTesserato extends JPanel {
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameEventi();
+				frame.setVisible(false);
+				
 				
 			}
 		});
@@ -214,7 +216,7 @@ public class FrameTesserato extends JPanel {
 			private static final long serialVersionUID = 1L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-					String.class, String.class, Integer.class,Integer.class
+					String.class, String.class, Integer.class
 					
 				};
 			
