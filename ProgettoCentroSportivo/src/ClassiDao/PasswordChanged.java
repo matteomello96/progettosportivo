@@ -18,19 +18,19 @@ public class PasswordChanged {
 	public static void changed(String vecchiapass ,String Nuovapass){
 		
 		  Connection con = DbConnection.db;
-	        Connection con2 = DbConnection.db;
-	        Statement st,st2;
+	       
+	        Statement st;
 	        
 	        ResultSet rs;
 	        try {
 	            
 	            st = con.createStatement();
-	            st2 = con2.createStatement();
+	           
 	            
 	          rs=st.executeQuery("SELECT elencoutenti.idutente FROM elencoutenti WHERE elencoutenti.username='"+Utente.getUsername()+"' AND elencoutenti.password='"+vecchiapass+"'");
 	            
 	         if(rs.next()){
-	        	st2.executeUpdate("UPDATE elencoutenti SET password = '"+Nuovapass+"' WHERE elencoutenti.username='"+Utente.getUsername()+"'");
+	        	st.executeUpdate("UPDATE elencoutenti SET password = '"+Nuovapass+"' WHERE elencoutenti.username='"+Utente.getUsername()+"'");
 	        	JOptionPane.showMessageDialog(FrameCambia.frame, "Password cambiata"," ",JOptionPane.INFORMATION_MESSAGE);
 	        if(FrameTesserato.frame!=null)
 	        FrameTesserato.frame.setEnabled(true);

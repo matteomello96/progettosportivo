@@ -18,45 +18,41 @@ public class modificaordinedao {
 	public static void modifica(int idiscrizione,int tesserato,int codiceturno){
 		
 		Connection con =DbConnection.db;
-		Connection con1 =DbConnection.db;
-		 Connection con2 = DbConnection.db;
-	        Connection con3 = DbConnection.db;
-		Statement st,st1,st2,st3;
-		  ResultSet rs,rs1;
+		
+		Statement st;
+		  ResultSet rs;
 		int conf,ann;
 		
 		
 		try{
 			st= con.createStatement();	
-			st1= con1.createStatement();
-			st2= con2.createStatement();
-			st3= con3.createStatement();
+		
 			
 			
 			 rs=st.executeQuery("select confermato from detiscr where iddet='"+idiscrizione+"'");
         	 rs.next();
              conf=rs.getInt("confermato");
             
-             rs1=st1.executeQuery("select annullato from detiscr where iddet='"+idiscrizione+"'");
-        	 rs1.next();
-             ann=rs1.getInt("annullato");
+             rs=st.executeQuery("select annullato from detiscr where iddet='"+idiscrizione+"'");
+        	 rs.next();
+             ann=rs.getInt("annullato");
              //JOptionPane.showMessageDialog(framedettagli.frame, "'"+idiscrizione+"','"+conf+"','"+ann+"',");
              
              if(conf==0 && ann==1){
 			st.executeUpdate("UPDATE detiscr SET confermato=1 WHERE iddet='"+idiscrizione+"'");
-			st1.executeUpdate("UPDATE detiscr SET annullato=0 WHERE iddet='"+idiscrizione+"'");
-		st2.executeUpdate("INSERT iscrizioniperturno (Codiceturnotesserato,codiceturno,tesserato)"+
+			st.executeUpdate("UPDATE detiscr SET annullato=0 WHERE iddet='"+idiscrizione+"'");
+		st.executeUpdate("INSERT iscrizioniperturno (Codiceturnotesserato,codiceturno,tesserato)"+
 			"VALUES(NULL,'"+codiceturno+"','"+tesserato+"')");
-		st3.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'-1 WHERE codiceturno='"+codiceturno+"'");
-	       JOptionPane.showMessageDialog(framedettagli.frame, "Modifica accettata");
+		st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'-1 WHERE codiceturno='"+codiceturno+"'");
+	      JOptionPane.showMessageDialog(framedettagli.frame, "Modifica accettata");
 	
              }
              
              else{
             	 
-            	 st2.executeUpdate("UPDATE detiscr SET confermato=0 WHERE iddet='"+idiscrizione+"'");
-     			st3.executeUpdate("UPDATE detiscr SET annullato=1 WHERE iddet='"+idiscrizione+"'");
-     			st1.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+tesserato+"' and codiceturno='"+codiceturno+"' ");
+            	 st.executeUpdate("UPDATE detiscr SET confermato=0 WHERE iddet='"+idiscrizione+"'");
+     			st.executeUpdate("UPDATE detiscr SET annullato=1 WHERE iddet='"+idiscrizione+"'");
+     			st.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+tesserato+"' and codiceturno='"+codiceturno+"' ");
      			st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'+1 WHERE codiceturno='"+codiceturno+"'");
      	   JOptionPane.showMessageDialog(framedettagli.frame, "Modifica negata");	 
              

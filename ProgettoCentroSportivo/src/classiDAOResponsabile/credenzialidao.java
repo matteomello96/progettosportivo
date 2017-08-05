@@ -1,3 +1,4 @@
+
 package classiDAOResponsabile;
 
 
@@ -17,15 +18,15 @@ public class credenzialidao {
 		
 		
 		Connection con =DbConnection.db;
-		Connection con1 = DbConnection.db;
-		Statement st,st1;
+	
+		Statement st;
 		ResultSet rs;
 		int conf;
 		try{
 		st= con.createStatement();	
-		st1= con1.createStatement();
+	
 		
-		rs=st1.executeQuery("select attivita from elencoutenti where idutente='"+idutente+"'");
+		rs=st.executeQuery("select attivita from elencoutenti where idutente='"+idutente+"'");
    	 rs.next();
         conf=rs.getInt("attivita");
         
