@@ -264,7 +264,7 @@ public class FrameTurno extends JPanel {
 						else{
 						
 						codiceturno=GetInfoDB.getcodiceturno(disciplina2, livello2, giorno2, ora);
-						postidisponibili= GetInfoDB.getcodiceturno(codiceturno)	;
+						postidisponibili= GetInfoDB.getprenotazioni(codiceturno)	;
 						if(postidisponibili==0){
 							JOptionPane.showMessageDialog(FrameTurno.frame, "Posti massimi raggiunti"," ",JOptionPane.WARNING_MESSAGE);	
 							frame.dispose();

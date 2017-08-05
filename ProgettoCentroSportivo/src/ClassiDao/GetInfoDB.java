@@ -255,7 +255,7 @@ public static int getcodiceturno(String disciplina,String livello,String giorno,
 
 
 
-public static int getcodiceturno(int codiceturno){
+public static int getprenotazioni(int codiceturno){
 
     
     

@@ -47,7 +47,8 @@ public class modificaordinedao {
 			st1.executeUpdate("UPDATE detiscr SET annullato=0 WHERE iddet='"+idiscrizione+"'");
 		st2.executeUpdate("INSERT iscrizioniperturno (Codiceturnotesserato,codiceturno,tesserato)"+
 			"VALUES(NULL,'"+codiceturno+"','"+tesserato+"')");
-	JOptionPane.showMessageDialog(framedettagli.frame, "Modifica accettata");
+		st3.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'+1 WHERE codiceturno='"+codiceturno+"'");
+	       JOptionPane.showMessageDialog(framedettagli.frame, "Modifica accettata");
 	
              }
              
@@ -56,7 +57,8 @@ public class modificaordinedao {
             	 st2.executeUpdate("UPDATE detiscr SET confermato=0 WHERE iddet='"+idiscrizione+"'");
      			st3.executeUpdate("UPDATE detiscr SET annullato=1 WHERE iddet='"+idiscrizione+"'");
      			st1.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+tesserato+"' and codiceturno='"+codiceturno+"' ");
-     	JOptionPane.showMessageDialog(framedettagli.frame, "Modifica negata");	 
+     			st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'-1 WHERE codiceturno='"+codiceturno+"'");
+     	   JOptionPane.showMessageDialog(framedettagli.frame, "Modifica negata");	 
              
              }
 	
