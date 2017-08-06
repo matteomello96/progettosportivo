@@ -1,6 +1,5 @@
 package VisteIstruttore;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -19,9 +18,9 @@ import ModelliTabelle.ModDetTest;
 import ModelliTabelle.ModDiscIni;
 import ModelliTabelleIstruttore.ModDetOrariAtt;
 import ModelliTabelleIstruttore.ModDetOrariEv;
+import ModelliTabelleIstruttore.ModElPart;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -35,6 +34,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import ClassiDAOIstruttore.DettagliOrariAttDAO;
 import ClassiDAOIstruttore.DettagliOrariEvDAO;
+import ClassiDAOIstruttore.ElencoPartecipantiAttDAO;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -45,27 +45,26 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class DetAtt {
+public class DetPartAtt {
 
 	private JFrame frame;
-	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4,bottoniPnl1;
+	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4;
 	public static JTable table1,table2,table3,table4;
-    private ModDetOrariAtt model1; 
+    private ModElPart model1; 
     private ModDetIstr model2;
     private ModDetTest model3;
     private ModDetOrari model4;
     
     
-	public DetAtt() {
-		String disciplina=(String) FrameIstruttore.table2.getValueAt(FrameIstruttore.table2.getSelectedRow(), 0);
-		String livello=(String) FrameIstruttore.table2.getValueAt(FrameIstruttore.table2.getSelectedRow(), 1);
+	public DetPartAtt() {
+		String giornoset=(String) DetAtt.table1.getValueAt(DetAtt.table1.getSelectedRow(), 0);
+		String fasciaoraria=(String) DetAtt.table1.getValueAt(DetAtt.table1.getSelectedRow(), 1);
+		String spazio=(String) DetAtt.table1.getValueAt(DetAtt.table1.getSelectedRow(), 2);
 		frame = new JFrame();
-		frame.setTitle("Dettaglio dell'attività disciplina: "+disciplina+" livello: "+livello+"");
+		frame.setTitle("Dettaglio dei partecipanti all'attività il giorno: "+giornoset+" alle ore: "+fasciaoraria+" nello spazio "+spazio+"");
 		frame.setBounds(100, 100, 956, 523);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
@@ -86,7 +85,7 @@ public class DetAtt {
 		scroll.setBounds(30, 400, 300, 30);	
 	    frame.getContentPane().add(scroll);
 		
-		JLabel lblTurni = new JLabel("Turni disponibili:");
+		JLabel lblTurni = new JLabel("Elenco Partecipanti all'attività:");
 		lblTurni.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTurni.setBounds(29, 38, 353, 14);
 		gbc.insets = new Insets(0, 0, 5, 5);
@@ -95,7 +94,7 @@ public class DetAtt {
 		contentPane.add(lblTurni, gbc);
 		
 		table1 = new JTable();
-		model1 = new ModDetOrariAtt(DettagliOrariAttDAO.elencoorario(ClassiDao.GetInfoDB.getcombinazionelivdis(disciplina,livello)));
+		model1 = new ModElPart(ElencoPartecipantiAttDAO.elencoiniziale(ClassiDao.GetInfoDB.getcodiceturno(giornoset,fasciaoraria,spazio)));
 		table1.setRowHeight(20);
 		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table1.setCellSelectionEnabled(true);
@@ -109,44 +108,15 @@ public class DetAtt {
 		gbc.insets= new Insets(0,0,5,5);
 		gbc.gridx =0;
 		gbc.gridy =1;
-		
-		
-		
-        bottoniPnl1 = new JPanel();
-		
-		JButton btnNewButton = new JButton("Dettaglio partecipanti");
-		btnNewButton.setMnemonic('c');
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(table1.getSelectedRow()!=-1)
-				new DetPartAtt();
-				else
-					JOptionPane.showMessageDialog(null, "Seleziona un turno dall'elenco","Errore turno",JOptionPane.WARNING_MESSAGE);
-			}
-		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl1.add(btnNewButton,gbc);
-		
 		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(3, 1));
+		tabellaPnl.setLayout(new GridLayout(2, 1));
 		tabellaPnl.add(table1.getTableHeader());
 		tabellaPnl.add(table1);
-		tabellaPnl.add(bottoniPnl1,gbc);
 		contentPane.add(tabellaPnl, gbc);
 		
 		
-		JLabel costoatt = new JLabel("Costo dell'evento:");
-		costoatt.setBounds(29, 38, 353, 14);
-		costoatt.setFont(new Font("Tahoma", Font.BOLD, 11));
-		costoatt.setText("Costo mensile dell'attività: '"+GetInfoDB.getcostoatt(disciplina,livello)+"'");
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		contentPane.add(costoatt, gbc);
+		
+		
 		
 		
 		

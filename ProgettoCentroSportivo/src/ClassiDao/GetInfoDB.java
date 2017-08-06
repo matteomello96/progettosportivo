@@ -209,7 +209,67 @@ public class GetInfoDB {
      return ris;
 
 }
- 
+public static int getcodiceturno(String fasciaor,String giornoset, String spazio ){
+
+     
+     
+     Connection con = DbConnection.db;
+     
+     Statement st;
+     
+     ResultSet rs;
+     
+
+     int ris=1;
+     
+     try {
+         
+         st = con.createStatement();
+        
+         rs = st.executeQuery("SELECT codiceturno from gestioneturno WHERE fasciaoraria='"+fasciaor+"' AND giornosettimana='"+fasciaor+"' AND spazio='"+spazio+"'"); 
+       
+             rs.next();
+             ris=rs.getInt("codiceturno");
+             		
+         return ris; 
+     } catch (SQLException ex) {
+     
+     }
+     return ris;
+
+}
+
+public static int getcodiceturnoevento(String fasciaor,String giornoset, String spazio ){
+
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+
+    int ris=1;
+    
+    try {
+        
+        st = con.createStatement();
+       
+        rs = st.executeQuery("SELECT codiceturnoevento from gestioneturnoevento WHERE fasciaoraria='"+fasciaor+"' AND giornosettimana='"+fasciaor+"' AND spazio='"+spazio+"'"); 
+      
+            rs.next();
+            ris=rs.getInt("codiceturnoevento");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+    
+    }
+    return ris;
+
+}
+
+
  
  
 public static int getiddet(String disciplina,String livello,int tesserato){

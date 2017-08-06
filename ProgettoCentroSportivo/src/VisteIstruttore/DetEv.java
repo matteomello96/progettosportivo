@@ -1,5 +1,6 @@
 package VisteIstruttore;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -19,6 +20,7 @@ import ModelliTabelle.ModDiscIni;
 import ModelliTabelleIstruttore.ModDetOrariEv;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -41,13 +43,15 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class DetEv {
 
 	private JFrame frame;
-	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4;
+	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4,bottoniPnl1;
 	public static JTable table1,table2,table3,table4;
     private ModDetOrariEv model1; 
     private ModDetIstr model2;
@@ -102,10 +106,31 @@ public class DetEv {
 		gbc.insets= new Insets(0,0,5,5);
 		gbc.gridx =0;
 		gbc.gridy =1;
+		
+        bottoniPnl1 = new JPanel();
+		
+		JButton btnNewButton = new JButton("Dettagli Partecipanti");
+		btnNewButton.setMnemonic('c');
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table1.getSelectedRow()!=-1)
+				new DetPartEv();
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un turno dall'elenco","Errore turno",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl1.add(btnNewButton,gbc);
+		
 		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(2, 1));
+		tabellaPnl.setLayout(new GridLayout(3, 1));
 		tabellaPnl.add(table1.getTableHeader());
 		tabellaPnl.add(table1);
+		tabellaPnl.add(bottoniPnl1,gbc);
 		contentPane.add(tabellaPnl, gbc);
 		
 		JLabel costoev = new JLabel("Costo dell'evento:");
