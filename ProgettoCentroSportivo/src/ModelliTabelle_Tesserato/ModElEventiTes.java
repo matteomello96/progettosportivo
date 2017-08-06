@@ -33,11 +33,11 @@ public class ModElEventiTes extends AbstractTableModel {
 	
 	@Override
 	public int getColumnCount() {
-		return 8;
+		return 7;
 	}
 	
 	
-	private String[] tableHeaders = {"Nome Evento","Descrizione","TipoEvento","Fascia oraria","Giorno della settimana","Posti disponibili","Nome istruttore","Cognome istruttore"};
+	private String[] tableHeaders = {"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello"};
 	@Override
 	public String getColumnName(int columnIndex){
 		return tableHeaders[columnIndex];
@@ -59,18 +59,18 @@ public class ModElEventiTes extends AbstractTableModel {
 		  if(columnIndex==0) return d.getNomeEvento();
 		else if(columnIndex==1) return d.getDescrizione();
 		else if(columnIndex==2) return d.getTipoEvento();
-		else if(columnIndex==3) return d.getFasciaOraria();
-		else if(columnIndex==4) return d.getGiornoSettimana();
-		else if(columnIndex==5) return d.getPostidisp();
-		else if(columnIndex==6) return d.getNomeIstruttore();
-		else if(columnIndex==7) return d.getCognomeIstruttore();
+		else if(columnIndex==3) return d.getNomeIstruttore();
+		else if(columnIndex==4) return d.getCognomeIstruttore();
+		else if(columnIndex==5) return d.getDisciplina();
+		else if(columnIndex==6) return d.getLivello();
+		
 		 
 		return null;
 	}
 
 	@Override
 	public Class getColumnClass(int column) {
-	    if(column==5) return Integer.class;
+	   
 		return String.class;
 	}
 	
@@ -85,11 +85,10 @@ public class ModElEventiTes extends AbstractTableModel {
         if(columnIndex==0) dati.get(rowIndex).setNomeEvento(aValue.toString());
         if(columnIndex==1) dati.get(rowIndex).setDescrizione(aValue.toString());
         if(columnIndex==2 ) dati.get(rowIndex).setTipoEvento(aValue.toString());
-        if(columnIndex==3 ) dati.get(rowIndex).setFasciaOraria(aValue.toString());
-        if(columnIndex==4 ) dati.get(rowIndex).setGiornoSettimana(aValue.toString());
-        if(columnIndex==5 ) dati.get(rowIndex).setPostidisp((int)aValue);
-        if(columnIndex==6) dati.get(rowIndex).setNomeIstruttore(aValue.toString());
-        if(columnIndex==7 ) dati.get(rowIndex).setCognomeIstruttore(aValue.toString());
+        if(columnIndex==3 ) dati.get(rowIndex).setNomeIstruttore(aValue.toString());
+        if(columnIndex==4 ) dati.get(rowIndex).setCognomeIstruttore(aValue.toString());
+        if(columnIndex==5) dati.get(rowIndex).setDisciplina(aValue.toString());
+        if(columnIndex==6 ) dati.get(rowIndex).setLivello(aValue.toString());
         
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
     }

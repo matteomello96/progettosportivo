@@ -1,4 +1,4 @@
-package VisteIstruttore;
+package view_tesserato;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -16,7 +16,6 @@ import ModelliTabelle.ModDetLiv;
 import ModelliTabelle.ModDetOrari;
 import ModelliTabelle.ModDetTest;
 import ModelliTabelle.ModDiscIni;
-import ModelliTabelleIstruttore.ModDetOrariAtt;
 import ModelliTabelleIstruttore.ModDetOrariEv;
 
 import javax.swing.JLabel;
@@ -31,7 +30,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.tree.TreeSelectionModel;
 
-import ClassiDAOIstruttore.DettagliOrariAttDAO;
 import ClassiDAOIstruttore.DettagliOrariEvDAO;
 
 import java.awt.Color;
@@ -46,22 +44,21 @@ import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class DetAtt {
+public class DetEvTes {
 
 	private JFrame frame;
 	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4;
 	public static JTable table1,table2,table3,table4;
-    private ModDetOrariAtt model1; 
+    private ModDetOrariEv model1; 
     private ModDetIstr model2;
     private ModDetTest model3;
     private ModDetOrari model4;
     
     
-	public DetAtt() {
-		String disciplina=(String) FrameIstruttore.table2.getValueAt(FrameIstruttore.table2.getSelectedRow(), 0);
-		String livello=(String) FrameIstruttore.table2.getValueAt(FrameIstruttore.table2.getSelectedRow(), 1);
+	public DetEvTes() {
+     String evento=(String) FrameEventi.table.getValueAt(FrameEventi.table.getSelectedRow(), 0);
 		frame = new JFrame();
-		frame.setTitle("Dettaglio dell'attività disciplina: "+disciplina+" livello: "+livello+"");
+		frame.setTitle("Dettaglio Evento: "+evento+"");
 		frame.setBounds(100, 100, 956, 523);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
@@ -91,7 +88,7 @@ public class DetAtt {
 		contentPane.add(lblTurni, gbc);
 		
 		table1 = new JTable();
-		model1 = new ModDetOrariAtt(DettagliOrariAttDAO.elencoorario(ClassiDao.GetInfoDB.getcombinazionelivdis(disciplina,livello)));
+		model1 = new ModDetOrariEv(DettagliOrariEvDAO.elencoorario(evento));
 		table1.setRowHeight(20);
 		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table1.setCellSelectionEnabled(true);
@@ -111,14 +108,14 @@ public class DetAtt {
 		tabellaPnl.add(table1);
 		contentPane.add(tabellaPnl, gbc);
 		
-		JLabel costoatt = new JLabel("Costo dell'evento:");
-		costoatt.setBounds(29, 38, 353, 14);
-		costoatt.setFont(new Font("Tahoma", Font.BOLD, 11));
-		costoatt.setText("Costo mensile dell'attività: '"+GetInfoDB.getcostoatt(disciplina,livello)+"'");
+		JLabel costoev = new JLabel("Costo dell'evento:");
+		costoev.setBounds(29, 38, 353, 14);
+		costoev.setFont(new Font("Tahoma", Font.BOLD, 11));
+		costoev.setText("Costo dell'evento: '"+GetInfoDB.getcosto(evento)+"'");
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 0;
 		gbc.gridy = 5;
-		contentPane.add(costoatt, gbc);
+		contentPane.add(costoev, gbc);
 		
 		
 		

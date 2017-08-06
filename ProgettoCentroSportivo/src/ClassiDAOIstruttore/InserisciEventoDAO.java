@@ -24,7 +24,7 @@ public class InserisciEventoDAO {
 	
     
     
-public static boolean registraevento(String nomeev, String descr , String costo , String infopag, String tipoev , String biscert , String fasciaor ,String giornoset , String spazio , String prendisp){
+public static boolean registraevento(int comblivdis,String nomeev, String descr , String costo , String infopag, String tipoev , String biscert , String fasciaor ,String giornoset , String spazio , String prendisp){
 	 
 	
 	
@@ -53,7 +53,7 @@ public static boolean registraevento(String nomeev, String descr , String costo 
       	  JOptionPane.showMessageDialog(null, "L'evento che si svolge il \""+giornoset+"\" nella fascia oraria \""+fasciaor+"\" nello spazio "+spazio+" è già stato creato, sceglierne un altro"," ",JOptionPane.WARNING_MESSAGE);
         
         else{
-         st2.executeUpdate("INSERT INTO `evento` ( `nomeevento`, `descrizione`, `infopagamento`,`costoevento`,`istruttoredisp`,`tipoevento`, `bisognocertificato`) VALUES ('"+nomeev+"', '"+descr+"', '"+infopag+"','"+costo+"', '"+matricola+"', '"+tipoev+"', '"+biscert+"')");
+         st2.executeUpdate("INSERT INTO `evento` ( `combinazionelivdis`,`nomeevento`, `descrizione`, `infopagamento`,`costoevento`,`istruttoredisp`,`tipoevento`, `bisognocertificato`) VALUES ('"+comblivdis+"','"+nomeev+"', '"+descr+"', '"+infopag+"','"+costo+"', '"+matricola+"', '"+tipoev+"', '"+biscert+"')");
          rs=st.executeQuery("SELECT codiceevento FROM evento WHERE evento.nomeevento='"+nomeev+"'");
          
          rs.next();

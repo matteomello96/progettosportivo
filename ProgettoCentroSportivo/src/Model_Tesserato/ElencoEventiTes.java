@@ -3,26 +3,19 @@ package Model_Tesserato;
 public class ElencoEventiTes {
 
 private String NomeEvento;
-private String DataEvento;
 private String Descrizione;
 private String TipoEvento;
 private String NomeIstruttore;
 private String CognomeIstruttore;
-private String GiornoSettimana;
-private String FasciaOraria;
-private int Postidisp;
+private String Disciplina;
+private String Livello;
 public String getNomeEvento() {
 	return NomeEvento;
 }
 public void setNomeEvento(String nomeEvento) {
 	NomeEvento = nomeEvento;
 }
-public String getDataEvento() {
-	return DataEvento;
-}
-public void setDataEvento(String dataEvento) {
-	DataEvento = dataEvento;
-}
+
 public String getDescrizione() {
 	return Descrizione;
 }
@@ -47,24 +40,19 @@ public String getCognomeIstruttore() {
 public void setCognomeIstruttore(String cognomeIstruttore) {
 	CognomeIstruttore = cognomeIstruttore;
 }
-public String getGiornoSettimana() {
-	return GiornoSettimana;
+public String getDisciplina() {
+	return Disciplina;
 }
-public void setGiornoSettimana(String giornoSettimana) {
-	GiornoSettimana = giornoSettimana;
+public void setDisciplina(String disciplina) {
+	Disciplina = disciplina;
 }
-public String getFasciaOraria() {
-	return FasciaOraria;
+public String getLivello() {
+	return Livello;
 }
-public void setFasciaOraria(String fasciaOraria) {
-	FasciaOraria = fasciaOraria;
+public void setLivello(String livello) {
+	Livello = livello;
 }
-public int getPostidisp() {
-	return Postidisp;
-}
-public void setPostidisp(int postidisp) {
-	Postidisp = postidisp;
-}
+
 
 
 

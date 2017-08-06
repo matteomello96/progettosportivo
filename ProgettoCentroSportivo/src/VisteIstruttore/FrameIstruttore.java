@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import ClassiDAOIstruttore.ElencoAttDAO;
 import ClassiDAOIstruttore.ElencoEventiDAO;
+import ClassiDAOIstruttore.EliminaAttDAO;
 import ClassiDAOIstruttore.EliminaEventoDAO;
 
 import javax.swing.JButton;
@@ -218,6 +219,26 @@ public class FrameIstruttore extends JFrame {
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl1.add(btnNewButton4,gbc);
 	
+		JButton btnNewButton8 = new JButton("Elenco Iscritti all'evento");
+		btnNewButton8.setMnemonic('l');
+		btnNewButton8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow()!=-1)
+				EliminaEventoDAO.eliminaevento((String) FrameIstruttore.table.getValueAt(FrameIstruttore.table.getSelectedRow(), 0));
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx = 3;
+		gbc.gridy = 6;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl1.add(btnNewButton8,gbc);
+		
+		
+		
+		
 		tabellaPnl = new JPanel();
 		tabellaPnl.setLayout(new GridLayout(3, 1));
 		tabellaPnl.add(table.getTableHeader());
@@ -257,9 +278,9 @@ public class FrameIstruttore extends JFrame {
 		btnNewButton5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table2.getSelectedRow()!=-1)
-				new DetEv();
+				new DetAtt();
 				else
-					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore attività",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
 		gbc.anchor = GridBagConstraints.LINE_START;
@@ -275,9 +296,9 @@ public class FrameIstruttore extends JFrame {
 		btnNewButton6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table2.getSelectedRow()!=-1)
-				new FrameModificaEv();
+				new FrameModificaAtt();
 				else
-					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore attività",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
 		gbc.anchor = GridBagConstraints.LINE_START;
@@ -287,14 +308,16 @@ public class FrameIstruttore extends JFrame {
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl2.add(btnNewButton6,gbc);
 		
-		JButton btnNewButton7 = new JButton("Elimina Evento");
+		JButton btnNewButton7 = new JButton("Elimina Attività");
 		btnNewButton7.setMnemonic('i');
 		btnNewButton7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table2.getSelectedRow()!=-1)
-				EliminaEventoDAO.eliminaevento((String) FrameIstruttore.table.getValueAt(FrameIstruttore.table.getSelectedRow(), 0));
+				{
+					
+				    EliminaAttDAO.eliminaatt(ClassiDao.GetInfoDB.getcombinazionelivdis((String) FrameIstruttore.table2.getValueAt(FrameIstruttore.table2.getSelectedRow(), 0),(String) FrameIstruttore.table2.getValueAt(FrameIstruttore.table2.getSelectedRow(), 1)));}
 				else
-					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore attività",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
 		gbc.anchor = GridBagConstraints.LINE_START;
@@ -304,6 +327,25 @@ public class FrameIstruttore extends JFrame {
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl2.add(btnNewButton7,gbc);
 	
+		JButton btnNewButton10 = new JButton(" Elenco Iscritti all'attività");
+		btnNewButton10.setMnemonic('m');
+		btnNewButton10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow()!=-1)
+				EliminaEventoDAO.eliminaevento((String) FrameIstruttore.table.getValueAt(FrameIstruttore.table.getSelectedRow(), 0));
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore attività",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx = 3;
+		gbc.gridy = 9;
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl2.add(btnNewButton10,gbc);
+		
+		
+		
 		tabellaPnl2 = new JPanel();
 		tabellaPnl2.setLayout(new GridLayout(3 , 1));
 		tabellaPnl2.add(table2.getTableHeader());

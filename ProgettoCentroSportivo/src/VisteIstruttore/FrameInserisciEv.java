@@ -10,13 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent.KeyBinding;
+import javax.swing.tree.TreeSelectionModel;
 
+import ClassiDAOIstruttore.ElencoLivDisDAO;
 import ClassiDAOIstruttore.InserisciEventoDAO;
 import Listener.Listen;
 import Model.Home;
+import Model.Utente;
 import ModelliTabelleIstruttore.ComboSpazio;
+import ModelliTabelleIstruttore.ModLivDis;
 import VisteUtenteGenerico.*;
-
+import ClassiDao.GetInfoDB;
 import ClassiDao.Reg_dao;
 
 import javax.swing.JMenuBar;
@@ -34,16 +38,24 @@ import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
 import java.awt.ScrollPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import java.awt.Rectangle;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -61,7 +73,7 @@ public class FrameInserisciEv extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
-	private JPanel contentPane;
+	private JPanel contentPane,tabellaPnl;
 	
 	private JTextField textnomeevento;
 	private JTextField textdescrizione;
@@ -74,11 +86,13 @@ public class FrameInserisciEv extends JFrame {
 	private JTextField comboprendisp;
 	private boolean bool;
 	public static ComboSpazio combospazio;
-	
+	public static JTable table1;
+	public ModLivDis model1;
 	
 	
 	public FrameInserisciEv() {
-		
+		String username=""+Utente.getUsername()+"";
+		int matricola = GetInfoDB.getidIstr(username);
 		frame = new JFrame("Inserimento eventi");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -132,25 +146,46 @@ public class FrameInserisciEv extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		contentPane.add(lblFormDiInserimento, gbc);
 		
-		JLabel lblDatiEvento= new JLabel("Dati dell'evento");
+		
+		
+		JLabel lblDatiDisc = new JLabel("Dati sulle discipline disponibili");
+		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblDatiEvento, gbc);
+		contentPane.add(lblDatiDisc, gbc);
+				
+		table1 = new JTable();
+		model1 = new ModLivDis(ElencoLivDisDAO.elencoiniziale(matricola));
+		table1.setRowHeight(20);
+		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		table1.setCellSelectionEnabled(true);
+		table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table1.setModel(model1);
 		
-		
+		Dimension b = table1.getPreferredSize();
+		table1.setPreferredSize(b);
+		gbc.insets= new Insets(0,0,5,5);
+		gbc.gridx =0;
+		gbc.gridy =2;
+		tabellaPnl = new JPanel();
+		tabellaPnl.setLayout(new GridLayout(2, 1));
+		tabellaPnl.add(table1.getTableHeader());
+		tabellaPnl.add(table1);
+		contentPane.add(tabellaPnl, gbc);
 		
 		JLabel lblNomeEvento = new JLabel("Nome dell'evento");
 		gbc.anchor =  GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		contentPane.add(lblNomeEvento, gbc);
 		
 		textnomeevento = new JTextField();
 		gbc.gridx = 1;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		contentPane.add(textnomeevento, gbc);
 		textnomeevento.setColumns(10);
@@ -159,12 +194,12 @@ public class FrameInserisciEv extends JFrame {
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		contentPane.add(lblDescrizione, gbc);
 		
 		textdescrizione = new JTextField();
 		gbc.gridx = 1;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		contentPane.add(textdescrizione, gbc);
 		textdescrizione.setColumns(10);
@@ -173,7 +208,7 @@ public class FrameInserisciEv extends JFrame {
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		contentPane.add(lblInfopag, gbc);
 		
 		comboinfopag = new JComboBox();
@@ -183,7 +218,7 @@ public class FrameInserisciEv extends JFrame {
 		comboinfopag.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		contentPane.add(comboinfopag, gbc);
 		
 		
@@ -191,12 +226,12 @@ public class FrameInserisciEv extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		contentPane.add(lblCostoEv, gbc);
 		
 		textcostoev = new JTextField();
 		gbc.gridx = 1;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		contentPane.add(textcostoev, gbc);
 		textcostoev.setColumns(10);
@@ -205,7 +240,7 @@ public class FrameInserisciEv extends JFrame {
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		contentPane.add(lblTipoEvento, gbc);
 		
 		combotipoev = new JComboBox();
@@ -215,14 +250,14 @@ public class FrameInserisciEv extends JFrame {
 		combotipoev.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		contentPane.add(combotipoev, gbc);
 		
 		JLabel lblBiscert = new JLabel("Bisogno certificato");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
-		gbc.gridy = 7;
+		gbc.gridy = 8;
 		contentPane.add(lblBiscert, gbc);
 		
 		combobiscert = new JComboBox();
@@ -232,7 +267,7 @@ public class FrameInserisciEv extends JFrame {
 		combobiscert.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 7;
+		gbc.gridy = 8;
 		contentPane.add(combobiscert, gbc);
 		
 		
@@ -242,7 +277,7 @@ public class FrameInserisciEv extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
-		gbc.gridy = 8;
+		gbc.gridy = 9;
 		contentPane.add(lblDatiorario, gbc);
 		
 		
@@ -250,7 +285,7 @@ public class FrameInserisciEv extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 9;
+		gbc.gridy = 10;
 		contentPane.add(lblFasciaoraria, gbc);
 		
 		combofasciaor = new JComboBox();
@@ -260,14 +295,14 @@ public class FrameInserisciEv extends JFrame {
 		combofasciaor.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 9;
+		gbc.gridy = 10;
 		contentPane.add(combofasciaor, gbc);
 		
 		JLabel lblGiornoset = new JLabel("Giorno della settimana");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 10;
+		gbc.gridy = 11;
 		contentPane.add(lblGiornoset, gbc);
 			
 		combogiornoset = new JComboBox();
@@ -277,7 +312,7 @@ public class FrameInserisciEv extends JFrame {
 		combogiornoset.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 10;
+		gbc.gridy = 11;
 		contentPane.add(combogiornoset, gbc);
 		
 	
@@ -285,7 +320,7 @@ public class FrameInserisciEv extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 11;
+		gbc.gridy = 12;
 		contentPane.add(lblSpazio, gbc);
 		
 		combospazio = new ComboSpazio();
@@ -294,19 +329,19 @@ public class FrameInserisciEv extends JFrame {
 		combospazio.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 11;
+		gbc.gridy = 12;
 		contentPane.add(combospazio, gbc);
 		
 		JLabel lblPrenDisp = new JLabel("Prenotazioni disponibili");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 12;
+		gbc.gridy = 13;
 		contentPane.add(lblPrenDisp, gbc);
 		
 		comboprendisp = new JTextField();
 		gbc.gridx = 1;
-		gbc.gridy = 12;
+		gbc.gridy = 13;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		contentPane.add(comboprendisp, gbc);
 		comboprendisp.setColumns(10);
@@ -316,7 +351,7 @@ public class FrameInserisciEv extends JFrame {
 		JButton btnRegistratiAlNostro = new JButton("Inserisci il nuovo evento");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
-		gbc.gridy = 14;
+		gbc.gridy = 15;
 		contentPane.add(btnRegistratiAlNostro, gbc);
 		
 		btnRegistratiAlNostro.addActionListener(new ActionListener() {
@@ -364,7 +399,7 @@ public class FrameInserisciEv extends JFrame {
 		
 		else
 			
-			bool=InserisciEventoDAO.registraevento(textnomeevento.getText(),textdescrizione.getText(),textcostoev.getText(),comboinfopag.getSelectedItem().toString(),combotipoev.getSelectedItem().toString(),combobiscert.getSelectedItem().toString(),combofasciaor.getSelectedItem().toString(),combogiornoset.getSelectedItem().toString(),combospazio.getSelectedItem().toString(),comboprendisp.getText());
+			bool=InserisciEventoDAO.registraevento(GetInfoDB.getcombinazionelivdis((String)FrameInserisciEv.table1.getValueAt(FrameInserisciEv.table1.getSelectedRow(), 0),(String)FrameInserisciEv.table1.getValueAt(FrameInserisciEv.table1.getSelectedRow(),1)),textnomeevento.getText(),textdescrizione.getText(),textcostoev.getText(),comboinfopag.getSelectedItem().toString(),combotipoev.getSelectedItem().toString(),combobiscert.getSelectedItem().toString(),combofasciaor.getSelectedItem().toString(),combogiornoset.getSelectedItem().toString(),combospazio.getSelectedItem().toString(),comboprendisp.getText());
 			
 		
 		if(bool)

@@ -20,12 +20,12 @@ import javax.swing.JOptionPane;
 import ClassiDao.GetInfoDB;
 
 
-public class ModificaEventoDAO {
+public class ModificaAttDAO {
 
 	
     
     
-public static boolean modificaevento ( String evento,String nuovoevento,String descr , String costo , String infopag, String tipoev , String biscert , String fasciaor ,String giornoset , String spazio , String prendisp ){
+public static boolean modificaatt ( int comblivdis, String fasciaor ,String giornoset , String spazio , String prendisp ){
 	 
 	
 	
@@ -47,18 +47,14 @@ public static boolean modificaevento ( String evento,String nuovoevento,String d
          st2 = con2.createStatement(); 
          
          
-        rs= st.executeQuery("SELECT * FROM gestioneturnoevento WHERE gestioneturnoevento.giornosettimana='"+giornoset+"' AND gestioneturnoevento.fasciaoraria='"+fasciaor+"' AND gestioneturnoevento.spazio='"+spazio+"' ");
+        rs= st.executeQuery("SELECT * FROM gestioneturno WHERE gestioneturno.giornosettimana='"+giornoset+"' AND gestioneturno.fasciaoraria='"+fasciaor+"' AND gestioneturno.spazio='"+spazio+"' ");
         
         if(rs.next())
       	  JOptionPane.showMessageDialog(null, "L'evento che si svolge il \""+giornoset+"\" nella fascia oraria \""+fasciaor+"\" nello spazio "+spazio+" è già stato creato, sceglierne un altro"," ",JOptionPane.WARNING_MESSAGE);
         
         else{
-         st2.executeUpdate("UPDATE  `evento` SET  `nomeevento`= '"+nuovoevento+"' ,  `descrizione`='"+descr+"',`infopagamento`='"+infopag+"',`costoevento`='"+costo+"',`tipoevento`='"+tipoev+"', `bisognocertificato`='"+biscert+"' where nomeevento='"+evento+"'  ");
-         rs=st.executeQuery("SELECT codiceevento FROM evento WHERE evento.nomeevento='"+nuovoevento+"'");
          
-         rs.next();
-         int codevento= rs.getInt("codiceevento");
-         st2.executeUpdate("UPDATE `gestioneturnoevento` SET `fasciaoraria`='"+fasciaor+"',`giornosettimana`='"+giornoset+"',`spazio`='"+spazio+"',`prenotazionidisponibili`='"+prendisp+"' WHERE evento='"+codevento+"' ");
+         st.executeUpdate("UPDATE `gestioneturno` SET `fasciaoraria`='"+fasciaor+"',`giornosettimana`='"+giornoset+"',`spazio`='"+spazio+"',`prenotazionidisponibili`='"+prendisp+"' WHERE combinazionelivdis='"+comblivdis+"' ");
             
          JOptionPane.showMessageDialog(FrameModificaEv.frame,"L'evento che si svolge il \""+giornoset+"\" nella fascia oraria \""+fasciaor+"\" nello spazio "+spazio+" è stato modificato correttamente ","Modifica riuscita! ",JOptionPane.INFORMATION_MESSAGE);
          return true;

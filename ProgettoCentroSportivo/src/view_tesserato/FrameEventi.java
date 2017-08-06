@@ -1,12 +1,15 @@
 package view_tesserato;
 
-
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
+import ClassiDAOIstruttore.ElencoEventiDAO;
 
 import javax.swing.JButton;
-
+import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -23,20 +26,25 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.table.DefaultTableModel;
 
+
+import ClassiDao.ElencoDisciplineDAO;
+import ClassiDao.GetInfoDB;
+import ClassiDao.UtenteDao;
 import ClassiDaoTesserato.ElencoEventiTessDAO;
 
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
-
+import ModelliTabelle.ModDiscIni;
+import ModelliTabelleIstruttore.ModElEventiIstr;
 import ModelliTabelle_Tesserato.ModElEventiTes;
 import VisteUtenteGenerico.DetDisciplina;
-
+import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.FrameIniziale;
-
-
+import VisteUtenteGenerico.FrameLogin;
+import Listener.Listen;
+import Model.Utente;
 
 import javax.swing.JScrollPane;
 
@@ -50,10 +58,10 @@ public class FrameEventi extends JFrame {
 	 */
 	public static JFrame frame;
 	
-	public JPanel contentPane,tabellaPnl;
+	public JPanel contentPane,tabellaPnl,bottoniPnl1;
 	public static JTable table;
     private ModElEventiTes model;
-	public static JTable table_1;
+	
 	
 
 	/**
@@ -81,24 +89,20 @@ public class FrameEventi extends JFrame {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
 		mnNewMenu.add(mntmNewMenuItem);
-		mntmNewMenuItem.addActionListener(new ActionListener(){
-
-			@Override
+		mntmNewMenuItem.addActionListener(new Listen(this));
+		mntmNewMenuItem.setActionCommand("iniistr2");
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
-		new FrameIniziale();
-				
+				new FrameCambia();
+				frame.setEnabled(false);
 			}
-			
-			
 		});
-		
-		
-
-
+		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,36,0));
+		contentPane.setBackground(new Color (64,224,208));
 		contentPane.setLayout(new GridBagLayout());
 		
 		
@@ -134,59 +138,21 @@ public class FrameEventi extends JFrame {
 		gbc.insets= new Insets(0,0,5,5);
 		gbc.gridx =2;
 		gbc.gridy =3;
-		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(2, 1));
-		tabellaPnl.add(table.getTableHeader());
-		tabellaPnl.add(table);
-		contentPane.add(tabellaPnl, gbc);
+		
+		bottoniPnl1 = new JPanel();
 		
 		
-		
-	table_1 = new JTable();
-		
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-					"Nome Evento","Descrizione","TipoEvento","Fascia oraria","Giorno della settimana","Posti disponibili","Nome istruttore","Cognome istruttore"
-			}
-		){
-			
-			private static final long serialVersionUID = 1L;
-			@SuppressWarnings("rawtypes")
-			Class[] columnTypes = new Class[] {
-					String.class, String.class, String.class,	String.class, String.class, Integer.class,	String.class, String.class
-					
-				};
-			
-				public Class<?> getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-				
-			
-		});
 		
 	
-		table_1.setAutoCreateRowSorter(true);
-		
-		
-		JScrollPane pane = new JScrollPane(table_1);
-		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 5;
-		gbc.gridy = 2;
-		contentPane.add(pane, gbc);
 		 
+		
+		
 		JButton btnNewButton = new JButton("Dettagli Evento");
 		btnNewButton.setMnemonic('d');
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1)
-				new DetDisciplina();
+				new DetEvTes();
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
 			}
@@ -196,20 +162,17 @@ public class FrameEventi extends JFrame {
 		gbc.gridx = 1;
 		gbc.gridy = 5;
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		contentPane.add(btnNewButton,gbc);
+		bottoniPnl1.add(btnNewButton,gbc);
 		
 		
+		tabellaPnl = new JPanel();
+		tabellaPnl.setLayout(new GridLayout(3, 1));
+		tabellaPnl.add(table.getTableHeader());
+		tabellaPnl.add(table);
+		tabellaPnl.add(bottoniPnl1,gbc);
+		contentPane.add(tabellaPnl, gbc);
 		
-		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-			   @Override
-			   public void windowClosing(java.awt.event.WindowEvent windowEvent) 
-			    {
-				   FrameTesserato.frame.setVisible(true);
-			    
-			    }
-			});
-		
-}
+	}
 	
 
 }

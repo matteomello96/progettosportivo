@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import VisteIstruttore.FrameInserisciAtt;
 import VisteIstruttore.FrameInserisciEv;
 import VisteIstruttore.FrameIstruttore;
+import VisteIstruttore.FrameModificaAtt;
 import VisteIstruttore.FrameModificaEv;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
@@ -33,6 +34,8 @@ public class Listen implements ActionListener {
 	public FrameInserisciEv frameinserisciev;
 	public FrameInserisciAtt frameinserisciatt;
 	public FrameModificaEv framemodificaev;
+	public FrameModificaAtt framemodificaatt;
+	
 	
 	public Listen(FrameIniziale frame)
 	{
@@ -73,6 +76,9 @@ public class Listen implements ActionListener {
 	public Listen(FrameModificaEv frame) {
 		 framemodificaev = frame;
 	}
+	public Listen(FrameModificaAtt frame) {
+		framemodificaatt = frame;
+	}
 	public void actionPerformed(ActionEvent e)
 	{
 if ("Vai_istr".equals(e.getActionCommand())){
@@ -82,7 +88,13 @@ if ("Vai_istr".equals(e.getActionCommand())){
 			new FrameIstruttore();
 			FrameIstruttore.frame.setVisible(true);
 		}
-		
+if ("Vai_istr1".equals(e.getActionCommand())){
+	
+	FrameModificaAtt.frame.setVisible(false);
+	FrameModificaAtt.frame.dispose();
+	new FrameIstruttore();
+	FrameIstruttore.frame.setVisible(true);
+}	
 		
 		if ("Vai_reg".equals(e.getActionCommand())){
 			
@@ -146,9 +158,15 @@ if ("Vai_istr".equals(e.getActionCommand())){
 			new FrameIniziale();
 			FrameIniziale.frame.setVisible(true);
 		}
+          if ("iniistr2".equals(e.getActionCommand())){
+    			
+        	  FrameEventi.frame.setVisible(false);
+        	  FrameEventi.frame.dispose();
+			new FrameIniziale();
+			FrameIniziale.frame.setVisible(true);
+		
           
-          
-          
+          }
           
           
           

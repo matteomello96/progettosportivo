@@ -77,7 +77,32 @@ public class GetInfoDB {
 			
 	     return ris;}
 	 
+	 public static float getcostoatt(String disciplina,String livello ){
+		   
+	     Connection con = DbConnection.db;
 	 
+	     Statement st;
+	     
+	     ResultSet rs;
+	     
+
+	  Float ris = null;
+	     
+	     try {
+	         
+	         st = con.createStatement();
+	       
+	         rs = st.executeQuery("select costomensile from disciplinedisponibili where disciplina='"+disciplina+"' and livello ='"+livello+"';  "); 
+	         rs.next();	               
+	         ris=rs.getFloat("costomensile");    
+	         return ris;
+	     } 
+	     
+	     catch (SQLException ex) {
+	     	
+	     }
+			
+	     return ris;}
 	  public static int getlastorder(String num){
 	       	 Connection con = DbConnection.db;
 		        

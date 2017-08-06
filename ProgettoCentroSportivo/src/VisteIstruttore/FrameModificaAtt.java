@@ -12,10 +12,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent.KeyBinding;
 
 import ClassiDAOIstruttore.InserisciEventoDAO;
+import ClassiDAOIstruttore.ModificaAttDAO;
 import ClassiDAOIstruttore.ModificaEventoDAO;
 import Listener.Listen;
 import Model.Home;
 import ModelliTabelleIstruttore.ComboSpazio;
+import ModelliTabelleIstruttore.ComboSpazioAltro;
 import VisteUtenteGenerico.*;
 
 import ClassiDao.Reg_dao;
@@ -54,8 +56,7 @@ import javax.swing.JButton;
 
 
 
-
-public class FrameModificaEv extends JFrame {
+public class FrameModificaAtt extends JFrame {
 	
 	/**
 	 * 
@@ -65,32 +66,28 @@ public class FrameModificaEv extends JFrame {
 	private JPanel contentPane;
 	
 	
-	private JTextField textdescrizione;
-	private JTextField textnomeev;
-	private JTextField textcostoev;
-	private JComboBox comboinfopag;
-	private JComboBox  combotipoev;
-	private JComboBox  combobiscert;
+	
 	private JComboBox combofasciaor;
 	private JComboBox combogiornoset;
 	private JTextField comboprendisp;
 	private boolean bool;
-	public static ComboSpazio combospazio;
+	public static ComboSpazioAltro combospazio;
+	public ClassiDao.GetInfoDB a;
 	
-	
-	
-	public FrameModificaEv() {
-		String evento=(String) FrameIstruttore.table.getValueAt(FrameIstruttore.table.getSelectedRow(), 0);
-		frame = new JFrame("Modifica  evento  ");
+	public FrameModificaAtt() {
+		String disciplina=(String) FrameIstruttore.table2.getValueAt(FrameIstruttore.table2.getSelectedRow(), 0);
+		String livello=(String) FrameIstruttore.table2.getValueAt(FrameIstruttore.table2.getSelectedRow(), 1);
+		frame = new JFrame("Modifica  attività  ");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocation(100, 100);
 		frame.setSize(450, 300);
-        frame.setTitle("Modifica  evento "+evento+"  ");
-		if(FrameModificaEv.frame==null)
+        frame.setTitle("Modifica  attività della disciplina: "+disciplina+" livello: "+livello+" ");
+       
+		if(FrameModificaAtt.frame==null)
 			frame.setLocationRelativeTo(null);
 			else
-			frame.setLocation(FrameModificaEv.frame.getLocation());
+			frame.setLocation(FrameModificaAtt.frame.getLocation());
 		
 		
 		
@@ -123,120 +120,23 @@ public class FrameModificaEv extends JFrame {
 	
 		mnNewMenu.add(mntmTornaAllaPagina);
 		mntmTornaAllaPagina.addActionListener(new Listen(this));
-		mntmTornaAllaPagina.setActionCommand("Vai_istr");
+		mntmTornaAllaPagina.setActionCommand("Vai_istr1");
 		
 		
 		
-		JLabel lblFormDiModifica = new JLabel("Form di Modifica dell'Evento");
+		JLabel lblFormDiModifica = new JLabel("Form di Modifica dell'Attività");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		contentPane.add(lblFormDiModifica, gbc);
 		
-		JLabel lblDatiEvento= new JLabel("Dati dell'evento");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblDatiEvento, gbc);
-		
-
-		JLabel lblNomeev = new JLabel("Nome dell'evento");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		contentPane.add(lblNomeev, gbc);
-		
-		textnomeev = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(textnomeev, gbc);
-		textnomeev.setColumns(10);
 		
 		
 		
-		JLabel lblDescrizione = new JLabel("Descrizione dell'evento");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		contentPane.add(lblDescrizione, gbc);
-		
-		textdescrizione = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 3;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(textdescrizione, gbc);
-		textdescrizione.setColumns(10);
-		
-		JLabel lblInfopag = new JLabel("Info pagamento");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		contentPane.add(lblInfopag, gbc);
-		
-		comboinfopag = new JComboBox();
-		comboinfopag.setModel(new DefaultComboBoxModel(new String[] {"Gratuito","A pagamento"}));
-		comboinfopag.setEnabled(true);
-		comboinfopag.setVisible(true);
-		comboinfopag.setEditable(false);
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 4;
-		contentPane.add(comboinfopag, gbc);
 		
 		
-		JLabel lblCostoEv = new JLabel("Costo dell'evento");
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		contentPane.add(lblCostoEv, gbc);
 		
-		textcostoev = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 5;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(textcostoev, gbc);
-		textcostoev.setColumns(10);
-		
-		JLabel lblTipoEvento = new JLabel("Tipo evento");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 6;
-		contentPane.add(lblTipoEvento, gbc);
-		
-		combotipoev = new JComboBox();
-		combotipoev.setModel(new DefaultComboBoxModel(new String[] {"Gara","Stage"}));
-		combotipoev.setVisible(true);
-		combotipoev.setEnabled(true);
-		combotipoev.setEditable(false);
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 6;
-		contentPane.add(combotipoev, gbc);
-		
-		JLabel lblBiscert = new JLabel("Bisogno certificato");
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 7;
-		contentPane.add(lblBiscert, gbc);
-		
-		combobiscert = new JComboBox();
-		combobiscert.setModel(new DefaultComboBoxModel(new String[] {"Si","No"}));
-		combobiscert.setEnabled(true);
-		combobiscert.setVisible(true);
-		combobiscert.setEditable(false);
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 7;
-		contentPane.add(combobiscert, gbc);
 		
 		
 		
@@ -245,7 +145,7 @@ public class FrameModificaEv extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
-		gbc.gridy = 8;
+		gbc.gridy = 2;
 		contentPane.add(lblDatiorario, gbc);
 		
 		
@@ -253,7 +153,7 @@ public class FrameModificaEv extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 9;
+		gbc.gridy = 3;
 		contentPane.add(lblFasciaoraria, gbc);
 		
 		combofasciaor = new JComboBox();
@@ -263,14 +163,14 @@ public class FrameModificaEv extends JFrame {
 		combofasciaor.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 9;
+		gbc.gridy = 3;
 		contentPane.add(combofasciaor, gbc);
 		
 		JLabel lblGiornoset = new JLabel("Giorno della settimana");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 10;
+		gbc.gridy = 4;
 		contentPane.add(lblGiornoset, gbc);
 			
 		combogiornoset = new JComboBox();
@@ -280,7 +180,7 @@ public class FrameModificaEv extends JFrame {
 		combogiornoset.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 10;
+		gbc.gridy = 4;
 		contentPane.add(combogiornoset, gbc);
 		
 	
@@ -288,28 +188,28 @@ public class FrameModificaEv extends JFrame {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 11;
+		gbc.gridy = 5;
 		contentPane.add(lblSpazio, gbc);
 		
-		combospazio = new ComboSpazio();
+		combospazio = new ComboSpazioAltro();
 		combospazio.setEnabled(true);
 		combospazio.setVisible(true);
 		combospazio.setEditable(false);
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridx = 1;
-		gbc.gridy = 11;
+		gbc.gridy = 5;
 		contentPane.add(combospazio, gbc);
 		
 		JLabel lblPrenDisp = new JLabel("Prenotazioni disponibili");
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
-		gbc.gridy = 12;
+		gbc.gridy = 6;
 		contentPane.add(lblPrenDisp, gbc);
 		
 		comboprendisp = new JTextField();
 		gbc.gridx = 1;
-		gbc.gridy = 12;
+		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		contentPane.add(comboprendisp, gbc);
 		comboprendisp.setColumns(10);
@@ -319,7 +219,7 @@ public class FrameModificaEv extends JFrame {
 		JButton btnRegistratiAlNostro = new JButton("Modifica evento");
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
-		gbc.gridy = 14;
+		gbc.gridy = 8;
 		contentPane.add(btnRegistratiAlNostro, gbc);
 		
 		btnRegistratiAlNostro.addActionListener(new ActionListener() {
@@ -327,46 +227,25 @@ public class FrameModificaEv extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			
 			
-			lblDescrizione.setForeground(Color.BLACK);
-			lblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		
-			lblCostoEv.setForeground(Color.BLACK);
-			lblCostoEv.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			
 
 			lblPrenDisp.setForeground(Color.BLACK);
 			lblPrenDisp.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			
 		
 		
-		if(textdescrizione.getText().isEmpty()||textcostoev.getText().isEmpty()||comboprendisp.getText().isEmpty()||textnomeev.getText().isEmpty())
-		{
-			if(textnomeev.getText().isEmpty())
-			{
-				lblNomeev.setForeground(Color.RED);
-				lblNomeev.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			
-			if(textdescrizione.getText().isEmpty())
-			{
-				lblDescrizione.setForeground(Color.RED);
-				lblDescrizione.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			if(textcostoev.getText().isEmpty())
-			{
-				lblCostoEv.setForeground(Color.RED);
-				lblCostoEv.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
+		
 			if(comboprendisp.getText().isEmpty())
 			{
 				lblPrenDisp.setForeground(Color.RED);
 				lblPrenDisp.setFont(new Font("Tahoma", Font.BOLD, 11));
-			}
-			JOptionPane.showMessageDialog(frame, "Riempire tutti i campi obbligatori"," ",JOptionPane.WARNING_MESSAGE);
-		}
-		
-		else
 			
-			bool=ModificaEventoDAO.modificaevento(evento,textnomeev.getText(),textdescrizione.getText(),textcostoev.getText(),comboinfopag.getSelectedItem().toString(),combotipoev.getSelectedItem().toString(),combobiscert.getSelectedItem().toString(),combofasciaor.getSelectedItem().toString(),combogiornoset.getSelectedItem().toString(),combospazio.getSelectedItem().toString(),comboprendisp.getText());
+			JOptionPane.showMessageDialog(frame, "Riempire tutti i campi obbligatori"," ",JOptionPane.WARNING_MESSAGE);
+		    }
+		
+		
+			
+			bool=ModificaAttDAO.modificaatt( ClassiDao.GetInfoDB.getcombinazionelivdis(disciplina,livello),combofasciaor.getSelectedItem().toString(),combogiornoset.getSelectedItem().toString(),combospazio.getSelectedItem().toString(),comboprendisp.getText());
 			
 		
 		if(bool)
