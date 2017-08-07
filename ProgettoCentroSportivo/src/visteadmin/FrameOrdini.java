@@ -22,6 +22,7 @@ import ClassiDao.GetInfoDB;
 import ModelliTabelleRespo.modelisc;
 import classiDAOResponsabile.ConfermaDao;
 import classiDAOResponsabile.RichiesteDao;
+import classiDAOResponsabile.Uccidi_iscrizione;
 import view_tesserato.FrameDiscAttive;
 import view_tesserato.FrameTesserato;
 
@@ -120,6 +121,21 @@ public class FrameOrdini extends JPanel {
 		gbc.gridy = 4;
 		contentPane.add(btnNewButton_1, gbc);
 		
+		
+		JButton btnNewButton_2 = new JButton("Elimina ordine");
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_2.setForeground(Color.BLACK);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 6;
+		gbc.gridy = 4;
+		contentPane.add(btnNewButton_2, gbc);
+		
+		
+		
+	
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int idordine;
@@ -128,7 +144,7 @@ public class FrameOrdini extends JPanel {
 				
 				
 			
-//JOptionPane.showMessageDialog(null, "Il nome utente \""+a+"\" e\\o l'email \""+a+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
+
 		   ConfermaDao.Confermaiscrizione(idordine);
 		   frame.dispose();
 		   new FrameOrdini();
@@ -141,12 +157,12 @@ public class FrameOrdini extends JPanel {
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int idordine;
+		int idordine;
 				
-				idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
+			idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
 				
 				
-				new framedettagli(idordine);
+	      new framedettagli(idordine);
 			frame.setVisible(false);
 
 				
@@ -154,6 +170,8 @@ public class FrameOrdini extends JPanel {
 			
 			}
 		});
+		
+
 	
 
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {

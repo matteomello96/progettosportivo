@@ -20,7 +20,7 @@ public class ConfermaDao {
 	public static void Confermaiscrizione(int idordine){
 		
 		   Connection con = DbConnection.db;
-	        Connection con2 = DbConnection.db;
+	      
 	     
 	        
 	        Statement st;

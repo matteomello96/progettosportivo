@@ -19,7 +19,7 @@ import javax.swing.ScrollPaneConstants;
 
 import ClassiDao.GetInfoDB;
 import ModelliTabelleRespo.modellidettagli;
-
+import classiDAOResponsabile.Uccidi_iscrizione;
 import classiDAOResponsabile.dettagliiscrizionedao;
 import classiDAOResponsabile.modificaordinedao;
 
@@ -36,6 +36,7 @@ public class framedettagli extends JFrame {
 	private modellidettagli model;
 	public JPanel contentPane;
 	public JButton bottone;
+	public JButton bottone1;
 	
 	
 	public framedettagli(int cod) {
@@ -101,6 +102,16 @@ public class framedettagli extends JFrame {
 		contentPane.add(bottone,gbc);
 		
 		
+		 bottone1= new JButton("elimina attività ");
+	        bottone1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			bottone1.setForeground(Color.BLACK);
+			gbc.anchor = GridBagConstraints.LINE_END;
+			gbc.gridwidth = 3;
+			gbc.gridx = 0;
+			gbc.gridy = 3;
+			contentPane.add(bottone1,gbc);
+		
+		
 	bottone.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			int iddet,tesserato,codiceturno;
@@ -119,6 +130,36 @@ public class framedettagli extends JFrame {
 			
 		
 				modificaordinedao.modifica(iddet,tesserato,codiceturno);
+				frame.dispose();
+				new framedettagli(cod);
+		
+		}
+	}
+			);	
+	
+	
+	
+	
+	
+	bottone1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			int iddet,tesserato,codiceturno,conf;
+			String disciplina,livello,giorno,orario;
+			
+			disciplina= (String) table_2.getValueAt(table_2.getSelectedRow(), 0);
+			livello=(String) table_2.getValueAt(table_2.getSelectedRow(), 1);
+			tesserato=(int) FrameOrdini.table_2.getValueAt(FrameOrdini.table_2.getSelectedRow(), 2);
+		    conf=(int) table_2.getValueAt(table_2.getSelectedRow(), 2);
+			giorno=(String) table_2.getValueAt(table_2.getSelectedRow(), 4);
+			orario=(String) table_2.getValueAt(table_2.getSelectedRow(), 5);
+			iddet= GetInfoDB.getiddet(disciplina,livello,tesserato);
+			codiceturno= GetInfoDB.getcodiceturno(disciplina, livello, giorno, orario);
+			
+			
+			
+		
+				Uccidi_iscrizione.Uccidi_isc(iddet,codiceturno,tesserato,conf);
+				
 				frame.dispose();
 				new framedettagli(cod);
 		
