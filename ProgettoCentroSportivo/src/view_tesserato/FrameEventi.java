@@ -63,7 +63,11 @@ public class FrameEventi extends JFrame {
 	public static JTable table;
     private ModElEventiTes model;
     public static JTable table_1;
-	
+    public static JButton Aggiungi;
+    public static JButton rimuovi;
+    public static JButton svuotacarrello;
+	   
+
 	
 
 	/**
@@ -118,11 +122,11 @@ public class FrameEventi extends JFrame {
 		
 		
 		JLabel lblEventi = new JLabel("Elenco dei tuoi eventi");
-		lblEventi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEventi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblEventi.setForeground(Color.BLACK);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 2;
+		gbc.insets = new Insets(5, 0, 0, 5);
+		gbc.gridx = 4;
+		gbc.gridy = 0;
 		contentPane.add(lblEventi, gbc);
 		
 		
@@ -139,7 +143,7 @@ public class FrameEventi extends JFrame {
 		table.setPreferredSize(d);
 		gbc.insets= new Insets(0,0,5,5);
 		gbc.gridx =2;
-		gbc.gridy =3;
+		gbc.gridy =0;
 		
 		bottoniPnl1 = new JPanel();
 		
@@ -181,10 +185,10 @@ table_1 = new JTable();
 		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridwidth = 2;
-		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.insets = new Insets(5, 0, 0, 5);
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 5;
-		gbc.gridy = 2;
+		gbc.gridx = 7;
+		gbc.gridy = 4;
 		contentPane.add(pane, gbc);
 		
 	
@@ -204,7 +208,7 @@ table_1 = new JTable();
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		bottoniPnl1.add(btnNewButton,gbc);
 		
 		
@@ -214,6 +218,102 @@ table_1 = new JTable();
 		tabellaPnl.add(table);
 		tabellaPnl.add(bottoniPnl1,gbc);
 		contentPane.add(tabellaPnl, gbc);
+		
+		
+		
+		Aggiungi = new JButton("Aggiungi");
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.gridx = 2;
+		gbc.gridy = 7;
+		contentPane.add(Aggiungi,gbc);
+		
+		
+		rimuovi = new JButton("rimuovi");
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 4;
+		gbc.gridy = 7;
+		contentPane.add(rimuovi, gbc);
+		
+		
+		
+
+		Aggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow()!=-1){
+				Object[] dati = new Object[7];
+
+				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
+				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
+				dati[2]=table.getValueAt(table.getSelectedRow(), 2);
+				dati[3]=table.getValueAt(table.getSelectedRow(), 3);
+				dati[4]=table.getValueAt(table.getSelectedRow(), 4);
+				dati[5]=table.getValueAt(table.getSelectedRow(), 5);
+				dati[6]=table.getValueAt(table.getSelectedRow(), 6);
+				
+				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+				
+
+
+				boolean u=true;
+				int c;
+				
+				for(c=0;c<table_1.getRowCount();c++)
+				{
+				if(table_1.getRowCount()>=1){
+						if(table.getValueAt(table.getSelectedRow(), 5).equals(table_1.getValueAt(c, 5))&&
+								table.getValueAt(table.getSelectedRow(), 6).equals(table_1.getValueAt(c, 6)))
+						{
+							u=false;
+							break;
+						}
+
+					}
+
+				}
+				if(u)
+				{
+				modello.addRow(dati);
+				}
+				
+				else{
+					
+					JOptionPane.showMessageDialog(FrameEventi.frame, "Non è possibile Aggiungere lo stesso evento",null,JOptionPane.WARNING_MESSAGE);
+				}
+				}
+				
+			}
+		});
+		
+		
+		rimuovi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+				if(table_1.getSelectedRow()!=-1){
+				modello.removeRow(table_1.getSelectedRow());
+				}
+			}
+		});
+		
+		
+		 svuotacarrello = new JButton("svuotacarrello");
+		   
+			gbc.insets = new Insets(0, 0, 5, 5);
+			gbc.gridx = 6;
+			gbc.gridy = 7;
+			contentPane.add(svuotacarrello, gbc);
+			
+			
+			svuotacarrello.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+					for(int x=modello.getRowCount()-1;x>=0;x--)
+					{
+						modello.removeRow(x);
+					}
+				}
+			});
+	
 		
 	}
 	
