@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import ClassiDAOIstruttore.ElencoEventiDAO;
 
@@ -61,6 +62,7 @@ public class FrameEventi extends JFrame {
 	public JPanel contentPane,tabellaPnl,bottoniPnl1;
 	public static JTable table;
     private ModElEventiTes model;
+    public static JTable table_1;
 	
 	
 
@@ -143,6 +145,48 @@ public class FrameEventi extends JFrame {
 		
 		
 		
+		
+		
+table_1 = new JTable();
+		
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+					"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello"
+			}
+		){
+			
+			private static final long serialVersionUID = 1L;
+			@SuppressWarnings("rawtypes")
+			Class[] columnTypes = new Class[] {
+					String.class, String.class, String.class,String.class, String.class, String.class, String.class
+					
+				};
+			
+				public Class<?> getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+				
+			
+		});
+		
+	
+		table_1.setAutoCreateRowSorter(true);
+		
+		
+		
+		JScrollPane pane = new JScrollPane(table_1);
+		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridwidth = 2;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 5;
+		gbc.gridy = 2;
+		contentPane.add(pane, gbc);
+		
 	
 		 
 		
@@ -161,7 +205,6 @@ public class FrameEventi extends JFrame {
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
 		gbc.gridy = 5;
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl1.add(btnNewButton,gbc);
 		
 		
