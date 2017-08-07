@@ -112,7 +112,7 @@ public class FrameTesserato extends JPanel {
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_4);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Stato Iscrizione");
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Aggiorna data e ora");
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameDiscAttive();
@@ -125,7 +125,7 @@ public class FrameTesserato extends JPanel {
 		
 		
 		
-		JMenuItem scelta_orario= new JMenuItem("Scegli turno");
+		/*JMenuItem scelta_orario= new JMenuItem("Scegli turno");
 		scelta_orario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -135,7 +135,7 @@ public class FrameTesserato extends JPanel {
 				
 			}
 		});
-		mnNewMenu.add(scelta_orario);
+		mnNewMenu.add(scelta_orario);*/
 
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Tue testimonianze");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
