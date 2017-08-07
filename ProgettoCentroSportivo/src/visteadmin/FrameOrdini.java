@@ -23,6 +23,7 @@ import ModelliTabelleRespo.modelisc;
 import classiDAOResponsabile.ConfermaDao;
 import classiDAOResponsabile.RichiesteDao;
 import classiDAOResponsabile.Uccidi_iscrizione;
+import classiDAOResponsabile.rimuoviordinedao;
 import view_tesserato.FrameDiscAttive;
 import view_tesserato.FrameTesserato;
 
@@ -164,6 +165,47 @@ public class FrameOrdini extends JPanel {
 				
 	      new framedettagli(idordine);
 			frame.setVisible(false);
+
+				
+		   
+			
+			}
+		});
+		
+		
+		
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+	int idordine,i;
+	int cont=0;
+	idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
+	
+	new framedettagli(idordine);
+	framedettagli.frame.dispose();
+	
+	for(i=0;i<framedettagli.table_2.getRowCount();i++){
+	
+	cont=cont+1;	
+		
+		
+	}				
+if(cont==0){
+	
+	
+	rimuoviordinedao.Uccidi_isc(idordine);
+	JOptionPane.showMessageDialog(frame, "Ordine rimosso dal database!!");
+frame.dispose();
+new FrameOrdini();
+	
+}
+    else{
+    	JOptionPane.showMessageDialog(frame, "Ci sono ancora discipline registrate in questo ordine.Perfavore elimina prima le discipline!!");
+    	cont=0;
+    
+    }			
+				
+	     
+		
 
 				
 		   
