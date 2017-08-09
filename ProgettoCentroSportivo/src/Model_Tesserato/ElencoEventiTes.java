@@ -9,6 +9,7 @@ private String NomeIstruttore;
 private String CognomeIstruttore;
 private String Disciplina;
 private String Livello;
+private int costoevento;
 public String getNomeEvento() {
 	return NomeEvento;
 }
@@ -51,6 +52,12 @@ public String getLivello() {
 }
 public void setLivello(String livello) {
 	Livello = livello;
+}
+public int getCostoevento() {
+	return costoevento;
+}
+public void setCostoevento(int costoevento) {
+	this.costoevento = costoevento;
 }
 
 

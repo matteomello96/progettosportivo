@@ -165,7 +165,6 @@ if ("Vai_istr1".equals(e.getActionCommand())){
 			new FrameIniziale();
 			FrameIniziale.frame.setVisible(true);
 		
-          
           }
           
           

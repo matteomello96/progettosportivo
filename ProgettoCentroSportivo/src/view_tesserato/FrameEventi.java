@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import ClassiDAOIstruttore.ElencoEventiDAO;
@@ -66,6 +68,7 @@ public class FrameEventi extends JFrame {
     public static JButton Aggiungi;
     public static JButton rimuovi;
     public static JButton svuotacarrello;
+    public static JButton invia;
 	   
 
 	
@@ -108,7 +111,7 @@ public class FrameEventi extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (64,224,208));
+		contentPane.setBackground(new Color (255,36,0));
 		contentPane.setLayout(new GridBagLayout());
 		
 		
@@ -157,14 +160,14 @@ table_1 = new JTable();
 			new Object[][] {
 			},
 			new String[] {
-					"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello"
+					"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello","Costo Evento"
 			}
 		){
 			
 			private static final long serialVersionUID = 1L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-					String.class, String.class, String.class,String.class, String.class, String.class, String.class
+					String.class, String.class, String.class,String.class, String.class, String.class, String.class, Integer.class
 					
 				};
 			
@@ -241,7 +244,7 @@ table_1 = new JTable();
 		Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1){
-				Object[] dati = new Object[7];
+				Object[] dati = new Object[8];
 
 				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
 				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
@@ -250,7 +253,7 @@ table_1 = new JTable();
 				dati[4]=table.getValueAt(table.getSelectedRow(), 4);
 				dati[5]=table.getValueAt(table.getSelectedRow(), 5);
 				dati[6]=table.getValueAt(table.getSelectedRow(), 6);
-				
+				dati[7]=table.getValueAt(table.getSelectedRow(), 7);
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				
 
@@ -313,7 +316,57 @@ table_1 = new JTable();
 					}
 				}
 			});
+			
+			
+			
+			  invia = new JButton("invia");
+
 	
+				gbc.insets = new Insets(0, 0, 5, 5);
+				gbc.gridx = 8;
+				gbc.gridy = 7;
+				invia.setEnabled(false);
+				contentPane.add(invia, gbc);
+				
+				
+				
+				invia.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e) {
+						frame.setEnabled(false);
+						new sendeventframe();
+						sendeventframe.frame.setVisible(true);
+					
+						
+					}
+				});
+
+				
+				
+				table_1.getModel().addTableModelListener(new TableModelListener(){
+					public void tableChanged(TableModelEvent e) {
+					
+						int totale;
+					
+						
+						
+						
+						totale=0;
+						int c=0;
+						for (c=0;c<table_1.getModel().getRowCount();c++){
+				
+						totale=totale+((Integer)(table_1.getModel().getValueAt(c, 7)));
+						
+						}
+						
+						
+						if(table_1.getModel().getRowCount()>0)
+							invia.setEnabled(true);
+						else table_1.setEnabled(false);
+						if(table_1.getModel().getRowCount()<1)
+							invia.setEnabled(false);	
+						
+						
+					}});
 		
 	}
 	
