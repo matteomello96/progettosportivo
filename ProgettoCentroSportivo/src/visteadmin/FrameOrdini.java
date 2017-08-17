@@ -20,9 +20,11 @@ import javax.swing.ScrollPaneConstants;
 
 import ClassiDao.GetInfoDB;
 import ModelliTabelleRespo.modelisc;
+import ModelliTabelleRespo.modellidettagli;
 import classiDAOResponsabile.ConfermaDao;
 import classiDAOResponsabile.RichiesteDao;
 import classiDAOResponsabile.Uccidi_iscrizione;
+import classiDAOResponsabile.dettagliiscrizionedao;
 import classiDAOResponsabile.rimuoviordinedao;
 import view_tesserato.FrameDiscAttive;
 import view_tesserato.FrameTesserato;
@@ -32,7 +34,9 @@ public class FrameOrdini extends JPanel {
 	public static JFrame frame;
 	
 	public static JTable table_2;
+	public static JTable table;
 	private modelisc model;
+	private modellidettagli model1;
 	public JPanel contentPane;
 
 	
@@ -180,10 +184,16 @@ public class FrameOrdini extends JPanel {
 	int cont=0;
 	idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
 	
-	new framedettagli(idordine);
-	framedettagli.frame.dispose();
 	
-	for(i=0;i<framedettagli.table_2.getRowCount();i++){
+	
+	
+	table = new JTable();
+	model1 = new modellidettagli(dettagliiscrizionedao.elencoiniziale(idordine));
+	table.setCellSelectionEnabled(true);
+	table.setModel(model);
+	
+	
+	for(i=0;i<table.getRowCount();i++){
 	
 	cont=cont+1;	
 		
