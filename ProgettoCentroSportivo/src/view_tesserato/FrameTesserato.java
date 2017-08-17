@@ -29,8 +29,10 @@ import javax.swing.table.DefaultTableModel;
 
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.ElencoAttivitaDAO;
+import ClassiDaoTesserato.elencoattivitaattivedao;
 import Listener.Listen;
 import Model.Utente;
+import ModelliTabelle_Tesserato.disc_attive;
 import ModelliTabelle_Tesserato.disc_tabella;
 import VisteUtenteGenerico.FrameCambia;
 
@@ -42,9 +44,11 @@ public class FrameTesserato extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	public static JTable table_1;
+	public static JTable table_2;
 	public static JFrame frame;
 	public JPanel contentPane;
-	 private disc_tabella model;
+	private disc_tabella model;
+	private disc_attive model1;
 	 public static float totale;
 	 public static JButton svuotacarrello;
 	 public static JButton Aggiungi;
@@ -256,6 +260,10 @@ public class FrameTesserato extends JPanel {
 		
 		Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				table_2 = new JTable();
+				model1 = new disc_attive(elencoattivitaattivedao.elencoiniziale());
+				table_2.setModel(model1);
 				if(table.getSelectedRow()!=-1){
 				Object[] dati = new Object[3];
 
@@ -270,12 +278,12 @@ public class FrameTesserato extends JPanel {
 				boolean u=true;
 				
 				
-				new FrameDiscAttive();
-				FrameDiscAttive.frame.dispose();
-				for(q=0;q<FrameDiscAttive.table_1.getRowCount();q++){
+				//new FrameDiscAttive();
+			//	FrameDiscAttive.frame.dispose();
+				for(q=0;q<table_2.getRowCount();q++){
 					
 				
-					if(GetInfoDB.getcombinazionelivdis(FrameDiscAttive.table_1.getValueAt(q,0).toString(), FrameDiscAttive.table_1.getValueAt(q,1).toString()) == GetInfoDB.getcombinazionelivdis(table.getValueAt(table.getSelectedRow() , 1).toString(),table.getValueAt(table.getSelectedRow() , 0).toString())){
+					if(GetInfoDB.getcombinazionelivdis(table_2.getValueAt(q,0).toString(), table_2.getValueAt(q,1).toString()) == GetInfoDB.getcombinazionelivdis(table.getValueAt(table.getSelectedRow() , 1).toString(),table.getValueAt(table.getSelectedRow() , 0).toString())){
 					
 						ris=1;
 					}

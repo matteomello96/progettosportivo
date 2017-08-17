@@ -268,6 +268,7 @@ table_1 = new JTable();
 				esci=1;
 			}
 				
+			
 				}		
 	
 				if(esci==1){
