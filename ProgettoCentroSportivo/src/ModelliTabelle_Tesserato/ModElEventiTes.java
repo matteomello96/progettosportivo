@@ -33,11 +33,11 @@ public class ModElEventiTes extends AbstractTableModel {
 	
 	@Override
 	public int getColumnCount() {
-		return 8;
+		return 9;
 	}
 	
 	
-	private String[] tableHeaders = {"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello","Costo Evento"};
+	private String[] tableHeaders = {"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello","Costo Evento","Codice Evento"};
 	@Override
 	public String getColumnName(int columnIndex){
 		return tableHeaders[columnIndex];
@@ -64,6 +64,7 @@ public class ModElEventiTes extends AbstractTableModel {
 		else if(columnIndex==5) return d.getDisciplina();
 		else if(columnIndex==6) return d.getLivello();
 		else if(columnIndex==7) return d.getCostoevento();
+		else if(columnIndex==8) return d.getCodiceevento();
 		 
 		return null;
 	}
@@ -90,6 +91,7 @@ public class ModElEventiTes extends AbstractTableModel {
         if(columnIndex==5) dati.get(rowIndex).setDisciplina(aValue.toString());
         if(columnIndex==6 ) dati.get(rowIndex).setLivello(aValue.toString());
         if(columnIndex==7 ) dati.get(rowIndex).setCostoevento((int)aValue);
+        if(columnIndex==8 ) dati.get(rowIndex).setCodiceevento((int)aValue);
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
     }
 	

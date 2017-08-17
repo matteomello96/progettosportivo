@@ -17,6 +17,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.RoundingMode;
+import java.sql.Blob;
 import java.text.DecimalFormat;
 
 
@@ -35,6 +36,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.TriggerOrdine;
+import ClassiDaoTesserato.ordineeventodao;
 import ComboTesserato.Combocon;
 
 
@@ -57,11 +59,9 @@ public class sendeventframe {
 	public String percorso="";
     public static JDialog frame;
     public String pagamento;
-
-    
     public JTextField Casella;
-	
-
+    public int costo;
+    public int evento;
 public sendeventframe(){
 		final DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
@@ -133,12 +133,12 @@ public sendeventframe(){
 	
 		
 		
-		final JButton btnGeneraDistinta = new JButton("Genera distinta");
+/*		final JButton btnGeneraDistinta = new JButton("Genera distinta");
 		btnGeneraDistinta.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnGeneraDistinta.addActionListener(new ActionListener() {
 			@SuppressWarnings("resource")
 			public void actionPerformed(ActionEvent e) {
-				pagamento=ComboP.getSelectedItem().toString();
+				
 		
 		
 				JFileChooser fc = new JFileChooser();
@@ -146,7 +146,7 @@ public sendeventframe(){
 			      if (sel == JFileChooser.APPROVE_OPTION) {
 			         nomedistinta=(fc.getSelectedFile().getName());
 			         percorso =(fc.getCurrentDirectory().toString());
-			     File fdistinta = new File(percorso+"\\"+nomedistinta+"");
+			    File fdistinta = new File(percorso+"\\"+nomedistinta+"");
 				    Casella.setText(nomedistinta);
 				    
 				    
@@ -154,7 +154,7 @@ public sendeventframe(){
 				    
 				    
 			     //Leggere il file        
-					/*	try {
+						try {
 							FileReader f;
 							f= new FileReader(fdistinta);
 							 BufferedReader read;
@@ -170,14 +170,14 @@ public sendeventframe(){
 						      System.out.println(s);
 						    }
 					//	  System.out.println(s);
-						JOptionPane.showMessageDialog(sendeventframe.frame, "'"+s+"'");
+						//JOptionPane.showMessageDialog(sendeventframe.frame, "'"+s+"'");
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 				
 														
-					*/	
+						
 					    
 
 				
@@ -194,7 +194,7 @@ public sendeventframe(){
 		btnGeneraDistinta.setBounds(549, 352, 145, 28);
 		btnGeneraDistinta.setEnabled(true);
 		frame.getContentPane().add(btnGeneraDistinta);
-		
+	*/	
 		
 		Casella= new JTextField();
 		Casella.setEnabled(false);
@@ -208,7 +208,53 @@ public sendeventframe(){
 		btnFine.setEnabled(true);
 		btnFine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int c;
+			for(c=0;c<FrameEventi.table_1.getRowCount();c++)	{
+				pagamento=ComboP.getSelectedItem().toString();
+				costo=(int) FrameEventi.table_1.getValueAt(c, 7);
+				// File fdistinta = new File(percorso+"\\"+nomedistinta+"");
+				 evento=(int) FrameEventi.table_1.getValueAt(c, 8);
+//	JOptionPane.showMessageDialog(sendeventframe.frame, " \""+pagamento+"\" \\o \""+costo+"\","+evento+" "," ",JOptionPane.INFORMATION_MESSAGE);
+				 JFileChooser fc = new JFileChooser();
+				 int sel = fc.showSaveDialog(frame);
+			      if (sel == JFileChooser.APPROVE_OPTION) {
+			         nomedistinta=(fc.getSelectedFile().getName());
+			         percorso =(fc.getCurrentDirectory().toString());
+			    File fdistinta = new File(percorso+"\\"+nomedistinta+"");
+				    Casella.setText(nomedistinta);
+				 
+			/*		try {
+						FileReader f;
+						f= new FileReader(fdistinta);
+						 BufferedReader read;
+						read = new BufferedReader(f);
+					String s;
 				
+					s=read.readLine();
+					
+					
+					
+					 while(true) {
+					      s=read.readLine();
+					      if(s==null)
+					        break;
+					      System.out.println(s);
+					   
+					    }
+				//	  System.out.println(s);
+					//JOptionPane.showMessageDialog(sendeventframe.frame, "'"+s+"'");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} */
+					ordineeventodao.insdetiscr(pagamento,fdistinta, evento, costo);
+			      }
+				 
+	
+
+			}
+			
+//JOptionPane.showMessageDialog(sendeventframe.frame, " \""+pagamento+"\" \\o \""+pagamento+"\","+pagamento+" "," ",JOptionPane.INFORMATION_MESSAGE);	
 	
 				frame.dispose();	
 				FrameEventi.frame.setEnabled(true);
@@ -227,7 +273,7 @@ public sendeventframe(){
 			btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-		
+				
 				
 				frame.setBounds(100, 100, 803, 447);
 				frame.setLocationRelativeTo(null);
@@ -237,7 +283,7 @@ public sendeventframe(){
 				btnConferma.setBounds(0,0,0,0);
 				btnTornaAlCarrello.setBounds(0, 0, 0, 0);
 				
-				btnGeneraDistinta.setEnabled(true);
+			//	btnGeneraDistinta.setEnabled(true);
 				Casella.setVisible(true);  
 				
 

@@ -10,6 +10,7 @@ private String CognomeIstruttore;
 private String Disciplina;
 private String Livello;
 private int costoevento;
+private int codiceevento;
 public String getNomeEvento() {
 	return NomeEvento;
 }
@@ -58,6 +59,12 @@ public int getCostoevento() {
 }
 public void setCostoevento(int costoevento) {
 	this.costoevento = costoevento;
+}
+public int getCodiceevento() {
+	return codiceevento;
+}
+public void setCodiceevento(int codiceevento) {
+	this.codiceevento = codiceevento;
 }
 
 

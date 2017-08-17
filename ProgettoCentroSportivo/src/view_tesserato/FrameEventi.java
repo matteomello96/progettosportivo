@@ -69,7 +69,7 @@ public class FrameEventi extends JFrame {
     public static JButton rimuovi;
     public static JButton svuotacarrello;
     public static JButton invia;
-	   
+
 
 	
 
@@ -160,14 +160,14 @@ table_1 = new JTable();
 			new Object[][] {
 			},
 			new String[] {
-					"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello","Costo Evento"
+					"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello","Costo Evento","Codice Evento"
 			}
 		){
 			
 			private static final long serialVersionUID = 1L;
 			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-					String.class, String.class, String.class,String.class, String.class, String.class, String.class, Integer.class
+					String.class, String.class, String.class,String.class, String.class, String.class, String.class, Integer.class , Integer.class
 					
 				};
 			
@@ -244,7 +244,7 @@ table_1 = new JTable();
 		Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1){
-				Object[] dati = new Object[8];
+				Object[] dati = new Object[9];
 
 				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
 				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
@@ -254,6 +254,7 @@ table_1 = new JTable();
 				dati[5]=table.getValueAt(table.getSelectedRow(), 5);
 				dati[6]=table.getValueAt(table.getSelectedRow(), 6);
 				dati[7]=table.getValueAt(table.getSelectedRow(), 7);
+				dati[8]=table.getValueAt(table.getSelectedRow(), 8);
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				
 
@@ -345,18 +346,11 @@ table_1 = new JTable();
 				table_1.getModel().addTableModelListener(new TableModelListener(){
 					public void tableChanged(TableModelEvent e) {
 					
-						int totale;
+					
 					
 						
 						
-						
-						totale=0;
-						int c=0;
-						for (c=0;c<table_1.getModel().getRowCount();c++){
-				
-						totale=totale+((Integer)(table_1.getModel().getValueAt(c, 7)));
-						
-						}
+					
 						
 						
 						if(table_1.getModel().getRowCount()>0)
