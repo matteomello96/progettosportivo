@@ -26,6 +26,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -35,6 +36,7 @@ import ClassiDao.ElencoDisciplineDAO;
 import ClassiDao.GetInfoDB;
 import ClassiDao.UtenteDao;
 import ClassiDaoTesserato.ElencoEventiTessDAO;
+import ClassiDaoTesserato.eventoesistedao;
 
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
@@ -42,12 +44,14 @@ import java.awt.Dimension;
 import ModelliTabelle.ModDiscIni;
 import ModelliTabelleIstruttore.ModElEventiIstr;
 import ModelliTabelle_Tesserato.ModElEventiTes;
+import ModelliTabelle_Tesserato.controlloevento;
 import VisteUtenteGenerico.DetDisciplina;
 import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
 import Listener.Listen;
 import Model.Utente;
+import Model_Tesserato.ElencoEventiTes;
 
 import javax.swing.JScrollPane;
 
@@ -63,7 +67,10 @@ public class FrameEventi extends JFrame {
 	
 	public JPanel contentPane,tabellaPnl,bottoniPnl1;
 	public static JTable table;
+	
+	public static JTable table2;
     private ModElEventiTes model;
+    private controlloevento model1;
     public static JTable table_1;
     public static JButton Aggiungi;
     public static JButton rimuovi;
@@ -243,6 +250,31 @@ table_1 = new JTable();
 
 		Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+			int tess;
+			table2 = new JTable();
+			int i;
+				model1 = new controlloevento(eventoesistedao.elencoiniziale());
+				table2.setModel(model1);
+				tess= GetInfoDB.getidTess(Utente.getUsername());
+				int esci=0;
+				int b;
+				
+				for(i=0;i<table2.getRowCount();i++){
+					b= (int) table2.getValueAt(i, 1);
+			if(table2.getValueAt(i, 0)==table.getValueAt(table.getSelectedRow(), 8) && b==tess){
+				
+				
+				esci=1;
+			}
+				
+				}		
+	
+				if(esci==1){
+					
+					JOptionPane.showMessageDialog(FrameEventi.frame, " evento già prenotato!!");
+				}
+				else{
 				if(table.getSelectedRow()!=-1){
 				Object[] dati = new Object[9];
 
@@ -258,7 +290,7 @@ table_1 = new JTable();
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				
 
-
+				
 				boolean u=true;
 				int c;
 				
@@ -285,7 +317,7 @@ table_1 = new JTable();
 					JOptionPane.showMessageDialog(FrameEventi.frame, "Non è possibile Aggiungere lo stesso evento",null,JOptionPane.WARNING_MESSAGE);
 				}
 				}
-				
+				}
 			}
 		});
 		
