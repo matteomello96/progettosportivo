@@ -1,4 +1,4 @@
-package ModelliTabelle;
+package ModelliTabelleRespo;
 
 
 import java.awt.image.BufferedImage;
@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
 
 import com.mysql.jdbc.Blob;
 
-import Model.DisciplinaElenco;
+import Model_Responsabile.DisciplinaElenco;
 
 public class ModDiscIni extends AbstractTableModel {
 

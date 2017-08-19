@@ -219,32 +219,17 @@ public class FrameIstruttore extends JFrame {
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl1.add(btnNewButton4,gbc);
 	
-		JButton btnNewButton8 = new JButton("Elenco Iscritti all'evento");
-		btnNewButton8.setMnemonic('l');
-		btnNewButton8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(table.getSelectedRow()!=-1)
-				EliminaEventoDAO.eliminaevento((String) FrameIstruttore.table.getValueAt(FrameIstruttore.table.getSelectedRow(), 0));
-				else
-					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
-			}
-		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx = 3;
-		gbc.gridy = 6;
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl1.add(btnNewButton8,gbc);
-		
-		
 		
 		
 		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(3, 1));
+		tabellaPnl.setLayout(new GridLayout(3 , 1));
 		tabellaPnl.add(table.getTableHeader());
 		tabellaPnl.add(table);
 		tabellaPnl.add(bottoniPnl1,gbc);
 		contentPane.add(tabellaPnl, gbc);
+		
+		
+	 
 		
 
 		
@@ -327,22 +312,7 @@ public class FrameIstruttore extends JFrame {
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl2.add(btnNewButton7,gbc);
 	
-		JButton btnNewButton10 = new JButton(" Elenco Iscritti all'attività");
-		btnNewButton10.setMnemonic('m');
-		btnNewButton10.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(table.getSelectedRow()!=-1)
-				EliminaEventoDAO.eliminaevento((String) FrameIstruttore.table.getValueAt(FrameIstruttore.table.getSelectedRow(), 0));
-				else
-					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore attività",JOptionPane.WARNING_MESSAGE);
-			}
-		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx = 3;
-		gbc.gridy = 9;
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl2.add(btnNewButton10,gbc);
+	
 		
 		
 		

@@ -16,6 +16,11 @@ import view_tesserato.FrameEventi;
 import view_tesserato.FrameTesserato;
 import view_tesserato.FrameTestimonianze;
 import view_tesserato.FrameTurno;
+import visteadmin.FrameGestione;
+import visteadmin.FrameInserisciLiv;
+import visteadmin.FrameInserisciModPag;
+import visteadmin.FrameModificaLiv;
+import visteadmin.FrameModificaModPag;
 import visteadmin.FrameOrdini;
 import visteadmin.FrameResponsabile;
 
@@ -35,7 +40,16 @@ public class Listen implements ActionListener {
 	public FrameInserisciAtt frameinserisciatt;
 	public FrameModificaEv framemodificaev;
 	public FrameModificaAtt framemodificaatt;
+	public FrameGestione framegestione;
+	public FrameModificaModPag framemodificamodpag;
+	public FrameInserisciModPag frameinseriscimodpag;
+	public FrameInserisciLiv frameinserisciliv;
+	public FrameModificaLiv framemodificaliv;
 	
+	public Listen(FrameModificaLiv frame)
+	{
+		framemodificaliv=frame;
+	}
 	
 	public Listen(FrameIniziale frame)
 	{
@@ -79,6 +93,18 @@ public class Listen implements ActionListener {
 	public Listen(FrameModificaAtt frame) {
 		framemodificaatt = frame;
 	}
+	public Listen(FrameGestione frame) {
+		framegestione = frame;
+	}
+	public Listen(FrameModificaModPag frame) {
+		framemodificamodpag = frame;
+	}
+	public Listen(FrameInserisciModPag frame) {
+		frameinseriscimodpag= frame;
+	}
+	public Listen(FrameInserisciLiv frame) {
+		frameinserisciliv = frame ;
+	}
 	public void actionPerformed(ActionEvent e)
 	{
 if ("Vai_istr".equals(e.getActionCommand())){
@@ -95,7 +121,35 @@ if ("Vai_istr1".equals(e.getActionCommand())){
 	new FrameIstruttore();
 	FrameIstruttore.frame.setVisible(true);
 }	
-		
+if ("Vai_ges".equals(e.getActionCommand())){
+	
+	FrameModificaModPag.frame.setVisible(false);
+	FrameGestione.frame.dispose();
+	new FrameGestione();
+	FrameGestione.frame.setVisible(true);
+}
+if ("Vai_ges_da_ins".equals(e.getActionCommand())){
+	
+	FrameInserisciModPag.frame.setVisible(false);
+	FrameGestione.frame.dispose();
+	new FrameGestione();
+	FrameGestione.frame.setVisible(true);
+}
+if ("Vai_ges_da_ins_liv".equals(e.getActionCommand())){
+	
+	FrameInserisciLiv.frame.setVisible(false);
+	FrameGestione.frame.dispose();
+	new FrameGestione();
+	FrameGestione.frame.setVisible(true);
+}
+if ("Vai_ges_da_mod_liv".equals(e.getActionCommand())){
+	
+	FrameModificaLiv.frame.setVisible(false);
+	FrameGestione.frame.dispose();
+	new FrameGestione();
+	FrameGestione.frame.setVisible(true);
+}
+
 		if ("Vai_reg".equals(e.getActionCommand())){
 			
 			FrameIniziale.frame.setVisible(false);

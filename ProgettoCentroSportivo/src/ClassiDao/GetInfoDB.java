@@ -23,7 +23,7 @@ import visteadmin.framedettagli;
 public class GetInfoDB {
 	 public static int getidTess(String username){
 
-	      
+	       
 	        
 	        Connection con = DbConnection.db;
 	        
