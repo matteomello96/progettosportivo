@@ -4,11 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,31 +15,32 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-
-import ClassiDao.GetInfoDB;
-import ModelliTabelleRespo.modelisc;
-import ModelliTabelleRespo.modellidettagli;
-import classiDAOResponsabile.ConfermaDao;
-import classiDAOResponsabile.RichiesteDao;
-import classiDAOResponsabile.Uccidi_iscrizione;
-import classiDAOResponsabile.dettagliiscrizionedao;
+import ModelliTabelleRespo.modeven;
+import classiDAOResponsabile.confeven;
+import classiDAOResponsabile.elencoeventidao;
+import classiDAOResponsabile.rimuovieventodao;
 import classiDAOResponsabile.rimuoviordinedao;
-import view_tesserato.FrameDiscAttive;
-import view_tesserato.FrameTesserato;
 
-public class FrameOrdini extends JPanel {
+
+public class frameeventi extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public static JFrame frame;
 	
 	public static JTable table_2;
-	public static JTable table;
-	private modelisc model;
-	private modellidettagli model1;
+      private Object ideven;
+	private modeven model;
+
 	public JPanel contentPane;
+private JButton btnNewButton;
 
 	
-	public FrameOrdini() {
-		frame = new JFrame("FrameOrdini");
+	public frameeventi() {
+		frame = new JFrame("FrameEventi");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 700, 400);
 		frame.setVisible(true);
@@ -71,7 +70,7 @@ public class FrameOrdini extends JPanel {
 	    
 	    
 	    
-		JLabel lblNewLabel = new JLabel("Richieste iscrizione dai Tesserati");
+		JLabel lblNewLabel = new JLabel("Richieste iscrizione Eventi");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		gbc.gridwidth = 4;
@@ -82,7 +81,7 @@ public class FrameOrdini extends JPanel {
 		
 		
 		table_2 = new JTable();
-		model = new modelisc(RichiesteDao.elencoiniziale());
+		model = new modeven(elencoeventidao.elencoeven());
 		table_2.setCellSelectionEnabled(true);
 		table_2.setModel(model);
 
@@ -101,7 +100,7 @@ public class FrameOrdini extends JPanel {
 		contentPane.add(pane2, gbc);
 
 		
-		JButton btnNewButton = new JButton("Conferma/Annulla Pagamento");
+		 btnNewButton = new JButton("Conferma/Annulla Partecipazione");
 		btnNewButton .setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton .setForeground(Color.BLACK);
 		gbc.gridwidth = 2;
@@ -111,18 +110,10 @@ public class FrameOrdini extends JPanel {
 		gbc.gridy = 4;
 		contentPane.add(btnNewButton, gbc);
 		
-		JButton btnNewButton_1 = new JButton("Conferma modifiche iscrizioni ");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton_1.setForeground(Color.BLACK);
 
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 4;
-		gbc.gridy = 4;
-		contentPane.add(btnNewButton_1, gbc);
 		
 		
-		JButton btnNewButton_2 = new JButton("Elimina ordine");
+		JButton btnNewButton_2 = new JButton("Elimina Partecipazione");
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton_2.setForeground(Color.BLACK);
 
@@ -134,89 +125,40 @@ public class FrameOrdini extends JPanel {
 		
 		
 		
-	
-		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int idordine;
-				
-				idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
-				
-				
-			
-
-		   ConfermaDao.Confermaiscrizione(idordine);
-		   frame.dispose();
-		   new FrameOrdini();
-			
+	
+ 
+	ideven = table_2.getValueAt( table_2.getSelectedRow() , 0);
+ 
+//   JOptionPane.showMessageDialog(frameeventi.frame, "Il nome utente \""+table_2.getValueAt( table_2.getSelectedRow() , 0)+"\" e\\o l'email \""+table_2.getValueAt( table_2.getSelectedRow() , 0)+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);			
+     
+	   confeven.conf(ideven);
+			frame.dispose();
+			new frameeventi();
 			}
 		});
 		
 		
 		
-		
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-		int idordine;
-				
-			idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
-				
-				
-	      new framedettagli(idordine);
-			frame.setVisible(false);
 
-				
-		   
-			
-			}
-		});
 		
 		
 		
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-	int idordine,i;
-	int cont=0;
-	idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
-	
-	
-	
-	
-	table = new JTable();
-	model1 = new modellidettagli(dettagliiscrizionedao.elencoiniziale(idordine));
-	table.setCellSelectionEnabled(true);
-	table.setModel(model);
-	
-	
-	for(i=0;i<table.getRowCount();i++){
-	
-	cont=cont+1;	
-		
-		
-	}				
-if(cont==0){
-	
-	
-	rimuoviordinedao.Uccidi_isc(idordine);
-	JOptionPane.showMessageDialog(frame, "Ordine rimosso dal database!!");
-frame.dispose();
-new FrameOrdini();
-	
-}
-    else{
-    	JOptionPane.showMessageDialog(frame, "Ci sono ancora discipline registrate in questo ordine.Perfavore elimina prima le discipline!!");
-    	cont=0;
-    
-    }			
 				
-	     
-		
-
+				ideven = table_2.getValueAt( table_2.getSelectedRow() , 0);
+				rimuovieventodao.uccudievento(ideven);
+				JOptionPane.showMessageDialog(frame, "Ordine rimosso dal database!!");
+			frame.dispose();
+			new frameeventi();
 				
-		   
 			
 			}
 		});
+	
+		
 		
 
 	

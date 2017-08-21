@@ -113,6 +113,21 @@ public class FrameResponsabile extends JFrame {
 		
 		mnNewMenu.add(MenuDiscipline);
 		
+		
+		
+		JMenuItem MenuEventi = new JMenuItem("Elenco eventi");
+		MenuEventi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new frameeventi();
+				frame.setVisible(false);
+			
+			}
+		});
+		
+		
+		mnNewMenu.add(MenuEventi);
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,193,20));
 		contentPane.setLayout(new GridBagLayout());
