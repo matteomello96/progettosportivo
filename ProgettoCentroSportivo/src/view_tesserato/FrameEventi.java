@@ -114,14 +114,7 @@ public class FrameEventi extends JFrame {
 		mntmNewMenuItem.addActionListener(new Listen(this));
 		mntmNewMenuItem.setActionCommand("iniistr2");
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new FrameCambia();
-				frame.setEnabled(false);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem_1);
+
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,36,0));
