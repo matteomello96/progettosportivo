@@ -101,10 +101,10 @@ public class FrameResponsabile extends JFrame {
 		});
 		mnNewMenu.add(MenuOrdini);
 
-		JMenuItem MenuDiscipline = new JMenuItem("Discipline");
+		JMenuItem MenuDiscipline = new JMenuItem("Gestione");
 		MenuDiscipline.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new framediscdisp();
+				new FrameGestione();
 				
 			
 			}
