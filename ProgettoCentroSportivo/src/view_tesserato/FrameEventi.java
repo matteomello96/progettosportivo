@@ -100,7 +100,13 @@ public class FrameEventi extends JFrame {
 		JMenu mnNewMenu = new JMenu("home");
 		menuBar.add(mnNewMenu);
 		
-		JMenu mnNewMenu_1 = new JMenu("visualizza");
+		JMenuItem mnNewMenu_1 = new JMenuItem("visualizza");
+		mnNewMenu_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new frameviseventi();
+				frame.setEnabled(false);
+			}
+		});
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
@@ -245,18 +251,20 @@ table_1 = new JTable();
 		gbc.gridy = 7;
 		contentPane.add(rimuovi, gbc);
 		
+		table2 = new JTable();
+		model1 = new controlloevento(eventoesistedao.elencoiniziale());
+		table2.setModel(model1);
+		int tess;
+		tess= GetInfoDB.getidTess(Utente.getUsername());
 		
-		
-
 		Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-			int tess;
-			table2 = new JTable();
+			
+			
 			int i;
-				model1 = new controlloevento(eventoesistedao.elencoiniziale());
-				table2.setModel(model1);
-				tess= GetInfoDB.getidTess(Utente.getUsername());
+				
+				
 				int esci=0;
 				int b;
 				

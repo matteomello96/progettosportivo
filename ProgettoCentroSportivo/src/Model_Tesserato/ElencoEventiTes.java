@@ -12,6 +12,7 @@ private String Livello;
 private int costoevento;
 private int codiceevento;
 private int tesserato;
+
 public String getNomeEvento() {
 	return NomeEvento;
 }

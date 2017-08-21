@@ -42,7 +42,7 @@ public class controlloevento extends AbstractTableModel  {
 		
 		  if(columnIndex==0) return d.getCodiceevento();
 		else if(columnIndex==1) return d.getTesserato();
-		
+
 		  
 		  return null;
 		  
@@ -60,6 +60,7 @@ public class controlloevento extends AbstractTableModel  {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         if(columnIndex==0) dati.get(rowIndex).setCodiceevento((int)aValue);
         if(columnIndex==1) dati.get(rowIndex).setTesserato((int)aValue);
+     
      
         
 		
