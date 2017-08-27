@@ -1,10 +1,12 @@
 package Model_Responsabile;
 
+import javax.swing.ImageIcon;
+
 public class DisciplinaElenco {
 private String NomeDisciplina;	
 private String Descrizione;
 private String Calendario;
-private String ImmaginePath;
+private ImageIcon Image;
 
 public String getNomeDisciplina() {
 	return NomeDisciplina;
@@ -18,11 +20,11 @@ public String getDescrizione() {
 public void setDescrizione(String descrizione) {
 	Descrizione = descrizione;
 }
-public String getImmaginePath() {
-	return ImmaginePath;
+public ImageIcon getImage() {
+	return Image;
 }
-public void setImmaginePath(String immagine) {
-	ImmaginePath = immagine;
+public void setImage(ImageIcon immagine) {
+	Image = immagine;
 }
 public String getCalendario() {
 	return Calendario;
@@ -32,4 +34,5 @@ public void setCalendario(String calendario) {
 	
 
 }
+
 }

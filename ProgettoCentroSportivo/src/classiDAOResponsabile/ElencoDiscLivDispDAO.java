@@ -13,39 +13,39 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import Model.DisciplinaElenco;
+import Model_Istruttore.ElencoAtt;
 import Model_Istruttore.ElencoEventi;
-import Model_Responsabile.ElencoLivDis;
+import Model_Responsabile.ElencoLivDisDisp;
 import DBInterfaccia.DbConnection;
 
-public class ElencoDiscDispDAO {
+public class ElencoDiscLivDispDAO {
 
-	private static ElencoDiscDispDAO instance;
+	private static ElencoDiscLivDispDAO instance;
 	
-	public static synchronized ElencoDiscDispDAO getInstance() {
+	public static synchronized ElencoDiscLivDispDAO getInstance() {
 		if(instance==null)
-			instance=new ElencoDiscDispDAO();
+			instance=new ElencoDiscLivDispDAO();
 		return instance;
 	}
 	
 	
-	public static ArrayList<ElencoLivDis> elencodiscdisp() {
+	public static ArrayList<ElencoLivDisDisp> elencoiniziale() {
 		
 		
-        ArrayList<ElencoLivDis> dati= new ArrayList<ElencoLivDis>(); 
+        ArrayList<ElencoLivDisDisp> dati= new ArrayList<ElencoLivDisDisp>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT disciplina,livello,costomensile,combinazionelivdis FROM disciplinedisponibili ;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select distinct disciplinedisponibili.disciplina,disciplinedisponibili.livello from disciplinedisponibili ");
         
         Iterator<String[]> i = res.iterator();
        
         while(i.hasNext()) {
         	String[] riga = i.next();
         	
-        	ElencoLivDis d=new ElencoLivDis(); 	
+        	ElencoLivDisDisp d=new ElencoLivDisDisp(); 	
         	d.setDisciplina(riga[0]);
         	d.setLivello(riga[1]);
-        	d.setCostomensile(Float.parseFloat(riga[2]));
-        	d.setCodicecomb(Integer.parseInt(riga[3]));
-        
+        	
+
         	
         	
         	

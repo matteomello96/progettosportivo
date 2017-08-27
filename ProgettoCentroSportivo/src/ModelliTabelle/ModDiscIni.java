@@ -1,24 +1,24 @@
 package ModelliTabelle;
 
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
+
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
+
 import javax.swing.ImageIcon;
+
 import javax.swing.table.AbstractTableModel;
 
-import com.mysql.jdbc.Blob;
+
 
 import Model.DisciplinaElenco;
 
 public class ModDiscIni extends AbstractTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<DisciplinaElenco> dati;
 	
 	public ArrayList<DisciplinaElenco> getDati() {
@@ -59,14 +59,14 @@ public class ModDiscIni extends AbstractTableModel {
 		  if(columnIndex==0) return d.getNomeDisciplina();
 		else if(columnIndex==1) return d.getDescrizione();
 		else if(columnIndex==2) return d.getCalendario();
-		else if(columnIndex==3) return d.getImmaginePath();
-			
+		else if(columnIndex==3) return d.getImage();
+		
 		return null;
 	}
 
 	@Override
 	public Class getColumnClass(int column) {
-	    if(column==3) return InputStream.class;
+	    if(column==3) return ImageIcon.class;
 		return String.class;
 	}
 	
@@ -78,16 +78,18 @@ public class ModDiscIni extends AbstractTableModel {
 
 	@Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+	
         if(columnIndex==0) dati.get(rowIndex).setNomeDisciplina(aValue.toString());
         if(columnIndex==1) dati.get(rowIndex).setDescrizione(aValue.toString());
         if(columnIndex==2 ) dati.get(rowIndex).setCalendario(aValue.toString());
-        if(columnIndex==3 ) dati.get(rowIndex).setImmaginePath(aValue.toString());
+        if(columnIndex==3 ) dati.get(rowIndex).setImage((ImageIcon)aValue);
         
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
     }
 	
 	
 	
-	}
-	
+
+}
+
 

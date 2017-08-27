@@ -17,8 +17,13 @@ import view_tesserato.FrameTesserato;
 import view_tesserato.FrameTestimonianze;
 import view_tesserato.FrameTurno;
 import visteadmin.FrameGestione;
+import visteadmin.FrameInserisciDiscDisp;
+import visteadmin.FrameInserisciDisciplina;
+import visteadmin.FrameInserisciIstrDisp;
 import visteadmin.FrameInserisciLiv;
 import visteadmin.FrameInserisciModPag;
+import visteadmin.FrameModificaDiscDisp;
+import visteadmin.FrameModificaDisciplina;
 import visteadmin.FrameModificaLiv;
 import visteadmin.FrameModificaModPag;
 import visteadmin.FrameOrdini;
@@ -45,6 +50,11 @@ public class Listen implements ActionListener {
 	public FrameInserisciModPag frameinseriscimodpag;
 	public FrameInserisciLiv frameinserisciliv;
 	public FrameModificaLiv framemodificaliv;
+	public FrameInserisciDiscDisp frameinseriscidiscdisp;
+	public FrameModificaDiscDisp framemodificadiscdisp;
+	public FrameInserisciIstrDisp frameinserisciistrdisp;
+	public FrameInserisciDisciplina frameinseriscidisciplina;
+	public FrameModificaDisciplina framemodificadisciplina;
 	
 	public Listen(FrameModificaLiv frame)
 	{
@@ -105,8 +115,50 @@ public class Listen implements ActionListener {
 	public Listen(FrameInserisciLiv frame) {
 		frameinserisciliv = frame ;
 	}
+	public Listen(FrameInserisciDiscDisp frame) {
+		frameinseriscidiscdisp =frame;
+	}
+	public Listen(FrameModificaDiscDisp frame) {
+		framemodificadiscdisp =frame;
+	}
+	public Listen(FrameInserisciIstrDisp frame) {
+		frameinserisciistrdisp = frame;
+	}
+
+	public Listen(FrameInserisciDisciplina frame) {
+		frameinseriscidisciplina= frame;
+	}
+
+	public Listen(FrameModificaDisciplina frame) {
+		framemodificadisciplina = frame;
+	}
+
 	public void actionPerformed(ActionEvent e)
 	{
+if ("Vai_home_da_mod_disc".equals(e.getActionCommand())){
+			
+			FrameModificaDiscDisp.frame.setVisible(false);
+			FrameModificaDiscDisp.frame.dispose();
+			new FrameGestione();
+			FrameGestione.frame.setVisible(true);
+		}
+if ("Vai_home_da_ins_disc".equals(e.getActionCommand())){
+			
+			FrameInserisciDiscDisp.frame.setVisible(false);
+			FrameInserisciDiscDisp.frame.dispose();
+			new FrameGestione();
+			FrameGestione.frame.setVisible(true);
+		}	
+if ("Vai_home_da_ins_istr".equals(e.getActionCommand())){
+	
+	FrameInserisciIstrDisp.frame.setVisible(false);
+	FrameInserisciIstrDisp.frame.dispose();
+	new FrameGestione();
+	FrameGestione.frame.setVisible(true);
+}	
+	
+		
+		
 if ("Vai_istr".equals(e.getActionCommand())){
 			
 			FrameModificaEv.frame.setVisible(false);
@@ -124,28 +176,42 @@ if ("Vai_istr1".equals(e.getActionCommand())){
 if ("Vai_ges".equals(e.getActionCommand())){
 	
 	FrameModificaModPag.frame.setVisible(false);
-	FrameGestione.frame.dispose();
+	FrameModificaModPag.frame.dispose();
 	new FrameGestione();
 	FrameGestione.frame.setVisible(true);
 }
 if ("Vai_ges_da_ins".equals(e.getActionCommand())){
 	
 	FrameInserisciModPag.frame.setVisible(false);
-	FrameGestione.frame.dispose();
+	FrameInserisciModPag.frame.dispose();
+	new FrameGestione();
+	FrameGestione.frame.setVisible(true);
+}
+if ("Vai_ges_da_ins_disc".equals(e.getActionCommand())){
+	
+	FrameInserisciDisciplina.frame.setVisible(false);
+	FrameInserisciDisciplina.frame.dispose();
+	new FrameGestione();
+	FrameGestione.frame.setVisible(true);
+}
+if ("Vai_ges_da_mod_disc".equals(e.getActionCommand())){
+	
+	FrameModificaDisciplina.frame.setVisible(false);
+	FrameModificaDisciplina.frame.dispose();
 	new FrameGestione();
 	FrameGestione.frame.setVisible(true);
 }
 if ("Vai_ges_da_ins_liv".equals(e.getActionCommand())){
 	
 	FrameInserisciLiv.frame.setVisible(false);
-	FrameGestione.frame.dispose();
+	FrameInserisciLiv.frame.dispose();
 	new FrameGestione();
 	FrameGestione.frame.setVisible(true);
 }
 if ("Vai_ges_da_mod_liv".equals(e.getActionCommand())){
 	
 	FrameModificaLiv.frame.setVisible(false);
-	FrameGestione.frame.dispose();
+	FrameModificaLiv.frame.dispose();
 	new FrameGestione();
 	FrameGestione.frame.setVisible(true);
 }
@@ -195,7 +261,7 @@ if ("Vai_ges_da_mod_liv".equals(e.getActionCommand())){
           if ("ini".equals(e.getActionCommand())){
     			
         	  FrameLogin.frame.setVisible(false);
-        	  FrameTesserato.frame.dispose();
+        	  FrameLogin.frame.dispose();
 			new FrameIniziale();
 			FrameIniziale.frame.setVisible(true);
 		}

@@ -19,7 +19,7 @@ public class DbConnection {
 	   
 	   public static String nomebase="centropolisportivo";
 	   public static String rootu="root";
-	  public static String rootp="Furfudopfa81";
+	  public static String rootp="Bla.bla.12";
 	   public static String host="127.0.0.1";
 	   
 	 
@@ -76,28 +76,7 @@ public class DbConnection {
 
 		      return v;
 		   }
-	   public Vector<InputStream[]> eseguiImmagine(String query) {
-		      Vector<InputStream[]> v = null;
-		      InputStream [] record;
-		      int colonne = 0;
-		      try {
-		         Statement stmt = db.createStatement();    
-		         ResultSet rs = stmt.executeQuery(query);   
-		         v = new Vector<InputStream[]>();
-		         ResultSetMetaData rsmd = rs.getMetaData();
-		         colonne = rsmd.getColumnCount();
-
-		         while(rs.next()) {   
-		            record = new InputStream[colonne];
-		            for (int i=0; i<colonne; i++) record[i] = rs.getBinaryStream(i+1);
-		            v.add( (InputStream[]) record.clone() );
-		         }
-		         rs.close();     
-		         stmt.close();   
-		      } catch (Exception e) { e.printStackTrace(); }
-
-		      return v;
-		   }
+	   
 	   public boolean eseguiAggiornamento(String query) {
 		      int numero = 0;
 		      boolean risultato = false;

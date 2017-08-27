@@ -3,6 +3,8 @@ package Model_Responsabile;
 public class ElencoLivDis{
 private String Disciplina;
 private String Livello;
+private Float Costomensile;
+
 private int codicecomb;
 public String getDisciplina() {
 	return Disciplina;
@@ -21,6 +23,12 @@ public int getCodicecomb() {
 }
 public void setCodicecomb(int codicecomb) {
 	this.codicecomb = codicecomb;
+}
+public Float getCostomensile() {
+	return Costomensile;
+}
+public void setCostomensile(Float costomensile) {
+	Costomensile = costomensile;
 }
 
 

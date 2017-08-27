@@ -4,15 +4,30 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-
+import java.awt.color.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringReader;
 
 import Model.DisciplinaElenco;
+import Model_Responsabile.ElencoDisc;
+import VisteUtenteGenerico.FrameIniziale;
 import DBInterfaccia.DbConnection;
 
 public class ElencoDisciplineDAO {
@@ -26,48 +41,42 @@ public class ElencoDisciplineDAO {
 	}
 	
 	
-	public static ArrayList<DisciplinaElenco> elencoiniziale() {
+	
+	public static ArrayList<ElencoDisc> elencoiniziale() throws IOException {
 		
 		
-        ArrayList<DisciplinaElenco> dati= new ArrayList<DisciplinaElenco>(); 
+        ArrayList<ElencoDisc> dati= new ArrayList<ElencoDisc>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT DISTINCT  C.NomeDisciplina,C.Descrizione,C.Calendario from disciplinedisponibili as A  INNER JOIN disciplina as C ON A.Disciplina=C.NomeDisciplina INNER JOIN calendario as D ON D.nomecalendario=C.Calendario; ");
-        Vector<InputStream[]> res2 = DbConnection.getInstance().eseguiImmagine("SELECT DISTINCT C.Immagine from disciplinedisponibili as A  INNER JOIN disciplina as C ON A.Disciplina=C.NomeDisciplina INNER JOIN calendario as D ON D.nomecalendario=C.Calendario;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT  C.NomeDisciplina,C.Descrizione,C.Calendario,C.immagine from disciplina as C ; ");
+    
         Iterator<String[]> i = res.iterator();
-        Iterator<InputStream[]> i2 = res2.iterator();
-        while((i.hasNext()) && (i2.hasNext())) {
+        
+        while((i.hasNext())) {
         	String[] riga = i.next();
-        	InputStream[] riga2 = i2.next();
-        	DisciplinaElenco d=new DisciplinaElenco(); 	
+        	
+        	ElencoDisc d=new ElencoDisc(); 	
         	d.setNomeDisciplina(riga[0]);
         	d.setDescrizione(riga[1]);
         	d.setCalendario(riga[2]);
-
-			try {
-        	// inputstream -> path dell'img sul pc
-        	File f;
-				f = File.createTempFile("mioprefisso", ".tmp");
-			
         	
-        	OutputStream out=new FileOutputStream(f);
-        	byte[] buffer = new byte[80*1024];
-        	int bytesRead;
-        	while((bytesRead=riga2[0].read(buffer))!=-1)
-        		out.write(buffer, 0, bytesRead);
-        	out.close();
-        d.setImmaginePath(f.getAbsolutePath()); 
-        f.deleteOnExit(); 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-       
-        	//..
+        	try{
+        		File is = new File(riga[3]);
+        		Image im2 = ImageIO.read(is);
+          
+        	
+        	d.setImage(new ImageIcon(im2));}
         	
         	
         	
-        	dati.add(d);
+        	catch (IOException ex) {
+        	    JOptionPane.showMessageDialog(FrameIniziale.frame, ex);
+        	}
+           
+        	
+        	
+        	
         }
+        
         return dati;
 	}
 	

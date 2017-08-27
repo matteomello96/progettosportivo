@@ -1,38 +1,54 @@
 package Model_Responsabile;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+
+
+
+import javax.swing.ImageIcon;
 
 public class ElencoDisc{
-private String Disciplina;
-private String Descrizione;
-private String Calendario;
-private InputStream Immagine;
+	private String NomeDisciplina;	
+	private String Descrizione;
+	private String Calendario;
+	private String Pathimmagine;
 
-public String getDisciplina() {
-	return Disciplina;
-}
-public void setDisciplina(String disciplina) {
-	Disciplina = disciplina;
-}
-public String getDescrizione() {
-	return Descrizione;
-}
-public void setDescrizione(String descrizione) {
-	Descrizione = descrizione;
-}
-public String getCalendario() {
-	return Calendario;
-}
-public void setCalendario(String calendario) {
-	Calendario = calendario;
-}
-public InputStream getImmagine() {
-	return Immagine;
-}
-public void setImmagine(InputStream immagine) {
-	Immagine = immagine;
-}
+	private ImageIcon image;
+
+	public String getNomeDisciplina() {
+		return NomeDisciplina;
+	}
+	public void setNomeDisciplina(String nomeDisciplina) {
+		NomeDisciplina = nomeDisciplina;
+	}
+	public String getDescrizione() {
+		return Descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		Descrizione = descrizione;
+	}
+
+
+	public String getCalendario() {
+		return Calendario;
+	}
+	public void setCalendario(String calendario) {
+		Calendario = calendario;
+		
+
+	}
+	public ImageIcon getImage() {
+		return image;
+	}
+	public void setImage(ImageIcon imageIcon) {
+		this.image = imageIcon;
+	}
+	public String getPathimmagine() {
+		return Pathimmagine;
+	}
+	public void setPathimmagine(String pathimmagine) {
+		Pathimmagine = pathimmagine;
+	}
+
+	
 
 
 

@@ -205,7 +205,7 @@ public class FrameGestione extends JFrame {
 		btnNewButton.setMnemonic('a');
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new FrameInserisciDisciplina();
 					
 			}
 		});	
@@ -226,7 +226,11 @@ public class FrameGestione extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				table.setEnabled(true);
 				if(table.getSelectedRow()!=-1)
-				{}
+				{
+					
+				new FrameModificaDisciplina((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0));	
+					
+				}
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
 			}
@@ -427,7 +431,7 @@ public class FrameGestione extends JFrame {
 		btnNewButton10.setMnemonic('g');
 		btnNewButton10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new FrameInserisciDiscDisp();
 					
 			}
 		});	
@@ -438,6 +442,23 @@ public class FrameGestione extends JFrame {
 		
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl3.add(btnNewButton10,gbc);
+		
+		JButton btnNewButton101 = new JButton("Modifica disciplina disponibile");
+		btnNewButton101.setMnemonic('x');
+		btnNewButton101.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new FrameModificaDiscDisp((String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 0),(String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 1),(float) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 2));
+					
+			}
+		});	
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.gridwidth = 2;
+		gbc.gridx =1;
+		gbc.gridy =9;
+		
+		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+		bottoniPnl3.add(btnNewButton101,gbc);
+		
 		
 		
 		JButton btnNewButton11 = new JButton("Elimina disciplina disponibile");
@@ -455,7 +476,7 @@ public class FrameGestione extends JFrame {
 		});	
 		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridwidth = 2;
-		gbc.gridx =1;
+		gbc.gridx =2;
 		gbc.gridy =9;
 		
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
@@ -478,53 +499,7 @@ public class FrameGestione extends JFrame {
 		
 		
 		
-	tabellaPnl4 = new JPanel();
-	tabellaPnl4.setLayout(new GridLayout(3 , 1));
-	
-	
-	JLabel lblIS = new JLabel("Elenco degli istruttori");
-	lblIS.setFont(new Font("Tahoma", Font.PLAIN, 14));
-	lblIS.setForeground(Color.BLACK);
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx =1;
-	gbc.gridy =10;
-	tabellaPnl4.add(lblIS);
-	
-	JScrollPane scrollt4 = new JScrollPane();
-	scrollt4.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-	scrollt4.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-	scrollt4.setBounds(50, 30, 300, 50);	
-	
-	
-	
-	model4 = new ModElIstr(ElencoIstrDAO.elencoistr());
-	table4 = new JTable(model4);
-	table4.setRowHeight(20);
-	table4.setRowHeight(3, 50);
-	table4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-	table4.setCellSelectionEnabled(true);
-	table4.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	Dimension tx = table4.getPreferredSize();
-	table4.setPreferredSize(tx);
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =1;
-	gbc.gridy =11;
-		
-	
-	scrollt4.setPreferredSize(tx);
-	scrollt4.setViewportView(table4);
-	
-	tabellaPnl4.add(scrollt4);
-	
-	
-	
-	
-	
-	
-	Dimension gx =tabellaPnl4.getPreferredSize();
-	tabellaPnl4.setPreferredSize(gx);
-	tabel.add("Elenco istruttori",tabellaPnl4);
-	
+
 	
 	tabellaPnl5 = new JPanel();
 	tabellaPnl5.setLayout(new GridLayout(4 , 1));
@@ -570,7 +545,7 @@ public class FrameGestione extends JFrame {
 	btnNewButton12.setMnemonic('h');
 	btnNewButton12.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			
+			new FrameInserisciIstrDisp();
 				
 		}
 	});	
@@ -605,11 +580,12 @@ public class FrameGestione extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(table5.getSelectedRow()!=-1)
 			{
-				EliminaCombIstrDAO.eliminacombis(((Integer) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 0)),((Integer) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 1)));	}
-			else
-				JOptionPane.showMessageDialog(null, "Seleziona una combinazione dall'elenco","Errore combinazione",JOptionPane.WARNING_MESSAGE);
+				EliminaCombIstrDAO.eliminacombis(((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 0)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 1)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 2)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 3)));
+				
 		}
-	});	
+			else{
+			JOptionPane.showMessageDialog(null, "Seleziona una combinazione dall'elenco","Errore combinazione",JOptionPane.WARNING_MESSAGE);}
+	}});	
 	gbc.anchor = GridBagConstraints.LINE_START;
 	gbc.gridwidth = 2;
 	gbc.gridx =1;

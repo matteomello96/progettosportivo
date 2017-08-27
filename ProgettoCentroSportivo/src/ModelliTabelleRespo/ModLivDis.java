@@ -12,32 +12,33 @@ import com.mysql.jdbc.Blob;
 import Model.DisciplinaElenco;
 import Model_Istruttore.ElencoEventi;
 import Model_Responsabile.ElencoLivDis;
+import Model_Responsabile.ElencoLivDisDisp;
 
-public class ModDiscDisp extends AbstractTableModel {
+public class ModLivDis extends AbstractTableModel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<ElencoLivDis> dati;
+	private ArrayList<ElencoLivDisDisp> dati;
 	
-	public ArrayList<ElencoLivDis> getDati() {
+	public ArrayList<ElencoLivDisDisp> getDati() {
 		return dati;
 	
 	}
-	public ModDiscDisp(ArrayList<ElencoLivDis> dati) {
+	public ModLivDis(ArrayList<ElencoLivDisDisp> arrayList) {
 		super();
-		this.dati = dati;
+		this.dati = arrayList;
 	}
 
 	
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return 2;
 	}
 	
 	
-	private String[] tableHeaders = {"Disciplina","Livello","Costo mensile","Combinazione Liv-Dis"};
+	private String[] tableHeaders = {"Disciplina","Livello"};
 	@Override
 	public String getColumnName(int columnIndex){
 		return tableHeaders[columnIndex];
@@ -54,20 +55,18 @@ public class ModDiscDisp extends AbstractTableModel {
 		
 		//ArrayList<Utente>
 		//data binding
-		ElencoLivDis d=dati.get(rowIndex);
+		ElencoLivDisDisp d=dati.get(rowIndex);
 		
 		  if(columnIndex==0) return d.getDisciplina();
 		else if(columnIndex==1) return d.getLivello();
-		else if(columnIndex==2) return d.getCostomensile();
-		else if(columnIndex==3) return d.getCodicecomb();
+
 		
 		return null;
 	}
 
 	@Override
 	public Class getColumnClass(int column) {
-		if(column==2) return Float.class;
-	    if(column==3) return Integer.class;
+	    
 		return String.class;
 	}
 	
@@ -81,8 +80,7 @@ public class ModDiscDisp extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         if(columnIndex==0) dati.get(rowIndex).setDisciplina(aValue.toString());
         if(columnIndex==1) dati.get(rowIndex).setLivello(aValue.toString());
-        if(columnIndex==2) dati.get(rowIndex).setCostomensile((float)aValue);
-        if(columnIndex==3) dati.get(rowIndex).setCodicecomb((int)aValue);
+        
         
         
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners

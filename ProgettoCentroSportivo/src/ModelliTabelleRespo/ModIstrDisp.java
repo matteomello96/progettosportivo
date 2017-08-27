@@ -35,11 +35,11 @@ public class ModIstrDisp extends AbstractTableModel {
 	
 	@Override
 	public int getColumnCount() {
-		return 2;
+		return 4;
 	}
 	
 	
-	private String[] tableHeaders = {"Codice istruttore","Codice combinazionelivdis"};
+	private String[] tableHeaders = {"Nome istruttore","Cognome istruttore","Disciplina","Livello"};
 	@Override
 	public String getColumnName(int columnIndex){
 		return tableHeaders[columnIndex];
@@ -58,16 +58,16 @@ public class ModIstrDisp extends AbstractTableModel {
 		//data binding
 		ElencoIstrDisp d=dati.get(rowIndex);
 		
-		  if(columnIndex==0) return d.getMatricolaistr();
-		else if(columnIndex==1) return d.getCodicecomblivdis();
-		
-		
+		  if(columnIndex==0) return d.getNomeistr();
+		else if(columnIndex==1) return d.getCognomeistr();
+		else if(columnIndex==2) return d.getDisciplina();
+		else if(columnIndex==3) return d.getLivello();
 		return null;
 	}
 
 	@Override
 	public Class getColumnClass(int column) {
-	    return Integer.class;
+	    return String.class;
 		
 	}
 	
@@ -80,8 +80,10 @@ public class ModIstrDisp extends AbstractTableModel {
 	@Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
        
-        if(columnIndex==0) dati.get(rowIndex).setMatricolaistr((int)aValue);
-        if(columnIndex==1) dati.get(rowIndex).setCodicecomblivdis((int)aValue);
+        if(columnIndex==0) dati.get(rowIndex).setNomeistr(aValue.toString());
+        if(columnIndex==1) dati.get(rowIndex).setCognomeistr(aValue.toString());
+        if(columnIndex==2) dati.get(rowIndex).setDisciplina(aValue.toString());
+        if(columnIndex==3) dati.get(rowIndex).setLivello(aValue.toString());
         
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
     }

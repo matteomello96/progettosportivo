@@ -34,7 +34,7 @@ public class ElencoIstrDispDAO {
 		
         ArrayList<ElencoIstrDisp> dati= new ArrayList<ElencoIstrDisp>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select distinct istruttore,combinazionelivdis from istruttoridisponibiliperdisciplina;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select distinct elencoutenti.nome,elencoutenti.cognome,disciplinedisponibili.disciplina,disciplinedisponibili.livello from elencoutenti inner join istruttore on istruttore.idutente=elencoutenti.idutente inner join istruttoridisponibiliperdisciplina on istruttoridisponibiliperdisciplina.istruttore =istruttore.matricolaistruttore inner join disciplinedisponibili on disciplinedisponibili.combinazionelivdis=istruttoridisponibiliperdisciplina.combinazionelivdis;");
         
         Iterator<String[]> i = res.iterator();
        
@@ -42,8 +42,10 @@ public class ElencoIstrDispDAO {
         	String[] riga = i.next();
         	
         	ElencoIstrDisp d=new ElencoIstrDisp(); 	
-        	d.setMatricolaistr(Integer.parseInt(riga[0]));
-        	d.setCodicecomblivdis(Integer.parseInt(riga[1]));
+        	d.setNomeistr(riga[0]);
+        	d.setCognomeistr(riga[1]);
+        	d.setDisciplina(riga[2]);
+        	d.setLivello(riga[3]);
         
         	
         	

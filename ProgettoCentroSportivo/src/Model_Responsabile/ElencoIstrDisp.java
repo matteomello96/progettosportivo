@@ -2,20 +2,35 @@ package Model_Responsabile;
 
 public class ElencoIstrDisp{
 
-private int matricolaistr;
-private int codicecomblivdis;
-public int getMatricolaistr() {
-	return matricolaistr;
+private String nomeistr;
+private String cognomeistr;
+private String disciplina;
+private String livello;
+public String getNomeistr() {
+	return nomeistr;
 }
-public void setMatricolaistr(int matricolaistr) {
-	this.matricolaistr = matricolaistr;
+public void setNomeistr(String nomeistr) {
+	this.nomeistr = nomeistr;
 }
-public int getCodicecomblivdis() {
-	return codicecomblivdis;
+public String getCognomeistr() {
+	return cognomeistr;
 }
-public void setCodicecomblivdis(int codicecomblivdis) {
-	this.codicecomblivdis = codicecomblivdis;
+public void setCognomeistr(String cognomeistr) {
+	this.cognomeistr = cognomeistr;
 }
+public String getDisciplina() {
+	return disciplina;
+}
+public void setDisciplina(String disciplina) {
+	this.disciplina = disciplina;
+}
+public String getLivello() {
+	return livello;
+}
+public void setLivello(String livello) {
+	this.livello = livello;
+}
+
 
 
 

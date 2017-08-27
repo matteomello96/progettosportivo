@@ -370,7 +370,36 @@ public static int getprenotazioni(int codiceturno){
     return ris;
 
 }
- 
+public static String getPath(String nomedisc){
+
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+
+    String ris="";
+    
+    try {
+        
+        st = con.createStatement();
+     
+				
+        rs = st.executeQuery("SELECT immagine from disciplina  where nomedisciplina='"+nomedisc+"' ; ");
+      
+            rs.next();
+            ris=rs.getString("immagine");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+    
+    }
+    return ris;
+
+}
  
  
 /*public static int getidcomm(String username,String codice){

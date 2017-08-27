@@ -25,15 +25,15 @@ public class EliminaCombIstrDAO {
 	
     
     
-public static boolean eliminacombis ( int istruttore,int comblivdis ){
+public static boolean eliminacombis ( String nomeis,String cognomeis,String disc,String liv ){
 	 
 	
 	
 	
 	Connection con = DbConnection.db;
-    
-    Statement st;
-    ResultSet rs;
+	Connection con2 = DbConnection.db;
+    Statement st,st2;
+    ResultSet rs,rs2;
 	
     
      
@@ -44,22 +44,24 @@ public static boolean eliminacombis ( int istruttore,int comblivdis ){
      
      try {
     	 st = con.createStatement();
-         rs=st.executeQuery("SELECT combinazioneistrdis FROM istruttoridisponibiliperdisciplina WHERE istruttoridisponibiliperdisciplina.istruttore='"+istruttore+"' and istruttoridisponibiliperdisciplina.combinazionelivdis='"+comblivdis+"'"); 
+    	 st2=con2.createStatement();
+         rs= st.executeQuery("SELECT DISTINCT combinazionelivdis FROM disciplinedisponibili where disciplinedisponibili.disciplina='"+disc+"' and disciplinedisponibili.livello='"+liv+"'"); 
+         rs2= st2.executeQuery("SELECT DISTINCT matricolaistruttore from istruttore inner join elencoutenti on elencoutenti.idutente=istruttore.idutente where elencoutenti.nome='"+nomeis+"' and elencoutenti.cognome='"+cognomeis+"'"); 
         
-        
-        if(!rs.next())
-      	  JOptionPane.showMessageDialog(null, "La combinazione a cui sono associati i codici istruttore "+istruttore+" e combinazione livello disciplina "+comblivdis+" non è  stata eliminata"," ",JOptionPane.WARNING_MESSAGE);
-        
-        else{
-        int comb= rs.getInt("combinazioneistrdis"); 
-        st.executeUpdate("DELETE  FROM istruttoridisponibiliperdisciplina WHERE  istruttoridisponibiliperdisciplina.combinazioneistrdis='"+comb+"' ");
-        
-         
-         
-            
-         JOptionPane.showMessageDialog(FrameGestione.frame,"La combinazione a cui sono associati i codici istruttore "+istruttore+" e combinazione livello disciplina "+comblivdis+" è stata eliminata correttamente ","Eliminazione riuscita! ",JOptionPane.INFORMATION_MESSAGE);
-         return true;
+        if((rs.next())&&(rs2.next())){
+        	
+        int comb= rs.getInt("combinazionelivdis"); 
+        int comb2=rs2.getInt("matricolaistruttore");
+        st2.executeUpdate("DELETE  FROM istruttoridisponibiliperdisciplina WHERE  istruttoridisponibiliperdisciplina.combinazionelivdis='"+comb+"' and istruttoridisponibiliperdisciplina.istruttore='"+comb2+"' ");
+      	JOptionPane.showMessageDialog(FrameGestione.frame,"La combinazione  è stata eliminata correttamente ","Eliminazione riuscita! ",JOptionPane.INFORMATION_MESSAGE);
+         return true;  
         }
+        else{
+        JOptionPane.showMessageDialog(null, "La combinazione selezionata non è  stata eliminata"," ",JOptionPane.WARNING_MESSAGE);
+        }
+        
+           
+         
             }
            
            
