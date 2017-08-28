@@ -220,7 +220,8 @@ public sendeventframe(){
 			      if (sel == JFileChooser.APPROVE_OPTION) {
 			         nomedistinta=(fc.getSelectedFile().getName());
 			         percorso =(fc.getCurrentDirectory().toString());
-			    String fdistinta = new String(percorso+"\\"+nomedistinta+"");
+			    String fdistinta;
+    fdistinta=(percorso+"\\"+nomedistinta+"");
 				    Casella.setText(nomedistinta);
 				 
 			/*		try {
@@ -287,7 +288,7 @@ public sendeventframe(){
 			//	btnGeneraDistinta.setEnabled(true);
 				Casella.setVisible(true);  
 				
-
+             
 				
 				
 				

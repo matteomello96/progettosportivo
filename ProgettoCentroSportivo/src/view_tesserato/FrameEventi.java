@@ -379,7 +379,7 @@ table_1 = new JTable();
 						frame.setEnabled(false);
 						new sendeventframe();
 						sendeventframe.frame.setVisible(true);
-					
+				
 						
 					}
 				});
