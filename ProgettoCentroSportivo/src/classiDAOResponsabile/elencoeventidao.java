@@ -34,7 +34,7 @@ public class elencoeventidao {
 		
         ArrayList<elencoeventi> dati= new ArrayList<elencoeventi>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select codiceiscrizioneevento,nome,cognome,username,NomeEvento,modalitapagamento,costotot,confermato,annullato,codiceturnoevento from iscrizioneevento,evento,elencoutenti,tesserato,gestioneturnoevento where iscrizioneevento.evento=evento.CodiceEvento and tesserato.Matricolatesserato=iscrizioneevento.tesserato and tesserato.idutente=elencoutenti.idutente and gestioneturnoevento.evento=evento.CodiceEvento;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select codiceiscrizioneevento,nome,cognome,username,NomeEvento,modalitapagamento,costotot,confermato,annullato,codiceturnoevento,certificatomed from iscrizioneevento,evento,elencoutenti,tesserato,gestioneturnoevento where iscrizioneevento.evento=evento.CodiceEvento and tesserato.Matricolatesserato=iscrizioneevento.tesserato and tesserato.idutente=elencoutenti.idutente and gestioneturnoevento.evento=evento.CodiceEvento;");
         
         Iterator<String[]> i = res.iterator();
        
@@ -52,7 +52,7 @@ public class elencoeventidao {
         	d.setConfermato(Integer.parseInt(riga[7]));
         	d.setAnnullato(Integer.parseInt(riga[8]));
            d.setCodiceturnoevento(Integer.parseInt(riga[9]));
-        	
+           d.setCertificatomed(riga[10]);
         	
         	
         	dati.add(d);

@@ -57,6 +57,8 @@ public class sendeventframe {
 	public JButton btnTornaAlCarrello;
 	public String nomedistinta="";
 	public String percorso="";
+	public String path="";
+	public String pathprecedente="";
     public static JDialog frame;
     public String pagamento;
     public JTextField Casella;
@@ -203,7 +205,7 @@ public sendeventframe(){
 		Casella.setVisible(false);
 		
 		
-		final JButton btnFine = new JButton("Fine");
+		final JButton btnFine = new JButton("Inserisci certificato");
 		btnFine.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnFine.setEnabled(true);
 		btnFine.addActionListener(new ActionListener() {
@@ -218,10 +220,11 @@ public sendeventframe(){
 				 JFileChooser fc = new JFileChooser();
 				 int sel = fc.showSaveDialog(frame);
 			      if (sel == JFileChooser.APPROVE_OPTION) {
+			    	 pathprecedente=(fc.getSelectedFile().getPath());
 			         nomedistinta=(fc.getSelectedFile().getName());
-			         percorso =(fc.getCurrentDirectory().toString());
-			    String fdistinta;
-    fdistinta=(percorso+"\\"+nomedistinta+"");
+			         percorso =("src/certificati");
+			         path=percorso+"/"+nomedistinta;
+			    
 				    Casella.setText(nomedistinta);
 				 
 			/*		try {
@@ -249,7 +252,7 @@ public sendeventframe(){
 						e1.printStackTrace();
 					} */
 				  
-					ordineeventodao.insdetiscr(pagamento,fdistinta, evento, costo);
+					ordineeventodao.insdetiscr(pagamento,path,pathprecedente, evento, costo);
 			      }
 				 
 	

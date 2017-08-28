@@ -11,6 +11,7 @@ public class elencoeventi {
 	private int  annullato;
 	private int codiceturnoevento;
 	private String username;
+	private String certificatomed;
 	
 	
 	public String getCodiceiscrizioneevento() {
@@ -72,6 +73,12 @@ public class elencoeventi {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getCertificatomed() {
+		return certificatomed;
+	}
+	public void setCertificatomed(String certificatomed) {
+		this.certificatomed = certificatomed;
 	}
 
 

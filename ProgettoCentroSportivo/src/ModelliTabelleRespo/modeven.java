@@ -28,11 +28,11 @@ public class modeven extends AbstractTableModel {
 	
 	@Override
 	public int getColumnCount() {
-		return 10;
+		return 11;
 	}
 	
 	
-	private String[] tableHeaders = {"codiceiscrizione","nome","cognome","username","nomeevento","modalitapagamento","costo","confermato","annullato","codiceevento"};
+	private String[] tableHeaders = {"codiceiscrizione","nome","cognome","username","nomeevento","modalitapagamento","costo","confermato","annullato","codiceevento","certificato"};
 	@Override
 	public String getColumnName(int columnIndex){
 		return tableHeaders[columnIndex];
@@ -61,6 +61,7 @@ public class modeven extends AbstractTableModel {
 		else if(columnIndex==7) return d.getConfermato();
 		else if(columnIndex==8) return d.getAnnullato();
 		else if(columnIndex==9) return d.getCodiceturnoevento();
+		else if(columnIndex==10) return d.getCertificatomed();
 		return null;
 	}
 
@@ -88,6 +89,7 @@ public class modeven extends AbstractTableModel {
         if(columnIndex==7) dati.get(rowIndex).setConfermato((int)aValue);     
         if(columnIndex==8) dati.get(rowIndex).setAnnullato((int)aValue);
         if(columnIndex==9) dati.get(rowIndex).setCodiceturnoevento((int)aValue);
+        if(columnIndex==10) dati.get(rowIndex).setCertificatomed(aValue.toString());
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
     }
 	

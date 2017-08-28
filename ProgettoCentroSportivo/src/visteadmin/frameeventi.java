@@ -7,7 +7,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -114,7 +117,7 @@ private JButton btnNewButton;
 		gbc.gridy = 4;
 		contentPane.add(btnNewButton, gbc);
 		
-		JButton btnNewButton_1 = new JButton("Download Certificato ");
+		JButton btnNewButton_1 = new JButton("Visualizza Certificato ");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton_1.setForeground(Color.BLACK);
 
@@ -156,12 +159,17 @@ private JButton btnNewButton;
 		
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
+
 			public void actionPerformed(ActionEvent arg0) {
-			Object a;
-			String b;
-			a=table_2.getValueAt( table_2.getSelectedRow() , 0);
-			b=downloaddao.scarica(a);
-			JOptionPane.showMessageDialog(frameeventi.frame, "'"+b+"'");
+			String a;
+			//String b;
+			a=(String) table_2.getValueAt( table_2.getSelectedRow() , 10);
+			downloaddao.scarica(a);
+			//JOptionPane.showMessageDialog(frameeventi.frame, "'"+b+"'");
+			
+			
+
 			}
 		});	
 
