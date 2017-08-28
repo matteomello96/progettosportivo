@@ -20,7 +20,7 @@ public class ordineeventodao {
 	
 	
 	
-	 public static void insdetiscr(String modalita,File certificato,int evento,int costo){	
+	 public static void insdetiscr(String modalita,String certificato,int evento,int costo){	
 	        
 	        Connection con = DbConnection.db;
 	        Statement st;
@@ -31,7 +31,7 @@ public class ordineeventodao {
 	        	st = con.createStatement();
 
 	        	 
-JOptionPane.showMessageDialog(sendeventframe.frame, " \""+modalita+"\" \\o \""+certificato+"\","+evento+" "+GetInfoDB.getidTess(Utente.getUsername())+" "," ",JOptionPane.INFORMATION_MESSAGE);	
+//JOptionPane.showMessageDialog(sendeventframe.frame, " \""+modalita+"\" \\o \""+certificato+"\","+evento+" "+GetInfoDB.getidTess(Utente.getUsername())+" "," ",JOptionPane.INFORMATION_MESSAGE);	
 			
 	        st.executeUpdate("INSERT INTO iscrizioneevento (codiceiscrizioneevento,evento,modalitapagamento,costotot,confermato,annullato,tesserato,certificatomed) "
 	        		+ "VALUES (NULL,'"+evento+"','"+modalita+"','"+costo+"','0','0','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+certificato+"')"); 

@@ -9,6 +9,10 @@ public class elencoeventi {
 	private int costotot;
 	private int  confermato;
 	private int  annullato;
+	private int codiceturnoevento;
+	private String username;
+	
+	
 	public String getCodiceiscrizioneevento() {
 		return codiceiscrizioneevento;
 	}
@@ -56,6 +60,18 @@ public class elencoeventi {
 	}
 	public void setAnnullato(int annullato) {
 		this.annullato = annullato;
+	}
+	public int getCodiceturnoevento() {
+		return codiceturnoevento;
+	}
+	public void setCodiceturnoevento(int codiceturnoevento) {
+		this.codiceturnoevento = codiceturnoevento;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 

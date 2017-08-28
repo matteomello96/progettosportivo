@@ -1,17 +1,11 @@
 package ModelliTabelleRespo;
 
 
-import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import com.mysql.jdbc.Blob;
 
-import Model.DisciplinaElenco;
-import Model_Istruttore.ElencoEventi;
-import Model_Responsabile.ElencoLivDis;
 import Model_Responsabile.elencoeventi;
 
 public class modeven extends AbstractTableModel {
@@ -34,11 +28,11 @@ public class modeven extends AbstractTableModel {
 	
 	@Override
 	public int getColumnCount() {
-		return 8;
+		return 10;
 	}
 	
 	
-	private String[] tableHeaders = {"codiceiscrizione","nome","cognome","nomeevento","modalitapagamento","costo","confermato","annullato"};
+	private String[] tableHeaders = {"codiceiscrizione","nome","cognome","username","nomeevento","modalitapagamento","costo","confermato","annullato","codiceevento"};
 	@Override
 	public String getColumnName(int columnIndex){
 		return tableHeaders[columnIndex];
@@ -60,12 +54,13 @@ public class modeven extends AbstractTableModel {
 		  if(columnIndex==0) return d.getCodiceiscrizioneevento();
 		else if(columnIndex==1) return d.getNome();
 		else if(columnIndex==2) return d.getCognome();
-		else if(columnIndex==3) return d.getNomeevento();
-		else if(columnIndex==4) return d.getModalitapagamento();
-		else if(columnIndex==5) return d.getCostotot();
-		else if(columnIndex==6) return d.getConfermato();
-		else if(columnIndex==7) return d.getAnnullato();
-		
+		else if(columnIndex==3) return d.getUsername();
+		else if(columnIndex==4) return d.getNomeevento();
+		else if(columnIndex==5) return d.getModalitapagamento();
+		else if(columnIndex==6) return d.getCostotot();
+		else if(columnIndex==7) return d.getConfermato();
+		else if(columnIndex==8) return d.getAnnullato();
+		else if(columnIndex==9) return d.getCodiceturnoevento();
 		return null;
 	}
 
@@ -86,11 +81,13 @@ public class modeven extends AbstractTableModel {
         if(columnIndex==0) dati.get(rowIndex).setCodiceiscrizioneevento(aValue.toString());
         if(columnIndex==1) dati.get(rowIndex).setNome(aValue.toString());
         if(columnIndex==2) dati.get(rowIndex).setCognome(aValue.toString());
-        if(columnIndex==3) dati.get(rowIndex).setNomeevento(aValue.toString());
-        if(columnIndex==4) dati.get(rowIndex).setModalitapagamento(aValue.toString());
-        if(columnIndex==5) dati.get(rowIndex).setCostotot((int)aValue);
-        if(columnIndex==6) dati.get(rowIndex).setConfermato((int)aValue);     
-        if(columnIndex==7) dati.get(rowIndex).setAnnullato((int)aValue);
+        if(columnIndex==3) dati.get(rowIndex).setUsername(aValue.toString());
+        if(columnIndex==4) dati.get(rowIndex).setNomeevento(aValue.toString());
+        if(columnIndex==5) dati.get(rowIndex).setModalitapagamento(aValue.toString());
+        if(columnIndex==6) dati.get(rowIndex).setCostotot((int)aValue);
+        if(columnIndex==7) dati.get(rowIndex).setConfermato((int)aValue);     
+        if(columnIndex==8) dati.get(rowIndex).setAnnullato((int)aValue);
+        if(columnIndex==9) dati.get(rowIndex).setCodiceturnoevento((int)aValue);
         fireTableCellUpdated(rowIndex, columnIndex);// notify listeners
     }
 	

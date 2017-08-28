@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 
 
@@ -18,7 +19,7 @@ public class confeven {
 	
 	
 	
-	public static void conf(Object ideven){
+	public static void conf(Object ideven,String username,Object codiceturno){
 		
 		   Connection con = DbConnection.db;
 	      
@@ -34,7 +35,7 @@ public class confeven {
 	          
 	            st= con.createStatement();
 	         
-	          //  JOptionPane.showMessageDialog(frameeventi.frame, "Il nome utente \""+ideven+"\" e\\o l'email \""+ideven+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				    
+	         //   JOptionPane.showMessageDialog(frameeventi.frame, "Il nome utente \""+username+"\" e\\o l'email \""+ideven+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				    
 	            
 	            rs=st.executeQuery("select confermato from iscrizioneevento where codiceiscrizioneevento='"+ideven+"'");
 	        	 rs.next();
@@ -51,8 +52,8 @@ public class confeven {
 	                       	
 	            	st.executeUpdate("UPDATE iscrizioneevento SET confermato=0 WHERE iscrizioneevento.codiceiscrizioneevento='"+ideven+"'");
 		        	st.executeUpdate("UPDATE iscrizioneevento SET annullato=1 WHERE iscrizioneevento.codiceiscrizioneevento='"+ideven+"'");
-		        
-		        	
+		        	st.executeUpdate("DELETE FROM iscrizioniperturnoevento where tesserato='"+GetInfoDB.getidTess(username)+"' and codiceturnoevento='"+codiceturno+"' ");
+		            st.executeUpdate("UPDATE gestioneturnoevento SET prenotazionidisponibili='"+GetInfoDB.getprenotazionievento(codiceturno)+"'+1 WHERE codiceturnoevento='"+codiceturno+"'");
 		        	
 		        	JOptionPane.showMessageDialog(frameeventi.frame, "Iscrizione Annullato"," ",JOptionPane.INFORMATION_MESSAGE);
 		        	
@@ -67,8 +68,9 @@ public class confeven {
 	            else{
 		        	st.executeUpdate("UPDATE iscrizioneevento SET confermato=1 WHERE iscrizioneevento.codiceiscrizioneevento='"+ideven+"'");
 		        	st.executeUpdate("UPDATE iscrizioneevento SET annullato=0 WHERE iscrizioneevento.codiceiscrizioneevento='"+ideven+"'");
-		        
-		        	
+		        	st.executeUpdate("INSERT iscrizioniperturnoevento (Codiceturnotesseratoevento,codiceturnoevento,tesserato)"+
+		        			"VALUES(NULL,'"+codiceturno+"','"+GetInfoDB.getidTess(username)+"')");
+		        	    st.executeUpdate("UPDATE gestioneturnoevento SET prenotazionidisponibili='"+GetInfoDB.getprenotazionievento(codiceturno)+"'-1 WHERE codiceturnoevento='"+codiceturno+"'");
 		        	JOptionPane.showMessageDialog(frameeventi.frame, "Iscrizione Confermata"," ",JOptionPane.INFORMATION_MESSAGE);
 		        	
 		        		

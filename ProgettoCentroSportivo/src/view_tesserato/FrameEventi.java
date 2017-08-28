@@ -113,7 +113,7 @@ public class FrameEventi extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
 		mntmNewMenuItem.setActionCommand("iniistr2");
-		
+		                                                                                                            
 
 		
 		contentPane = new JPanel();

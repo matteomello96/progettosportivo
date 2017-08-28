@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,9 +19,10 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import ModelliTabelleRespo.modeven;
 import classiDAOResponsabile.confeven;
+import classiDAOResponsabile.downloaddao;
 import classiDAOResponsabile.elencoeventidao;
 import classiDAOResponsabile.rimuovieventodao;
-import classiDAOResponsabile.rimuoviordinedao;
+
 
 
 public class frameeventi extends JPanel {
@@ -33,8 +36,9 @@ public class frameeventi extends JPanel {
 	
 	public static JTable table_2;
       private Object ideven;
+      private String user;
 	private modeven model;
-
+    private Object codiceturno;
 	public JPanel contentPane;
 private JButton btnNewButton;
 
@@ -110,6 +114,16 @@ private JButton btnNewButton;
 		gbc.gridy = 4;
 		contentPane.add(btnNewButton, gbc);
 		
+		JButton btnNewButton_1 = new JButton("Download Certificato ");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_1.setForeground(Color.BLACK);
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 4;
+		gbc.gridy = 4;
+		contentPane.add(btnNewButton_1, gbc);
+		
 
 		
 		
@@ -130,17 +144,26 @@ private JButton btnNewButton;
 	
  
 	ideven = table_2.getValueAt( table_2.getSelectedRow() , 0);
- 
+  user= (String) table_2.getValueAt( table_2.getSelectedRow() , 3);
+  codiceturno= table_2.getValueAt( table_2.getSelectedRow() , 9);
 //   JOptionPane.showMessageDialog(frameeventi.frame, "Il nome utente \""+table_2.getValueAt( table_2.getSelectedRow() , 0)+"\" e\\o l'email \""+table_2.getValueAt( table_2.getSelectedRow() , 0)+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);			
      
-	   confeven.conf(ideven);
+	   confeven.conf(ideven,user,codiceturno);
 			frame.dispose();
 			new frameeventi();
 			}
 		});
 		
 		
-		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			Object a;
+			String b;
+			a=table_2.getValueAt( table_2.getSelectedRow() , 0);
+			b=downloaddao.scarica(a);
+			JOptionPane.showMessageDialog(frameeventi.frame, "'"+b+"'");
+			}
+		});	
 
 		
 		
@@ -150,7 +173,7 @@ private JButton btnNewButton;
 				
 				ideven = table_2.getValueAt( table_2.getSelectedRow() , 0);
 				rimuovieventodao.uccudievento(ideven);
-				JOptionPane.showMessageDialog(frame, "Ordine rimosso dal database!!");
+				JOptionPane.showMessageDialog(frame, "evento rimosso dal database!!");
 			frame.dispose();
 			new frameeventi();
 				

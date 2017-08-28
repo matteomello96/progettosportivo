@@ -34,7 +34,7 @@ public class elencoeventidao {
 		
         ArrayList<elencoeventi> dati= new ArrayList<elencoeventi>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select codiceiscrizioneevento,nome,cognome,NomeEvento,modalitapagamento,costotot,confermato,annullato from iscrizioneevento,evento,elencoutenti,tesserato where iscrizioneevento.evento=evento.CodiceEvento and tesserato.Matricolatesserato=iscrizioneevento.tesserato and tesserato.idutente=elencoutenti.idutente;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select codiceiscrizioneevento,nome,cognome,username,NomeEvento,modalitapagamento,costotot,confermato,annullato,codiceturnoevento from iscrizioneevento,evento,elencoutenti,tesserato,gestioneturnoevento where iscrizioneevento.evento=evento.CodiceEvento and tesserato.Matricolatesserato=iscrizioneevento.tesserato and tesserato.idutente=elencoutenti.idutente and gestioneturnoevento.evento=evento.CodiceEvento;");
         
         Iterator<String[]> i = res.iterator();
        
@@ -45,12 +45,13 @@ public class elencoeventidao {
         	d.setCodiceiscrizioneevento(riga[0]);
         	d.setNome(riga[1]);
           	d.setCognome(riga[2]);
-          	d.setNomeevento(riga[3]);
-          	d.setModalitapagamento(riga[4]);
-        	d.setCostotot(Integer.parseInt(riga[5]));
-        	d.setConfermato(Integer.parseInt(riga[6]));
-        	d.setAnnullato(Integer.parseInt(riga[7]));
-        
+          	d.setUsername(riga[3]);
+          	d.setNomeevento(riga[4]);
+          	d.setModalitapagamento(riga[5]);
+        	d.setCostotot(Integer.parseInt(riga[6]));
+        	d.setConfermato(Integer.parseInt(riga[7]));
+        	d.setAnnullato(Integer.parseInt(riga[8]));
+           d.setCodiceturnoevento(Integer.parseInt(riga[9]));
         	
         	
         	

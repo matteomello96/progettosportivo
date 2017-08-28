@@ -35,7 +35,7 @@ import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import ClassiDao.GetInfoDB;
-import ClassiDaoTesserato.TriggerOrdine;
+
 import ClassiDaoTesserato.ordineeventodao;
 import ComboTesserato.Combocon;
 
@@ -220,7 +220,7 @@ public sendeventframe(){
 			      if (sel == JFileChooser.APPROVE_OPTION) {
 			         nomedistinta=(fc.getSelectedFile().getName());
 			         percorso =(fc.getCurrentDirectory().toString());
-			    File fdistinta = new File(percorso+"\\"+nomedistinta+"");
+			    String fdistinta = new String(percorso+"\\"+nomedistinta+"");
 				    Casella.setText(nomedistinta);
 				 
 			/*		try {
@@ -247,6 +247,7 @@ public sendeventframe(){
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} */
+				  
 					ordineeventodao.insdetiscr(pagamento,fdistinta, evento, costo);
 			      }
 				 

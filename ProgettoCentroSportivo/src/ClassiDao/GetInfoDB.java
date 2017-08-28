@@ -432,7 +432,36 @@ public static String getPath(String nomedisc){
 
 }*/
  
- 
+public static int getprenotazionievento(Object codiceturno){
+
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+
+    int ris=-1;
+    
+    try {
+        
+        st = con.createStatement();
+     
+				
+        rs = st.executeQuery("select prenotazionidisponibili from gestioneturnoevento where codiceturnoevento='"+codiceturno+"'");
+      
+            rs.next();
+            ris=rs.getInt("prenotazionidisponibili");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+    
+    }
+    return ris;
+
+}
  
 
 	    
