@@ -260,7 +260,10 @@ table_1 = new JTable();
 				
 				int esci=0;
 				int b;
+				int prenotazioni,codice;
 				
+				codice=(int) table.getValueAt(table.getSelectedRow(), 8);
+				prenotazioni=GetInfoDB.getprenotazionievento1(codice);
 				for(i=0;i<table2.getRowCount();i++){
 					b= (int) table2.getValueAt(i, 1);
 			if(table2.getValueAt(i, 0)==table.getValueAt(table.getSelectedRow(), 8) && b==tess){
@@ -299,8 +302,9 @@ table_1 = new JTable();
 				for(c=0;c<table_1.getRowCount();c++)
 				{
 				if(table_1.getRowCount()>=1){
-						if(table.getValueAt(table.getSelectedRow(), 5).equals(table_1.getValueAt(c, 5))&&
-								table.getValueAt(table.getSelectedRow(), 6).equals(table_1.getValueAt(c, 6)))
+						//if(table.getValueAt(table.getSelectedRow(), 5).equals(table_1.getValueAt(c, 5))&&
+							//	table.getValueAt(table.getSelectedRow(), 6).equals(table_1.getValueAt(c, 6)))
+					if(table.getValueAt(table.getSelectedRow(), 8).equals(table_1.getValueAt(c, 8)))
 						{
 							u=false;
 							break;
@@ -311,7 +315,12 @@ table_1 = new JTable();
 				}
 				if(u)
 				{
+				if(prenotazioni==0)	{
+					JOptionPane.showMessageDialog(FrameEventi.frame, "Numero massimo prenotazioni raggiunto!!",null,JOptionPane.WARNING_MESSAGE);
+				}
+				else{
 				modello.addRow(dati);
+				}
 				}
 				
 				else{

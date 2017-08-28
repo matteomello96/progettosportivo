@@ -464,5 +464,36 @@ public static int getprenotazionievento(Object codiceturno){
 }
  
 
+public static int getprenotazionievento1(Object codiceturno){
+
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+
+    int ris=-1;
+    
+    try {
+        
+        st = con.createStatement();
+     
+				
+        rs = st.executeQuery("select prenotazionidisponibili from gestioneturnoevento where evento='"+codiceturno+"'");
+      
+            rs.next();
+            ris=rs.getInt("prenotazionidisponibili");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+    
+    }
+    return ris;
+
+}
+
 	    
 }
