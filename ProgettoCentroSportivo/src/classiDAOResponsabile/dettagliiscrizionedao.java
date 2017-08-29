@@ -25,12 +25,12 @@ public class dettagliiscrizionedao {
 			}
 			
 			
-			public static ArrayList<Dettagliiscrizione> elencoiniziale(int cod) {
+			public static ArrayList<Dettagliiscrizione> elencoiniziale(Object idordine) {
 				
 				
 		        ArrayList<Dettagliiscrizione> dati= new ArrayList<Dettagliiscrizione>(); 
 		        
-		        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT Disciplina,Livello,confermato,annullato,giorno,orario from detiscr,disciplinedisponibili where idiscrizione='"+cod+"' and giorno!='null' and orario!='null' and disciplinedisponibili.combinazionelivdis=detiscr.combinazionelivdis; ");
+		        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT Disciplina,Livello,confermato,annullato,giorno,orario from detiscr,disciplinedisponibili where idiscrizione='"+idordine+"' and giorno!='null' and orario!='null' and disciplinedisponibili.combinazionelivdis=detiscr.combinazionelivdis; ");
 		       
 		        Iterator<String[]> i = res.iterator();
 		       

@@ -175,9 +175,10 @@ public class FrameOrdini extends JPanel {
 		
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-	int idordine,i;
+	int i;
 	int cont=0;
-	idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
+	Object idordine;
+	idordine=table_2.getValueAt(table_2.getSelectedRow(), 0);
 	
 	
 	
@@ -185,15 +186,17 @@ public class FrameOrdini extends JPanel {
 	table = new JTable();
 	model1 = new modellidettagli(dettagliiscrizionedao.elencoiniziale(idordine));
 	table.setCellSelectionEnabled(true);
-	table.setModel(model);
-	
+	table.setModel(model1);
+	JOptionPane.showMessageDialog(frame, "'"+idordine+"'");
+	JOptionPane.showMessageDialog(frame, "'"+table.getRowCount()+"'");
 	
 	for(i=0;i<table.getRowCount();i++){
 	
 	cont=cont+1;	
 		
 		
-	}				
+	}	
+	JOptionPane.showMessageDialog(frame, "'"+cont+"'");	
 if(cont==0){
 	
 	

@@ -13,7 +13,7 @@ import DBInterfaccia.DbConnection;
 public class rimuoviordinedao {
 	
 	
-	public static void Uccidi_isc(int ordine){
+	public static void Uccidi_isc(Object idordine){
 		 Connection con = DbConnection.db;
 		   Statement st;
 		   
@@ -21,7 +21,7 @@ public class rimuoviordinedao {
 		   try {
 	            
 	            st= con.createStatement();
-	      st.executeUpdate("DELETE FROM iscrizionedisciplina WHERE codiceiscrizionedisciplina='"+ordine+"'");
+	      st.executeUpdate("DELETE FROM iscrizionedisciplina WHERE codiceiscrizionedisciplina='"+idordine+"'");
   
 	      
 	      

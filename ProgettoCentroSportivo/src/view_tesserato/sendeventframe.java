@@ -78,18 +78,13 @@ public sendeventframe(){
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color (255,36,0));
 
-		lblTotaleOrdineEur = new JLabel("TOTALE ISCRIZIONE:");
+		lblTotaleOrdineEur = new JLabel("FRAME ISCRIZIONE:");
 		lblTotaleOrdineEur.setToolTipText("");
 		lblTotaleOrdineEur.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTotaleOrdineEur.setBounds(26, 46, 145, 14);
 		frame.getContentPane().add(lblTotaleOrdineEur);
 		
-		part = new JLabel("VALORE");
-		part.setHorizontalAlignment(SwingConstants.TRAILING);
-		part.setText(df.format(FrameTesserato.totale)+" EUR");
-		part.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		part.setBounds(171, 46, 118, 14);
-		frame.getContentPane().add(part);
+		
 		
 		
 
