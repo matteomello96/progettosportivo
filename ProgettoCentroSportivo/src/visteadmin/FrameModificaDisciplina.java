@@ -88,10 +88,11 @@ public class FrameModificaDisciplina extends JFrame {
 	public String nomefile="";
 	public String percorso="";
 	public String path="";
-	
+	public String pathprecimg=""+GetInfoDB.getPath((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0))+"";
 	public String pathnuovo="";
+	//public String pathprec="";
 	public File fileprec;
-	
+	public String path2="";
 	public FrameModificaDisciplina(String disc) {
 	    String disciplina = ((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0));
 		frame = new JFrame("Modifica disciplina "+disciplina+""  );
@@ -204,8 +205,8 @@ public class FrameModificaDisciplina extends JFrame {
 		contentPane.add(lblIm, gbc);
 		
 		
-		String pathprecedente=""+GetInfoDB.getPath((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0))+"";
-		String newS = pathprecedente.substring(12);
+		String pathprec =""+GetInfoDB.getPath((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0))+"";
+		String newS = pathprec.substring(12);
 		nomefile=newS;
 		
 		immagine = new JTextField(newS,50);
@@ -228,11 +229,13 @@ public class FrameModificaDisciplina extends JFrame {
 				 int sel = fc.showOpenDialog(frame);
 			      if (sel == JFileChooser.APPROVE_OPTION) {
 			    	 
-			    	
+			    	 pathprecimg=(fc.getSelectedFile().getPath());
+			    
 			         nomefile=(fc.getSelectedFile().getName());
 			         percorso =("src/risorse");
 			         pathnuovo=percorso+"/"+nomefile;
-              	    
+		        	 JOptionPane.showMessageDialog(FrameModificaDisciplina.frame,"  \""+pathprecimg+"\"  VS   \""+pathprec+"\" ","Modifica riuscita! ",JOptionPane.INFORMATION_MESSAGE);	
+                    
 				      immagine.setText(nomefile);
 			
 			
@@ -278,7 +281,7 @@ public class FrameModificaDisciplina extends JFrame {
 			
 		else
 			
-			bool=ModificaDisciplinaDAO.modificadisc((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0),textnomed.getText(),descr.getText(),combocal.getSelectedItem().toString(),path,nomefile,pathprecedente);
+			bool=ModificaDisciplinaDAO.modificadisc(pathprecimg,(String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0),textnomed.getText(),descr.getText(),combocal.getSelectedItem().toString(),pathnuovo,nomefile,pathprec);
 			
 		
 		if(bool)

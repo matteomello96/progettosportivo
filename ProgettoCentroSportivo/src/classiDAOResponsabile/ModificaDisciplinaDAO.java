@@ -12,6 +12,7 @@ import visteadmin.FrameInserisciDiscDisp;
 import visteadmin.FrameInserisciDisciplina;
 import visteadmin.FrameInserisciLiv;
 import visteadmin.FrameInserisciModPag;
+import visteadmin.FrameModificaDisciplina;
 
 import java.awt.Image;
 import java.io.File;
@@ -44,7 +45,7 @@ public class ModificaDisciplinaDAO {
  public static boolean successo = false;  
     
 @SuppressWarnings("resource")
-public static boolean modificadisc ( String exdisc,String dis ,String desc,String cal,String pathim,String nomefile,String pathprec){
+public static boolean modificadisc (String pathprecimg, String exdisc,String dis ,String desc,String cal,String pathim,String nomefile,String pathprec){
 	 
 	
 	
@@ -58,8 +59,7 @@ public static boolean modificadisc ( String exdisc,String dis ,String desc,Strin
      
      
      
-    
-   
+     
     
      try {
     	 st = con.createStatement();
@@ -72,25 +72,37 @@ public static boolean modificadisc ( String exdisc,String dis ,String desc,Strin
       	  JOptionPane.showMessageDialog(null, "La disciplina "+dis+" è già esistente, inserirne un' altra"," ",JOptionPane.WARNING_MESSAGE);
         
         else{
+        	
+        if (pathprec.equals(pathprecimg))
+     { 
+    	 pathim=pathprec;
+     }
+    
+     else 
+     {
         
-        
-         st2.executeUpdate("UPDATE  `disciplina`SET nomedisciplina='"+dis+"',descrizione='"+desc+"',calendario='"+cal+"',immagine='"+pathim+"' where nomedisciplina='"+exdisc+"' ");
         try {
-         File f1 = new File(pathprec);
-         FileInputStream fis1 = new FileInputStream(f1);
-         FileChannel channel1=fis1.getChannel();
-         FileLock lock1= channel1.tryLock();
-         if (lock1==null){ JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,"non posso lavorare 1"); }
-         File f2 = new File(pathim);
-         FileInputStream fis2 = new FileInputStream(f2);
-         FileChannel channel2=fis2.getChannel();
-         FileLock lock2= channel2.tryLock();
-         if (lock2==null){ JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,"non posso lavorare 2"); }
-         java.nio.file.Path pathprec2 =Paths.get(pathprec);
+       
+        
+        
+        FileChannel fc1= new FileOutputStream(pathprec).getChannel();
+        fc1.close();
+        
+        java.nio.file.Path pathprec3 =Paths.get(pathprec);
+        
+        
+       	
+        java.nio.file.Path pathprec2 =Paths.get(pathprecimg);
+        
         java.nio.file.Path pathim3 =Paths.get(pathim);
+        File f2 = pathim3.toFile();
+        
         Files.copy(pathprec2,pathim3,StandardCopyOption.REPLACE_EXISTING);
-        //
-        //successo = f.delete();
+        
+        File f3 = pathprec3.toFile();
+        
+        
+        
         }
         catch (FileNotFoundException e) {
         	JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);
@@ -98,16 +110,15 @@ public static boolean modificadisc ( String exdisc,String dis ,String desc,Strin
 			// TODO Auto-generated catch block
         	  JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);
 		}
-        
-        //if(successo){JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,"Il file con il path "+pathprec+"è stato eliminato correttamente ","Inserimento riuscito! ",JOptionPane.INFORMATION_MESSAGE);
-         //}
+     }
+        st2.executeUpdate("UPDATE  `disciplina`SET nomedisciplina='"+dis+"',descrizione='"+desc+"',calendario='"+cal+"',immagine='"+pathim+"' where nomedisciplina='"+exdisc+"' ");
             
-       JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,"La disciplina  \""+dis+"\"  è stata modificata  correttamente ","Modifica riuscita! ",JOptionPane.INFORMATION_MESSAGE);
+       JOptionPane.showMessageDialog(FrameModificaDisciplina.frame,"La disciplina  \""+dis+"\"  è stata modificata  correttamente ","Modifica riuscita! ",JOptionPane.INFORMATION_MESSAGE);
          return true;
           
      }}
 catch (SQLException ex) {
-    JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, ex);
+    JOptionPane.showMessageDialog(FrameModificaDisciplina.frame, ex);
 }
 return false;
 

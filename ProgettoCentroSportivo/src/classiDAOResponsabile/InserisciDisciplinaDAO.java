@@ -1,4 +1,4 @@
-
+ 
 
 package classiDAOResponsabile;
 import DBInterfaccia.DbConnection ;
@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -77,6 +78,9 @@ public static boolean inserimentodisc ( String dis ,String desc,String cal,Strin
         java.nio.file.Path pathprec2 =Paths.get(pathprec);
         java.nio.file.Path pathim3 =Paths.get(pathim);
         Files.copy(pathprec2,pathim3,StandardCopyOption.REPLACE_EXISTING);
+        
+        
+        
         }
         catch (FileNotFoundException e) {
         	JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);

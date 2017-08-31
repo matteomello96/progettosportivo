@@ -2,11 +2,14 @@ package VisteUtenteGenerico;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
+import javax.swing.border.Border;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
@@ -15,13 +18,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.awt.Color;
 import javax.swing.JTable;
@@ -39,21 +49,25 @@ import ModelliTabelle.ModDiscIni;
 import Listener.Listen;
 import javax.swing.JScrollPane;
 import VisteUtenteGenerico.setupTableWidths;
-import javafx.scene.layout.Border;
 public class FrameIniziale extends JFrame {
 	/**
 	 * 
 	 */
+	
 	private static  final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */
-	public static  JFrame frame;
 	
+	public static  JFrame frame;
+    
 	public JPanel contentPane,tabellaPnl;
 	public static JTable table,tablemod;
     private ModDiscIni model; 
-	/**
+	BufferedImage img;
+	int cordx;
+	int cordy;
+		/**
 	 * Launch the application.
 	 */
 
@@ -61,13 +75,39 @@ public class FrameIniziale extends JFrame {
 	 * Create the frame.
 	 
 	 */
-	public FrameIniziale() {
+	public FrameIniziale()  {
+		
+		FrameIniziale.setDefaultLookAndFeelDecorated(true);
 		frame = new JFrame("Pagina iniziale");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 605, 391);
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		frame.setResizable(true);
+		
+		
+		 frame.addMouseListener(new MouseAdapter(){
+		       public void mousePressed(MouseEvent ev){
+		        cordx = ev.getX();
+		         cordy = ev.getY();
+		       }
+		    });
+		   
+		    frame.addMouseMotionListener(new MouseMotionAdapter() {
+		                public void mouseDragged(MouseEvent evt) {
+		                    int x = evt.getXOnScreen()-cordx;
+		                    int y = evt.getYOnScreen()-cordy;
+		                    //System.out.println(x+","+y+"     "+xi+","+yi);
+		                    frame.setLocation(x,y); 
+
+		                }
+		            });
+		
+		
+		
+		
+		
+		
 		
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -88,9 +128,9 @@ public class FrameIniziale extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,193,20));
 		contentPane.setLayout(new GridBagLayout());
-		 
+		
 		GridBagConstraints gbc = new GridBagConstraints();
- 
+        
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -98,13 +138,12 @@ public class FrameIniziale extends JFrame {
 		scroll.setBounds(100, 100, 605, 391);
 	    frame.getContentPane().add(scroll);
 		
-		JLabel lblNewLabel = new JLabel("A.C.P. Icchia ");
-		lblNewLabel.setOpaque(false);
+		JLabel lblNewLabel = new JLabel(new ImageIcon("src/immaginijava/logo.GIF"));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		
-		lblNewLabel.setBackground(new Color (255,205,255));
-		javax.swing.border.Border b = lblNewLabel.getBorder();
+		lblNewLabel.setForeground(new Color (0,123,167));
+		Border b = BorderFactory.createLineBorder(new Color (255,205,255));
 		lblNewLabel.setBorder(b);
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 20));
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 2;
 		gbc.gridy = 0;
