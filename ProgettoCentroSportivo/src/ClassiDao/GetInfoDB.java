@@ -21,6 +21,212 @@ import visteadmin.framedettagli;
 
 
 public class GetInfoDB {
+
+	
+	
+
+	 public static String getTipo(String username){
+
+	       
+	        
+	        Connection con = DbConnection.db;
+	        
+	        Statement st;
+	        
+	        ResultSet rs;
+	        
+	 
+	        String mod = "";
+	        
+	        try {
+	            
+	            st = con.createStatement();
+	           
+	            rs = st.executeQuery("SELECT tipoutente FROM elencoutenti WHERE elencoutenti.username='"+username+"' "); 
+	          
+	                rs.next();
+	                mod=rs.getString("tipoutente");
+	                		
+	            return mod; 
+	        } catch (SQLException ex) {
+	        
+	        }
+	        return mod;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+public static boolean  SettaLogout(String username){
+
+	       
+        
+        Connection con = DbConnection.db;
+        
+        Statement st;
+        
+        int rs;
+        
+ 
+        
+        
+        try {
+            
+            st = con.createStatement();
+           
+            rs = st.executeUpdate("UPDATE elencoutenti SET connessione=0 WHERE elencoutenti.username='"+username+"' "); 
+          
+                return true;
+                
+                		
+             
+        } catch (SQLException ex) {
+        
+        }
+		return false;
+ 
+
+	}
+public static boolean  SettaConnesso(String username){
+
+	       
+        
+        Connection con = DbConnection.db;
+        
+        Statement st;
+        
+        int rs;
+        
+ 
+        
+        
+        try {
+            
+            st = con.createStatement();
+           
+            rs = st.executeUpdate("UPDATE elencoutenti SET connessione= 1 WHERE elencoutenti.username='"+username+"' "); 
+          
+                return true;
+                
+                		
+             
+        } catch (SQLException ex) {
+        
+        }
+		return false;
+ 
+
+	}
+public static int getAttUt(String username){
+
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+
+    int bloc = 1;
+    
+    try {
+        
+        st = con.createStatement();
+       
+        rs = st.executeQuery("SELECT attivita FROM elencoutenti WHERE elencoutenti.username='"+username+"' "); 
+      
+            rs.next();
+            bloc=rs.getInt("attivita");
+            		
+        return bloc; 
+    } catch (SQLException ex) {
+    
+    }
+    return bloc;
+
+
+}
+
+
+
+	public static int getBlcUt(String username){
+
+	       
+        
+        Connection con = DbConnection.db;
+        
+        Statement st;
+        
+        ResultSet rs;
+        
+ 
+        int bloc = 1;
+        
+        try {
+            
+            st = con.createStatement();
+           
+            rs = st.executeQuery("SELECT bloccato FROM elencoutenti WHERE elencoutenti.username='"+username+"' "); 
+          
+                rs.next();
+                bloc=rs.getInt("bloccato");
+                		
+            return bloc; 
+        } catch (SQLException ex) {
+        
+        }
+        return bloc;
+
+
+	}
+	 public static int getModUt(String username){
+
+	       
+	        
+	        Connection con = DbConnection.db;
+	        
+	        Statement st;
+	        
+	        ResultSet rs;
+	        
+	 
+	        int mod = 1;
+	        
+	        try {
+	            
+	            st = con.createStatement();
+	           
+	            rs = st.executeQuery("SELECT modificato FROM elencoutenti WHERE elencoutenti.username='"+username+"' "); 
+	          
+	                rs.next();
+	                mod=rs.getInt("modificato");
+	                		
+	            return mod; 
+	        } catch (SQLException ex) {
+	        
+	        }
+	        return mod;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	 public static int getidTess(String username){
 
 	       
@@ -257,7 +463,7 @@ public static int getcodiceturnoevento(String fasciaor,String giornoset, String 
         
         st = con.createStatement();
        
-        rs = st.executeQuery("SELECT codiceturnoevento from gestioneturnoevento WHERE fasciaoraria='"+fasciaor+"' AND giornosettimana='"+fasciaor+"' AND spazio='"+spazio+"'"); 
+        rs = st.executeQuery("SELECT codiceturnoevento from gestioneturnoevento WHERE giornosettimana='"+giornoset+"' AND fasciaoraria='"+fasciaor+"' AND spazio='"+spazio+"'"); 
       
             rs.next();
             ris=rs.getInt("codiceturnoevento");

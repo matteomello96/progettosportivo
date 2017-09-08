@@ -79,9 +79,9 @@ public class FrameCambia {
 		lblReinserisciNuovaPassword.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblReinserisciNuovaPassword.setBounds(10, 141, 142, 14);
 		frame.getContentPane().add(lblReinserisciNuovaPassword);
-		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-		    @Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) 
+		//frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		    //@Override
+		    /*public void windowClosing(java.awt.event.WindowEvent windowEvent) 
 		    {
 		    	if(FrameTesserato.frame!=null)
 		    		FrameTesserato.frame.setEnabled(true);
@@ -91,7 +91,7 @@ public class FrameCambia {
 		    	//	CapFrame.frame.setEnabled(true);
 		    	//if(AdminFrame.frame!=null)
 		    	//	AdminFrame.frame.setEnabled(true);
-		    }
-		});
+		    }*/
+		//});
 	}
 }

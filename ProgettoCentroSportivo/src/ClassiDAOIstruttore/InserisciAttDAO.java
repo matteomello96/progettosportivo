@@ -3,9 +3,9 @@
 package ClassiDAOIstruttore;
 import DBInterfaccia.DbConnection ;
 import Model.Utente;
-import VisteIstruttore.FrameInserisciEv;
-import VisteIstruttore.FrameIstruttore;
 import VisteUtenteGenerico.FrameRegistrazione;
+import visteIstruttore.FrameInserisciAtt;
+import visteIstruttore.FrameInserisciEv;
 
 
 import java.sql.Connection;
@@ -58,14 +58,14 @@ public static boolean registraatt(String disc, String liv , String fasciaor ,Str
          int comb= rs.getInt("combinazionelivdis");
          st2.executeUpdate("INSERT INTO `gestioneturno` (`fasciaoraria`,`giornosettimana`,`spazio`,`prenotazionidisponibili`,`combinazionelivdis`) VALUES ('"+fasciaor+"','"+giornoset+"','"+spazio+"','"+prendisp+"','"+comb+"')");
             
-         JOptionPane.showMessageDialog(FrameInserisciEv.frame,"L'attività che si svolge il \""+giornoset+"\" nella fascia oraria \""+fasciaor+"\" nello spazio "+spazio+" è stato creato correttamente ","Inserimento riuscito! ",JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(FrameInserisciAtt.frame,"L'attività che si svolge il \""+giornoset+"\" nella fascia oraria \""+fasciaor+"\" nello spazio "+spazio+" è stato creato correttamente ","Inserimento riuscito! ",JOptionPane.INFORMATION_MESSAGE);
          return true;
         }
             }
            
            
 catch (SQLException ex) {
-    JOptionPane.showMessageDialog(FrameInserisciEv.frame, ex);
+    JOptionPane.showMessageDialog(FrameInserisciAtt.frame, ex);
 }
 return false;
 }

@@ -1,48 +1,37 @@
 package visteadmin;
 
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.EventQueue;
+
 import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.JTextComponent.KeyBinding;
 
-import ClassiDAOIstruttore.InserisciEventoDAO;
-import ClassiDAOIstruttore.ModificaEventoDAO;
-import Listener.Listen;
-import Model.Home;
-import ModelliTabelleIstruttore.ComboSpazio;
-import ModelliTabelleRespo.ComboDiscipline;
-import VisteUtenteGenerico.*;
-import classiDAOResponsabile.InserisciDisciplinaDAO;
-import classiDAOResponsabile.InserisciModPagDAO;
-import classiDAOResponsabile.ModificaModPagDAO;
-import ClassiDao.Reg_dao;
+import classiDAOResponsabile.GestioneDAO;
+
+
+
+import listener.Listen;
+
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+
 import javax.swing.JMenu;
-import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 
-import javax.swing.Action;
-import javax.swing.DefaultComboBoxModel;
+
+
 
 import java.awt.GridBagLayout;
-import java.awt.Image;
+
 
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -50,13 +39,9 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import java.awt.ScrollPane;
+
 import javax.swing.JScrollPane;
-import java.awt.Rectangle;
-import java.awt.Component;
-import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
+
 import javax.swing.JFileChooser;
 import javax.swing.JButton;
 
@@ -135,6 +120,9 @@ public class FrameInserisciDisciplina extends JFrame {
 		
 		
 		JLabel lblFormDiModifica = new JLabel("Form di Inserimento della disciplina");
+		lblFormDiModifica.setOpaque(true);
+		lblFormDiModifica.setBackground(new Color(128, 120, 120));
+		lblFormDiModifica.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -145,11 +133,26 @@ public class FrameInserisciDisciplina extends JFrame {
 		
 
 		JLabel lblNomeD = new JLabel("Nome della disciplina");
+		lblNomeD.setOpaque(true);
+		lblNomeD.setBackground(new Color(128, 120, 120));
+		lblNomeD.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		contentPane.add(lblNomeD, gbc);
+		
+		JLabel lblErrNome = new JLabel("La disciplina non deve contenere numeri");
+		lblErrNome.setOpaque(true);
+		lblErrNome.setBackground(new Color(128, 0, 0));
+		lblErrNome.setForeground(new Color(255, 255, 255));
+		lblErrNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblErrNome.setBounds(25, 30, 10, 10);
+		lblErrNome.setVisible(false);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 2;
+		gbc.gridy = 2;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		
 		textnomed = new JTextField();
 		gbc.gridx = 1;
@@ -158,12 +161,54 @@ public class FrameInserisciDisciplina extends JFrame {
 		contentPane.add(textnomed, gbc);
 		textnomed.setColumns(10);
 		
+		textnomed.addKeyListener(new KeyListener(){
+			public void keyPressed(KeyEvent ke)
+		
+		{
+				
+				if((ke.getKeyChar()+"").matches("[0-9]+$")){
+                lblErrNome.setVisible(true);
+                }
+				else
+				{
+				lblErrNome.setVisible(false);
+				}
+		}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}});
+		
+		
 		JLabel lblDesc = new JLabel("Descrizione");
+		lblDesc.setOpaque(true);
+		lblDesc.setBackground(new Color(128, 120, 120));
+		lblDesc.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		contentPane.add(lblDesc, gbc);
+		
+		JLabel lblErrNome2 = new JLabel("");
+		lblErrNome2.setOpaque(true);
+		lblErrNome2.setBackground(new Color(128, 0, 0));
+		lblErrNome2.setForeground(new Color(255, 255, 255));
+		lblErrNome2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblErrNome2.setBounds(25, 30, 10, 10);
+		lblErrNome2.setVisible(false);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 2;
+		gbc.gridy = 3;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		
 		descr = new JTextField();
 		gbc.gridx = 1;
@@ -173,6 +218,9 @@ public class FrameInserisciDisciplina extends JFrame {
 		descr.setColumns(10);
 		
 		JLabel lblCal = new JLabel("Scegli calendario");
+		lblCal.setOpaque(true);
+		lblCal.setBackground(new Color(128, 120, 120));
+		lblCal.setForeground(new Color(255, 255, 255));
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
@@ -191,6 +239,9 @@ public class FrameInserisciDisciplina extends JFrame {
 		
 		
 		JLabel lblIm = new JLabel("Inserisci immagine");
+		lblIm.setOpaque(true);
+		lblIm.setBackground(new Color(128, 120, 120));
+		lblIm.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
@@ -205,6 +256,8 @@ public class FrameInserisciDisciplina extends JFrame {
 		immagine.setColumns(10);
 		
 		JButton sfoglia = new JButton("Sfoglia:");
+		sfoglia.setBackground(new Color(28, 220, 157));
+		sfoglia.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 2;
 		gbc.gridy = 5;
@@ -236,6 +289,8 @@ public class FrameInserisciDisciplina extends JFrame {
 		
 		
 		JButton btninsdisc = new JButton("Inserisci disciplina");
+		btninsdisc.setBackground(new Color(28, 140, 220));
+		btninsdisc.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 14;
@@ -244,7 +299,7 @@ public class FrameInserisciDisciplina extends JFrame {
 		btninsdisc.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-			
+			 
 			
 			lblNomeD.setForeground(Color.BLACK);
 			lblNomeD.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -254,19 +309,27 @@ public class FrameInserisciDisciplina extends JFrame {
 			
 		
 		
-		if(textnomed.getText().isEmpty()||descr.getText().isEmpty())
-		
+		if(textnomed.getText().isEmpty()||descr.getText().isEmpty()){
+			if(textnomed.getText().isEmpty())
 			{
 				lblNomeD.setForeground(Color.RED);
 				lblNomeD.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblErrNome.setText("Il campo è vuoto");
+				lblErrNome.setVisible(true);
 				
+			}	
+			if(descr.getText().isEmpty())
+			{
 				lblDesc.setForeground(Color.RED);
 				lblDesc.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblErrNome2.setText("Il campo è vuoto");
+				lblErrNome2.setVisible(true);
+			}
 			}
 			
 		else
 			
-			bool=InserisciDisciplinaDAO.inserimentodisc(textnomed.getText(),descr.getText(),combocal.getSelectedItem().toString(),path,nomefile,pathprecedente);
+			bool=GestioneDAO.inserimentodisc(textnomed.getText(),descr.getText(),combocal.getSelectedItem().toString(),path,nomefile,pathprecedente);
 			
 		
 		if(bool)

@@ -1,74 +1,44 @@
 package visteadmin;
 
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.EventQueue;
+
 import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.JTextComponent.KeyBinding;
-import javax.swing.tree.TreeSelectionModel;
 
-import ClassiDAOIstruttore.ElencoLivDisDAO;
-import ClassiDAOIstruttore.InserisciAttDAO;
-import ClassiDAOIstruttore.InserisciEventoDAO;
-import Listener.Listen;
-import Model.Home;
-import Model.Utente;
-import ModelliTabelle.ModDetLiv;
-import ModelliTabelleIstruttore.ComboDis;
-import ModelliTabelleIstruttore.ComboLivelloIs;
-import ModelliTabelleIstruttore.ComboSpazio;
-import ModelliTabelleIstruttore.ComboSpazioAltro;
-import ModelliTabelleIstruttore.ModLivDis;
-import ModelliTabelleRespo.ComboDiscipline;
-import ModelliTabelleRespo.ComboLivelli;
-import VisteUtenteGenerico.*;
-import classiDAOResponsabile.InserisciDiscDispDAO;
-import ClassiDao.DettagliLivelloDAO;
-import ClassiDao.GetInfoDB;
-import ClassiDao.Reg_dao;
-import ComboTesserato.Comboliv;
+import classiDAOResponsabile.GestioneDAO;
+
+import listener.Listen;
+
+import modelliTabelleRespo.ComboDiscipline;
+import modelliTabelleRespo.ComboLivelli;
+
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
-import javax.swing.AbstractAction;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.Action;
-import javax.swing.DefaultComboBoxModel;
-
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+
 
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
+
 import javax.swing.ScrollPaneConstants;
 
-import java.awt.ScrollPane;
+
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
-import java.awt.Rectangle;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-
-import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JButton;
 
 
@@ -131,10 +101,10 @@ public class FrameInserisciDiscDisp extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Pagina Iniziale");
+		JMenu mnNewMenu = new JMenu("Gestione");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmTornaAllaPagina = new JMenuItem("Torna alla pagina iniziale");
+		JMenuItem mntmTornaAllaPagina = new JMenuItem("Torna alla pagina gestione");
 	
 		mnNewMenu.add(mntmTornaAllaPagina);
 		mntmTornaAllaPagina.addActionListener(new Listen(this));
@@ -143,6 +113,9 @@ public class FrameInserisciDiscDisp extends JFrame {
 		
 		
 		JLabel lblFormDiInserimento = new JLabel("Form di Inserimento della disciplina");
+		lblFormDiInserimento.setOpaque(true);
+		lblFormDiInserimento.setBackground(new Color(128, 120, 120));
+		lblFormDiInserimento.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -159,6 +132,9 @@ public class FrameInserisciDiscDisp extends JFrame {
 		
 	
 		JLabel lblDisc = new JLabel("Scegli disciplina");
+		lblDisc.setOpaque(true);
+		lblDisc.setBackground(new Color(128, 120, 120));
+		lblDisc.setForeground(new Color(255, 255, 255));
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
@@ -175,6 +151,9 @@ public class FrameInserisciDiscDisp extends JFrame {
 		contentPane.add(combodis, gbc);
 		
 		JLabel lblLiv = new JLabel("Scegli livello");
+		lblLiv.setOpaque(true);
+		lblLiv.setBackground(new Color(128, 120, 120));
+		lblLiv.setForeground(new Color(255, 255, 255));
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
@@ -192,11 +171,29 @@ public class FrameInserisciDiscDisp extends JFrame {
 		
 		
 		JLabel lblCostomensile = new JLabel("Costo mensile");
+		lblCostomensile.setOpaque(true);
+		lblCostomensile.setBackground(new Color(128, 120, 120));
+		lblCostomensile.setForeground(new Color(255, 255, 255));
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 0;
 		gbc.gridy =4;
 		contentPane.add(lblCostomensile, gbc);
+		
+		
+		JLabel lblErrNome = new JLabel("Il livello non deve contenere numeri");
+		lblErrNome.setOpaque(true);
+		lblErrNome.setBackground(new Color(128, 0, 0));
+		lblErrNome.setForeground(new Color(255, 255, 255));
+		lblErrNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblErrNome.setBounds(25, 30, 10, 10);
+		lblErrNome.setVisible(false);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 2;
+		gbc.gridy = 4;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		
+		contentPane.add(lblErrNome,gbc);
 		
 		costomensile = new JTextField();
 		gbc.gridx = 1;
@@ -207,7 +204,38 @@ public class FrameInserisciDiscDisp extends JFrame {
 
 		
 		
+		costomensile.addKeyListener(new KeyListener(){
+			public void keyPressed(KeyEvent ke)
+		
+		{
+				
+				if((ke.getKeyChar()+"").matches("[0-9]+$")){
+                lblErrNome.setVisible(true);
+                }
+				else
+				{
+				lblErrNome.setVisible(false);
+				}
+		}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}});
+		
+		
+		
 		JButton btnRegistratiAlNostro = new JButton("Inserisci la nuova disciplina");
+		
+		btnRegistratiAlNostro.setBackground(new Color(17, 120, 220));
+		btnRegistratiAlNostro.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 6;
@@ -231,13 +259,15 @@ public class FrameInserisciDiscDisp extends JFrame {
 			{
 				costomensile.setForeground(Color.RED);
 				costomensile.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblErrNome.setText("Il campo è vuoto");
+				lblErrNome.setVisible(true);
 			}
 			JOptionPane.showMessageDialog(frame, "Riempire tutti i campi obbligatori"," ",JOptionPane.WARNING_MESSAGE);
 		}
 		
 		else
 	
-			bool=InserisciDiscDispDAO.inserimentodiscdisp(combodis.getSelectedItem().toString(),combolivelli.getSelectedItem().toString(),costomensile.getText());
+			bool=GestioneDAO.inserimentodiscdisp(combodis.getSelectedItem().toString(),combolivelli.getSelectedItem().toString(),costomensile.getText());
 			
 		
 		if(bool)

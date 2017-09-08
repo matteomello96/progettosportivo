@@ -20,11 +20,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-import ModelliTabelleRespo.modeven;
+
 import classiDAOResponsabile.confeven;
 import classiDAOResponsabile.downloaddao;
 import classiDAOResponsabile.elencoeventidao;
 import classiDAOResponsabile.rimuovieventodao;
+import modelliTabelleRespo.modeven;
 
 
 
@@ -198,7 +199,7 @@ private JButton btnNewButton;
 			   @Override
 			   public void windowClosing(java.awt.event.WindowEvent windowEvent) 
 			    {
-			    FrameResponsabile.frame.setVisible(true);
+			    FrameElencoUtenti.frame.setVisible(true);
 			    }
 			});
 		

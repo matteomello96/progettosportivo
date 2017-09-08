@@ -42,14 +42,14 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
 import ModelliTabelle.ModDiscIni;
-import ModelliTabelleIstruttore.ModElEventiIstr;
 import ModelliTabelle_Tesserato.ModElEventiTes;
 import ModelliTabelle_Tesserato.controlloevento;
 import VisteUtenteGenerico.DetDisciplina;
 import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
-import Listener.Listen;
+import listener.Listen;
+import modelliTabelleIstruttore.ModElEventiIstr;
 import Model.Utente;
 import Model_Tesserato.ElencoEventiTes;
 

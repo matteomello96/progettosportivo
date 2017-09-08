@@ -3,11 +3,10 @@
 package ClassiDAOIstruttore;
 import DBInterfaccia.DbConnection ;
 import Model.Utente;
-import VisteIstruttore.FrameInserisciEv;
-import VisteIstruttore.FrameIstruttore;
-import VisteIstruttore.FrameModificaEv;
 import VisteUtenteGenerico.FrameRegistrazione;
-
+import visteIstruttore.FrameInserisciEv;
+import visteIstruttore.FrameModificaAtt;
+import visteIstruttore.FrameModificaEv;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -56,14 +55,14 @@ public static boolean modificaatt ( int comblivdis, String fasciaor ,String gior
          
          st.executeUpdate("UPDATE `gestioneturno` SET `fasciaoraria`='"+fasciaor+"',`giornosettimana`='"+giornoset+"',`spazio`='"+spazio+"',`prenotazionidisponibili`='"+prendisp+"' WHERE combinazionelivdis='"+comblivdis+"' ");
             
-         JOptionPane.showMessageDialog(FrameModificaEv.frame,"L'evento che si svolge il \""+giornoset+"\" nella fascia oraria \""+fasciaor+"\" nello spazio "+spazio+" è stato modificato correttamente ","Modifica riuscita! ",JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(FrameModificaAtt.frame,"L'evento che si svolge il \""+giornoset+"\" nella fascia oraria \""+fasciaor+"\" nello spazio "+spazio+" è stato modificato correttamente ","Modifica riuscita! ",JOptionPane.INFORMATION_MESSAGE);
          return true;
         }
             }
            
            
 catch (SQLException ex) {
-    JOptionPane.showMessageDialog(FrameModificaEv.frame, ex);
+    JOptionPane.showMessageDialog(FrameModificaAtt.frame, ex);
 }
 return false;
 }

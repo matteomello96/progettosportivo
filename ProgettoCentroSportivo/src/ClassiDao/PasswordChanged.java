@@ -9,8 +9,9 @@ import javax.swing.JOptionPane;
 import DBInterfaccia.DbConnection;
 import Model.Utente;
 import VisteUtenteGenerico.FrameCambia;
+import VisteUtenteGenerico.FrameModificaDati;
 import view_tesserato.FrameTesserato;
-import visteadmin.FrameResponsabile;
+import visteadmin.FrameElencoUtenti;
 public class PasswordChanged {
 	
 	
@@ -30,18 +31,19 @@ public class PasswordChanged {
 	          rs=st.executeQuery("SELECT elencoutenti.idutente FROM elencoutenti WHERE elencoutenti.username='"+Utente.getUsername()+"' AND elencoutenti.password='"+vecchiapass+"'");
 	            
 	         if(rs.next()){
-	        	st.executeUpdate("UPDATE elencoutenti SET password = '"+Nuovapass+"' WHERE elencoutenti.username='"+Utente.getUsername()+"'");
+	        	st.executeUpdate("UPDATE elencoutenti SET password = '"+Nuovapass+"',modificato= 1 WHERE elencoutenti.username='"+Utente.getUsername()+"'");
 	        	JOptionPane.showMessageDialog(FrameCambia.frame, "Password cambiata"," ",JOptionPane.INFORMATION_MESSAGE);
-	        if(FrameTesserato.frame!=null)
-	        FrameTesserato.frame.setEnabled(true);
-			   if(FrameResponsabile.frame!=null)
-			    		FrameResponsabile.frame.setEnabled(true);
+	        //if(FrameTesserato.frame!=null)
+	        //FrameTesserato.frame.setEnabled(true);
+			  ///if(FrameElencoUtenti.frame!=null)
+			    		//FrameElencoUtenti.frame.setEnabled(true);
 			    	//if(CapFrame.frame!=null)
 			    	//	CapFrame.frame.setEnabled(true);
 			    	//if(AdminFrame.frame!=null)
 			    		//AdminFrame.frame.setEnabled(true);
 				FrameCambia.frame.setVisible(false);
 				FrameCambia.frame.dispose();
+				 FrameModificaDati.frame.setVisible(true);
 	        	
 	         }
 	           

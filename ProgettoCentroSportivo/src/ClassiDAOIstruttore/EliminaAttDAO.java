@@ -3,11 +3,12 @@
 package ClassiDAOIstruttore;
 import DBInterfaccia.DbConnection ;
 import Model.Utente;
-import VisteIstruttore.FrameInserisciEv;
-import VisteIstruttore.FrameIstruttore;
-import VisteIstruttore.FrameModificaEv;
 import VisteUtenteGenerico.FrameRegistrazione;
+import visteIstruttore.FrameAttIstr;
+import visteIstruttore.FrameEventiIstr;
+import visteIstruttore.FrameInserisciEv;
 
+import visteIstruttore.FrameModificaEv;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -51,20 +52,23 @@ public static boolean eliminaatt ( int comblivdis ){
         
         
             
-         JOptionPane.showMessageDialog(FrameIstruttore.frame,"L'attività selezionata è stata eliminata correttamente ","Eliminazione riuscita! ",JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(FrameAttIstr.frame,"L'attività selezionata è stata eliminata correttamente ","Eliminazione riuscita! ",JOptionPane.INFORMATION_MESSAGE);
+         
+        
+        
+         
          return true;
-     
             }
            
            
 catch (SQLException ex) {
-    JOptionPane.showMessageDialog(FrameIstruttore.frame, ex);
+    JOptionPane.showMessageDialog(FrameAttIstr.frame, ex);
 }
 return false;
 }
 
 
-
+   
 
 
      

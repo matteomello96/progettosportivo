@@ -2,22 +2,18 @@
 
 package classiDAOResponsabile;
 import DBInterfaccia.DbConnection ;
-import Model.Utente;
-import VisteIstruttore.FrameInserisciEv;
-import VisteIstruttore.FrameIstruttore;
-import VisteIstruttore.FrameModificaEv;
-import VisteUtenteGenerico.FrameRegistrazione;
+
 import visteadmin.FrameModificaModPag;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
+
 
 import javax.swing.JOptionPane;
 
-import ClassiDao.GetInfoDB;
+
 
 
 public class ModificaModPagDAO {

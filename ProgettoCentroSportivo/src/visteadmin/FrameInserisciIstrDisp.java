@@ -1,55 +1,36 @@
 package visteadmin;
 
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.EventQueue;
+
 import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.JTextComponent.KeyBinding;
-import javax.swing.tree.TreeSelectionModel;
 
-import ClassiDAOIstruttore.ElencoLivDisDAO;
-import ClassiDAOIstruttore.InserisciAttDAO;
-import ClassiDAOIstruttore.InserisciEventoDAO;
-import Listener.Listen;
-import Model.Home;
-import Model.Utente;
-import Model_Responsabile.DettagliIstruttore;
-import ModelliTabelle.ModDetLiv;
-import ModelliTabelleIstruttore.ComboDis;
-import ModelliTabelleIstruttore.ComboLivelloIs;
-import ModelliTabelleIstruttore.ComboSpazio;
-import ModelliTabelleIstruttore.ComboSpazioAltro;
-import ModelliTabelleRespo.ModLivDis;
-import ModelliTabelleRespo.ModDetIstr;
-import ModelliTabelleRespo.ModIstrDisp;
-import VisteUtenteGenerico.*;
-import classiDAOResponsabile.InserisciCombIstrDAO;
+
+import VisteUtenteGenerico.setupTableWidths;
+
+import listener.Listen;
+
+import modelliTabelleRespo.ModDetIstr;
+
+import modelliTabelleRespo.ModLivDis;
 import classiDAOResponsabile.ElencoDiscLivDispDAO;
-import classiDAOResponsabile.ElencoIstrDispDAO;
+import classiDAOResponsabile.GestioneDAO;
 import classiDAOResponsabile.DettagliIstruttoreDAO;
-import ClassiDao.DettagliLivelloDAO;
-import ClassiDao.GetInfoDB;
-import ClassiDao.Reg_dao;
-import ComboTesserato.Comboliv;
+
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
-import javax.swing.AbstractAction;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-import javax.swing.Action;
-import javax.swing.DefaultComboBoxModel;
+
 
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -57,24 +38,20 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
+
 import javax.swing.ScrollPaneConstants;
 
-import java.awt.ScrollPane;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import java.awt.Rectangle;
-import java.awt.Component;
+
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
-import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
+
 import javax.swing.JButton;
-import classiDAOResponsabile.InserisciCombIstrDAO;
+
 
 
 
@@ -91,7 +68,7 @@ public class FrameInserisciIstrDisp extends JFrame {
 	private JPanel contentPane,tabellaPnl,bottoniPnl;
 	public ModLivDis model2;
 	public ModDetIstr model1;
-	public static JTable table1,table2;
+	public static JTable table1,table2,tablemod1,tablemod2;
 	
 	private boolean bool;
 	
@@ -132,10 +109,10 @@ public class FrameInserisciIstrDisp extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Pagina Iniziale");
+		JMenu mnNewMenu = new JMenu("Pagina Gestione");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmTornaAllaPagina = new JMenuItem("Torna alla pagina iniziale");
+		JMenuItem mntmTornaAllaPagina = new JMenuItem("Torna alla pagina Gestione");
 	
 		mnNewMenu.add(mntmTornaAllaPagina);
 		mntmTornaAllaPagina.addActionListener(new Listen(this));
@@ -144,6 +121,9 @@ public class FrameInserisciIstrDisp extends JFrame {
 		
 		
 		JLabel lblFormDiInserimento = new JLabel("Form di Inserimento dell'istruttore disponibile");
+		lblFormDiInserimento.setOpaque(true);
+		lblFormDiInserimento.setBackground(new Color(128, 120, 120));
+		lblFormDiInserimento.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -155,8 +135,10 @@ public class FrameInserisciIstrDisp extends JFrame {
 		tabellaPnl.setLayout(new GridLayout(3 , 2));
 		
 		JLabel lblISD = new JLabel("Elenco degli istruttori");
+		lblISD.setOpaque(true);
+		lblISD.setBackground(new Color(128, 120, 120));
+		lblISD.setForeground(new Color(255, 255, 255));
 		lblISD.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblISD.setForeground(Color.BLACK);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx =1;
 		gbc.gridy =1;
@@ -175,15 +157,17 @@ public class FrameInserisciIstrDisp extends JFrame {
 		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table1.setCellSelectionEnabled(true);
 		table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		Dimension txy = table1.getPreferredSize();
-		table1.setPreferredSize(txy);
+		tablemod1 = setupTableWidths.setupTableWidths(table1);
+
+		tablemod1.setForeground(new Color(255, 255, 255));
+		tablemod1.setBackground(new Color(240, 220, 130));
 		gbc.insets= new Insets(0,0,5,5);
 		gbc.gridx =1;
 		gbc.gridy =2;
 			
 			
-		scrollt1.setPreferredSize(txy);
-		scrollt1.setViewportView(table1);
+		
+		scrollt1.setViewportView(tablemod1);
 		tabellaPnl.add(scrollt1);
 		
 		
@@ -192,8 +176,10 @@ public class FrameInserisciIstrDisp extends JFrame {
 		
 		
 		JLabel lblDD = new JLabel("Elenco delle discipline disponibili");
+		lblDD.setOpaque(true);
+		lblDD.setBackground(new Color(128, 120, 120));
+		lblDD.setForeground(new Color(255, 255, 255));
 		lblDD.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDD.setForeground(Color.BLACK);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx =2;
 		gbc.gridy =1;
@@ -212,15 +198,17 @@ public class FrameInserisciIstrDisp extends JFrame {
 		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table2.setCellSelectionEnabled(true);
 		table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		Dimension txyz = table2.getPreferredSize();
-		table2.setPreferredSize(txyz);
+		tablemod2 = setupTableWidths.setupTableWidths(table2);
+
+		tablemod2.setForeground(new Color(255, 255, 255));
+		tablemod2.setBackground(new Color(240, 220, 130));
 		gbc.insets= new Insets(0,0,5,5);
 		gbc.gridx =2;
 		gbc.gridy =2;
 			
 			
-		scrollt2.setPreferredSize(txyz);
-		scrollt2.setViewportView(table2);
+		
+		scrollt2.setViewportView(tablemod2);
 		tabellaPnl.add(scrollt2);
 		
 		
@@ -230,13 +218,15 @@ public class FrameInserisciIstrDisp extends JFrame {
 	  
 		
 		JButton btnNewButton12 = new JButton("Inserisci istruttore  disponibile");
+		btnNewButton12.setBackground(new Color(128, 120, 120));
+		btnNewButton12.setForeground(new Color(255, 255, 255));
 		btnNewButton12.setMnemonic('h');
 		btnNewButton12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
 			if((table1.getSelectedRow()!=-1)&&(table2.getSelectedRow()!=-1))
 			{
 			
-			bool = InserisciCombIstrDAO.inseriscicombis(((String) FrameInserisciIstrDisp.table1.getValueAt(FrameInserisciIstrDisp.table1.getSelectedRow(), 0)),((String) FrameInserisciIstrDisp.table1.getValueAt(FrameInserisciIstrDisp.table1.getSelectedRow(), 1)),((String) FrameInserisciIstrDisp.table2.getValueAt(FrameInserisciIstrDisp.table2.getSelectedRow(), 0)),((String) FrameInserisciIstrDisp.table2.getValueAt(FrameInserisciIstrDisp.table2.getSelectedRow(), 1)));
+			bool = GestioneDAO.inseriscicombis(((String) FrameInserisciIstrDisp.table1.getValueAt(FrameInserisciIstrDisp.table1.getSelectedRow(), 0)),((String) FrameInserisciIstrDisp.table1.getValueAt(FrameInserisciIstrDisp.table1.getSelectedRow(), 1)),((String) FrameInserisciIstrDisp.table2.getValueAt(FrameInserisciIstrDisp.table2.getSelectedRow(), 0)),((String) FrameInserisciIstrDisp.table2.getValueAt(FrameInserisciIstrDisp.table2.getSelectedRow(), 1)));
 			}
 					
 			else{	

@@ -3,11 +3,11 @@
 package ClassiDAOIstruttore;
 import DBInterfaccia.DbConnection ;
 import Model.Utente;
-import VisteIstruttore.FrameInserisciEv;
-import VisteIstruttore.FrameIstruttore;
-import VisteIstruttore.FrameModificaEv;
 import VisteUtenteGenerico.FrameRegistrazione;
+import visteIstruttore.FrameEventiIstr;
+import visteIstruttore.FrameInserisciEv;
 
+import visteIstruttore.FrameModificaEv;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -58,14 +58,14 @@ public static boolean eliminaevento ( String evento ){
          
          st2.executeUpdate("DELETE from evento  WHERE codiceevento='"+codevento+"' ");
             
-         JOptionPane.showMessageDialog(FrameIstruttore.frame,"L'evento "+evento+" è stato eliminato correttamente ","Eliminazione riuscita! ",JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(FrameEventiIstr.frame,"L'evento "+evento+" è stato eliminato correttamente ","Eliminazione riuscita! ",JOptionPane.INFORMATION_MESSAGE);
          return true;
         }
             }
            
            
 catch (SQLException ex) {
-    JOptionPane.showMessageDialog(FrameIstruttore.frame, ex);
+    JOptionPane.showMessageDialog(FrameEventiIstr.frame, ex);
 }
 return false;
 }

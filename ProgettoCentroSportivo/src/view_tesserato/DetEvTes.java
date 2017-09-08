@@ -4,7 +4,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import VisteUtenteGenerico.FrameIniziale;
-
+import modelliTabelleIstruttore.ModDetOrariEv;
 import ClassiDao.DettagliIstruttoreDAO;
 import ClassiDao.DettagliLivelloDAO;
 import ClassiDao.DettagliOrariDAO;
@@ -16,7 +16,6 @@ import ModelliTabelle.ModDetLiv;
 import ModelliTabelle.ModDetOrari;
 import ModelliTabelle.ModDetTest;
 import ModelliTabelle.ModDiscIni;
-import ModelliTabelleIstruttore.ModDetOrariEv;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

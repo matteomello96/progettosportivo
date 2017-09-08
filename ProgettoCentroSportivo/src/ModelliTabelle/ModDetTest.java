@@ -1,6 +1,8 @@
 package ModelliTabelle;
 
+
 import java.util.ArrayList;
+
 
 import javax.swing.table.AbstractTableModel;
 
@@ -10,6 +12,7 @@ public class ModDetTest extends AbstractTableModel {
 	   /**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<DettagliTestimonianze> dati;
 		
@@ -37,7 +40,7 @@ public class ModDetTest extends AbstractTableModel {
 			if(dati!=null) return dati.size();
 			else return 0;
 		}
-
+     
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			
 			//ArrayList<Utente>

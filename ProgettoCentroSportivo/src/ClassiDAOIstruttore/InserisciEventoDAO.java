@@ -3,9 +3,8 @@
 package ClassiDAOIstruttore;
 import DBInterfaccia.DbConnection ;
 import Model.Utente;
-import VisteIstruttore.FrameInserisciEv;
-import VisteIstruttore.FrameIstruttore;
 import VisteUtenteGenerico.FrameRegistrazione;
+import visteIstruttore.FrameInserisciEv;
 
 
 import java.sql.Connection;

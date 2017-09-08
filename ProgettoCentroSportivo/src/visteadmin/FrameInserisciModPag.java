@@ -1,39 +1,33 @@
 package visteadmin;
 
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.EventQueue;
+
 import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.JTextComponent.KeyBinding;
 
-import ClassiDAOIstruttore.InserisciEventoDAO;
-import ClassiDAOIstruttore.ModificaEventoDAO;
-import Listener.Listen;
-import Model.Home;
-import ModelliTabelleIstruttore.ComboSpazio;
-import VisteUtenteGenerico.*;
-import classiDAOResponsabile.InserisciModPagDAO;
-import classiDAOResponsabile.ModificaModPagDAO;
-import ClassiDao.Reg_dao;
+
+
+import classiDAOResponsabile.GestioneDAO;
+
+import listener.Listen;
+
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+
 import javax.swing.JMenu;
-import javax.swing.AbstractAction;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.Action;
-import javax.swing.DefaultComboBoxModel;
+
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -42,13 +36,10 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import java.awt.ScrollPane;
+
 import javax.swing.JScrollPane;
-import java.awt.Rectangle;
-import java.awt.Component;
-import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
+
+
 import javax.swing.JButton;
 
 
@@ -122,6 +113,9 @@ public class FrameInserisciModPag extends JFrame {
 		
 		
 		JLabel lblFormDiModifica = new JLabel("Form di Inserimento della modalità di pagamento");
+		lblFormDiModifica.setOpaque(true);
+		lblFormDiModifica.setBackground(new Color(128, 120, 120));
+		lblFormDiModifica.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -132,11 +126,29 @@ public class FrameInserisciModPag extends JFrame {
 		
 
 		JLabel lblModP = new JLabel("Nome della modalità da inserire");
+		lblModP.setOpaque(true);
+		lblModP.setBackground(new Color(128, 120, 120));
+		lblModP.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		contentPane.add(lblModP, gbc);
+		
+		JLabel lblErrNome = new JLabel("La modalità di pagamento non deve contenere numeri");
+		lblErrNome.setOpaque(true);
+		lblErrNome.setBackground(new Color(128, 0, 0));
+		lblErrNome.setForeground(new Color(255, 255, 255));
+		lblErrNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblErrNome.setBounds(25, 30, 10, 10);
+		lblErrNome.setVisible(false);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 2;
+		gbc.gridy = 2;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		
+		contentPane.add(lblErrNome,gbc);
+		
 		
 		textmodpag = new JTextField();
 		gbc.gridx = 1;
@@ -145,12 +157,40 @@ public class FrameInserisciModPag extends JFrame {
 		contentPane.add(textmodpag, gbc);
 		textmodpag.setColumns(10);
 		
+		textmodpag.addKeyListener(new KeyListener(){
+			public void keyPressed(KeyEvent ke)
 		
+		{
+				
+				if((ke.getKeyChar()+"").matches("[0-9]+$")){
+                lblErrNome.setVisible(true);
+                }
+				else
+				{
+				lblErrNome.setVisible(false);
+				}
+		}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}});
+		
+
 		
 		
 		
 		
 		JButton btnRegistratiAlNostro = new JButton("Inserisci modalità di pagamento");
+		btnRegistratiAlNostro.setBackground(new Color(128, 120, 0));
+		btnRegistratiAlNostro.setForeground(new Color(255, 255, 255));
 		gbc.insets = new Insets(5, 0, 0, 10);
 		gbc.gridx = 1;
 		gbc.gridy = 14;
@@ -172,11 +212,13 @@ public class FrameInserisciModPag extends JFrame {
 			{
 				lblModP.setForeground(Color.RED);
 				lblModP.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblErrNome.setText("Il campo è vuoto");
+				lblErrNome.setVisible(true);
 			}
 			
 		else
 			
-			bool=InserisciModPagDAO.inserimentomodpag(textmodpag.getText());
+			bool=GestioneDAO.inserimentomodpag(textmodpag.getText());
 			
 		
 		if(bool)

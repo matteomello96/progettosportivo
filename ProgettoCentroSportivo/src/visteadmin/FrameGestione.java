@@ -1,24 +1,20 @@
 package visteadmin;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.Border;
 
-import ClassiDAOIstruttore.ElencoAttDAO;
-import ClassiDAOIstruttore.ElencoEventiDAO;
-import ClassiDAOIstruttore.EliminaAttDAO;
-import ClassiDAOIstruttore.EliminaEventoDAO;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -26,46 +22,39 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 
 import ClassiDao.ElencoDisciplineDAO;
-import ClassiDao.GetInfoDB;
-import ClassiDao.UtenteDao;
+
 
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
 import ModelliTabelle.ModDiscIni;
-import ModelliTabelleIstruttore.ModElAttIstr;
-import ModelliTabelleIstruttore.ModElEventiIstr;
-import ModelliTabelleRespo.ModDiscDisp;
-import ModelliTabelleRespo.ModElIstr;
-import ModelliTabelleRespo.ModElTestResp;
-import ModelliTabelleRespo.ModIstrDisp;
-import ModelliTabelleRespo.ModLiv;
-import ModelliTabelleRespo.ModPagam;
-import VisteIstruttore.FrameIstruttore;
-import VisteUtenteGenerico.DetDisciplina;
-import VisteUtenteGenerico.FrameCambia;
-import VisteUtenteGenerico.FrameIniziale;
-import VisteUtenteGenerico.FrameLogin;
+
+import VisteUtenteGenerico.setupTableWidths;
+import classiDAOResponsabile.ElencoCalDAO;
 import classiDAOResponsabile.ElencoDiscDispDAO;
-import classiDAOResponsabile.ElencoIstrDAO;
+
 import classiDAOResponsabile.ElencoIstrDispDAO;
 import classiDAOResponsabile.ElencoLivDAO;
 import classiDAOResponsabile.ElencoModPagDAO;
 import classiDAOResponsabile.ElencoTestRespDao;
-import classiDAOResponsabile.EliminaCombIstrDAO;
-import classiDAOResponsabile.EliminaDisciplinaDAO;
-import classiDAOResponsabile.EliminaDisciplinaDispDAO;
-import classiDAOResponsabile.EliminaLivelloDAO;
-import classiDAOResponsabile.EliminaModPagDAO;
-import classiDAOResponsabile.EliminaTestimonianzaDAO;
-import Listener.Listen;
+
+import classiDAOResponsabile.GestioneDAO;
+import listener.Listen;
+
+import modelliTabelleRespo.ModCal;
+import modelliTabelleRespo.ModDiscDisp;
+
+import modelliTabelleRespo.ModElTestResp;
+import modelliTabelleRespo.ModIstrDisp;
+import modelliTabelleRespo.ModLiv;
+import modelliTabelleRespo.ModPagam;
 import Model.Utente;
 
 import javax.swing.JScrollPane;
@@ -81,17 +70,18 @@ public class FrameGestione extends JFrame {
 	 */
 	public static JFrame frame;
 	
-	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,bottoniPnl1,bottoniPnl2,bottoniPnl3,tabellaPnl4,tabellaPnl5,bottoniPnl4,bottoniPnl5,bottoniPnl6,tabellaPnl7,tabellaPnl6;
-	public static JTable table,table2,table3,table4,table5,table6,table7;
+	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,bottoniPnl1,bottoniPnl2,bottoniPnl3,bottoniPnl7,tabellaPnl8,tabellaPnl4,tabellaPnl5,bottoniPnl4,bottoniPnl5,bottoniPnl6,tabellaPnl7,tabellaPnl6;
+	public static JTable table,table2,table3,table4,table5,table6,table7,table8,tablemod1,tablemod2,tablemod3,tablemod4,tablemod5,tablemod6,tablemod7,tablemod8;
     private ModDiscIni model;
     private ModLiv model2;
     private ModDiscDisp model3;
-    private ModElIstr model4;
+    
     private ModIstrDisp model5;
     private ModPagam model6;
 	private ModElTestResp model7;
+	private ModCal model8;
 	private JTabbedPane tabel = new JTabbedPane();
-    private JTabbedPane tabel2= new JTabbedPane();	/**
+    	/**
 	 * Create the frame.
 	 */
 	public FrameGestione() {
@@ -108,25 +98,17 @@ public class FrameGestione extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("home");
+		JMenu mnNewMenu = new JMenu("Pannello di controllo");
 		menuBar.add(mnNewMenu);
 		
-		JMenu mnNewMenu_1 = new JMenu("visualizza");
-		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Vai al pannello di controllo");
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
-		mntmNewMenuItem.setActionCommand("iniistr");
+		mntmNewMenuItem.setActionCommand("pandages");
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new FrameCambia();
-				frame.setEnabled(false);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem_1);
+		
 		
 
 		
@@ -155,7 +137,16 @@ public class FrameGestione extends JFrame {
 		
 		
 		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(4 , 1));
+		tabellaPnl.setLayout(new BorderLayout());
+		
+		JLabel lblNull = new JLabel("Nessuna informazione disponibile");
+		lblNull.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNull.setBounds(40,40,100,300);
+		lblNull.setOpaque(true);
+		lblNull.setForeground(new Color (255,255,255));
+		lblNull.setBackground(new Color (0,150,17));
+		Border b = BorderFactory.createLineBorder(new Color (255,205,255));
+		lblNull.setBorder(b);
 		
 		
 		JLabel lblG = new JLabel("Elenco delle discipline");
@@ -166,7 +157,7 @@ public class FrameGestione extends JFrame {
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-		tabellaPnl.add(lblG);
+		tabellaPnl.add(lblG,BorderLayout.NORTH);
 		
 		
 			
@@ -185,26 +176,32 @@ public class FrameGestione extends JFrame {
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setCellSelectionEnabled(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		Dimension d = table.getPreferredSize();
-		table.setPreferredSize(d);
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =1;
-		gbc.gridy =2;
+		tablemod1 = setupTableWidths.setupTableWidths(table);
+
+		tablemod1.setForeground(new Color(255, 255, 255));
+		tablemod1.setBackground(new Color(240, 220, 130));
 		
-		scrollt1.setPreferredSize(d);
-		scrollt1.setViewportView(table);
-		tabellaPnl.add(scrollt1);
+		if(model.getRowCount()==0)
+		{
+			scrollt1.setViewportView(lblNull);
+		}
+		else{
+		scrollt1.setViewportView(tablemod1);
+		}
+		tabellaPnl.add(scrollt1,BorderLayout.CENTER);
 		
 		
 		
 		
 		bottoniPnl1 = new JPanel();
+		bottoniPnl1.setLayout(new GridBagLayout());
 		
 		JButton btnNewButton = new JButton("Inserisci disciplina");
 		btnNewButton.setEnabled(true);
 		btnNewButton.setMnemonic('a');
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
 				new FrameInserisciDisciplina();
 					
 			}
@@ -229,7 +226,7 @@ public class FrameGestione extends JFrame {
 				{
 					
 				new FrameModificaDisciplina((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0));	
-					
+				frame.dispose();	
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
@@ -249,8 +246,10 @@ public class FrameGestione extends JFrame {
 		btnNewButton2.setMnemonic('c');
 		btnNewButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(table.getSelectedRow()!=-1)
-				EliminaDisciplinaDAO.eliminadisciplina((String) FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0));
+				if(table.getSelectedRow()!=-1){
+				GestioneDAO.eliminadisciplina((String) FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0));
+				frame.dispose();
+				new FrameGestione();}
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
 			}
@@ -263,24 +262,21 @@ public class FrameGestione extends JFrame {
 		
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl1.add(btnNewButton2,gbc);
-		Dimension b = bottoniPnl1.getPreferredSize();
-		bottoniPnl1.setPreferredSize(b);
 		
 		
 		
 		
 		
 		
-		tabellaPnl.add(bottoniPnl1,gbc);
+		tabellaPnl.add(bottoniPnl1,BorderLayout.SOUTH);
 		
-		Dimension x = tabellaPnl.getPreferredSize();
-		tabellaPnl.setPreferredSize(x);
+	
 		tabel.addTab("Gestione discipline", tabellaPnl);
 		
 		
 
 		tabellaPnl2 = new JPanel();
-		tabellaPnl2.setLayout(new GridLayout(4 , 1));
+		tabellaPnl2.setLayout(new BorderLayout());
 		
 		
 		JLabel lblDisc = new JLabel("Elenco dei livelli");
@@ -291,7 +287,7 @@ public class FrameGestione extends JFrame {
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx =1;
 		gbc.gridy =4;
-		tabellaPnl2.add(lblDisc);
+		tabellaPnl2.add(lblDisc,BorderLayout.NORTH);
 		
 		JScrollPane scrollt2 = new JScrollPane();
 		scrollt2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -307,25 +303,31 @@ public class FrameGestione extends JFrame {
 		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table2.setCellSelectionEnabled(true);
 		table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		Dimension e = table2.getPreferredSize();
-		table2.setPreferredSize(e);
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =1;
-		gbc.gridy =5;
-		scrollt2.setPreferredSize(e);
-		
-		scrollt2.setViewportView(table2);
-		tabellaPnl2.add(scrollt2);
+		tablemod2 = setupTableWidths.setupTableWidths(table2);
+
+		tablemod2.setForeground(new Color(255, 255, 255));
+		tablemod2.setBackground(new Color(240, 220, 130));
+		if(model2.getRowCount()==0)
+		{
+			scrollt2.setViewportView(lblNull);
+		}
+		else
+		{
+		scrollt2.setViewportView(tablemod2);
+		}
+		tabellaPnl2.add(scrollt2,BorderLayout.CENTER);
 		
 		
 		
 		
         bottoniPnl2 = new JPanel();
+		bottoniPnl2.setLayout(new GridBagLayout());
 		
 		JButton btnNewButton3 = new JButton("Inserisci Livello");
 		btnNewButton3.setMnemonic('d');
 		btnNewButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
 				new FrameInserisciLiv();
 			}
 		});	
@@ -345,7 +347,7 @@ public class FrameGestione extends JFrame {
 				if(table2.getSelectedRow()!=-1)
 				{
 					new FrameModificaLiv(((String) FrameGestione.table2.getValueAt(FrameGestione.table2.getSelectedRow(), 0)));
-					
+					frame.dispose();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona un livello dall'elenco","Errore livello",JOptionPane.WARNING_MESSAGE);
@@ -365,8 +367,9 @@ public class FrameGestione extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(table2.getSelectedRow()!=-1)
 			{
-					EliminaLivelloDAO.eliminalivello((String) FrameGestione.table2.getValueAt(FrameGestione.table2.getSelectedRow(), 0));	
-					
+					GestioneDAO.eliminalivello((String) FrameGestione.table2.getValueAt(FrameGestione.table2.getSelectedRow(), 0));	
+					frame.dispose();
+					new FrameGestione();
 			}
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore attività",JOptionPane.WARNING_MESSAGE);
@@ -381,15 +384,14 @@ public class FrameGestione extends JFrame {
 		bottoniPnl2.add(btnNewButton5,gbc);
 	
 	
-		tabellaPnl2.add(bottoniPnl2,gbc);
-		Dimension t = tabellaPnl2.getPreferredSize();
-		tabellaPnl2.setPreferredSize(t);
+		tabellaPnl2.add(bottoniPnl2,BorderLayout.SOUTH);
+		
 		tabel.addTab("Gestione livelli",tabellaPnl2);
 		
         
 	
 		tabellaPnl3 = new JPanel();
-		tabellaPnl3.setLayout(new GridLayout(4 , 1));
+		tabellaPnl3.setLayout(new BorderLayout());
 		
 		
 		
@@ -399,7 +401,7 @@ public class FrameGestione extends JFrame {
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx =1;
 		gbc.gridy =7;
-		tabellaPnl3.add(lblDD);
+		tabellaPnl3.add(lblDD,BorderLayout.NORTH);
 		
 		
 		
@@ -411,26 +413,34 @@ public class FrameGestione extends JFrame {
 		table3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table3.setCellSelectionEnabled(true);
 		table3.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		Dimension n = table3.getPreferredSize();
-		table3.setPreferredSize(n);
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =1;
-		gbc.gridy =8;
+		tablemod3 = setupTableWidths.setupTableWidths(table3);
+
+		tablemod3.setForeground(new Color(255, 255, 255));
+		tablemod3.setBackground(new Color(240, 220, 130));
 			
 		JScrollPane scrollt3 = new JScrollPane();
 		scrollt3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollt3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt3.setBounds(50, 30, 300, 50);	
-		scrollt3.setPreferredSize(n);
-		scrollt3.setViewportView(table3);
-		tabellaPnl3.add(scrollt3);
+		scrollt3.setBounds(50, 30, 300, 50);
+		if(model3.getRowCount()==0)
+		{
+			scrollt3.setViewportView(lblNull);
+		}
+		else
+		{
+		scrollt3.setViewportView(tablemod3);
+		}
+		tabellaPnl3.add(scrollt3,BorderLayout.CENTER);
 		
 		bottoniPnl3 = new JPanel();
+		bottoniPnl3.setLayout(new GridBagLayout());
+		
 		
 		JButton btnNewButton10 = new JButton("Inserisci disciplina disponibile");
 		btnNewButton10.setMnemonic('g');
 		btnNewButton10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
 				new FrameInserisciDiscDisp();
 					
 			}
@@ -448,7 +458,7 @@ public class FrameGestione extends JFrame {
 		btnNewButton101.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FrameModificaDiscDisp((String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 0),(String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 1),(float) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 2));
-					
+					frame.dispose();
 			}
 		});	
 		gbc.anchor = GridBagConstraints.LINE_START;
@@ -468,7 +478,9 @@ public class FrameGestione extends JFrame {
 				if(table3.getSelectedRow()!=-1)
 				{
 					
-					EliminaDisciplinaDispDAO.eliminadisciplinadisp(((String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 0)),((String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 1)));	
+					GestioneDAO.eliminadisciplinadisp(((String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 0)),((String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 1)));	
+					frame.dispose();
+					new FrameGestione();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
@@ -481,17 +493,14 @@ public class FrameGestione extends JFrame {
 		
 		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 		bottoniPnl3.add(btnNewButton11,gbc);
-		Dimension v = bottoniPnl3.getPreferredSize();
-		bottoniPnl3.setPreferredSize(v);
+		
 		
 		
 		
 		
 	
 		
-		tabellaPnl3.add(bottoniPnl3,gbc);
-		Dimension s = tabellaPnl3.getPreferredSize();
-		tabellaPnl3.setPreferredSize(s);
+		tabellaPnl3.add(bottoniPnl3,BorderLayout.SOUTH);
 		tabel.addTab("Gestione discipline disponibili",tabellaPnl3);
 		
 		
@@ -502,7 +511,7 @@ public class FrameGestione extends JFrame {
 
 	
 	tabellaPnl5 = new JPanel();
-	tabellaPnl5.setLayout(new GridLayout(4 , 1));
+	tabellaPnl5.setLayout(new BorderLayout());
 	
 	
 	
@@ -512,7 +521,7 @@ public class FrameGestione extends JFrame {
 	gbc.insets = new Insets(0, 0, 5, 5);
 	gbc.gridx =1;
 	gbc.gridy =12;
-	tabellaPnl5.add(lblISD);
+	tabellaPnl5.add(lblISD,BorderLayout.NORTH);
 	
 	JScrollPane scrollt5 = new JScrollPane();
 	scrollt5.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -527,26 +536,31 @@ public class FrameGestione extends JFrame {
 	table5.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 	table5.setCellSelectionEnabled(true);
 	table5.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	Dimension txy = table5.getPreferredSize();
-	table5.setPreferredSize(txy);
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =1;
-	gbc.gridy =13;
-		
-		
-	scrollt5.setPreferredSize(txy);
-	scrollt5.setViewportView(table5);
-	tabellaPnl5.add(scrollt5);
+	tablemod5 = setupTableWidths.setupTableWidths(table5);
+
+	tablemod5.setForeground(new Color(255, 255, 255));
+	tablemod5.setBackground(new Color(240, 220, 130));
+	if(model5.getRowCount()==0)
+	{
+		scrollt5.setViewportView(lblNull);
+	}
+	else
+	{
+	scrollt5.setViewportView(tablemod5);
+	}
+	tabellaPnl5.add(scrollt5,BorderLayout.CENTER);
 	
 	
 	bottoniPnl4 = new JPanel();
+	bottoniPnl4.setLayout(new GridBagLayout());
+	
 	
 	JButton btnNewButton12 = new JButton("Inserisci istruttore  disponibile");
 	btnNewButton12.setMnemonic('h');
 	btnNewButton12.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			new FrameInserisciIstrDisp();
-				
+				frame.dispose();
 		}
 	});	
 	gbc.anchor = GridBagConstraints.LINE_START;
@@ -580,8 +594,9 @@ public class FrameGestione extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(table5.getSelectedRow()!=-1)
 			{
-				EliminaCombIstrDAO.eliminacombis(((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 0)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 1)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 2)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 3)));
-				
+				GestioneDAO.eliminacombis(((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 0)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 1)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 2)),((String) FrameGestione.table5.getValueAt(FrameGestione.table5.getSelectedRow(), 3)));
+				frame.dispose();
+				new FrameGestione();
 		}
 			else{
 			JOptionPane.showMessageDialog(null, "Seleziona una combinazione dall'elenco","Errore combinazione",JOptionPane.WARNING_MESSAGE);}
@@ -593,17 +608,15 @@ public class FrameGestione extends JFrame {
 	
 	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 	bottoniPnl4.add(btnNewButton13,gbc);
-	Dimension o = bottoniPnl3.getPreferredSize();
-	bottoniPnl4.setPreferredSize(o);
 	
 	
-	tabellaPnl5.add(bottoniPnl4,gbc);
-	Dimension sex= tabellaPnl5.getPreferredSize();
-	tabellaPnl5.setPreferredSize(sex);
+	
+	tabellaPnl5.add(bottoniPnl4,BorderLayout.SOUTH);
+	
 	tabel.addTab("Gestione Istruttori Disponibii",tabellaPnl5);
 	
 	tabellaPnl6 = new JPanel();
-	tabellaPnl6.setLayout(new GridLayout(4 , 1));
+	tabellaPnl6.setLayout(new BorderLayout());
 	
 	
 	
@@ -616,7 +629,7 @@ public class FrameGestione extends JFrame {
 	gbc.insets = new Insets(0, 0, 5, 5);
 	gbc.gridx = 1;
 	gbc.gridy = 15;
-	tabellaPnl6.add(lblM);
+	tabellaPnl6.add(lblM,BorderLayout.NORTH);
 	
 	JScrollPane scrollt6 = new JScrollPane();
 	scrollt6.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -631,25 +644,29 @@ public class FrameGestione extends JFrame {
 	table6.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 	table6.setCellSelectionEnabled(true);
 	table6.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	Dimension di = table6.getPreferredSize();
-	table6.setPreferredSize(di);
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =1;
-	gbc.gridy= 16;
-		
-	
-	scrollt6.setPreferredSize(di);
-	scrollt6.setViewportView(table6);
-	tabellaPnl6.add(scrollt6);
+	tablemod6 = setupTableWidths.setupTableWidths(table6);
+
+	tablemod6.setForeground(new Color(255, 255, 255));
+	tablemod6.setBackground(new Color(240, 220, 130));
+	if(model6.getRowCount()==0)
+	{
+		scrollt6.setViewportView(lblNull);
+	}
+	else
+	{
+	scrollt6.setViewportView(tablemod6);
+	}
+	tabellaPnl6.add(scrollt6,BorderLayout.CENTER);
 	
 	bottoniPnl5 = new JPanel();
+	bottoniPnl5.setLayout(new GridBagLayout());
 	
 	JButton btnNewButton9 = new JButton("Inserisci modalità di pagamento");
 	btnNewButton9.setMnemonic('m');
 	btnNewButton9.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			new FrameInserisciModPag();
-				
+				frame.dispose();
 		}
 	});	
 	gbc.anchor = GridBagConstraints.LINE_START;
@@ -669,6 +686,7 @@ public class FrameGestione extends JFrame {
 			if(table6.getSelectedRow()!=-1)
 			{
 				new FrameModificaModPag((String) FrameGestione.table6.getValueAt(FrameGestione.table6.getSelectedRow(), 0));
+				frame.dispose();
 			}
 			else
 				JOptionPane.showMessageDialog(null, "Seleziona una modalità dall'elenco","Errore modalità",JOptionPane.WARNING_MESSAGE);
@@ -689,8 +707,9 @@ public class FrameGestione extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(table6.getSelectedRow()!=-1)
 			{
-				EliminaModPagDAO.eliminamodpagam((String) FrameGestione.table6.getValueAt(FrameGestione.table6.getSelectedRow(), 0));	
-				
+				GestioneDAO.eliminamodpagam((String) FrameGestione.table6.getValueAt(FrameGestione.table6.getSelectedRow(), 0));	
+				frame.dispose();
+				new FrameGestione();
 				
 			}
 			else
@@ -705,19 +724,17 @@ public class FrameGestione extends JFrame {
 	
 	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
 	bottoniPnl5.add(btnNewButton15,gbc);
-	Dimension bi = bottoniPnl5.getPreferredSize();
-	bottoniPnl5.setPreferredSize(bi);
+	
 		
 	
 	
 	
-	tabellaPnl6.add(bottoniPnl5,gbc);
-	Dimension u =tabellaPnl6.getPreferredSize();
-	tabellaPnl6.setPreferredSize(u);
+	tabellaPnl6.add(bottoniPnl5,BorderLayout.SOUTH);
+	
 	tabel.addTab("Gestione modalità di pagamento", tabellaPnl6);
 	
 	tabellaPnl7 = new JPanel();
-	tabellaPnl7.setLayout(new GridLayout(4 , 1));
+	tabellaPnl7.setLayout(new BorderLayout());
 	
 	
 	
@@ -730,7 +747,7 @@ public class FrameGestione extends JFrame {
 	gbc.insets = new Insets(0, 0, 5, 5);
 	gbc.gridx = 1;
 	gbc.gridy = 18;
-	tabellaPnl7.add(lblT);
+	tabellaPnl7.add(lblT,BorderLayout.NORTH);
 	
 	JScrollPane scrollt7 = new JScrollPane();
 	scrollt7.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -745,18 +762,22 @@ public class FrameGestione extends JFrame {
 	table7.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 	table7.setCellSelectionEnabled(true);
 	table7.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	Dimension dix = table7.getPreferredSize();
-	table7.setPreferredSize(dix);
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =1;
-	gbc.gridy= 19;
-		
-	
-	scrollt7.setPreferredSize(dix);
-	scrollt7.setViewportView(table7);
-	tabellaPnl7.add(scrollt7);
+	tablemod7 = setupTableWidths.setupTableWidths(table7);
+
+	tablemod7.setForeground(new Color(255, 255, 255));
+	tablemod7.setBackground(new Color(240, 220, 130));
+	if(model7.getRowCount()==0)
+	{
+		scrollt7.setViewportView(lblNull);
+	}
+	else
+	{
+	scrollt7.setViewportView(tablemod7);
+	}
+	tabellaPnl7.add(scrollt7,BorderLayout.CENTER);
 	
 	bottoniPnl6 = new JPanel();
+	bottoniPnl6.setLayout(new GridBagLayout());
 	
 	JButton btnNewButton16 = new JButton("Cancella Testimonianza");
 	btnNewButton16.setMnemonic('q');
@@ -764,11 +785,12 @@ public class FrameGestione extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(table7.getSelectedRow()!=-1)
 			{
-				EliminaTestimonianzaDAO.eliminatest(((String) FrameGestione.table7.getValueAt(FrameGestione.table7.getSelectedRow(), 0)),((String) FrameGestione.table7.getValueAt(FrameGestione.table7.getSelectedRow(), 1)));		
-				
+				GestioneDAO.eliminatest(((String) FrameGestione.table7.getValueAt(FrameGestione.table7.getSelectedRow(), 0)),((String) FrameGestione.table7.getValueAt(FrameGestione.table7.getSelectedRow(), 1)));		
+				frame.dispose();
+				new FrameGestione();
 			}
 			else
-				JOptionPane.showMessageDialog(null, "Seleziona una modalità dall'elenco","Errore modalità",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Seleziona una testimonianza dall'elenco","Errore testimonianza",JOptionPane.WARNING_MESSAGE);
 		}
 				
 		
@@ -785,19 +807,129 @@ public class FrameGestione extends JFrame {
 	
 	
 	
-	Dimension bim = bottoniPnl6.getPreferredSize();
-	bottoniPnl6.setPreferredSize(bim);
+
 		
 	
 	
 	
-	tabellaPnl7.add(bottoniPnl6,gbc);
-	Dimension uy =tabellaPnl7.getPreferredSize();
-	tabellaPnl7.setPreferredSize(uy);
+	tabellaPnl7.add(bottoniPnl6,BorderLayout.SOUTH);
+	
 	tabel.addTab("Gestione testimonianze",tabellaPnl7);
 	
 	
+	tabellaPnl8 = new JPanel();
+	tabellaPnl8.setLayout(new BorderLayout());
 	
+	
+	
+	
+	JLabel lblC = new JLabel("Elenco dei Calendari");
+	lblC.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	lblC.setForeground(Color.BLACK);
+	Dimension itz = lblC.getPreferredSize();
+	lblC.setPreferredSize(itz);
+	gbc.insets = new Insets(0, 0, 5, 5);
+	gbc.gridx = 1;
+	gbc.gridy = 18;
+	tabellaPnl8.add(lblC,BorderLayout.NORTH);
+	
+	JScrollPane scrollt8 = new JScrollPane();
+	scrollt8.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+	scrollt8.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+	scrollt8.setBounds(30, 30, 200, 30);
+	
+	
+	model8 = new ModCal(ElencoCalDAO.elencocal());
+	table8 = new JTable(model8);
+	table8.setRowHeight(20);
+	table8.setRowHeight(3, 50);
+	table8.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+	table8.setCellSelectionEnabled(true);
+	table8.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	tablemod8 = setupTableWidths.setupTableWidths(table8);
+
+	tablemod8.setForeground(new Color(255, 255, 255));
+	tablemod8.setBackground(new Color(240, 220, 130));
+	if(model8.getRowCount()==0)
+	{
+		scrollt8.setViewportView(lblNull);
+	}
+	else
+	{
+	scrollt8.setViewportView(tablemod8);
+	}
+	tabellaPnl8.add(scrollt8,BorderLayout.CENTER);
+	
+	bottoniPnl7 = new JPanel();
+	bottoniPnl7.setLayout(new GridBagLayout());
+	JButton btnNewButton17 = new JButton("Inserisci calendario");
+	btnNewButton17.setMnemonic('m');
+	btnNewButton17.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			new FrameInserisciCal();
+				frame.dispose();
+		}
+	});	
+	gbc.anchor = GridBagConstraints.LINE_START;
+	gbc.insets= new Insets(0,0,5,5);
+	gbc.gridx =0;
+	gbc.gridy =20;
+	gbc.gridwidth = 2;
+	
+	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
+	bottoniPnl7.add(btnNewButton17,gbc);
+	
+	
+	JButton btnNewButton18 = new JButton("Modifica calendario ");
+	btnNewButton18.setMnemonic('n');
+	btnNewButton18.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if(table8.getSelectedRow()!=-1)
+			{
+				new FrameModificaCal((String) FrameGestione.table8.getValueAt(FrameGestione.table8.getSelectedRow(), 0));
+				frame.dispose();
+			}
+			else
+				JOptionPane.showMessageDialog(null, "Seleziona un calendario dall'elenco","Errore calendario",JOptionPane.WARNING_MESSAGE);
+		}
+	});	
+	gbc.anchor = GridBagConstraints.LINE_START;
+	gbc.gridwidth = 2;
+	gbc.insets= new Insets(0,0,5,5);
+	gbc.gridx =1;
+	gbc.gridy =20;
+	bottoniPnl7.add(btnNewButton18,gbc);
+	
+	JButton btnNewButton19 = new JButton("Cancella Calendario");
+	btnNewButton19.setMnemonic('q');
+	btnNewButton19.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if(table8.getSelectedRow()!=-1)
+			{
+				GestioneDAO.eliminacalendario(((String) FrameGestione.table8.getValueAt(FrameGestione.table8.getSelectedRow(), 0)));		
+				frame.dispose();
+				new FrameGestione();
+			}
+			else
+				JOptionPane.showMessageDialog(null, "Seleziona un calendario dall'elenco","Errore calendario",JOptionPane.WARNING_MESSAGE);
+		}
+				
+		
+	});	
+	gbc.anchor = GridBagConstraints.LINE_START;
+	gbc.gridwidth = 2;
+	gbc.insets= new Insets(0,0,5,5);
+	gbc.gridx =2;
+	gbc.gridy =20;
+	bottoniPnl7.add(btnNewButton19,gbc);
+	
+
+	
+	
+	
+	tabellaPnl8.add(bottoniPnl7,BorderLayout.SOUTH);
+	
+	tabel.addTab("Gestione calendario",tabellaPnl8);
 	
 	
 	contentPane.add(tabel,gbc);

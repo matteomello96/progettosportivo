@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 
 import javax.swing.JMenu;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,11 +31,12 @@ import javax.swing.table.DefaultTableModel;
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.ElencoAttivitaDAO;
 import ClassiDaoTesserato.elencoattivitaattivedao;
-import Listener.Listen;
 import Model.Utente;
 import ModelliTabelle_Tesserato.disc_attive;
 import ModelliTabelle_Tesserato.disc_tabella;
 import VisteUtenteGenerico.FrameCambia;
+import VisteUtenteGenerico.setupTableWidths;
+import listener.Listen;
 
 
 public class FrameTesserato extends JPanel {
@@ -42,7 +44,7 @@ public class FrameTesserato extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTable table;
+	private JTable table,tablemod1;
 	public static JTable table_1;
 	public static JTable table_2;
 	public static JFrame frame;
@@ -95,7 +97,7 @@ public class FrameTesserato extends JPanel {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
-		mntmNewMenuItem.setActionCommand("ini");
+		mntmNewMenuItem.setActionCommand("out_da_tes");
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
@@ -177,26 +179,48 @@ public class FrameTesserato extends JPanel {
 		
 		
 		
-		JLabel totord = new JLabel("TOTALE ISCRIZIONI:");
+		JLabel totord = new JLabel("Elenco delle discipline disponibili per l'iscrizione");
 		totord.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc.gridwidth = 3;
 		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 3;
+		gbc.gridx = 1;
 		gbc.gridy = 0;
 		contentPane.add(totord, gbc_lblNewLabel);
 		
 		
 		table = new JTable();
-		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());
+		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());table.setRowHeight(250);
+		table.setRowHeight(3, 50);
+		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		table.setCellSelectionEnabled(true);
 		table.setCellSelectionEnabled(true);
 		table.setModel(model);
-		
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setModel(model);
+		Font font2 = new Font("Comic Sans", Font.PLAIN, 15);
+		table.setFont(font2);
+		tablemod1 = setupTableWidths.setupTableWidths(table);
+
+		tablemod1.setForeground(new Color(255, 255, 255));
+		tablemod1.setBackground(new Color(240, 220, 130));
 		
 		
 		JScrollPane pane2 = new JScrollPane(table);
 		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		// .
+	
+
+		
+		pane2.setBackground(new Color(255, 193, 20));
+		pane2.setViewportView(tablemod1);
+		
+		
+		
+		
+		
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridwidth = 2;
 		gbc.insets = new Insets(0, 0, 5, 5);

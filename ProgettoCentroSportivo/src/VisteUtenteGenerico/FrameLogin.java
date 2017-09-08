@@ -8,13 +8,13 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 import javax.swing.border.Border;
 
-
-import Listener.Listen;
-import Listener.LoginListener;
+import listener.Listen;
+import listener.LoginListener;
 
 import java.awt.Color;
 
@@ -42,7 +42,7 @@ public class FrameLogin extends JFrame {
 		
 		frame = new JFrame("Accesso centropolisportivo");
 		frame.setTitle("Pagina Login");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(true);
 		
 		frame.setBounds(100, 100, 605, 391);
@@ -72,7 +72,7 @@ public class FrameLogin extends JFrame {
 
 		    JMenuBar menuBar = new JMenuBar();
 			frame.setJMenuBar(menuBar);
-			JMenuItem mnAccedi = new JMenuItem("Home");
+			JMenuItem mnAccedi = new JMenuItem("Torna alla Home Page");
 			menuBar.add(mnAccedi);
 			mnAccedi.addActionListener(new Listen(this));
 			mnAccedi.setActionCommand("Vai_home1");
@@ -103,7 +103,12 @@ public class FrameLogin extends JFrame {
 		
 
 		JLabel lblNewLabel = new JLabel("Login al portale");
+		lblNewLabel.setOpaque(true);
 		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+		lblNewLabel.setForeground(new Color (255,255,255));
+		lblNewLabel.setBackground(new Color (100,133,217));
+		Border b = BorderFactory.createLineBorder(new Color (255,255,255));
+		lblNewLabel.setBorder(b);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 3;
 		gbc.gridy = 0;
@@ -111,12 +116,16 @@ public class FrameLogin extends JFrame {
 		
 		
 		JLabel lblNomeUtente = new JLabel("Nome utente");
-		lblNomeUtente.setForeground(Color.GRAY);
+		lblNomeUtente.setOpaque(true);
+		
 		lblNomeUtente.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNomeUtente.setForeground(new Color (255,255,255));
+		lblNomeUtente.setBackground(new Color (100,233,17));
+		lblNomeUtente.setBorder(b);
 		lblNomeUtente.setBounds(253, 43, 86, 20);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 2;
-		gbc.gridy = 5;
+		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		contentPane.add(lblNomeUtente,gbc);
 				
@@ -130,15 +139,16 @@ public class FrameLogin extends JFrame {
 		CasellaNomeutente.setBounds(253, 43, 86, 20);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 3;
-		gbc.gridy = 5;
+		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		contentPane.add(CasellaNomeutente, gbc);
 		CasellaNomeutente.setColumns(10);
 		CasellaNomeutente.addFocusListener(new FocusAdapter() {
 			
-			public void focusLost(FocusEvent arg0) {
+			public void focusGained(FocusEvent arg0) {
 				CasellaNomeutente.setBackground(Color.WHITE);
-			
+				if(CasellaNomeutente.getText().isEmpty())
+					CasellaNomeutente.setBackground(Color.CYAN);
 				
 
 			}
@@ -146,12 +156,15 @@ public class FrameLogin extends JFrame {
 
 
 	    JLabel lblPassword = new JLabel("Password");
+	    lblPassword.setOpaque(true);
 		lblPassword.setBounds(253, 95, 86, 20);
-		lblPassword.setForeground(Color.GRAY);
+		lblPassword.setForeground(new Color (255,255,255));
+		lblPassword.setBackground(new Color (100,233,17));
+		lblPassword.setBorder(b);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 2;
-		gbc.gridy = 7;
+		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		contentPane.add(lblPassword, gbc);
 		
@@ -166,7 +179,7 @@ public class FrameLogin extends JFrame {
 		passwordField.setForeground(Color.BLACK);
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 3;
-		gbc.gridy = 7;
+		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		contentPane.add(passwordField, gbc);
 		passwordField.setColumns(10);
@@ -174,87 +187,109 @@ public class FrameLogin extends JFrame {
 			@Override
 			
 		
-			public void focusLost(FocusEvent arg0) {
+			public void focusGained(FocusEvent arg0) {
 				passwordField.setBackground(Color.WHITE);
-			
+			    
 				if(passwordField.getText().isEmpty())
-					lblPassword.setBounds(1075, 0, 150, 24);
+					passwordField.setBackground(Color.CYAN);
 				
 
 			}
 		});
 		
-
+		
+		
+		
+        JLabel lblBlocMaiuscAttivo = new JLabel("BLOC MAIUSC attivato!");
+		lblBlocMaiuscAttivo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblBlocMaiuscAttivo.setForeground(new Color(255, 69, 0));
+		lblBlocMaiuscAttivo.setBounds(25, 30, 10, 10);
+		lblBlocMaiuscAttivo.setVisible(false);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 4;
+		gbc.gridy = 5;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		
+		contentPane.add(lblBlocMaiuscAttivo,gbc);
+		
+		
+		
             baccedi = new JButton("Accedi");
+            baccedi.setVisible(false);
 	        baccedi.setToolTipText("Esegui l'accesso");
 		    baccedi.setFont(new Font("Dialog", Font.PLAIN, 12));
 		    baccedi.setBounds(253, 151, 89, 23);
 		    baccedi.setContentAreaFilled(true);
             baccedi.addActionListener(new LoginListener(this));
-            gbc.insets = new Insets(0, 0, 5, 5);
+            baccedi.setForeground(new Color (255,255,255));
+    		baccedi.setBackground(new Color (10,133,217));
+    		baccedi.setBorder(b);
+             gbc.insets = new Insets(0, 0, 5, 5);
 		    gbc.gridx = 3;
 		    gbc.gridy = 9;
-		    contentPane.add(baccedi, gbc);
+		    gbc.anchor = GridBagConstraints.LINE_START;
+		    contentPane.add(baccedi, gbc); 
 		    frame.getRootPane().setDefaultButton(baccedi); //RENDE ACCEDI PULSANTE PREDEFINITO PER ENTER
+            
+            
         
-
-		
-		
-			
-		
-		
-
-	
-
-
-
-		passwordField.addKeyListener(new KeyAdapter() {
-		
-			public void keyReleased(KeyEvent e) { //ascolta i keystrokes
-				if(CasellaNomeutente.getText().isEmpty() && passwordField.getText().isEmpty())
-					baccedi.setEnabled(false);
-				else
-				{
-					baccedi.setEnabled(true);
-				}
-			}
-		});
-
-
-
-		
+   
 		CasellaNomeutente.addKeyListener(new KeyAdapter() {
 			
 			public void keyReleased(KeyEvent e) { //ascolta i keystrokes
-				if(CasellaNomeutente.getText().isEmpty() && passwordField.getText().isEmpty())
-					baccedi.setEnabled(false);
+				if(CasellaNomeutente.getText().isEmpty() || passwordField.getText().isEmpty())
+					baccedi.setVisible(false);
 				else
 				{
+					baccedi.setVisible(true);
 					baccedi.setEnabled(true);
 				}
 			}
 		});
+		 passwordField.addKeyListener(new KeyAdapter() {
+			
+			public void keyReleased(KeyEvent e) { //ascolta i keystrokes
+				if(CasellaNomeutente.getText().isEmpty() || passwordField.getText().isEmpty())
+					baccedi.setVisible(false);
+				else
+				{
+					baccedi.setVisible(true);
+					baccedi.setEnabled(true);
+				}
+			}
+		});
+			
 		
-		CasellaNomeutente.addFocusListener(new FocusAdapter() {
-			@Override
-			
-		public void focusLost(FocusEvent arg0) {
-			CasellaNomeutente.setBackground(Color.WHITE);
-			
-			
-	}});
+		CasellaNomeutente.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent e) { //ascolta i keystrokes
+				if ( Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK))
+				{
+					lblBlocMaiuscAttivo.setVisible(true);
+					//lblBlocMaiuscAttivo.setBounds(283, 282, 136, 14);
+				}
+
+				else
+				{
+					lblBlocMaiuscAttivo.setVisible(false);
+				}
+				
+			}
 		
-		
-		passwordField.addFocusListener(new FocusAdapter() {
-			@Override
-			
-		public void focusLost(FocusEvent arg0) {
-			passwordField.setBackground(Color.WHITE);
-			
-			
-	}});		
-		
-		
+	});
+		passwordField.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) { //ascolta i keystrokes
+				if ( Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK))
+				{
+					lblBlocMaiuscAttivo.setVisible(true);
+					//lblBlocMaiuscAttivo.setBounds(283, 282, 136, 14);
+				}
+
+				else
+				{
+					lblBlocMaiuscAttivo.setVisible(false);
+				}	
+				
+			}
 		
 		
 	
@@ -263,10 +298,9 @@ public class FrameLogin extends JFrame {
 		
 		
 		
-	}
+	});
 		
-		
-}
+}}
 
 
 

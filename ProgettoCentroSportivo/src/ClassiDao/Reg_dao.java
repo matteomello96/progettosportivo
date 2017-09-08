@@ -19,7 +19,7 @@ public class Reg_dao {
 	
     
     
-public static boolean registratesserato(String nome, String cognome , String cod_fis , String citta, String via , String num_civ , String mail ,String user , String pass , String tipo){
+public static boolean registratesserato(String nome, String cognome , String cod_fis , String citta, String via , String num_civ , String mail ,String tel,String user , String pass , String tipo){
 	 
 	
 	
@@ -51,12 +51,12 @@ public static boolean registratesserato(String nome, String cognome , String cod
       	  JOptionPane.showMessageDialog(null, "Il nome utente \""+user+"\" e\\o l'email \""+mail+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);
         
         else{
-         st2.executeUpdate("INSERT INTO `elencoutenti` ( `nome`, `cognome`, `codicefiscale`,`citta`, `via`, `numerocivico`, `mail`,  `username`, `password`,`tipoutente`, `attivita`, `connessione`,`telefono`) VALUES ('"+nome+"', '"+cognome+"', '"+cod_fis+"','"+citta+"', '"+via+"', '"+num_civ+"', '"+mail+"', '"+user+"', '"+pass+"', '"+tipo+"', '0',  '0' ,'NULL')");
-         rs=st.executeQuery("SELECT elencoutenti.idutente FROM elencoutenti WHERE elencoutenti.nome='"+nome+"'");
+         st2.executeUpdate("INSERT INTO `elencoutenti` ( `nome`, `cognome`, `codicefiscale`,`citta`, `via`, `numerocivico`, `mail`, `telefono`,  `username`, `password`,`tipoutente`, `attivita`, `connessione`,`bloccato`,`modificato`) VALUES ('"+nome+"', '"+cognome+"', '"+cod_fis+"','"+citta+"', '"+via+"', '"+num_civ+"', '"+mail+"','"+tel+"', '"+user+"', '"+pass+"', '"+tipo+"', '0',  '0','0','0' )");
+         rs=st.executeQuery("SELECT elencoutenti.idutente FROM elencoutenti WHERE elencoutenti.username='"+user+"'and elencoutenti.password='"+pass+"'");
          
          rs.next();
          int userid= rs.getInt("idutente");
-         st2.executeUpdate("INSERT INTO `tesserato` (`idutente`) VALUES ('"+userid+"')");
+         st2.executeUpdate("INSERT INTO `tesserato`(`idutente`) VALUES('"+userid+"')");
             
          JOptionPane.showMessageDialog(FrameRegistrazione.frame,"Ciao "+nome+"! Ti sei registrato come "+nometipo+" ","Registrazione completata ",JOptionPane.INFORMATION_MESSAGE);
          return true;
@@ -70,7 +70,7 @@ catch (SQLException ex) {
 return false;
 }
 
-public static boolean registraistruttore(String nome, String cognome , String cod_fis , String citta, String via , String num_civ , String mail ,String user , String pass , String tipo){
+public static boolean registraistruttore(String nome, String cognome , String cod_fis , String citta, String via , String num_civ , String mail ,String tel,String user , String pass , String tipo){
 
 	
 
@@ -101,12 +101,12 @@ public static boolean registraistruttore(String nome, String cognome , String co
       	  JOptionPane.showMessageDialog(null, "Il nome utente \""+user+"\" e\\o l'email \""+mail+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);
         
         else{
-         st2.executeUpdate("INSERT INTO `elencoutenti` ( `nome`, `cognome`, `codicefiscale`,`citta`, `via`, `numerocivico`, `mail`,  `username`, `password`,`tipoutente`, `attivita`, `connessione`,`telefono`) VALUES ('"+nome+"', '"+cognome+"', '"+cod_fis+"','"+citta+"', '"+via+"', '"+num_civ+"', '"+mail+"', '"+user+"', '"+pass+"', '"+tipo+"', '0',  '0' ,'NULL')");
-         rs=st.executeQuery("SELECT elencoutenti.idutente FROM elencoutenti WHERE elencoutenti.nome='"+nome+"'");
+         st2.executeUpdate("INSERT INTO `elencoutenti` ( `nome`, `cognome`, `codicefiscale`,`citta`, `via`, `numerocivico`, `mail`, `telefono`,  `username`, `password`,`tipoutente`, `attivita`, `connessione`,`bloccato`,`modificato`) VALUES ('"+nome+"', '"+cognome+"', '"+cod_fis+"','"+citta+"', '"+via+"', '"+num_civ+"', '"+mail+"','"+tel+"', '"+user+"', '"+pass+"', '"+tipo+"', '0',  '0','0','0' )");
+         rs=st.executeQuery("SELECT elencoutenti.idutente FROM elencoutenti WHERE elencoutenti.username='"+user+"'and elencoutenti.password='"+pass+"'");
          
          rs.next();
          int userid=rs.getInt("idutente"); 
-         st2.executeUpdate("INSERT INTO `istruttore`(`idutente`,`telefonoist`) VALUES ('"+userid+"','NULL')");
+         st2.executeUpdate("INSERT INTO `istruttore`(`idutente`) VALUES ('"+userid+"')");
             
          JOptionPane.showMessageDialog(FrameRegistrazione.frame,"Ciao "+nome+"! Ti sei registrato come "+nometipo+" ","Registrazione completata ",JOptionPane.INFORMATION_MESSAGE);
          return true;

@@ -11,10 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
-
-import ModelliTabelleRespo.modellidettagli;
-
 import classiDAOResponsabile.dettagliiscrizionedao;
+import modelliTabelleRespo.modellidettagli;
 
 public class framediscdisp {
 

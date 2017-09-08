@@ -8,6 +8,7 @@ private String modalitapagamento;
 private int prezzotot;
 private int confermato;
 private int annullato;
+private int modificato;
 
 
 public int getCodiceiscrizionedisciplina() {
@@ -51,6 +52,12 @@ public int getAnnullato() {
 }
 public void setAnnullato(int annullato) {
 	this.annullato = annullato;
+}
+public int getModificato() {
+	return modificato;
+}
+public void setModificato(int modificato) {
+	this.modificato = modificato;
 }
 
 

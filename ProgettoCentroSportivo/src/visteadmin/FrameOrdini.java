@@ -19,13 +19,13 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 import ClassiDao.GetInfoDB;
-import ModelliTabelleRespo.modelisc;
-import ModelliTabelleRespo.modellidettagli;
 import classiDAOResponsabile.ConfermaDao;
 import classiDAOResponsabile.RichiesteDao;
 import classiDAOResponsabile.Uccidi_iscrizione;
 import classiDAOResponsabile.dettagliiscrizionedao;
 import classiDAOResponsabile.rimuoviordinedao;
+import modelliTabelleRespo.modelisc;
+import modelliTabelleRespo.modellidettagli;
 import view_tesserato.FrameDiscAttive;
 import view_tesserato.FrameTesserato;
 
@@ -159,10 +159,10 @@ public class FrameOrdini extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 		int idordine;
 				
-			idordine=(int) table_2.getValueAt(table_2.getSelectedRow(), 0);
+			idordine=;
 				
 				
-	      new framedettagli(idordine);
+	      new framedettagli((int) table2.getValueAt(table_2.getSelectedRow(), 0));
 			frame.setVisible(false);
 
 				
@@ -228,7 +228,7 @@ new FrameOrdini();
 			   @Override
 			   public void windowClosing(java.awt.event.WindowEvent windowEvent) 
 			    {
-			    FrameResponsabile.frame.setVisible(true);
+			    FrameElencoUtenti.frame.setVisible(true);
 			    }
 			});
 		

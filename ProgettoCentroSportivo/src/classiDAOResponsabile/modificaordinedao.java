@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 import visteadmin.FrameOrdini;
-import visteadmin.FrameResponsabile;
+import visteadmin.FrameElencoUtenti;
 import visteadmin.framedettagli;
 
 public class modificaordinedao {

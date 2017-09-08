@@ -37,10 +37,10 @@ import java.net.URL;
 import java.sql.SQLException;
 
 import Model.DisciplinaElenco;
-import VisteIstruttore.FrameInserisciEv;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.Rule;
 import VisteUtenteGenerico.ScrollablePicture;
+import visteIstruttore.FrameInserisciEv;
 import DBInterfaccia.DbConnection;
 
 public class ElencoDisciplineDAO {
