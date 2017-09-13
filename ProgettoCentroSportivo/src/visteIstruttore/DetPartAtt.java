@@ -12,7 +12,7 @@ import listener.Listen;
 import modelliTabelleIstruttore.ModDetOrariAtt;
 import modelliTabelleIstruttore.ModDetOrariEv;
 import modelliTabelleIstruttore.ModElPart;
-import view_tesserato.FrameTesserato;
+import view_tesserato.FrameAttivitaTes;
 import ClassiDao.DettagliIstruttoreDAO;
 import ClassiDao.DettagliLivelloDAO;
 import ClassiDao.DettagliOrariDAO;

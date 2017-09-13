@@ -14,8 +14,9 @@ import javax.swing.JOptionPane;
 import DBInterfaccia.DbConnection;
 import Model.Utente;
 import view_tesserato.Confermaordine;
-import visteadmin.FrameOrdini;
-import visteadmin.framedettagli;
+import view_tesserato.FrameAttivitaTes;
+import view_tesserato.FrameTurno;
+import visteadmin.FrameDettagliDaAccResp;
 
 
 
@@ -386,6 +387,34 @@ public static int getAttUt(String username){
 	        return ris;
 
 	}
+ public static int getcomb(String disciplina , String livello,int tesserato){
+	   
+     Connection con = DbConnection.db;
+ 
+     Statement st;
+     
+     ResultSet rs;
+     
+
+   int ris=-1;
+     
+     try {
+         
+         st = con.createStatement();
+       
+         rs = st.executeQuery("select combinazionelivdis from iddet where combinazionelivdis="+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"and tesserato='"+tesserato+"'"); 
+         rs.next();	               
+         ris=rs.getInt("combinazionelivdis");    
+         return ris;
+     } 
+     
+     catch (SQLException ex) {
+     	
+     }
+		
+     return ris;
+
+}
 	    
  public static int getidIstr(String username){
 
@@ -433,7 +462,7 @@ public static int getcodiceturno(String fasciaor,String giornoset, String spazio
          
          st = con.createStatement();
         
-         rs = st.executeQuery("SELECT codiceturno from gestioneturno WHERE fasciaoraria='"+fasciaor+"' AND giornosettimana='"+fasciaor+"' AND spazio='"+spazio+"'"); 
+         rs = st.executeQuery("SELECT codiceturno from gestioneturno WHERE fasciaoraria='"+fasciaor+"' AND giornosettimana='"+giornoset+"' AND spazio='"+spazio+"'"); 
        
              rs.next();
              ris=rs.getInt("codiceturno");
@@ -476,10 +505,40 @@ public static int getcodiceturnoevento(String fasciaor,String giornoset, String 
 
 }
 
+public static int getiddet3(String disciplina,String livello,int tesserato,String giorno,String orario){
 
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+    int comb= GetInfoDB.getcombinazionelivdis(disciplina, livello);
+    int ris=0;
+    
+    try {
+        
+        st = con.createStatement();
+
+      
+   //   JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, " '"+a+"','"+disciplina+"','"+livello+"','"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' "," ",JOptionPane.WARNING_MESSAGE);				
+        rs = st.executeQuery("SELECT iddet FROM detiscr WHERE tesserato='"+tesserato+"' and combinazionelivdis= '"+comb+"' and giorno= '"+giorno+"' and orario='"+orario+"' "); 
+      
+            rs.next();
+            ris=rs.getInt("iddet");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+   	 JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame,"GetIDDET "+ ex+"");
+    }
+    return ris;
+
+}
  
  
-public static int getiddet(String disciplina,String livello,int tesserato){
+public static int getiddet(String disciplina,String livello,int tesserato,String giorno,String orario){
 
      
      
@@ -490,31 +549,58 @@ public static int getiddet(String disciplina,String livello,int tesserato){
      ResultSet rs;
      
 
-     int ris=-1;
+     int ris=0;
      
      try {
          
          st = con.createStatement();
 
        
-    //   JOptionPane.showMessageDialog(framedettagli.frame, " '"+a+"','"+disciplina+"','"+livello+"','"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' "," ",JOptionPane.WARNING_MESSAGE);				
-         rs = st.executeQuery("SELECT iddet FROM detiscr WHERE tesserato='"+tesserato+"' and combinazionelivdis= '"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"'  "); 
+    //   JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, " '"+a+"','"+disciplina+"','"+livello+"','"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' "," ",JOptionPane.WARNING_MESSAGE);				
+         rs = st.executeQuery("SELECT iddet FROM detiscr WHERE tesserato='"+tesserato+"' and combinazionelivdis= '"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and giorno= '"+giorno+"' and orario='"+orario+"' "); 
        
              rs.next();
              ris=rs.getInt("iddet");
              		
          return ris; 
      } catch (SQLException ex) {
-     
+    	 JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame,"GetIDDET "+ ex+"");
      }
      return ris;
 
 }
+public static int getiddet2(String disciplina,String livello,int tesserato){
 
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
 
+    int ris=0;
+    
+    try {
+        
+        st = con.createStatement();
 
+      int comb= GetInfoDB.getcombinazionelivdis(disciplina, livello);
+   //   JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, " '"+a+"','"+disciplina+"','"+livello+"','"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' "," ",JOptionPane.WARNING_MESSAGE);				
+        rs = st.executeQuery("SELECT iddet FROM detiscr WHERE tesserato='"+tesserato+"' and combinazionelivdis='"+comb+"';  "); 
+      
+            rs.next();
+            ris=rs.getInt("iddet");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+   	 JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"GetIDDET "+ ex+"");
+    }
+    return ris;
 
-public static int getcodiceturno(String disciplina,String livello,String giorno, String orario){
+}
+public static int getconf(String disciplina,String livello,String giorno, String orario){
 
     
     
@@ -547,6 +633,68 @@ public static int getcodiceturno(String disciplina,String livello,String giorno,
 
 
 
+public static int getcodiceturno2(String disciplina,String livello,String giorno, String orario){
+
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+
+    int ris=-1;
+    
+    try {
+        
+        st = con.createStatement();
+     
+				
+        rs = st.executeQuery("select codiceturno from gestioneturno where fasciaoraria='"+orario+"' and Giornosettimana='"+giorno+"' and Combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"'");
+      
+            rs.next();
+            ris=rs.getInt("codiceturno");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+    	JOptionPane.showMessageDialog(FrameTurno.frame,"Getcodiceturno2 "+ ex+"");
+    }
+    return ris;
+
+}
+public static int getprenotazioniev(int codiceturno){
+
+    
+    
+    Connection con = DbConnection.db;
+    
+    Statement st;
+    
+    ResultSet rs;
+    
+
+    int ris=-1;
+    
+    try {
+        
+        st = con.createStatement();
+     
+				
+        rs = st.executeQuery("select prenotazionidisponibili from gestioneturnoevento where codiceturnoevento='"+codiceturno+"'");
+      
+            rs.next();
+            ris=rs.getInt("prenotazionidisponibili");
+            		
+        return ris; 
+    } catch (SQLException ex) {
+    
+    }
+    return ris;
+
+}
+
+
 public static int getprenotazioni(int codiceturno){
 
     
@@ -565,7 +713,7 @@ public static int getprenotazioni(int codiceturno){
         st = con.createStatement();
      
 				
-        rs = st.executeQuery("select prenotazionidisponibili from gestioneturno where codiceturno='"+codiceturno+"'");
+        rs = st.executeQuery("select prenotazionidisponibili from gestioneturno where codiceturno='"+codiceturno+"';");
       
             rs.next();
             ris=rs.getInt("prenotazionidisponibili");

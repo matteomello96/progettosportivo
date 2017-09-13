@@ -23,7 +23,7 @@ public class framediscdisp {
 	
 	
 	public framediscdisp() {
-		frame = new JFrame("FrameDettagli");
+		frame = new JFrame("FrameDettagliDaAccResp");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 700, 400);
 		frame.setVisible(true);

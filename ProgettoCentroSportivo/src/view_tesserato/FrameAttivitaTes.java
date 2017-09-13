@@ -39,7 +39,7 @@ import VisteUtenteGenerico.setupTableWidths;
 import listener.Listen;
 
 
-public class FrameTesserato extends JPanel {
+public class FrameAttivitaTes extends JPanel {
 	/**
 	 * 
 	 */
@@ -62,7 +62,7 @@ public class FrameTesserato extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public FrameTesserato() {
+	public FrameAttivitaTes() {
 		
 
 
@@ -88,45 +88,19 @@ public class FrameTesserato extends JPanel {
 		frame.setJMenuBar(menuBar);
 	
 		
-		JMenu mnNewMenu = new JMenu("home");
+		JMenu mnNewMenu = new JMenu("Torna al Pannello di Controllo");
 		menuBar.add(mnNewMenu);
 		
-		JMenu mnNewMenu_1 = new JMenu("visualizza");
-		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Pannello di controllo");
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
-		mntmNewMenuItem.setActionCommand("out_da_tes");
+		mntmNewMenuItem.setActionCommand("pantes");
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("CambiaPassword");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new FrameCambia();
-				frame.setEnabled(false);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem_1);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Visualizza eventi");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new FrameEventi();
-				frame.setVisible(false);
-				
-			}
-		});
-		mnNewMenu_1.add(mntmNewMenuItem_4);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Aggiorna data e ora");
-		mntmNewMenuItem_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new FrameDiscAttive();
-				frame.setVisible(false);
-				
-			}
-		});
-		mnNewMenu_1.add(mntmNewMenuItem_5);
+		
 		
 		
 		
@@ -143,31 +117,12 @@ public class FrameTesserato extends JPanel {
 		});
 		mnNewMenu.add(scelta_orario);*/
 
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Tue testimonianze");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new FrameVisTest();
-				//frame.setEnabled(false);
-			}
-		});
-		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 	
 		
-		JMenuItem test= new JMenuItem("Testimonianze");
-		test.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new FrameTestimonianze(null,null,null);
-				frame.setEnabled(false);
-							
-			}
-		});
-		mnNewMenu.add(test);
 		
 		
 		
-		
-		;
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -184,13 +139,14 @@ public class FrameTesserato extends JPanel {
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc.gridwidth = 3;
 		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 1;
+		gbc.gridx = 0;
 		gbc.gridy = 0;
 		contentPane.add(totord, gbc_lblNewLabel);
 		
 		
 		table = new JTable();
-		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());table.setRowHeight(250);
+		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());
+		table.setRowHeight(250);
 		table.setRowHeight(3, 50);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setCellSelectionEnabled(true);
@@ -274,7 +230,7 @@ public class FrameTesserato extends JPanel {
 		
 
 		Aggiungi = new JButton("Aggiungi");
-		gbc.anchor = GridBagConstraints.WEST;
+		
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 2;
 		gbc.gridy = 4;
@@ -303,13 +259,14 @@ public class FrameTesserato extends JPanel {
 				
 				
 				//new FrameDiscAttive();
-			//	FrameDiscAttive.frame.dispose();
+			//FrameDiscAttive.frame.dispose();
 				for(q=0;q<table_2.getRowCount();q++){
 					
 				
-					if(GetInfoDB.getcombinazionelivdis(table_2.getValueAt(q,0).toString(), table_2.getValueAt(q,1).toString()) == GetInfoDB.getcombinazionelivdis(table.getValueAt(table.getSelectedRow() , 1).toString(),table.getValueAt(table.getSelectedRow() , 0).toString())){
+					if(GetInfoDB.getcombinazionelivdis(table_2.getValueAt(q,0).toString(), table_2.getValueAt(q,1).toString()) == GetInfoDB.getcomb(table_2.getValueAt(q , 1).toString(),table_2.getValueAt(q , 0).toString(),GetInfoDB.getidTess(Utente.getUsername())))
+					{
 					
-						ris=1;
+					ris=1;
 					}
 					else{
 						
@@ -339,7 +296,7 @@ public class FrameTesserato extends JPanel {
 					{
 						
 						if(ris==1){
-							JOptionPane.showMessageDialog(FrameTesserato.frame, "Hai già un iscrizione in stato di avanzamento",null,JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(FrameAttivitaTes.frame, "Hai già un iscrizione con la disciplina da te selezionata",null,JOptionPane.WARNING_MESSAGE);
 							
 						}
 						else{
@@ -349,7 +306,7 @@ public class FrameTesserato extends JPanel {
 				
 					else{
 				
-					JOptionPane.showMessageDialog(FrameTesserato.frame, "Non è possibile Aggiungere la stessa disciplina",null,JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(FrameAttivitaTes.frame, "Non è possibile Aggiungere la stessa disciplina",null,JOptionPane.WARNING_MESSAGE);
 					
 					}
 					
@@ -422,7 +379,7 @@ public class FrameTesserato extends JPanel {
 		
 	     invia = new JButton("invia");
 
-			gbc.anchor = GridBagConstraints.WEST;
+			
 			gbc.insets = new Insets(0, 0, 5, 5);
 			gbc.gridx = 5;
 			gbc.gridy = 4;

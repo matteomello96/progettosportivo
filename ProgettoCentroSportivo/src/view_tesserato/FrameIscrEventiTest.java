@@ -1,4 +1,4 @@
-package visteadmin;
+package view_tesserato;
 
 import java.awt.BorderLayout;
 
@@ -22,7 +22,8 @@ import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
-
+import ClassiDao.GetInfoDB;
+import ClassiDaoTesserato.ElencoeventidaoTess;
 
 import java.awt.ComponentOrientation;
 
@@ -31,19 +32,23 @@ import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.setupTableWidths;
 import classiDAOResponsabile.ElencoUtentiDAO;
 import classiDAOResponsabile.GestioneIscrizioniDAO;
+import classiDAOResponsabile.GestioneIscrizioniEventiDAO;
 import classiDAOResponsabile.RichiesteDao;
 import classiDAOResponsabile.credenzialidao;
+import classiDAOResponsabile.downloaddao;
+import classiDAOResponsabile.elencoeventidao;
 import listener.Listen;
 import modelliTabelleIstruttore.ModElEventiIstr;
 import modelliTabelleRespo.ModElUtenti;
 import modelliTabelleRespo.modelisc;
+import modelliTabelleRespo.modeven;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
-public class FrameOrdini extends JFrame {
+public class FrameIscrEventiTest extends JFrame {
 	/**
 	 * 
 	 */
@@ -63,7 +68,8 @@ public class FrameOrdini extends JFrame {
 	public JTable tablemod3;
 	public JTable tablemod4;
   
-	private modelisc model,model2,model3,model4;
+	
+	private modeven model,model2,model3,model4;
 
     private JTabbedPane tabed = new JTabbedPane();
 	/**
@@ -73,10 +79,10 @@ public class FrameOrdini extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameOrdini() {
+	public FrameIscrEventiTest() {
 		frame = new JFrame("Pagina Iscritti");
 		
-		frame.setTitle("Elenco degli utenti");
+		frame.setTitle("Elenco delle tue iscrizioni agli eventi");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 1000, 1000);
 		frame.setVisible(true);
@@ -95,7 +101,7 @@ public class FrameOrdini extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Torna al pannello di controllo");
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
-		mntmNewMenuItem.setActionCommand("Vai_home_da_ord");
+		mntmNewMenuItem.setActionCommand("inites2");
 		
 		tabed = new JTabbedPane();
 		contentPane = new JPanel();
@@ -111,7 +117,7 @@ public class FrameOrdini extends JFrame {
 	    frame.getContentPane().add(scroll);
 		
 		
-		
+		int tes= GetInfoDB.getidTess(Utente.getUsername());
 		
 		
 		
@@ -122,7 +128,7 @@ public class FrameOrdini extends JFrame {
 		
 		
 		
-		JLabel lblUtenti = new JLabel("Elenco delle richieste confermate");
+		JLabel lblUtenti = new JLabel("Elenco delle tue richieste confermate");
 		lblUtenti.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUtenti.setForeground(Color.WHITE);
 		gbc.insets = new Insets(0, 0, 5, 5);
@@ -131,7 +137,7 @@ public class FrameOrdini extends JFrame {
 		GPane1.add(lblUtenti,BorderLayout.NORTH);
 		
 		table = new JTable();
-		model = new modelisc(RichiesteDao.elencoconfermati());
+		model = new modeven(ElencoeventidaoTess.elencoevenconf(tes));
 		table.setRowHeight(50);
 		table.setRowHeight(3, 50);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -164,49 +170,63 @@ public class FrameOrdini extends JFrame {
 		BotPnl1.setLayout(new GridBagLayout());
 		
 		
-		JButton bottone= new JButton("Dettagli Ordine");
-		bottone.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		BotPnl1.add(bottone,gbc);
-		bottone.addActionListener(new ActionListener() {
 		
-			@Override
+		
+		JButton btnNewButton_1 = new JButton("Visualizza Certificato ");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_1.setForeground(Color.BLACK);
+
+		
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		BotPnl1.add(btnNewButton_1, gbc);
+        btnNewButton_1.addActionListener(new ActionListener() {
+			
+
 			public void actionPerformed(ActionEvent arg0) {
 				if (table.getSelectedRow() != -1) {
-				      frame.setVisible(false);
-				      frame.dispose();
-					new FrameDettagliAcc((int) FrameOrdini.table.getValueAt(FrameOrdini.table.getSelectedRow(), 0));
-					} else
-						JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
-								JOptionPane.WARNING_MESSAGE);
-				}
-		});
-		
+			String a;
+			//String b;
+			a=(String) table.getValueAt( table.getSelectedRow() , 6);
+			downloaddao.scarica(a);
+			//JOptionPane.showMessageDialog(frameeventidacanc.frame, "'"+b+"'");
+				} else
+					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+							JOptionPane.WARNING_MESSAGE);
+			
+
+			}
+		});	
+        
+
 		
 		JButton bottone2= new JButton("Elimina Ordine");
 		bottone2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		bottone2.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 4;
+		
+		gbc.gridx = 3;
 		gbc.gridy = 1;
 		BotPnl1.add(bottone2,gbc);
 		bottone2.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				int b;
+				
 				if (table.getSelectedRow() != -1) {
-				b= (int) table.getValueAt(table.getSelectedRow(), 0);
-		
-			GestioneIscrizioniDAO.Uccidi_isc(b);
-			frame.dispose();
-			new FrameOrdini();
+					int idord,tesserato,codiceturno;
+					String giorno,orario,spazio;
+					
+					        
+							tesserato=(int) table.getValueAt(table.getSelectedRow(), 1);
+				
+					giorno=(String) table.getValueAt(table.getSelectedRow(), 10);
+					orario=(String) table.getValueAt(table.getSelectedRow(), 11);
+					spazio=(String) table.getValueAt(table.getSelectedRow(), 12);
+					idord= (int) table.getValueAt(table.getSelectedRow(), 0);
+					codiceturno= GetInfoDB.getcodiceturnoevento( orario, giorno,spazio);
+					    GestioneIscrizioniEventiDAO.Uccidiev(idord,codiceturno,tesserato);
+						frame.dispose();
+						new FrameIscrEventiTest();
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
@@ -235,7 +255,7 @@ public class FrameOrdini extends JFrame {
 		GPane2.add(lblUtentiS,BorderLayout.NORTH);
 		
 		table2 = new JTable();
-		model2 = new modelisc(RichiesteDao.elencodaconf());
+		model2 = new modeven(ElencoeventidaoTess.elencoevendaconf(tes));
 		table2.setRowHeight(50);
 		table2.setRowHeight(3, 50);
 		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -267,24 +287,33 @@ public class FrameOrdini extends JFrame {
 		BotPnl2.setBackground(new Color (235,193,20));
 		BotPnl2.setLayout(new GridBagLayout());
 		
+		JButton bottone24= new JButton("Elimina Ordine");
+		bottone24.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		bottone24.setForeground(Color.BLACK);
 		
-		JButton bottone3= new JButton("Dettagli ordine");
-		bottone3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone3.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
+		gbc.gridx = 3;
 		gbc.gridy = 1;
-		BotPnl2.add(bottone3,gbc);
-		bottone3.addActionListener(new ActionListener() {
+		BotPnl2.add(bottone24,gbc);
+		bottone24.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				
 				if (table2.getSelectedRow() != -1) {
-			      frame.setVisible(false);
-			      frame.dispose();
-				new FrameDettagliDaAccResp((int) FrameOrdini.table2.getValueAt(FrameOrdini.table2.getSelectedRow(), 0));
+					int idord,tesserato,codiceturno;
+					String giorno,orario,spazio;
+					
+					        
+							tesserato=(int) table2.getValueAt(table2.getSelectedRow(), 1);
+				
+					giorno=(String) table2.getValueAt(table2.getSelectedRow(), 10);
+					orario=(String) table2.getValueAt(table2.getSelectedRow(), 11);
+					spazio=(String) table2.getValueAt(table2.getSelectedRow(), 12);
+					idord= (int) table2.getValueAt(table2.getSelectedRow(), 0);
+					codiceturno= GetInfoDB.getcodiceturnoevento( orario, giorno,spazio);
+					    GestioneIscrizioniEventiDAO.Uccidiev(idord,codiceturno,tesserato);
+						frame.dispose();
+						new FrameIscrEventiTest();
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
@@ -292,121 +321,50 @@ public class FrameOrdini extends JFrame {
 		});
 		
 		
-		JButton bottone4= new JButton("Elimina Richiesta di Iscrizione");
-		bottone4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone4.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 4;
-		gbc.gridy = 1;
-		BotPnl2.add(bottone4,gbc);
-		bottone4.addActionListener(new ActionListener() {
 		
-			@Override
+		
+		
+		
+		
+		
+		
+		JButton btnNewButton_2 = new JButton("Visualizza Certificato ");
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_2.setForeground(Color.BLACK);
+
+		
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		BotPnl2.add(btnNewButton_2, gbc);
+        btnNewButton_2.addActionListener(new ActionListener() {
+			
+
 			public void actionPerformed(ActionEvent arg0) {
 				if (table2.getSelectedRow() != -1) {
-				// TODO Auto-generated method stub
-				int b;
-			
-				b= (int) table2.getValueAt(table2.getSelectedRow(), 0);
-		
-			GestioneIscrizioniDAO.Uccidi_isc(b);
-			frame.dispose();
-			new FrameOrdini();
+			String a;
+			//String b;
+			a=(String) table2.getValueAt( table2.getSelectedRow() , 6);
+			downloaddao.scarica(a);
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
+			//JOptionPane.showMessageDialog(frameeventidacanc.frame, "'"+b+"'");
+			
+			
+
 			}
-		}	
-		);
+		});	
+		
+		
 		
 		GPane2.add(BotPnl2,BorderLayout.SOUTH);
 		
 		tabed.add("Richieste da accettare",GPane2);
 		
 		
-		GPane3 = new JPanel();
-		GPane3.setBackground(new Color (235,193,20));
-		GPane3.setLayout(new BorderLayout());
 		
 		
 		
-		
-		JLabel lblUtentiM = new JLabel("Elenco delle richieste modificate");
-		lblUtentiM.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUtentiM.setForeground(Color.WHITE);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		GPane3.add(lblUtentiM,BorderLayout.NORTH);
-		
-		table3 = new JTable();
-		model3 = new modelisc(RichiesteDao.elencomod());
-		table3.setRowHeight(50);
-		table3.setRowHeight(3, 50);
-		table3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table3.setCellSelectionEnabled(true);
-		// .
-		table3.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table3.setModel(model3);
-		
-		table3.setFont(font2);
-		tablemod3 = setupTableWidths.setupTableWidths(table3);
-
-		tablemod3.setForeground(new Color(255, 255, 255));
-		tablemod3.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt3 = new JScrollPane();
-
-		scrollt3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt3.setBackground(new Color(255, 193, 20));
-		scrollt3.setViewportView(tablemod3);
-
-		GPane3.add(scrollt3, BorderLayout.CENTER);
-
-		
-		
-		
-		
-		BotPnl3 = new JPanel();
-		BotPnl3.setBackground(new Color (235,193,20));
-		BotPnl3.setLayout(new GridBagLayout());
-		
-		
-		JButton bottone5= new JButton("Dettagli ordine");
-		bottone5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone5.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		BotPnl3.add(bottone5,gbc);
-		bottone5.addActionListener(new ActionListener() {
-		
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				int b;
-				if (table3.getSelectedRow() != -1) {
-				b= (int) table3.getValueAt(table3.getSelectedRow(), 0);
-		
-			new FrameDettagliMod(b);
-			frame.dispose();
-		
-				} else
-					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
-							JOptionPane.WARNING_MESSAGE);
-			}
-		
-		});
-		
-		
-		
-		
-		GPane3.add(BotPnl3,BorderLayout.SOUTH);
-		
-		tabed.add("Richieste modificate",GPane3);
 		
 		
 		

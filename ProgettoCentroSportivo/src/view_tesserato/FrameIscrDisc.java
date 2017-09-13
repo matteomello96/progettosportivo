@@ -1,4 +1,4 @@
-package visteadmin;
+package view_tesserato;
 
 import java.awt.BorderLayout;
 
@@ -22,7 +22,9 @@ import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
-
+import ClassiDao.GetInfoDB;
+import ClassiDaoTesserato.Modifica_Turno_Dao;
+import ClassiDaoTesserato.RichiesteDaoTes;
 
 import java.awt.ComponentOrientation;
 
@@ -43,7 +45,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
-public class FrameOrdini extends JFrame {
+public class FrameIscrDisc extends JFrame {
 	/**
 	 * 
 	 */
@@ -73,7 +75,7 @@ public class FrameOrdini extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameOrdini() {
+	public FrameIscrDisc() {
 		frame = new JFrame("Pagina Iscritti");
 		
 		frame.setTitle("Elenco degli utenti");
@@ -95,7 +97,7 @@ public class FrameOrdini extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Torna al pannello di controllo");
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
-		mntmNewMenuItem.setActionCommand("Vai_home_da_ord");
+		mntmNewMenuItem.setActionCommand("Vai_home_da_ord2");
 		
 		tabed = new JTabbedPane();
 		contentPane = new JPanel();
@@ -110,7 +112,7 @@ public class FrameOrdini extends JFrame {
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
 		
-		
+		int tesserato=GetInfoDB.getidTess(Utente.getUsername());
 		
 		
 		
@@ -122,7 +124,7 @@ public class FrameOrdini extends JFrame {
 		
 		
 		
-		JLabel lblUtenti = new JLabel("Elenco delle richieste confermate");
+		JLabel lblUtenti = new JLabel("Le tue richieste confermate");
 		lblUtenti.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUtenti.setForeground(Color.WHITE);
 		gbc.insets = new Insets(0, 0, 5, 5);
@@ -131,7 +133,7 @@ public class FrameOrdini extends JFrame {
 		GPane1.add(lblUtenti,BorderLayout.NORTH);
 		
 		table = new JTable();
-		model = new modelisc(RichiesteDao.elencoconfermati());
+		model = new modelisc(RichiesteDaoTes.elencoconfermati(tesserato));
 		table.setRowHeight(50);
 		table.setRowHeight(3, 50);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -177,9 +179,11 @@ public class FrameOrdini extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (table.getSelectedRow() != -1) {
-				      frame.setVisible(false);
-				      frame.dispose();
-					new FrameDettagliAcc((int) FrameOrdini.table.getValueAt(FrameOrdini.table.getSelectedRow(), 0));
+				     frame.setVisible(false);
+					frame.dispose();
+				    new FrameDettagliConfTess((int)FrameIscrDisc.table.getValueAt(FrameIscrDisc.table.getSelectedRow(), 0));
+					FrameDettagliConfTess.frame.setVisible(true);
+					
 					} else
 						JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 								JOptionPane.WARNING_MESSAGE);
@@ -204,9 +208,9 @@ public class FrameOrdini extends JFrame {
 				if (table.getSelectedRow() != -1) {
 				b= (int) table.getValueAt(table.getSelectedRow(), 0);
 		
-			GestioneIscrizioniDAO.Uccidi_isc(b);
+			Modifica_Turno_Dao.Uccidi_isc(b);
 			frame.dispose();
-			new FrameOrdini();
+			new FrameIscrDisc();
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
@@ -226,7 +230,7 @@ public class FrameOrdini extends JFrame {
 		
 		
 		
-		JLabel lblUtentiS = new JLabel("Elenco delle richieste  da accettare");
+		JLabel lblUtentiS = new JLabel("Le tue richieste in attesa di conferma");
 		lblUtentiS.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUtentiS.setForeground(Color.WHITE);
 		gbc.insets = new Insets(0, 0, 5, 5);
@@ -235,7 +239,7 @@ public class FrameOrdini extends JFrame {
 		GPane2.add(lblUtentiS,BorderLayout.NORTH);
 		
 		table2 = new JTable();
-		model2 = new modelisc(RichiesteDao.elencodaconf());
+		model2 = new modelisc(RichiesteDaoTes.elencodaconf(tesserato));
 		table2.setRowHeight(50);
 		table2.setRowHeight(3, 50);
 		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -284,7 +288,9 @@ public class FrameOrdini extends JFrame {
 				if (table2.getSelectedRow() != -1) {
 			      frame.setVisible(false);
 			      frame.dispose();
-				new FrameDettagliDaAccResp((int) FrameOrdini.table2.getValueAt(FrameOrdini.table2.getSelectedRow(), 0));
+			      new FrameDettagliDaAccTess((int)FrameIscrDisc.table2.getValueAt(FrameIscrDisc.table2.getSelectedRow(), 0));
+					FrameDettagliDaAccTess.frame.setVisible(true);
+					
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
@@ -310,9 +316,9 @@ public class FrameOrdini extends JFrame {
 			
 				b= (int) table2.getValueAt(table2.getSelectedRow(), 0);
 		
-			GestioneIscrizioniDAO.Uccidi_isc(b);
+			Modifica_Turno_Dao.Uccidi_isc(b);
 			frame.dispose();
-			new FrameOrdini();
+			new FrameIscrDisc();
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
@@ -332,7 +338,7 @@ public class FrameOrdini extends JFrame {
 		
 		
 		
-		JLabel lblUtentiM = new JLabel("Elenco delle richieste modificate");
+		JLabel lblUtentiM = new JLabel("Le tue richieste modificate");
 		lblUtentiM.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUtentiM.setForeground(Color.WHITE);
 		gbc.insets = new Insets(0, 0, 5, 5);
@@ -341,7 +347,7 @@ public class FrameOrdini extends JFrame {
 		GPane3.add(lblUtentiM,BorderLayout.NORTH);
 		
 		table3 = new JTable();
-		model3 = new modelisc(RichiesteDao.elencomod());
+		model3 = new modelisc(RichiesteDaoTes.elencomod(tesserato));
 		table3.setRowHeight(50);
 		table3.setRowHeight(3, 50);
 		table3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -374,32 +380,61 @@ public class FrameOrdini extends JFrame {
 		BotPnl3.setLayout(new GridBagLayout());
 		
 		
-		JButton bottone5= new JButton("Dettagli ordine");
-		bottone5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone5.setForeground(Color.BLACK);
+		JButton bottone53= new JButton("Dettagli ordine");
+		bottone53.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		bottone53.setForeground(Color.BLACK);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		BotPnl3.add(bottone5,gbc);
-		bottone5.addActionListener(new ActionListener() {
+		BotPnl3.add(bottone53,gbc);
+		bottone53.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				int b;
 				if (table3.getSelectedRow() != -1) {
-				b= (int) table3.getValueAt(table3.getSelectedRow(), 0);
-		
-			new FrameDettagliMod(b);
-			frame.dispose();
-		
+			      frame.setVisible(false);
+			      frame.dispose();
+			      new FrameDettagliModTess2((int)FrameIscrDisc.table3.getValueAt(FrameIscrDisc.table3.getSelectedRow(), 0));
+					FrameDettagliModTess2.frame.setVisible(true);
+					
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
 			}
-		
 		});
+		
+		
+		JButton bottone54= new JButton("Elimina Richiesta di Iscrizione");
+		bottone54.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		bottone54.setForeground(Color.BLACK);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridwidth = 2;
+		gbc.gridx = 4;
+		gbc.gridy = 1;
+		BotPnl3.add(bottone54,gbc);
+		bottone54.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (table3.getSelectedRow() != -1) {
+				// TODO Auto-generated method stub
+				int b;
+			
+				b= (int) table3.getValueAt(table3.getSelectedRow(), 0);
+		
+			Modifica_Turno_Dao.Uccidi_isc(b);
+			frame.dispose();
+			new FrameIscrDisc();
+				} else
+					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+							JOptionPane.WARNING_MESSAGE);
+			}
+		}	
+		);
+		
+		
 		
 		
 		

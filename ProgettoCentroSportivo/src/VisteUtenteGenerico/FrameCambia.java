@@ -12,7 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ClassiDao.PasswordChanged;
-import view_tesserato.FrameTesserato;
+import view_tesserato.FrameAttivitaTes;
 
 
 public class FrameCambia {
@@ -83,8 +83,8 @@ public class FrameCambia {
 		    //@Override
 		    /*public void windowClosing(java.awt.event.WindowEvent windowEvent) 
 		    {
-		    	if(FrameTesserato.frame!=null)
-		    		FrameTesserato.frame.setEnabled(true);
+		    	if(FrameAttivitaTes.frame!=null)
+		    		FrameAttivitaTes.frame.setEnabled(true);
 		    	//if(MagFrame.frame!=null)
 		    		//MagFrame.frame.setEnabled(true);
 		    	//if(CapFrame.frame!=null)

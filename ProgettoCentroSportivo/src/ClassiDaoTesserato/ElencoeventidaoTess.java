@@ -1,4 +1,4 @@
-package classiDAOResponsabile;
+package ClassiDaoTesserato;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,23 +18,23 @@ import Model_Responsabile.ElencoLivDis;
 import Model_Responsabile.elencoeventi;
 import DBInterfaccia.DbConnection;
 
-public class elencoeventidao {
+public class ElencoeventidaoTess {
 
-	private static elencoeventidao instance;
+	private static ElencoeventidaoTess instance;
 	
-	public static synchronized elencoeventidao getInstance() {
+	public static synchronized ElencoeventidaoTess getInstance() {
 		if(instance==null)
-			instance=new elencoeventidao();
+			instance=new ElencoeventidaoTess();
 		return instance;
 	}
 	
 	
-	public static ArrayList<elencoeventi> elencoevenconf() {
+	public static ArrayList<elencoeventi> elencoevenconf(int tes) {
 		
 		
         ArrayList<elencoeventi> dati= new ArrayList<elencoeventi>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select I.codiceiscrizioneevento,I.tesserato,I.evento,I.tipoevento,I.costotot,I.modalitapagamento,I.certificatomed,I.confermato,I.annullato,I.modificato,B.giornosettimana,B.fasciaoraria,B.spazio from iscrizioneevento as I inner join gestioneturnoevento as B on I.evento=B.evento where I.confermato=1 and I.modificato=0 and I.annullato=0;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select I.codiceiscrizioneevento,I.tesserato,I.evento,I.tipoevento,I.costotot,I.modalitapagamento,I.certificatomed,I.confermato,I.annullato,I.modificato,B.giornosettimana,B.fasciaoraria,B.spazio from iscrizioneevento as I inner join gestioneturnoevento as B on I.evento=B.evento where I.confermato=1 and I.modificato=0 and I.annullato=0 and tesserato='"+tes+"';");
         
         Iterator<String[]> i = res.iterator();
        
@@ -67,12 +67,12 @@ public class elencoeventidao {
 	}
 	
 	
-public static ArrayList<elencoeventi> elencoevendaconf() {
+public static ArrayList<elencoeventi> elencoevendaconf(int tes) {
 		
 		
         ArrayList<elencoeventi> dati= new ArrayList<elencoeventi>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select I.codiceiscrizioneevento,I.tesserato,I.evento,I.tipoevento,I.costotot,I.modalitapagamento,I.certificatomed,I.confermato,I.annullato,I.modificato,B.giornosettimana,B.fasciaoraria,B.spazio from iscrizioneevento as I inner join gestioneturnoevento as B on I.evento=B.evento where I.confermato=0 and I.modificato=0 and I.annullato=0;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select I.codiceiscrizioneevento,I.tesserato,I.evento,I.tipoevento,I.costotot,I.modalitapagamento,I.certificatomed,I.confermato,I.annullato,I.modificato,B.giornosettimana,B.fasciaoraria,B.spazio from iscrizioneevento as I inner join gestioneturnoevento as B on I.evento=B.evento where I.confermato=0 and I.modificato=0 and I.annullato=0 and tesserato='"+tes+"';");
         
         Iterator<String[]> i = res.iterator();
        
@@ -104,12 +104,12 @@ public static ArrayList<elencoeventi> elencoevendaconf() {
         return dati;
 	}
 
-public static ArrayList<elencoeventi> elencoevenmod() {
+public static ArrayList<elencoeventi> elencoevenmod(int tes) {
 	
 	
     ArrayList<elencoeventi> dati= new ArrayList<elencoeventi>(); 
     
-    Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select I.codiceiscrizioneevento,I.tesserato,I.evento,I.tipoevento,I.costotot,I.modalitapagamento,I.certificatomed,I.confermato,I.annullato,I.modificato,B.giornosettimana,B.fasciaoraria,B.spazio from iscrizioneevento as I inner join gestioneturnoevento as B on I.evento=B.evento where I.confermato=0 and I.modificato=1 and I.annullato=0;");
+    Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select I.codiceiscrizioneevento,I.tesserato,I.evento,I.tipoevento,I.costotot,I.modalitapagamento,I.certificatomed,I.confermato,I.annullato,I.modificato,B.giornosettimana,B.fasciaoraria,B.spazio from iscrizioneevento as I inner join gestioneturnoevento as B on I.evento=B.evento where I.confermato=0 and I.modificato=1 and I.annullato=0 and tesserato='"+tes+"';");
     
     Iterator<String[]> i = res.iterator();
    

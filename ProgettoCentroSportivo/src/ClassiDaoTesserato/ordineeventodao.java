@@ -25,7 +25,7 @@ public class ordineeventodao {
 	
 	
 	
-	 public static void insdetiscr(String modalita,String certificato,String pathprec,int evento,int costo){	
+	 public static void insdetiscr(String modalita,String certificato,String pathprec,int evento,int costo,String tipoevento){	
 	        
 	        Connection con = DbConnection.db;
 	        Statement st;
@@ -38,25 +38,32 @@ public class ordineeventodao {
 	        	 
 //JOptionPane.showMessageDialog(sendeventframe.frame, " \""+modalita+"\" \\o \""+certificato+"\","+evento+" "+GetInfoDB.getidTess(Utente.getUsername())+" "," ",JOptionPane.INFORMATION_MESSAGE);	
 			
-	        st.executeUpdate("INSERT INTO iscrizioneevento (codiceiscrizioneevento,evento,modalitapagamento,costotot,confermato,annullato,tesserato,certificatomed) "
-	        		+ "VALUES (NULL,'"+evento+"','"+modalita+"','"+costo+"','0','0','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+certificato+"')"); 
+	    
 	        try {
+	        	if((!(pathprec.equals("null"))&&!((certificato.equals("null")))))
+	        	{
 	            java.nio.file.Path pathprec2 =Paths.get(pathprec);
 	            java.nio.file.Path pathim3 =Paths.get(certificato);
 	            Files.copy(pathprec2,pathim3,StandardCopyOption.REPLACE_EXISTING);
+	        	}
+	        	else
+	        	{
+	        		certificato="null";
+	        	}
 	            }
 	            catch (FileNotFoundException e) {
-	            	JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);
+	            	JOptionPane.showMessageDialog(sendeventframe.frame, e);
 	              } catch (IOException e) {
 	    			// TODO Auto-generated catch block
-	            	  JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);
+	            	  JOptionPane.showMessageDialog(sendeventframe.frame, e);
 	    		}
-	        
-	        JOptionPane.showMessageDialog(sendeventframe.frame, "Eventi Aggiunti!!");
+	        st.executeUpdate("INSERT INTO iscrizioneevento (evento,modalitapagamento,costotot,confermato,annullato,modificato,tesserato,certificatomed,tipoevento) "
+	        		+ "VALUES ('"+evento+"','"+modalita+"','"+costo+"','0','0','0','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+certificato+"','"+tipoevento+"')"); 
+	    	
+	        JOptionPane.showMessageDialog(sendeventframe.frame, "Evento Aggiunto !!");
 	      } catch (SQLException ex) {
-	        	
-	    	  JOptionPane.showMessageDialog(sendeventframe.frame, "Eventi non Aggiunti!!");
-	        }
+	        
+	        }    
 	    }
 
 }

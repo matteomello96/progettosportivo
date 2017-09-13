@@ -10,7 +10,7 @@ import DBInterfaccia.DbConnection;
 import Model.Utente;
 import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.FrameModificaDati;
-import view_tesserato.FrameTesserato;
+import view_tesserato.FrameAttivitaTes;
 import visteadmin.FrameElencoUtenti;
 public class PasswordChanged {
 	
@@ -33,8 +33,8 @@ public class PasswordChanged {
 	         if(rs.next()){
 	        	st.executeUpdate("UPDATE elencoutenti SET password = '"+Nuovapass+"',modificato= 1 WHERE elencoutenti.username='"+Utente.getUsername()+"'");
 	        	JOptionPane.showMessageDialog(FrameCambia.frame, "Password cambiata"," ",JOptionPane.INFORMATION_MESSAGE);
-	        //if(FrameTesserato.frame!=null)
-	        //FrameTesserato.frame.setEnabled(true);
+	        //if(FrameAttivitaTes.frame!=null)
+	        //FrameAttivitaTes.frame.setEnabled(true);
 			  ///if(FrameElencoUtenti.frame!=null)
 			    		//FrameElencoUtenti.frame.setEnabled(true);
 			    	//if(CapFrame.frame!=null)

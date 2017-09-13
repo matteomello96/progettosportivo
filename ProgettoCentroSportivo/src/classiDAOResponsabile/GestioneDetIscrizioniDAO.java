@@ -9,7 +9,8 @@ import javax.swing.JOptionPane;
 
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
-import visteadmin.framedettagli;
+import visteadmin.FrameDettagliDaAccResp;
+import visteadmin.FrameDettagliMod;
 
 
 public class GestioneDetIscrizioniDAO {
@@ -34,11 +35,11 @@ public class GestioneDetIscrizioniDAO {
 		            if(conf==1)
 		            {
 	            
-	            st.executeUpdate("UPDATE detiscr set confermato=0  WHERE iddet='"+idordine+"'");
+	            st.executeUpdate("UPDATE detiscr SET confermato=0  WHERE iddet='"+idordine+"'");
 	     
 	      st.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+tesserato+"' and codiceturno='"+codiceturno+"' ");
 			st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'+1 WHERE codiceturno='"+codiceturno+"'");
-	   JOptionPane.showMessageDialog(framedettagli.frame, "Conferma annullata");
+	   JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, "Conferma annullata");
 	   
 	      
 		            }
@@ -46,7 +47,7 @@ public class GestioneDetIscrizioniDAO {
 		            else
 		            {
 		            	
-		            	JOptionPane.showMessageDialog(framedettagli.frame, "Parte di ordine già annullata");
+		            	JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, "Parte di ordine già annullata");
 		            }
 	      
 	      
@@ -56,13 +57,65 @@ public class GestioneDetIscrizioniDAO {
 	           
 	            
 	        } catch (SQLException ex) {
-	        	JOptionPane.showMessageDialog(framedettagli.frame, ex);
+	        	JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame,"GestioneDETiscrConf "+ ex+"");
 	        }
 		
 		
 		
 	}
-	public static void ConfermaDetIscrizione(int idordine,int tesserato,int codiceturno){
+	
+	public static void AnnullaDetModIsc(int idordine,int tesserato,int codiceturno){
+		 Connection con = DbConnection.db;
+		   Statement st;
+		   ResultSet rs;
+				int conf;
+		   
+		   
+	            
+			   
+			   try {
+		            
+		            st= con.createStatement();
+		            rs=st.executeQuery("select confermato from detiscr where iddet='"+idordine+"'");
+		        	 rs.next();
+		             conf=rs.getInt("confermato");
+		            
+		            if(conf==1)
+		            {
+	            
+	            st.executeUpdate("UPDATE detiscr SET confermato=0,modificato=1  WHERE iddet='"+idordine+"'");
+	     
+	      st.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+tesserato+"' and codiceturno='"+codiceturno+"' ");
+			st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'+1 WHERE codiceturno='"+codiceturno+"'");
+	   JOptionPane.showMessageDialog(FrameDettagliMod.frame, "Conferma modifica annullata");
+	   
+	      
+		            }
+		      
+		            else
+		            {
+		            	
+		            	JOptionPane.showMessageDialog(FrameDettagliMod.frame, "Parte di ordine già annullata");
+		            }
+	      
+	      
+	  
+		           	
+	            
+	           
+	            
+	        } catch (SQLException ex) {
+	        	JOptionPane.showMessageDialog(FrameDettagliMod.frame,"GestioneDETiscrConf "+ ex+"");
+	        }
+		
+		
+		
+	}
+	
+	
+	
+	
+	public static void ConfermaDetIscrizione(int idordine,int tesserato,int codiceturno,int ord){
 		 Connection con = DbConnection.db;
 		   Statement st;
 		   ResultSet rs;
@@ -78,16 +131,16 @@ public class GestioneDetIscrizioniDAO {
 	            if(conf==0)
 	            {
 	      st.executeUpdate("UPDATE detiscr set confermato=1  WHERE iddet='"+idordine+"'");
-	      st.executeUpdate("INSERT iscrizioniperturno (codiceturno,tesserato) VALUES('"+codiceturno+"','"+tesserato+"')");
+	      st.executeUpdate("INSERT INTO iscrizioniperturno (codiceturno,tesserato,iddet) VALUES('"+codiceturno+"','"+tesserato+"','"+ord+"')");
 	  		st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'-1 WHERE codiceturno='"+codiceturno+"'");
-	  	      JOptionPane.showMessageDialog(framedettagli.frame, "Parte di ordine accettata");
+	  	      JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, "Parte di ordine accettata");
 	      
 	            }
 	      
 	            else
 	            {
 	            	
-	            	JOptionPane.showMessageDialog(framedettagli.frame, "Parte di ordine già accettata");
+	            	JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, "Parte di ordine già accettata");
 	            }
 	  
 		           	
@@ -95,7 +148,7 @@ public class GestioneDetIscrizioniDAO {
 	           
 	            
 	        } catch (SQLException ex) {
-	        	JOptionPane.showMessageDialog(framedettagli.frame, ex);
+	        	JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, ex);
 	        }
 		
 		
@@ -103,7 +156,7 @@ public class GestioneDetIscrizioniDAO {
 	}
 	
 
-	public static void ConfermaDetMod(int idordine,int tesserato,int codiceturno){
+	public static void ConfermaDetMod(int idordine,int tesserato,int codiceturno,int ord){
 		 Connection con = DbConnection.db;
 		   Statement st;
 		   ResultSet rs;
@@ -119,16 +172,16 @@ public class GestioneDetIscrizioniDAO {
 	            if(conf==1)
 	            {
 	      st.executeUpdate("UPDATE detiscr set confermato=1,modificato=0  WHERE iddet='"+idordine+"'");
-	      st.executeUpdate("INSERT iscrizioniperturno (codiceturno,tesserato) VALUES('"+codiceturno+"','"+tesserato+"')");
+	      st.executeUpdate("INSERT INTO iscrizioniperturno (codiceturno,tesserato,iddet) VALUES('"+codiceturno+"','"+tesserato+"','"+ord+"')");
 	  		st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'-1 WHERE codiceturno='"+codiceturno+"'");
-	  	      JOptionPane.showMessageDialog(framedettagli.frame, "Modifica accettata");
+	  	      JOptionPane.showMessageDialog(FrameDettagliMod.frame, "Modifica accettata");
 	      
 	            }
 	      
 	            else
 	            {
 	            	
-	            	JOptionPane.showMessageDialog(framedettagli.frame, "Modifica già accettata");
+	            	JOptionPane.showMessageDialog(FrameDettagliMod.frame, "Modifica già accettata");
 	            }
 	  
 		           	
@@ -136,7 +189,7 @@ public class GestioneDetIscrizioniDAO {
 	           
 	            
 	        } catch (SQLException ex) {
-	        	JOptionPane.showMessageDialog(framedettagli.frame, ex);
+	        	JOptionPane.showMessageDialog(FrameDettagliMod.frame, ex);
 	        }
 		
 		

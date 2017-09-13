@@ -32,6 +32,12 @@ public int getAnnullla() {
 public void setAnnullla(int annullla) {
 	this.annullla = annullla;
 }
+public int getModifica() {
+	return modifica;
+}
+public void setModifica(int modifica) {
+	this.modifica = modifica;
+}
 public String getGiorno() {
 	return giorno;
 }
@@ -44,10 +50,5 @@ public String getOrario() {
 public void setOrario(String orario) {
 	this.orario = orario;
 }
-public int getModifica() {
-	return modifica;
-}
-public void setModifica(int modifica) {
-	this.modifica = modifica;
-}
+
 }

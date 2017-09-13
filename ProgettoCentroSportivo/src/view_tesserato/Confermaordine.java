@@ -64,7 +64,7 @@ public Confermaordine(){
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
 		
 		
-		frame = new JDialog(FrameTesserato.frame,true);
+		frame = new JDialog(FrameAttivitaTes.frame,true);
 		frame.setTitle("Conferma ordine");
 		frame.setBounds(100, 100, 803, 364);
 		frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -81,7 +81,7 @@ public Confermaordine(){
 		
 		part = new JLabel("VALORE");
 		part.setHorizontalAlignment(SwingConstants.TRAILING);
-		part.setText(df.format(FrameTesserato.totale)+" EUR");
+		part.setText(df.format(FrameAttivitaTes.totale)+" EUR");
 		part.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		part.setBounds(171, 46, 118, 14);
 		frame.getContentPane().add(part);
@@ -111,9 +111,9 @@ public Confermaordine(){
 				frame.setVisible(false);
 				
 				frame.dispose();
-				FrameTesserato.frame.setEnabled(true);
-				FrameTesserato.frame.setAlwaysOnTop(true);
-				FrameTesserato.frame.setAlwaysOnTop(false);
+				FrameAttivitaTes.frame.setEnabled(true);
+				FrameAttivitaTes.frame.setAlwaysOnTop(true);
+				FrameAttivitaTes.frame.setAlwaysOnTop(false);
 			}
 		});
 		btnTornaAlCarrello.setBounds(21, 295, 138, 28);
@@ -206,7 +206,7 @@ public Confermaordine(){
 		btnGeneraDistinta.setEnabled(true);
 		frame.getContentPane().add(btnGeneraDistinta);
 		
-		final JButton btnFine = new JButton("Fine");
+		final JButton btnFine = new JButton("Salva documento");
 		btnFine.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnFine.setEnabled(false);
 		btnFine.addActionListener(new ActionListener() {
@@ -252,12 +252,14 @@ public Confermaordine(){
 				if(d2){
 				frame.setVisible(false);
 				
-				frame.dispose();	
-				FrameTesserato.frame.setEnabled(true);
-				FrameTesserato.frame.setAlwaysOnTop(true);
-				FrameTesserato.frame.setAlwaysOnTop(false);
-				FrameTesserato.invia.setEnabled(false);
-				FrameTesserato.svuotacarrello.doClick();
+				frame.dispose();
+				FrameAttivitaTes.frame.dispose();
+				new FrameDiscAttive(momento);
+				/*FrameAttivitaTes.frame.setEnabled(true);
+				FrameAttivitaTes.frame.setAlwaysOnTop(true);
+				FrameAttivitaTes.frame.setAlwaysOnTop(false);
+				FrameAttivitaTes.invia.setEnabled(false);
+				FrameAttivitaTes.svuotacarrello.doClick();*/
 				d2=true;
 				}
 				
@@ -278,11 +280,11 @@ public Confermaordine(){
 
 			
 				String a2="",a3="";
-				for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
+				for(int c=0;c<FrameAttivitaTes.table_1.getRowCount();c++)
 				{
 						
-					a2=FrameTesserato.table_1.getValueAt(c,0).toString();
-					a3=FrameTesserato.table_1.getValueAt(c,1).toString();
+					a2=FrameAttivitaTes.table_1.getValueAt(c,0).toString();
+					a3=FrameAttivitaTes.table_1.getValueAt(c,1).toString();
 	
 					TriggerOrdine.insdetiscr(a3 , a2 , momento);
 				
@@ -312,9 +314,9 @@ public Confermaordine(){
 					e.printStackTrace();
 				}
 				
-			//	FrameTesserato.tease();
+			//	FrameAttivitaTes.tease();
 				
-			//	FrameTesserato.svuotacarrello.doClick();
+			//	FrameAttivitaTes.svuotacarrello.doClick();
 				
 				
 

@@ -20,7 +20,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import ClassiDao.GetInfoDB;
 import Model.Utente;
 import view_tesserato.Confermaordine;
-import view_tesserato.FrameTesserato;
+import view_tesserato.FrameAttivitaTes;
 import DBInterfaccia.DbConnection;
 
 

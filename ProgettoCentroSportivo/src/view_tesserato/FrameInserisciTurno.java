@@ -32,7 +32,7 @@ import ComboTesserato.Comboorario;
 
 
 
-public class framemodificaturno extends JPanel {
+public class FrameInserisciTurno extends JPanel {
 	/**
 	 * 
 	 */
@@ -55,7 +55,7 @@ public class framemodificaturno extends JPanel {
 	private int postidisponibili;
 	
 	
-	public framemodificaturno(String disciplina, String livello,String giorno,String orario) {
+	public FrameInserisciTurno(String disciplina, String livello,String giorno,String orario,String momento) {
 		final DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
 		
@@ -85,7 +85,7 @@ public class framemodificaturno extends JPanel {
 	    
 	    
 		
-		JLabel lblNewLabel = new JLabel("Modifica turno");
+		JLabel lblNewLabel = new JLabel("Inseisci turno");
 		lblNewLabel.setFont(new Font("Sylfaen", Font.BOLD, 25));
 		
 		gbc.gridwidth = 2;
@@ -171,7 +171,7 @@ public class framemodificaturno extends JPanel {
 				}
 				else{
 						frame.dispose();
-						new framemodificaturno(livello,disciplina,giorno2,orario);
+						new FrameInserisciTurno(livello,disciplina,giorno2,orario,momento);
 						//JOptionPane.showMessageDialog(frame, "  '"+disciplina+"','"+livello+"','"+giorno2+"','"+orario+"',  ");
 						Comboorario.setEnabled(true);
 						Combogiorno.setEnabled(false);
@@ -185,21 +185,21 @@ public class framemodificaturno extends JPanel {
 				}
 				else{
 			
-				    codiceturno = GetInfoDB.getcodiceturno(livello, disciplina, giorno, orario2);
+				    codiceturno = GetInfoDB.getcodiceturno2(livello, disciplina, giorno, orario2);
 			
 					postidisponibili = GetInfoDB.getprenotazioni(codiceturno);
 					if(postidisponibili==0){
 						JOptionPane.showMessageDialog(FrameTurno.frame, "Posti massimi raggiunti"," ",JOptionPane.WARNING_MESSAGE);	
 						frame.dispose();
-						new framemodificaturno(livello,disciplina,null,null);
+						new FrameInserisciTurno(livello,disciplina,null,null,momento);
 					}
 					else{
 					
 					Invia_Turno_Dao.Invia(livello,disciplina,giorno,orario2);
 					
-			JOptionPane.showMessageDialog(frame,"Le modifiche sono state apportate.Attendi la conferma delle modifiche!!");
+			JOptionPane.showMessageDialog(frame,"L'inserimento è stato apportato.Attendi la conferma da parte del responsabile!");
 					frame.dispose();
-					new FrameTesserato();
+					new FrameDiscAttive(momento);
 					}	
 	
 				}	

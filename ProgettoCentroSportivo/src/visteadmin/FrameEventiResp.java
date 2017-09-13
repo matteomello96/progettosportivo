@@ -22,7 +22,7 @@ import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
-
+import ClassiDao.GetInfoDB;
 
 import java.awt.ComponentOrientation;
 
@@ -30,19 +30,24 @@ import Model.Utente;
 import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.setupTableWidths;
 import classiDAOResponsabile.ElencoUtentiDAO;
+import classiDAOResponsabile.GestioneIscrizioniDAO;
+import classiDAOResponsabile.GestioneIscrizioniEventiDAO;
 import classiDAOResponsabile.RichiesteDao;
 import classiDAOResponsabile.credenzialidao;
+import classiDAOResponsabile.downloaddao;
+import classiDAOResponsabile.elencoeventidao;
 import listener.Listen;
 import modelliTabelleIstruttore.ModElEventiIstr;
 import modelliTabelleRespo.ModElUtenti;
 import modelliTabelleRespo.modelisc;
+import modelliTabelleRespo.modeven;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
-public class FrameOrdini2 extends JFrame {
+public class FrameEventiResp extends JFrame {
 	/**
 	 * 
 	 */
@@ -53,16 +58,17 @@ public class FrameOrdini2 extends JFrame {
 	public static JFrame frame;
 	
 	public JPanel GPane1,GPane2,GPane3,GPane4,contentPane,BotPnl1,BotPnl2,BotPnl3,BotPnl4;
-	public JTable table;
+	public static JTable table;
 	public static JTable table2;
-	public JTable table3;
+	public static JTable table3;
 	public JTable table4;
 	public JTable tablemod;
 	public JTable tablemod2;
 	public JTable tablemod3;
 	public JTable tablemod4;
   
-	private modelisc model,model2,model3,model4;
+	
+	private modeven model,model2,model3,model4;
 
     private JTabbedPane tabed = new JTabbedPane();
 	/**
@@ -72,10 +78,10 @@ public class FrameOrdini2 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameOrdini2() {
+	public FrameEventiResp() {
 		frame = new JFrame("Pagina Iscritti");
 		
-		frame.setTitle("Elenco degli utenti");
+		frame.setTitle("Elenco delle iscrizioni agli eventi");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 1000, 1000);
 		frame.setVisible(true);
@@ -94,7 +100,7 @@ public class FrameOrdini2 extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Torna al pannello di controllo");
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
-		mntmNewMenuItem.setActionCommand("iniresp");
+		mntmNewMenuItem.setActionCommand("iniresp2");
 		
 		tabed = new JTabbedPane();
 		contentPane = new JPanel();
@@ -130,7 +136,7 @@ public class FrameOrdini2 extends JFrame {
 		GPane1.add(lblUtenti,BorderLayout.NORTH);
 		
 		table = new JTable();
-		model = new modelisc(RichiesteDao.elencoconfermati());
+		model = new modeven(elencoeventidao.elencoevenconf());
 		table.setRowHeight(50);
 		table.setRowHeight(3, 50);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -163,51 +169,97 @@ public class FrameOrdini2 extends JFrame {
 		BotPnl1.setLayout(new GridBagLayout());
 		
 		
-		JButton bottone= new JButton("Elimina Iscrizione Ordine");
-		bottone.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
+		
+		
+		JButton btnNewButton_1 = new JButton("Visualizza Certificato ");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_1.setForeground(Color.BLACK);
+
+		
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		BotPnl1.add(btnNewButton_1, gbc);
+        btnNewButton_1.addActionListener(new ActionListener() {
+			
+
+			public void actionPerformed(ActionEvent arg0) {
+				if (table.getSelectedRow() != -1) {
+			String a;
+			//String b;
+			a=(String) table.getValueAt( table.getSelectedRow() , 6);
+			downloaddao.scarica(a);
+			//JOptionPane.showMessageDialog(frameeventidacanc.frame, "'"+b+"'");
+				} else
+					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+							JOptionPane.WARNING_MESSAGE);
+			
+
+			}
+		});	
+        JButton bottone8= new JButton("Annulla conferma ordine");
+		bottone8.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		bottone8.setForeground(Color.BLACK);
+		
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		BotPnl1.add(bottone,gbc);
-		bottone.addActionListener(new ActionListener() {
+		BotPnl1.add(bottone8,gbc);
+		bottone8.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				int b;
-			
-				b= (int) table.getValueAt(table.getSelectedRow(), 0);
+				
+				if (table.getSelectedRow() != -1) {
+					int idord,tesserato,codiceturno;
+					String giorno,orario,spazio;
+					
+					        
+							tesserato=(int) table.getValueAt(table.getSelectedRow(), 1);
+				
+					giorno=(String) table.getValueAt(table.getSelectedRow(), 10);
+					orario=(String) table.getValueAt(table.getSelectedRow(), 11);
+					spazio=(String) table.getValueAt(table.getSelectedRow(), 12);
+					idord= (int) table.getValueAt(table.getSelectedRow(), 0);
+					codiceturno= GetInfoDB.getcodiceturnoevento( orario, giorno,spazio);
+					    GestioneIscrizioniEventiDAO.AnnullaConfEv(idord,tesserato,codiceturno);
+						frame.dispose();
+						new FrameEventiResp();
 		
-			credenzialidao.eliminaiscr(b);
-			frame.dispose();
-			new FrameOrdini2();
-			
-		}	
+				} else
+					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+							JOptionPane.WARNING_MESSAGE);
+			}
+		
 		});
 		
+
 		
-		JButton bottone2= new JButton("Blocca Iscritto");
+		JButton bottone2= new JButton("Elimina Ordine");
 		bottone2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		bottone2.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 4;
+		
+		gbc.gridx = 3;
 		gbc.gridy = 1;
 		BotPnl1.add(bottone2,gbc);
 		bottone2.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				int b;
+				
 				if (table.getSelectedRow() != -1) {
-				b= (int) table.getValueAt(table.getSelectedRow(), 0);
-		
-			credenzialidao.blocca(b);
-			frame.dispose();
-			new FrameOrdini2();
+					int idord,tesserato,codiceturno;
+					String giorno,orario,spazio;
+					
+					        
+							tesserato=(int) table.getValueAt(table.getSelectedRow(), 1);
+				
+					giorno=(String) table.getValueAt(table.getSelectedRow(), 10);
+					orario=(String) table.getValueAt(table.getSelectedRow(), 11);
+					spazio=(String) table.getValueAt(table.getSelectedRow(), 12);
+					idord= (int) table.getValueAt(table.getSelectedRow(), 0);
+					codiceturno= GetInfoDB.getcodiceturnoevento( orario, giorno,spazio);
+					    GestioneIscrizioniEventiDAO.Uccidiev(idord,codiceturno,tesserato);
+						frame.dispose();
+						new FrameEventiResp();
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
@@ -236,7 +288,7 @@ public class FrameOrdini2 extends JFrame {
 		GPane2.add(lblUtentiS,BorderLayout.NORTH);
 		
 		table2 = new JTable();
-		model2 = new modelisc(RichiesteDao.elencodaconf());
+		model2 = new modeven(elencoeventidao.elencoevendaconf());
 		table2.setRowHeight(50);
 		table2.setRowHeight(3, 50);
 		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -269,11 +321,10 @@ public class FrameOrdini2 extends JFrame {
 		BotPnl2.setLayout(new GridBagLayout());
 		
 		
-		JButton bottone3= new JButton("Dettagli ordine");
+		JButton bottone3= new JButton("Conferma ordine");
 		bottone3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		bottone3.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
+		
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		BotPnl2.add(bottone3,gbc);
@@ -281,45 +332,61 @@ public class FrameOrdini2 extends JFrame {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				if (table2.getSelectedRow() != -1) {
-			      frame.setVisible(false);
-			      frame.dispose();
-				new framedettagli((int) FrameOrdini2.table2.getValueAt(FrameOrdini2.table2.getSelectedRow(), 0));
-				} else
-					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
-							JOptionPane.WARNING_MESSAGE);
-			}
+				int idord,tesserato,codiceturno;
+				String giorno,orario,spazio;
+				
+				        
+						tesserato=(int) table2.getValueAt(table2.getSelectedRow(), 1);
+			
+				giorno=(String) table2.getValueAt(table2.getSelectedRow(), 10);
+				orario=(String) table2.getValueAt(table2.getSelectedRow(), 11);
+				spazio=(String) table2.getValueAt(table2.getSelectedRow(), 12);
+				idord= (int) table2.getValueAt(table2.getSelectedRow(), 0);
+				codiceturno= GetInfoDB.getcodiceturnoevento( orario, giorno,spazio);
+				    GestioneIscrizioniEventiDAO.ConfermaIscrizioneEv(idord,tesserato,codiceturno);
+					frame.dispose();
+					new FrameEventiResp();
+					}else
+						JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+								JOptionPane.WARNING_MESSAGE);
+				}
 		});
 		
 		
-		JButton bottone4= new JButton("Elimina Richiesta di Iscrizione");
-		bottone4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone4.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 4;
-		gbc.gridy = 1;
-		BotPnl2.add(bottone4,gbc);
-		bottone4.addActionListener(new ActionListener() {
 		
-			@Override
+		
+		
+		
+		
+		JButton btnNewButton_2 = new JButton("Visualizza Certificato ");
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_2.setForeground(Color.BLACK);
+
+		
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		BotPnl2.add(btnNewButton_2, gbc);
+        btnNewButton_2.addActionListener(new ActionListener() {
+			
+
 			public void actionPerformed(ActionEvent arg0) {
 				if (table2.getSelectedRow() != -1) {
-				// TODO Auto-generated method stub
-				int b;
-			
-				b= (int) table2.getValueAt(table2.getSelectedRow(), 0);
-		
-			credenzialidao.eliminaiscr(b);
-			frame.dispose();
-			new FrameOrdini2();
+			String a;
+			//String b;
+			a=(String) table2.getValueAt( table2.getSelectedRow() , 6);
+			downloaddao.scarica(a);
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
+			//JOptionPane.showMessageDialog(frameeventidacanc.frame, "'"+b+"'");
+			
+			
+
 			}
-		}	
-		);
+		});	
+		
+		
 		
 		GPane2.add(BotPnl2,BorderLayout.SOUTH);
 		
@@ -342,7 +409,7 @@ public class FrameOrdini2 extends JFrame {
 		GPane3.add(lblUtentiM,BorderLayout.NORTH);
 		
 		table3 = new JTable();
-		model3 = new modelisc(RichiesteDao.elencomod());
+		model3 = new modeven(elencoeventidao.elencoevenmod());
 		table3.setRowHeight(50);
 		table3.setRowHeight(3, 50);
 		table3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -375,11 +442,10 @@ public class FrameOrdini2 extends JFrame {
 		BotPnl3.setLayout(new GridBagLayout());
 		
 		
-		JButton bottone5= new JButton("Accetta Modifica");
+		JButton bottone5= new JButton("Conferma modifiche ordine");
 		bottone5.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		bottone5.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
+		
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		BotPnl3.add(bottone5,gbc);
@@ -387,14 +453,23 @@ public class FrameOrdini2 extends JFrame {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				int b;
+				
 				if (table3.getSelectedRow() != -1) {
-				b= (int) table3.getValueAt(table3.getSelectedRow(), 0);
+					int idord,tesserato,codiceturno;
+					String giorno,orario,spazio;
+					
+					        
+							tesserato=(int) table3.getValueAt(table3.getSelectedRow(), 1);
+				
+					giorno=(String) table3.getValueAt(table3.getSelectedRow(), 10);
+					orario=(String) table3.getValueAt(table3.getSelectedRow(), 11);
+					spazio=(String) table3.getValueAt(table3.getSelectedRow(), 12);
+					idord= (int) table3.getValueAt(table3.getSelectedRow(), 0);
+					codiceturno= GetInfoDB.getcodiceturnoevento( orario, giorno,spazio);
+					    GestioneIscrizioniEventiDAO.ConfermaModEv(idord,tesserato,codiceturno);
+						frame.dispose();
+						new FrameEventiResp();
 		
-			credenzialidao.accmod(b);
-			frame.dispose();
-			new FrameOrdini2();
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
 							JOptionPane.WARNING_MESSAGE);
@@ -402,7 +477,31 @@ public class FrameOrdini2 extends JFrame {
 		
 		});
 		
+		JButton btnNewButton_3 = new JButton("Visualizza Certificato ");
+		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_3.setForeground(Color.BLACK);
+
 		
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		BotPnl3.add(btnNewButton_3, gbc);
+        btnNewButton_3.addActionListener(new ActionListener() {
+			
+
+			public void actionPerformed(ActionEvent arg0) {
+				if (table3.getSelectedRow() != -1) {
+			String a;
+			//String b;
+			a=(String) table3.getValueAt( table3.getSelectedRow() , 6);
+			downloaddao.scarica(a);
+			//JOptionPane.showMessageDialog(frameeventidacanc.frame, "'"+b+"'");
+				} else
+					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+							JOptionPane.WARNING_MESSAGE);
+			
+
+			}
+		});	
 		
 		
 		GPane3.add(BotPnl3,BorderLayout.SOUTH);

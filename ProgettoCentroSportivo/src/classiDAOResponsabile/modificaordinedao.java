@@ -11,7 +11,7 @@ import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 import visteadmin.FrameOrdini;
 import visteadmin.FrameElencoUtenti;
-import visteadmin.framedettagli;
+import visteadmin.FrameDettagliDaAccResp;
 
 public class modificaordinedao {
 	
@@ -36,7 +36,7 @@ public class modificaordinedao {
              rs=st.executeQuery("select annullato from detiscr where iddet='"+idiscrizione+"'");
         	 rs.next();
              ann=rs.getInt("annullato");
-             //JOptionPane.showMessageDialog(framedettagli.frame, "'"+idiscrizione+"','"+conf+"','"+ann+"',");
+             //JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, "'"+idiscrizione+"','"+conf+"','"+ann+"',");
              
              if(conf==0 && ann==1){
 			st.executeUpdate("UPDATE detiscr SET confermato=1 WHERE iddet='"+idiscrizione+"'");
@@ -44,7 +44,7 @@ public class modificaordinedao {
 		st.executeUpdate("INSERT iscrizioniperturno (Codiceturnotesserato,codiceturno,tesserato)"+
 			"VALUES(NULL,'"+codiceturno+"','"+tesserato+"')");
 		st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'-1 WHERE codiceturno='"+codiceturno+"'");
-	      JOptionPane.showMessageDialog(framedettagli.frame, "Modifica accettata");
+	      JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, "Modifica accettata");
 	
              }
              
@@ -54,7 +54,7 @@ public class modificaordinedao {
      			st.executeUpdate("UPDATE detiscr SET annullato=1 WHERE iddet='"+idiscrizione+"'");
      			st.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+tesserato+"' and codiceturno='"+codiceturno+"' ");
      			st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'+1 WHERE codiceturno='"+codiceturno+"'");
-     	   JOptionPane.showMessageDialog(framedettagli.frame, "Modifica negata");	 
+     	   JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, "Modifica negata");	 
              
              }
 	

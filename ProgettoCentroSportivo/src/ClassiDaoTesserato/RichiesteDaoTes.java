@@ -1,4 +1,4 @@
-package classiDAOResponsabile;
+package ClassiDaoTesserato;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,15 +8,15 @@ import DBInterfaccia.DbConnection;
 import Model.ElencoUtenti;
 import Model_Responsabile.ModelRichiestaIscrizione;
 
-public class RichiesteDao {
+public class RichiesteDaoTes {
 	
 	
 	
-private static RichiesteDao instance;
+private static RichiesteDaoTes instance;
 	
-	public static synchronized RichiesteDao getInstance() {
+	public static synchronized RichiesteDaoTes getInstance() {
 		if(instance==null)
-			instance=new RichiesteDao();
+			instance=new RichiesteDaoTes();
 		return instance;
 	}
 	
@@ -52,12 +52,12 @@ private static RichiesteDao instance;
         return dati;
 	}
 	
-public static ArrayList<ModelRichiestaIscrizione> elencoconfermati() {
+public static ArrayList<ModelRichiestaIscrizione> elencoconfermati(int tesserato) {
 		
 		
         ArrayList<ModelRichiestaIscrizione> dati= new ArrayList<ModelRichiestaIscrizione>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot,iscrizionedisciplina.Confermato,iscrizionedisciplina.Annullato,modificato from iscrizionedisciplina where Confermato= 1 ; ");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot,iscrizionedisciplina.Confermato,iscrizionedisciplina.Annullato,modificato from iscrizionedisciplina where Confermato= 1 and tesserato='"+tesserato+"'; ");
        
         Iterator<String[]> i = res.iterator();
        
@@ -84,12 +84,12 @@ public static ArrayList<ModelRichiestaIscrizione> elencoconfermati() {
 	}
 	
 	
-public static ArrayList<ModelRichiestaIscrizione> elencodaconf() {
+public static ArrayList<ModelRichiestaIscrizione> elencodaconf(int tesserato) {
 	
 	
     ArrayList<ModelRichiestaIscrizione> dati= new ArrayList<ModelRichiestaIscrizione>(); 
     
-    Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot,iscrizionedisciplina.Confermato,iscrizionedisciplina.Annullato,modificato from iscrizionedisciplina where Confermato=0 and Modificato=0 ; ");
+    Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot,iscrizionedisciplina.Confermato,iscrizionedisciplina.Annullato,modificato from iscrizionedisciplina where Confermato=0 and Modificato=0 and tesserato='"+tesserato+"' ; ");
    
     Iterator<String[]> i = res.iterator();
    
@@ -115,12 +115,12 @@ public static ArrayList<ModelRichiestaIscrizione> elencodaconf() {
     return dati;
 }	
 	
-public static ArrayList<ModelRichiestaIscrizione> elencomod() {
+public static ArrayList<ModelRichiestaIscrizione> elencomod(int tesserato) {
 	
 	
     ArrayList<ModelRichiestaIscrizione> dati= new ArrayList<ModelRichiestaIscrizione>(); 
     
-    Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot,iscrizionedisciplina.Confermato,iscrizionedisciplina.Annullato,modificato from iscrizionedisciplina where modificato=1 and confermato=0; ");
+    Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT iscrizionedisciplina.codiceiscrizionedisciplina,iscrizionedisciplina.dataazione,iscrizionedisciplina.tesserato,iscrizionedisciplina.modalitapagamento,iscrizionedisciplina.prezzotot,iscrizionedisciplina.Confermato,iscrizionedisciplina.Annullato,modificato from iscrizionedisciplina where modificato=1 and confermato=0 and tesserato='"+tesserato+"'; ");
    
     Iterator<String[]> i = res.iterator();
    

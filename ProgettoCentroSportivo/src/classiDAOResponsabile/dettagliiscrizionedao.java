@@ -30,7 +30,7 @@ public class dettagliiscrizionedao {
 				
 		        ArrayList<Dettagliiscrizione> dati= new ArrayList<Dettagliiscrizione>(); 
 		        
-		        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT Disciplina,Livello,confermato,annullato,giorno,orario from detiscr,disciplinedisponibili where idiscrizione='"+idordine+"' and giorno!='null' and orario!='null' and disciplinedisponibili.combinazionelivdis=detiscr.combinazionelivdis; ");
+		        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("SELECT Disciplina,Livello,confermato,annullato,modificato,giorno,orario from detiscr,disciplinedisponibili where idiscrizione='"+idordine+"' and giorno!='null' and orario!='null' and disciplinedisponibili.combinazionelivdis=detiscr.combinazionelivdis; ");
 		       
 		        Iterator<String[]> i = res.iterator();
 		       
@@ -42,8 +42,9 @@ public class dettagliiscrizionedao {
 		        	fa.setLivello(riga[1]);
 		        	fa.setConferma(Integer.parseInt(riga[2]));
 		        	fa.setAnnullla(Integer.parseInt(riga[3]));
-		        	fa.setGiorno(riga[4]);
-		        	fa.setOrario(riga[5]);
+		        	fa.setModifica(Integer.parseInt(riga[4]));
+		        	fa.setGiorno(riga[5]);
+		        	fa.setOrario(riga[6]);
 		       
 		      
 		        	

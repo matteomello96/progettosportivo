@@ -1,0 +1,10 @@
+:: DISTINTA ORDINE ::
+Data ordine: 2017-09-04 13:33:03
+ID Tesserato: 5
+Nome tesserato: t
+___________________________________________________________________________________________________
+nomedisciplina          livello      Prezzo mensile (EUR)      
+___________________________________________________________________________________________________
+avanzato;               atletica;             60
+
+Prezzo totale : 		60.0 EUR

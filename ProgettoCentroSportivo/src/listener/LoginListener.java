@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 import Business.UtenteBusiness;
 import ClassiDao.*;
 import VisteUtenteGenerico.FrameLogin;
-import view_tesserato.FrameTesserato;
-
+import view_tesserato.FrameAttivitaTes;
+import view_tesserato.PannelloTesserato;
 import visteIstruttore.PannelloIstruttore;
 import visteadmin.FrameElencoUtenti;
 import visteadmin.PannelloResponsabile;
@@ -65,7 +65,7 @@ public class LoginListener implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Accesso come tesserato "+username +".Benvenuto!");
 				GetInfoDB.SettaConnesso(username);
 				FrameLogin.frame.setVisible(false);
-				new FrameTesserato();
+				new PannelloTesserato();
 				FrameLogin.frame.dispose();
 				
 				

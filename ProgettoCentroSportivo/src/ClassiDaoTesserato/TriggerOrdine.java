@@ -20,7 +20,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import ClassiDao.GetInfoDB;
 import Model.Utente;
 import view_tesserato.Confermaordine;
-import view_tesserato.FrameTesserato;
+import view_tesserato.FrameAttivitaTes;
 import DBInterfaccia.DbConnection;
 
 
@@ -52,9 +52,9 @@ public class TriggerOrdine {
 	        	momento=TriggerOrdine.getDate();
 	        	 
 	            
-	        	//JOptionPane.showMessageDialog(null, "Il nome utente \""+FrameTesserato.totale+"\" e\\o l'email \""+momento+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
-	            st.executeUpdate("INSERT INTO iscrizionedisciplina (codiceiscrizionedisciplina,dataazione,tesserato,modalitapagamento,prezzotot,confermato,annullato) "
-	            		+ "VALUES (NULL,'"+momento+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+pag+"','"+FrameTesserato.totale+"', '0', '0')"); 
+	        	//JOptionPane.showMessageDialog(null, "Il nome utente \""+FrameAttivitaTes.totale+"\" e\\o l'email \""+momento+"\" sono già in uso, sceglierne altri"," ",JOptionPane.WARNING_MESSAGE);				
+	            st.executeUpdate("INSERT INTO iscrizionedisciplina (dataazione,tesserato,modalitapagamento,prezzotot,confermato,annullato,modificato) "
+	            		+ "VALUES ('"+momento+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+pag+"','"+FrameAttivitaTes.totale+"', '0', '0', '0')"); 
 	        } catch (SQLException ex) {
 	        }
 	    }
@@ -74,8 +74,8 @@ public class TriggerOrdine {
 	        	 
 	  //JOptionPane.showMessageDialog(Confermaordine.frame, " \""+GetInfoDB.getcombinazionelivdis(disciplina,livello)+"\" \\o \""+livello+"\","+disciplina+" "," ",JOptionPane.INFORMATION_MESSAGE);	
 			
-	        st.executeUpdate("INSERT INTO detiscr (iddet,combinazionelivdis,idiscrizione,tesserato,confermato,annullato) "
-	        		+ "VALUES (NULL,'"+GetInfoDB.getcombinazionelivdis(disciplina,livello)+"','"+GetInfoDB.getlastorder(momento)+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','0','0')"); 
+	        st.executeUpdate("INSERT INTO detiscr (combinazionelivdis,idiscrizione,tesserato,confermato,annullato,modificato) "
+	        		+ "VALUES ('"+GetInfoDB.getcombinazionelivdis(disciplina,livello)+"','"+GetInfoDB.getlastorder(momento)+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','0','0','0')"); 
 	      } catch (SQLException ex) {
 	        	
 	        	
@@ -126,12 +126,12 @@ public class TriggerOrdine {
 	    		vers.drawString("__________________________________________________________________________________________________________________________\r\n");
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		
-	    		for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
+	    		for(int c=0;c<FrameAttivitaTes.table_1.getRowCount();c++)
 	    		{
 	    		
-	    			s0=FrameTesserato.table_1.getValueAt(c, 0).toString();
-	    			s1=FrameTesserato.table_1.getValueAt(c, 1).toString();
-	    			s2=FrameTesserato.table_1.getValueAt(c,2).toString();
+	    			s0=FrameAttivitaTes.table_1.getValueAt(c, 0).toString();
+	    			s1=FrameAttivitaTes.table_1.getValueAt(c, 1).toString();
+	    			s2=FrameAttivitaTes.table_1.getValueAt(c,2).toString();
 	                
 	    		
 	    			
@@ -153,7 +153,7 @@ public class TriggerOrdine {
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.setFont(PDType1Font.HELVETICA_BOLD, 10);
-	    		vers.drawString("PREZZO TOTALE : \t\t"+df.format(FrameTesserato.totale)+" EUR\r\n");
+	    		vers.drawString("PREZZO TOTALE : \t\t"+df.format(FrameAttivitaTes.totale)+" EUR\r\n");
 	    			
 			
 				vers.endText();
@@ -186,19 +186,19 @@ public class TriggerOrdine {
  		String datidip="ID Tesserato: "+GetInfoDB.getidTess(Utente.getUsername())+"\r\nNome tesserato: "+Utente.getUsername()+"\r\n";
  		
  		String titoli="___________________________________________________________________________________________________\r\nnomedisciplina          livello      Prezzo mensile (EUR)      \r\n___________________________________________________________________________________________________\r\n";
- 		for(int c=0;c<FrameTesserato.table_1.getRowCount();c++)
+ 		for(int c=0;c<FrameAttivitaTes.table_1.getRowCount();c++)
  		{
  		
- 			s0=FrameTesserato.table_1.getValueAt(c, 0).toString();
- 		    s1=FrameTesserato.table_1.getValueAt(c, 1).toString();
- 			s3=FrameTesserato.table_1.getValueAt(c,2).toString();
+ 			s0=FrameAttivitaTes.table_1.getValueAt(c, 0).toString();
+ 		    s1=FrameAttivitaTes.table_1.getValueAt(c, 1).toString();
+ 			s3=FrameAttivitaTes.table_1.getValueAt(c,2).toString();
  			
  		rigaord=rigaord+s0+";               "+s1+";             "+s3+"\r\n";
  			
  			
  		}
  		
- 		prezzototale="\r\nPrezzo totale : \t\t"+FrameTesserato.totale+" EUR\r\n";
+ 		prezzototale="\r\nPrezzo totale : \t\t"+FrameAttivitaTes.totale+" EUR\r\n";
  		String ris=tit+dataord+datidip+titoli+rigaord+prezzototale;
  			return ris;
  	}

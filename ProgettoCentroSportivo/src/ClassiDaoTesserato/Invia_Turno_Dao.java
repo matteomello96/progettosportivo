@@ -12,9 +12,9 @@ import DBInterfaccia.DbConnection;
 import Model.Utente;
 import VisteUtenteGenerico.FrameCambia;
 import view_tesserato.FrameDiscAttive;
-import view_tesserato.FrameTesserato;
+import view_tesserato.FrameAttivitaTes;
 import view_tesserato.FrameTurno;
-import view_tesserato.framemodificaturno;
+import view_tesserato.FrameInserisciTurno;
 
 
 public class Invia_Turno_Dao {
@@ -40,24 +40,24 @@ public static int conf;
 	    st = con.createStatement(); 
 	  
 	    
-	    rs=st.executeQuery("select confermato from detiscr where iddet='"+GetInfoDB.getiddet(disciplina, livello, GetInfoDB.getidTess(Utente.getUsername()))+"'");
+	    rs=st.executeQuery("select confermato from detiscr where iddet='"+GetInfoDB.getiddet2(disciplina, livello, GetInfoDB.getidTess(Utente.getUsername()))+"'");
    	 rs.next();
        conf=rs.getInt("confermato");
-   //    JOptionPane.showMessageDialog(framemodificaturno.frame, "'"+conf+"'");
+   //    JOptionPane.showMessageDialog(FrameInserisciTurno.frame, "'"+conf+"'");
        
        
        
 	    st.executeUpdate("UPDATE detiscr SET giorno = '"+giorno+"' WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
 	    st.executeUpdate("UPDATE detiscr SET orario = '"+orario+"' WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'"); 
 	    st.executeUpdate("UPDATE detiscr SET confermato=0 WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
-	  st.executeUpdate("UPDATE detiscr SET annullato=1  WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
+	  st.executeUpdate("UPDATE detiscr SET modificato=0  WHERE detiscr.combinazionelivdis='"+GetInfoDB.getcombinazionelivdis(disciplina, livello)+"' and detiscr.tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"'");
 	 
 	  
 	  
-	  if(conf==1){
-	   st.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and codiceturno='"+GetInfoDB.getcodiceturno(disciplina, livello, oldday, oldhours)+"' ");
-	   st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(GetInfoDB.getcodiceturno(disciplina, livello, oldday, oldhours))+"'+1 WHERE codiceturno='"+GetInfoDB.getcodiceturno(disciplina, livello, oldday, oldhours)+"'");  	
-	  }
+	  /*if(conf==1){
+	   st.executeUpdate("DELETE FROM iscrizioniperturno where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and codiceturno='"+GetInfoDB.getcodiceturno2(disciplina, livello, oldday, oldhours)+"' ");
+	   st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(GetInfoDB.getcodiceturno2(disciplina, livello, oldday, oldhours))+"'+1 WHERE codiceturno='"+GetInfoDB.getcodiceturno2(disciplina, livello, oldday, oldhours)+"'");  	
+	  }*/
 	        	
 	         }
 	           

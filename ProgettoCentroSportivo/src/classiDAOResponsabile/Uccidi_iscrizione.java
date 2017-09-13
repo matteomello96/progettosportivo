@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 import VisteUtenteGenerico.FrameCambia;
-import visteadmin.framedettagli;
+import visteadmin.FrameDettagliDaAccResp;
 
 public class Uccidi_iscrizione {
 	
@@ -34,7 +34,7 @@ public class Uccidi_iscrizione {
 	  	st.executeUpdate("UPDATE gestioneturno SET prenotazionidisponibili='"+GetInfoDB.getprenotazioni(codiceturno)+"'+1 WHERE codiceturno='"+codiceturno+"'"); 
 	  	
 	    }
-	    JOptionPane.showMessageDialog(framedettagli.frame, "Ordine Cancellato"," ",JOptionPane.INFORMATION_MESSAGE);
+	    JOptionPane.showMessageDialog(FrameDettagliDaAccResp.frame, "Ordine Cancellato"," ",JOptionPane.INFORMATION_MESSAGE);
 		        	
 		        	
 		        	

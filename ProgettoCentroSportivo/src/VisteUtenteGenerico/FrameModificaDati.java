@@ -17,6 +17,7 @@ import Model.Home;
 import Model.Utente;
 import VisteUtenteGenerico.*;
 import listener.Listen;
+import view_tesserato.PannelloTesserato;
 import visteIstruttore.PannelloIstruttore;
 import visteadmin.PannelloResponsabile;
 import ClassiDao.GetInfoDB;
@@ -615,7 +616,11 @@ public class FrameModificaDati extends JFrame {
 			PannelloResponsabile.frame.setVisible(true);
 			PannelloResponsabile.frame.setEnabled(true);
 			}
-			
+			if (GetInfoDB.getTipo(""+Utente.getUsername()+"").equals("T"))
+			{
+			PannelloTesserato.frame.setVisible(true);
+			PannelloTesserato.frame.setEnabled(true);
+			}
 			
 	}
 								

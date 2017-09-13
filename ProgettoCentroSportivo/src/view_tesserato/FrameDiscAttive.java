@@ -19,6 +19,7 @@ import javax.swing.ScrollPaneConstants;
 
 import ClassiDaoTesserato.elencoattivitaattivedao;
 import ModelliTabelle_Tesserato.disc_attive;
+import VisteUtenteGenerico.FrameRegistrazione;
 
 
 public class FrameDiscAttive extends JPanel {
@@ -35,7 +36,7 @@ public JButton bottone;
 /**
  * Create the panel.
  */
-public FrameDiscAttive() {
+public FrameDiscAttive(String momento) {
 	
 	
 	
@@ -63,7 +64,7 @@ public FrameDiscAttive() {
 	
 	
 	
-	JLabel lblNewLabel_1 = new JLabel("STATO ISCRIZIONE");
+	JLabel lblNewLabel_1 = new JLabel("Completa la scelta degli orari");
 	lblNewLabel_1.setForeground(Color.BLACK);
 	lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 23));
 	
@@ -74,7 +75,7 @@ public FrameDiscAttive() {
 	contentPane.add(lblNewLabel_1, gbc);
 	
 	table_1 = new JTable();
-	model = new disc_attive(elencoattivitaattivedao.elencoiniziale());
+	model = new disc_attive(elencoattivitaattivedao.elencodopo(momento));
 	table_1.setCellSelectionEnabled(true);
 	table_1.setModel(model);
 	
@@ -93,7 +94,7 @@ public FrameDiscAttive() {
 	contentPane.add(pane2, gbc);
 
 		
-	bottone = new JButton("Modifica Iscrizione");
+	bottone = new JButton("Continua Iscrizione");
 	gbc.anchor = GridBagConstraints.WEST;
 	gbc.insets = new Insets(0, 0, 5, 5);
 	gbc.gridx = 2;
@@ -110,22 +111,83 @@ public FrameDiscAttive() {
 			a=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 0);
 			b=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 1);
 		
-		new framemodificaturno(a,b,null,null);
+		new FrameInserisciTurno(a,b,null,null,momento);
 		frame.setVisible(false);
 		
 			
 		}
 	});
 	
+	JButton bottone2 = new JButton("Fine inserimento");
+	gbc.anchor = GridBagConstraints.WEST;
+	gbc.insets = new Insets(0, 0, 5, 5);
+	gbc.gridx = 3;
+	gbc.gridy = 4;
+	contentPane.add(bottone2,gbc);
+	bottone2.addActionListener(new ActionListener(){
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+	          frame.dispose();
+	          new PannelloTesserato();
+		}
+	});
 	
+	int in=table_1.getRowCount();
 	
+	int count=table_1.getRowCount();
+	String o="b";
+	
+
+		
+		
+		
+		String[] array1= new String[in];
+		String[] array2= new String[in];
+			for(in=0;in<count;in++){
+				if (table_1.getValueAt(in, 2)==null){
+					array1[in]="";
+						
+				}else
+				{
+			array1[in] =  (String)table_1.getValueAt(in, 2);
+				}
+				if (table_1.getValueAt(in, 3)==null){
+					array2[in]="";
+				}else
+				{	
+			  array2[in] = (String)table_1.getValueAt(in, 3);
+			    }
+			}
+			for (in=0;in<count;in++)
+			{
+				
+				if(!(array1[in].equals(""))&&(!(array2[in].equals(""))))
+				{
+					o="a";
+				}
+				else{
+					o="b";
+				}
+				
+			}
+			
+			if (o.equals("a")){
+				bottone2.setVisible(true);
+				bottone.setVisible(false);
+			}
+				
+			else
+			{
+				bottone2.setVisible(false);
+				}
 	
 	
 	frame.addWindowListener(new java.awt.event.WindowAdapter() {
 		   @Override
 		   public void windowClosing(java.awt.event.WindowEvent windowEvent) 
 		    {
-			   FrameTesserato.frame.setVisible(true);
+			   FrameAttivitaTes.frame.setVisible(true);
 		    
 		    }
 		});

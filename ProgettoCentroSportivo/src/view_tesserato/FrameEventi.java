@@ -96,29 +96,23 @@ public class FrameEventi extends JFrame {
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
+	
 		
-		JMenu mnNewMenu = new JMenu("home");
+		JMenu mnNewMenu = new JMenu("Torna al Pannello di Controllo");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mnNewMenu_1 = new JMenuItem("visualizza");
-		mnNewMenu_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new frameviseventi();
-				frame.setEnabled(false);
-			}
-		});
-		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Pannello di controllo");
 		mnNewMenu.add(mntmNewMenuItem);
 		mntmNewMenuItem.addActionListener(new Listen(this));
-		mntmNewMenuItem.setActionCommand("iniistr2");
-		                                                                                                            
+		mntmNewMenuItem.setActionCommand("pantes2");
+		                                                            
 
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,36,0));
-		contentPane.setLayout(new GridBagLayout());
+		contentPane.setLayout(new BorderLayout());
 		
 		
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -136,7 +130,11 @@ public class FrameEventi extends JFrame {
 		gbc.insets = new Insets(5, 0, 0, 5);
 		gbc.gridx = 4;
 		gbc.gridy = 0;
-		contentPane.add(lblEventi, gbc);
+		contentPane.add(lblEventi,BorderLayout.NORTH);
+		
+		tabellaPnl = new JPanel();
+		tabellaPnl.setLayout(new BorderLayout());
+		
 		
 		
 		table = new JTable();
@@ -148,19 +146,24 @@ public class FrameEventi extends JFrame {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setModel(model);
 		
-		Dimension d = table.getPreferredSize();
-		table.setPreferredSize(d);
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =2;
-		gbc.gridy =0;
+
+		JScrollPane pane2 = new JScrollPane(table);
+		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.gridwidth = 2;
+		gbc.insets = new Insets(5, 0, 0, 5);
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 7;
+		gbc.gridy = 4;
+		tabellaPnl.add(pane2, BorderLayout.CENTER);
+		
 		
 		bottoniPnl1 = new JPanel();
-		
-		
-		
-		
-		
-table_1 = new JTable();
+		bottoniPnl1.setLayout(new GridBagLayout());
+		JPanel tabellaPnl2 = new JPanel();
+		tabellaPnl2.setLayout(new BorderLayout());
+        table_1 = new JTable();
 		
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -198,11 +201,12 @@ table_1 = new JTable();
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = 7;
 		gbc.gridy = 4;
-		contentPane.add(pane, gbc);
+		tabellaPnl2.add(pane, BorderLayout.CENTER);
 		
 	
 		 
-		
+		JPanel bottoniPnl2 = new JPanel();
+		bottoniPnl2.setLayout(new GridBagLayout());
 		
 		JButton btnNewButton = new JButton("Dettagli Evento");
 		btnNewButton.setMnemonic('d');
@@ -218,15 +222,15 @@ table_1 = new JTable();
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
 		gbc.gridy = 6;
-		bottoniPnl1.add(btnNewButton,gbc);
+		bottoniPnl2.add(btnNewButton,gbc);
 		
 		
-		tabellaPnl = new JPanel();
+		/*tabellaPnl = new JPanel();
 		tabellaPnl.setLayout(new GridLayout(3, 1));
 		tabellaPnl.add(table.getTableHeader());
 		tabellaPnl.add(table);
 		tabellaPnl.add(bottoniPnl1,gbc);
-		contentPane.add(tabellaPnl, gbc);
+		contentPane.add(tabellaPnl, gbc);*/
 		
 		
 		
@@ -235,14 +239,15 @@ table_1 = new JTable();
 		gbc.insets = new Insets(0, 0, 5, 0);
 		gbc.gridx = 2;
 		gbc.gridy = 7;
-		contentPane.add(Aggiungi,gbc);
-		
+		bottoniPnl2.add(Aggiungi,gbc);
+		tabellaPnl.add(bottoniPnl2,BorderLayout.SOUTH);
+		contentPane.add(tabellaPnl, BorderLayout.WEST);
 		
 		rimuovi = new JButton("rimuovi");
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 4;
 		gbc.gridy = 7;
-		contentPane.add(rimuovi, gbc);
+		bottoniPnl1.add(rimuovi, gbc);
 		
 		table2 = new JTable();
 		model1 = new controlloevento(eventoesistedao.elencoiniziale());
@@ -266,11 +271,11 @@ table_1 = new JTable();
 				prenotazioni=GetInfoDB.getprenotazionievento1(codice);
 				for(i=0;i<table2.getRowCount();i++){
 					b= (int) table2.getValueAt(i, 1);
-			if(table2.getValueAt(i, 0)==table.getValueAt(table.getSelectedRow(), 8) && b==tess){
+			/*if(table2.getValueAt(i, 0)==table.getValueAt(table.getSelectedRow(), 8) && b==tess){
 				
 				
-				esci=1;
-			}
+				esci=1;*/
+			//}
 				
 			
 				}		
@@ -348,7 +353,7 @@ table_1 = new JTable();
 			gbc.insets = new Insets(0, 0, 5, 5);
 			gbc.gridx = 6;
 			gbc.gridy = 7;
-			contentPane.add(svuotacarrello, gbc);
+			bottoniPnl1.add(svuotacarrello, gbc);
 			
 			
 			svuotacarrello.addActionListener(new ActionListener() {
@@ -370,14 +375,14 @@ table_1 = new JTable();
 				gbc.gridx = 8;
 				gbc.gridy = 7;
 				invia.setEnabled(false);
-				contentPane.add(invia, gbc);
+				bottoniPnl1.add(invia, gbc);
 				
-				
-				
+		tabellaPnl2.add(bottoniPnl1,BorderLayout.SOUTH)	;	
+		contentPane.add(tabellaPnl2, BorderLayout.EAST );
 				invia.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
 						frame.setEnabled(false);
-						new sendeventframe();
+						new sendeventframe((String) FrameEventi.table.getValueAt(table.getSelectedRow(), 2));
 						sendeventframe.frame.setVisible(true);
 				
 						

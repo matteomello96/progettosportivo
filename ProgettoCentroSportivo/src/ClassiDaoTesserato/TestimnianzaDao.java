@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 import Model.Utente;
-import view_tesserato.FrameTesserato;
-import view_tesserato.FrameTestimonianze;
+import view_tesserato.FrameAttivitaTes;
+import view_tesserato.FrameInsTest;
 
 public class TestimnianzaDao {
 
@@ -32,32 +32,28 @@ public class TestimnianzaDao {
 		   return data;
 		}
 	
-	public static void instest(String disciplina,String livello,String commento){
+	public static void instest(String disciplina,String livello,String commento,int matricola,int a){
 		
 		Connection con = DbConnection.db;
         Statement st;
         Connection con2 = DbConnection.db;
         Statement st2;
         ResultSet rs;
-        int a;
+        ;
         
         try {
         	st = con.createStatement();
         	st2=con2.createStatement();
         	momento=TriggerOrdine.getDate();
-        	 rs=st2.executeQuery("select Combinazionelivdis from disciplinedisponibili where Disciplina='"+disciplina+"' and Livello='"+livello+"'");
-        	 rs.next();
-             a=rs.getInt("combinazionelivdis");
-        
-           st.executeUpdate("INSERT INTO testimonianza(CodiceTestimonianza,Commento,DataAzione,Tesserato,combinazionelivdis) "
-           		+"VALUES (NULL,'"+commento+"','"+momento+"','"+GetInfoDB.getidTess(Utente.getUsername())+"','"+a+"')"); 
-            JOptionPane.showMessageDialog(FrameTestimonianze.frame, "Testimonianza inviata"," ",JOptionPane.INFORMATION_MESSAGE);
-            FrameTestimonianze.frame.dispose();
-            FrameTesserato.frame.setEnabled(true);
+        	JOptionPane.showMessageDialog(FrameInsTest.frame, momento," ",JOptionPane.INFORMATION_MESSAGE);
+           st.executeUpdate("INSERT INTO testimonianza(Commento,DataAzione,Tesserato,combinazionelivdis) "
+           		+"VALUES ('"+commento+"','"+momento+"','"+matricola+"','"+a+"')"); 
+            JOptionPane.showMessageDialog(FrameInsTest.frame, "Testimonianza inviata"," ",JOptionPane.INFORMATION_MESSAGE);
+            FrameInsTest.frame.dispose();
+            FrameInsTest.frame.setEnabled(true);
         } catch (SQLException ex) {
-        	JOptionPane.showMessageDialog(FrameTestimonianze.frame, "Hai già lasciato una recensione per questa disciplina"," ",JOptionPane.WARNING_MESSAGE);				
-        	 FrameTesserato.frame.setEnabled(true);
-        	 FrameTestimonianze.frame.dispose();
+        	JOptionPane.showMessageDialog(FrameInsTest.frame, ex," ",JOptionPane.WARNING_MESSAGE);				
+        	 
         }
 		
 		

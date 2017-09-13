@@ -1,4 +1,4 @@
-package visteadmin;
+package view_tesserato;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -43,7 +43,7 @@ import VisteUtenteGenerico.FrameModificaDati;
 import listener.Listen;
 import modelliTabelleIstruttore.ModElAttIstr;
 import modelliTabelleIstruttore.ModElEventiIstr;
-public class PannelloResponsabile extends JFrame {
+public class PannelloTesserato extends JFrame {
 	/**
 	 * 
 	 */
@@ -57,6 +57,7 @@ public class PannelloResponsabile extends JFrame {
 	public static JTable table,table2;
     private ModElEventiIstr model;
     private ModElAttIstr model2;
+    
 	
     
     	
@@ -65,10 +66,10 @@ public class PannelloResponsabile extends JFrame {
     	/**
     	 * Create the frame.
     	 */
-    	public PannelloResponsabile() {
+    	public PannelloTesserato() {
     		frame = new JFrame();
     		String username=""+Utente.getUsername()+"";
-    		frame.setTitle("Pannello di controllo responsabile "+username+"");
+    		frame.setTitle("Pannello di controllo tesserato "+username+"");
     		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     		frame.setBounds(100, 100, 605, 391);
     		frame.setVisible(true);
@@ -88,46 +89,61 @@ public class PannelloResponsabile extends JFrame {
     		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
     		mnNewMenu.add(mntmNewMenuItem);
     		mntmNewMenuItem.addActionListener(new Listen(this));
-    		mntmNewMenuItem.setActionCommand("logoutresp");
+    		mntmNewMenuItem.setActionCommand("logouttes");
     		
-    		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Richieste di iscrizione alle discipline ");
+    		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Elenco attività da scegliere ");
     		mntmNewMenuItem_4.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent arg0) {
     				frame.dispose();
-    				new FrameOrdini();
+    				new FrameAttivitaTes();
     			}
     		});
     		mnNewMenu_1.add(mntmNewMenuItem_4);
     		
-    		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Richieste di iscrizione agli eventi ");
+    		JMenuItem mntmNewMenuItem_5 = new JMenuItem("I tuoi eventi da scegliere ");
     		mntmNewMenuItem_5.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent arg0) {
     				frame.dispose();
-    				new FrameEventiResp();
+    				new FrameEventi();
     			}
     		});
     		mnNewMenu_1.add(mntmNewMenuItem_5);
 
-    		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Elenco Iscritti");
+    		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Le tue testimonianze");
     		mntmNewMenuItem_2.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent arg0) {
     				frame.dispose();
-    				new FrameElencoUtenti();
+    				new FrameVisTest();
     			}
     		});
     		mnNewMenu_1.add(mntmNewMenuItem_2);
     		
-    		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Gestione Centro Polisportivo");
+    		JMenuItem mntmNewMenuItem_3 = new JMenuItem("I tuoi ordini:attività");
     		mntmNewMenuItem_3.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent arg0) {
     				
     				frame.dispose();
-    				new FrameGestione();
+    				new FrameIscrDisc();
+    				
     				
     				
     			}
     		});
     		mnNewMenu_1.add(mntmNewMenuItem_3);
+    		
+    		JMenuItem mntmNewMenuItem_6 = new JMenuItem("I tuoi ordini:eventi");
+    		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent arg0) {
+    				
+    				frame.dispose();
+    				new FrameIscrEventiTest();
+    				
+    				
+    				
+    			}
+    		});
+    		mnNewMenu_1.add(mntmNewMenuItem_6);
+    		
     		
     		
     		contentPane = new JPanel();

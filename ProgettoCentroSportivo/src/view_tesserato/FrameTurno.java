@@ -263,8 +263,8 @@ public class FrameTurno extends JPanel {
 						}
 						else{
 						
-						codiceturno=GetInfoDB.getcodiceturno(disciplina2, livello2, giorno2, ora);
-						postidisponibili= GetInfoDB.getprenotazioni(codiceturno)	;
+						codiceturno=GetInfoDB.getcodiceturno2(disciplina2,livello2,giorno2,ora);
+						postidisponibili= GetInfoDB.getprenotazioni(codiceturno);
 						if(postidisponibili==0){
 							JOptionPane.showMessageDialog(FrameTurno.frame, "Posti massimi raggiunti"," ",JOptionPane.WARNING_MESSAGE);	
 							frame.dispose();
@@ -290,9 +290,9 @@ public class FrameTurno extends JPanel {
 				   @Override
 				   public void windowClosing(java.awt.event.WindowEvent windowEvent) 
 				    {
-				    	if(FrameTesserato.frame!=null)
-				    		FrameTesserato.frame.setEnabled(true);
-				    	FrameTesserato.frame.setVisible(true);
+				    	if(FrameAttivitaTes.frame!=null)
+				    		FrameAttivitaTes.frame.setEnabled(true);
+				    	FrameAttivitaTes.frame.setVisible(true);
 				    
 				    }
 				});

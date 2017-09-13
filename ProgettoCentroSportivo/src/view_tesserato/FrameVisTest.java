@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,6 +24,7 @@ import ClassiDaoTesserato.ElencoTestDao;
 import ClassiDaoTesserato.ModificaCommDao;
 
 import ModelliTabelle_Tesserato.disc_testimonianza;
+import listener.Listen;
 
 public class FrameVisTest extends JPanel {
 	
@@ -51,6 +54,19 @@ public class FrameVisTest extends JPanel {
 		frame.setResizable(true);
 		frame.setAlwaysOnTop(true);
 		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+	
+		JMenu mnNewMenu = new JMenu("Pannello di controllo");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Torna al pannello di controllo");
+		mnNewMenu.add(mntmNewMenuItem);
+		mntmNewMenuItem.addActionListener(new Listen(this));
+		mntmNewMenuItem.setActionCommand("vaitest");	
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,36,0));
 		contentPane.setLayout(new GridBagLayout());
@@ -67,7 +83,8 @@ public class FrameVisTest extends JPanel {
 	    
 	    GridBagConstraints gbc = new GridBagConstraints();
 		
-			
+	  
+		
 			
 		JLabel lblNewLabel_1 = new JLabel("Le tue testimonianze");
 		lblNewLabel_1.setForeground(Color.BLACK);
@@ -119,6 +136,16 @@ public class FrameVisTest extends JPanel {
 		gbc.gridy = 4;
 		contentPane.add(btnNewButton_2, gbc);
 
+		
+		JButton btnNewButton_3 = new JButton("Inserisci Commento");
+		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+	
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 9;
+		gbc.gridy = 4;
+		contentPane.add(btnNewButton_3, gbc);
 			
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
@@ -127,6 +154,15 @@ public class FrameVisTest extends JPanel {
 				DistruggiTestimonianza.EliminaTest(disciplina,livello);
 				frame.dispose();
 				new FrameVisTest();
+			}
+			
+		});
+		
+		
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				
+				new FrameInsTest();
 			}
 			
 		});

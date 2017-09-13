@@ -1,42 +1,48 @@
 package Model_Responsabile;
 
 public class elencoeventi {
-	private String codiceiscrizioneevento;
-	private String nome;
-	private String cognome;
-	private String nomeevento;
-	private String modalitapagamento;
+	private int codiceiscrizioneevento;
+	private int tesserato;
+	private int evento;
+	private String tipoevento;
 	private int costotot;
+	private String modalitapagamento;
+	private String certificatomed;
 	private int  confermato;
 	private int  annullato;
-	private int codiceturnoevento;
-	private String username;
-	private String certificatomed;
-	
-	
-	public String getCodiceiscrizioneevento() {
+	private int modificato;
+	private String giorno;
+	private String fasciaoraria;
+	private String spazio;
+	public int getCodiceiscrizioneevento() {
 		return codiceiscrizioneevento;
 	}
-	public void setCodiceiscrizioneevento(String codiceiscrizioneevento) {
+	public void setCodiceiscrizioneevento(int codiceiscrizioneevento) {
 		this.codiceiscrizioneevento = codiceiscrizioneevento;
 	}
-	public String getNome() {
-		return nome;
+	public int getTesserato() {
+		return tesserato;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTesserato(int tesserato) {
+		this.tesserato = tesserato;
 	}
-	public String getCognome() {
-		return cognome;
+	public int getEvento() {
+		return evento;
 	}
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public void setEvento(int evento) {
+		this.evento = evento;
 	}
-	public String getNomeevento() {
-		return nomeevento;
+	public String getTipoevento() {
+		return tipoevento;
 	}
-	public void setNomeevento(String nomeevento) {
-		this.nomeevento = nomeevento;
+	public void setTipoevento(String tipoevento) {
+		this.tipoevento = tipoevento;
+	}
+	public int getCostotot() {
+		return costotot;
+	}
+	public void setCostotot(int costotot) {
+		this.costotot = costotot;
 	}
 	public String getModalitapagamento() {
 		return modalitapagamento;
@@ -44,11 +50,11 @@ public class elencoeventi {
 	public void setModalitapagamento(String modalitapagamento) {
 		this.modalitapagamento = modalitapagamento;
 	}
-	public int getCostotot() {
-		return costotot;
+	public String getCertificatomed() {
+		return certificatomed;
 	}
-	public void setCostotot(int costotot) {
-		this.costotot = costotot;
+	public void setCertificatomed(String certificatomed) {
+		this.certificatomed = certificatomed;
 	}
 	public int getConfermato() {
 		return confermato;
@@ -62,25 +68,35 @@ public class elencoeventi {
 	public void setAnnullato(int annullato) {
 		this.annullato = annullato;
 	}
-	public int getCodiceturnoevento() {
-		return codiceturnoevento;
+	public int getModificato() {
+		return modificato;
 	}
-	public void setCodiceturnoevento(int codiceturnoevento) {
-		this.codiceturnoevento = codiceturnoevento;
+	public void setModificato(int modificato) {
+		this.modificato = modificato;
 	}
-	public String getUsername() {
-		return username;
+	public String getGiorno() {
+		return giorno;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setGiorno(String giorno) {
+		this.giorno = giorno;
 	}
-	public String getCertificatomed() {
-		return certificatomed;
+	public String getFasciaoraria() {
+		return fasciaoraria;
 	}
-	public void setCertificatomed(String certificatomed) {
-		this.certificatomed = certificatomed;
+	public void setFasciaoraria(String fasciaoraria) {
+		this.fasciaoraria = fasciaoraria;
 	}
-
-
+	public String getSpazio() {
+		return spazio;
+	}
+	public void setSpazio(String spazio) {
+		this.spazio = spazio;
+	}
+	
+	
+	
+	
+	
+	
 
 }
