@@ -1,32 +1,23 @@
 package VisteUtenteGenerico;
 
 import java.awt.BorderLayout;
-
 import javax.swing.border.Border;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import javax.imageio.ImageIO;
-
 import javax.swing.BorderFactory;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
 import javax.swing.JMenuBar;                                   
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
 import java.awt.GridBagLayout;
-
 import java.awt.Image;
 import VisteUtenteGenerico.ScalaImmagine;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
-
 import java.awt.Insets;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -40,15 +31,11 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import ClassiDao.ElencoDisciplineDAO;
-
-import java.awt.ComponentOrientation;
 import java.awt.Container;
-
 import ModelliTabelle.ModDiscIni;
-
 import javax.swing.JScrollPane;
-import VisteUtenteGenerico.setupTableWidths;
 import listener.Listen;
+import listener.VariListener;
 
 public class FrameIniziale extends JFrame {
 	/**
@@ -63,7 +50,7 @@ public class FrameIniziale extends JFrame {
 	public static JFrame frame;
 
 	public JPanel contentPane, tabellaPnl, panelImage, panelCenter, PanelBottom;
-	public static JTable table, tablemod;
+	public static JTable table;
 	private ModDiscIni model;
 	BufferedImage img;
 	int cordx;
@@ -105,7 +92,7 @@ public class FrameIniziale extends JFrame {
 		});
 
 		Container c = this.getContentPane();
-		c.setBackground(new Color(255, 193, 20));
+		c.setBackground(new Color(229, 43, 80));
 		c.setLayout(new BorderLayout());
 
 		JMenuBar menuBar = new JMenuBar();
@@ -129,11 +116,17 @@ public class FrameIniziale extends JFrame {
 
 		scroll.setBounds(100, 100, 605, 391);
 		frame.getContentPane().add(scroll);
-
+		
+		
+		
+        ImageIcon im=new ImageIcon("src/immaginijava/bottone1.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone2.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo1.png");
+        
 		// panelImage = new JPanel();
 		panelCenter = new JPanel();
 		panelCenter.setLayout(new GridBagLayout());
-		panelCenter.setBackground(new Color(255, 193, 20));
+		panelCenter.setBackground(new Color(229, 43, 80));
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		Image img = null;
@@ -148,8 +141,6 @@ public class FrameIniziale extends JFrame {
 		JLabel lblNewLabel = new JLabel();
 		icon = new ImageIcon(img);
 		lblNewLabel.setIcon(icon);
-		lblNewLabel.setForeground(new Color(0, 123, 167));
-		lblNewLabel.setBackground(new Color(0, 133, 217));
 		Border b = BorderFactory.createLineBorder(new Color(255, 205, 255));
 		lblNewLabel.setBorder(b);
 		gbc.insets = new Insets(0, 0, 5, 5);
@@ -159,62 +150,42 @@ public class FrameIniziale extends JFrame {
 
 		panelCenter.add(lblNewLabel, gbc);
 
-		JLabel lblLeNostreDiscipline = new JLabel("Le nostre discipline");
-		gbc.gridx = 2;
-		gbc.gridy = 2;
-
-		Border bordo2 = BorderFactory.createLineBorder(new Color(255, 205, 255));
-		lblLeNostreDiscipline.setBorder(bordo2);
-		Font font = new Font("Comic Sans", Font.PLAIN, 25);
-		lblLeNostreDiscipline.setFont(font);
-		lblLeNostreDiscipline.setFont(lblLeNostreDiscipline.getFont().deriveFont(Font.BOLD));
-		lblLeNostreDiscipline.setForeground(Color.WHITE);
-		lblLeNostreDiscipline.setOpaque(true);
-		lblLeNostreDiscipline.setBackground(new Color(10, 173, 217));
-
-		panelCenter.add(lblLeNostreDiscipline, gbc);
-
-		c.add(panelCenter, BorderLayout.NORTH);
+		
+		
+		c.add(VariListener.SettaPannelloTitolo(im3, panelCenter, 2, 2, "Le nostre discipline"), BorderLayout.NORTH);
 
 		table = new JTable();
 		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
-		table.setRowHeight(250);
-		table.setRowHeight(3, 250);
-		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table.setCellSelectionEnabled(true);
-		// .
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.setModel(model);
-		Font font2 = new Font("Comic Sans", Font.PLAIN, 25);
-		table.setFont(font2);
-		tablemod = setupTableWidths.setupTableWidths(table);
-
-		tablemod.setForeground(new Color(255, 255, 255));
-		tablemod.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt1 = new JScrollPane();
-
-		scrollt1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt1.setBackground(new Color(255, 193, 20));
-		scrollt1.setViewportView(tablemod);
-
-		c.add(scrollt1, BorderLayout.CENTER);
+		
+		c.add(VariListener.SettaScroll(table,250,model), BorderLayout.CENTER);
 
 		PanelBottom = new JPanel();
 		PanelBottom.setLayout(new GridBagLayout());
-		PanelBottom.setBackground(new Color(255, 193, 20));
-
-		JButton btnNewButton = new JButton("Dettagli Disciplina");
+		PanelBottom.setBackground(new Color(229, 43, 80));
+		
+		JLabel lblNewLabel2 = new JLabel("Dettagli disciplina");
+		lblNewLabel2.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblNewLabel2.setForeground( Color.WHITE);
+		lblNewLabel2.setOpaque(false);
+		gbc.gridx = 2;
+		gbc.gridy = 2;
+		PanelBottom.add(lblNewLabel2, gbc);
+		
+		
+        
+		JButton btnNewButton = new JButton(im);
+		VariListener.SettaCarBtn(btnNewButton,false,false);
 		gbc.gridx = 2;
 		gbc.gridy = 2;
 		btnNewButton.setMnemonic('d');
-		btnNewButton.setSize(50, 75);
-		btnNewButton.setBackground(new Color(240, 150, 90));
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		
+				
+        VariListener.SettaClickBtn1(btnNewButton,lblNewLabel2,im2);
+	   
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblNewLabel2.setForeground( Color.WHITE);
+				
 				if (table.getSelectedRow() != -1) {
 					new DetDisciplina();
 					FrameIniziale.frame.setVisible(false);
@@ -223,9 +194,10 @@ public class FrameIniziale extends JFrame {
 							JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		PanelBottom.add(btnNewButton, gbc);
-
+		
+        PanelBottom.add(btnNewButton, gbc);
 		c.add(PanelBottom, BorderLayout.SOUTH);
+		
 
 	}
 

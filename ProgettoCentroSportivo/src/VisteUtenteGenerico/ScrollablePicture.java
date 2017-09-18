@@ -2,7 +2,7 @@ package VisteUtenteGenerico;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
+
 
 
 public abstract class ScrollablePicture extends JLabel implements Scrollable,MouseMotionListener {

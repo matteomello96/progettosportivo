@@ -2,26 +2,12 @@ package visteIstruttore;
 
 import java.io.IOException;
 import java.math.RoundingMode;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import javax.swing.JOptionPane;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import ClassiDao.GetInfoDB;
-import Model.Utente;
-import view_tesserato.Confermaordine;
-import view_tesserato.FrameAttivitaTes;
-import DBInterfaccia.DbConnection;
 
 
 
@@ -45,7 +31,7 @@ public class TriggerPartecipantiEv {
 				PDPage pagina = new PDPage(PDPage.PAGE_SIZE_A4);
 				text.addPage(pagina);
 				PDPageContentStream vers = new PDPageContentStream(text, pagina);
-				String s0,s1,s2;
+				String s0,s1;
 	    		vers.beginText();
 	    		vers.setFont(PDType1Font.COURIER_BOLD, 20);
 	    		vers.moveTextPositionByAmount(20, 800);
@@ -69,7 +55,7 @@ public class TriggerPartecipantiEv {
 	    		vers.drawString("__________________________________________________________________________________________________________________________\r\n");
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.setFont(PDType1Font.HELVETICA_BOLD, 8);
-	    		vers.drawString("Nome Tesserato                                                                                             Cognome Tesserato   ");
+	    		vers.drawString("Nome Tesserato                                                                      Cognome Tesserato   ");
 	    		vers.moveTextPositionByAmount(0, -12);
 	    		vers.setFont(PDType1Font.HELVETICA, 8);
 	    		vers.drawString("__________________________________________________________________________________________________________________________\r\n");
@@ -114,7 +100,7 @@ public class TriggerPartecipantiEv {
 				
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			
 			}

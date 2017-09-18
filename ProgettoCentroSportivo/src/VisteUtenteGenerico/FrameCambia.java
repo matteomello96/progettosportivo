@@ -3,16 +3,20 @@ package VisteUtenteGenerico;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
+import ClassiDao.GetInfoDB;
 import ClassiDao.PasswordChanged;
-import view_tesserato.FrameAttivitaTes;
+import Model.Utente;
+import view_tesserato.PannelloTesserato;
+import visteIstruttore.PannelloIstruttore;
+import visteadmin.PannelloResponsabile;
 
 
 public class FrameCambia {
@@ -35,6 +39,35 @@ public class FrameCambia {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setAlwaysOnTop(true);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Torna al pannello di controllo");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Elenco attività da scegliere ");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if((GetInfoDB.getTipo(Utente.getUsername())=="T"))
+				{
+				frame.dispose();
+				new PannelloTesserato();
+				}
+				if((GetInfoDB.getTipo(Utente.getUsername())=="I"))
+				{
+				frame.dispose();
+				new PannelloIstruttore();
+				}
+				if((GetInfoDB.getTipo(Utente.getUsername())=="R"))
+				{
+				frame.dispose();
+				new PannelloResponsabile();
+				}
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_4);
+		
 		
 		
 		pass0 = new JTextField();

@@ -8,12 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import javax.swing.JOptionPane;
-
 import DBInterfaccia.DbConnection;
-import Model.Utente;
-import view_tesserato.Confermaordine;
 import view_tesserato.FrameAttivitaTes;
 import view_tesserato.FrameTurno;
 import visteadmin.FrameDettagliDaAccResp;
@@ -22,7 +18,69 @@ import visteadmin.FrameDettagliDaAccResp;
 
 
 public class GetInfoDB {
+  
+	public static int getoccev(int cod,int tesserato){
 
+	       
+        
+        Connection con = DbConnection.db;
+        
+        Statement st;
+        
+        ResultSet rs;
+        
+ 
+        int mod = -1;
+        
+        try {
+            
+            st = con.createStatement();
+           
+            rs = st.executeQuery("SELECT codiceiscrizioneevento FROM iscrizioneevento where evento='"+cod+"' and tesserato='"+tesserato+"'  "); 
+          
+                rs.next();
+                mod=rs.getInt("codiceiscrizioneevento");
+                		
+            return mod; 
+        } catch (SQLException ex) {
+        
+        }
+        return mod;
+
+}
+	
+	
+	
+	 public static int getocc(int comb,int tesserato){
+
+	       
+	        
+	        Connection con = DbConnection.db;
+	        
+	        Statement st;
+	        
+	        ResultSet rs;
+	        
+	 
+	        int mod = -1;
+	        
+	        try {
+	            
+	            st = con.createStatement();
+	           
+	            rs = st.executeQuery("SELECT iddet FROM detiscr where combinazionelivdis='"+comb+"' and tesserato='"+tesserato+"'  "); 
+	          
+	                rs.next();
+	                mod=rs.getInt("iddet");
+	                		
+	            return mod; 
+	        } catch (SQLException ex) {
+	        
+	        }
+	        return mod;
+
+	}
+	
 	
 	
 
@@ -757,35 +815,7 @@ public static String getPath(String nomedisc){
 }
  
  
-/*public static int getidcomm(String username,String codice){
 
-     
-     
-     Connection con = DbConnection.db;
-     
-     Statement st;
-     
-     ResultSet rs;
-     
-
-     int ris=1;
-     
-     try {
-         
-         st = con.createStatement();
-        
-         rs = st.executeQuery("SELECT CodiceTestimonianza FROM testimonianza WHERE Tesserato='"+username+"'and CodiceTestimonianza='"+codice+"' "); 
-       
-             rs.next();
-             ris=rs.getInt("CodiceTestimonianza");
-             		
-         return ris; 
-     } catch (SQLException ex) {
-     
-     }
-     return ris;
-
-}*/
  
 public static int getprenotazionievento(Object codiceturno){
 

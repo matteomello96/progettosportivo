@@ -1,29 +1,14 @@
 package visteIstruttore;
 
-import javax.swing.BorderFactory;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
-import VisteUtenteGenerico.FrameIniziale;
-import VisteUtenteGenerico.setupTableWidths;
 import listener.Listen;
-import modelliTabelleIstruttore.ModDetOrariAtt;
-import modelliTabelleIstruttore.ModDetOrariEv;
+import listener.VariListener;
 import modelliTabelleIstruttore.ModElPart;
-import ClassiDao.DettagliIstruttoreDAO;
-import ClassiDao.DettagliLivelloDAO;
-import ClassiDao.DettagliOrariDAO;
-import ClassiDao.DettagliTestimonianzeDAO;
-import ClassiDao.ElencoDisciplineDAO;
 import ClassiDao.GetInfoDB;
-import ModelliTabelle.ModDetIstr;
-import ModelliTabelle.ModDetLiv;
-import ModelliTabelle.ModDetOrari;
-import ModelliTabelle.ModDetTest;
-import ModelliTabelle.ModDiscIni;
-
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -31,37 +16,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
-import javax.swing.plaf.TableHeaderUI;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
-import javax.swing.tree.TreeSelectionModel;
-
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
-
-import ClassiDAOIstruttore.DettagliOrariAttDAO;
-import ClassiDAOIstruttore.DettagliOrariEvDAO;
-import ClassiDAOIstruttore.ElencoPartecipantiAttDAO;
 import ClassiDAOIstruttore.ElencoPartecipantiEvDAO;
-
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -70,12 +34,10 @@ import java.io.IOException;
 public class DetPartEv {
 
 	public static JFrame frame;
-	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4;
+	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4,Panel1,Panel2,PanelBottom;
 	public static JTable table1,table2,table3,table4,tablemod;
     private ModElPart model1; 
-    private ModDetIstr model2;
-    private ModDetTest model3;
-    private ModDetOrari model4;
+    
     public String nomedistinta="";
 	public String percorso="";
 	public static String testodistinta;
@@ -110,63 +72,52 @@ public class DetPartEv {
 		MenuRegistra.setActionCommand("Vai_ev_det");
 
 		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+		
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,193,20));
-		contentPane.setLayout(new GridBagLayout());
+		contentPane.setBackground(new Color (60,179,113));
+		contentPane.setLayout(new BorderLayout());
 		
-		GridBagConstraints gbc = new GridBagConstraints();
 		
+		
+ 
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(30, 400, 300, 30);	
+		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
 		
-	    JLabel lblTurni = new JLabel("Turni disponibili:");
-		lblTurni.setForeground(new Color(0, 123, 167));
-		lblTurni.setBackground(new Color(0, 133, 217));
-		Border b = BorderFactory.createLineBorder(new Color(255, 205, 255));
-		lblTurni.setBorder(b);
-		lblTurni.setBounds(29, 38, 353, 14);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		contentPane.add(lblTurni, gbc);
+
+		
+
+		
+		 Panel1 = new JPanel();
+ 		Panel1.setBackground(new Color(60, 179, 113));
+ 		Panel1.setLayout(new GridBagLayout());
+ 		
+ 		
+ 		
+ 		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Turni disponibili"), BorderLayout.NORTH);
 		
 		table1 = new JTable();
 		model1 = new ModElPart(ElencoPartecipantiEvDAO.elencoiniziale(ClassiDao.GetInfoDB.getcodiceturnoevento(fasciaoraria,giornoset,spazio)));
-		table1.setRowHeight(20);
-		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table1.setCellSelectionEnabled(true);
-		table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table1.setModel(model1);
+		contentPane.add(VariListener.SettaScroll(table1,50,model1), BorderLayout.CENTER);
 		
+		
+		
+		
+		
+		PanelBottom = new JPanel();
+		PanelBottom.setLayout(new GridBagLayout());
+		PanelBottom.setBackground(new Color (60,179,113));
 
-		Font font2 = new Font("Comic Sans", Font.PLAIN, 25);
-		table1.setFont(font2);
-		tablemod = setupTableWidths.setupTableWidths(table1);
-
-		tablemod.setForeground(new Color(255, 255, 255));
-		tablemod.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt1 = new JScrollPane();
-
-		scrollt1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt1.setBackground(new Color(255, 193, 20));
-		scrollt1.setViewportView(tablemod);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		contentPane.add(scrollt1, gbc);
-		
-		
-		final JButton btnGeneraDistinta = new JButton("Genera elenco");
-		btnGeneraDistinta.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		
-		
-		btnGeneraDistinta.addActionListener(new ActionListener() {
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(PanelBottom, btn, lbl,"Genera elenco", 2, 2,im2,true);
+		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				testodistinta=TriggerPartecipantiEv.scriviDistinta();
@@ -175,7 +126,7 @@ public class DetPartEv {
 				try {
 					TriggerPartecipantiEv.writePDF((String) DetEv.table1.getValueAt(DetEv.table1.getSelectedRow(), 0),(String) DetEv.table1.getValueAt(DetEv.table1.getSelectedRow(), 1),(String) DetEv.table1.getValueAt(DetEv.table1.getSelectedRow(), 2)).close();
 				} catch (IOException f) {
-					// TODO Auto-generated catch block
+					
 					f.printStackTrace();
 				}
 				
@@ -210,12 +161,12 @@ public class DetPartEv {
 
 						d=false;
 					} catch (COSVisitorException e2) {
-						// TODO Auto-generated catch block
+						
 						JOptionPane.showMessageDialog(frame,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e2.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
 						e2.printStackTrace();
 					} catch (IOException e2) {
 						JOptionPane.showMessageDialog(frame,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e2.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
-						// TODO Auto-generated catch block
+						
 						e2.printStackTrace();
 					}
 			         
@@ -235,17 +186,13 @@ public class DetPartEv {
 		});
 		
 	
-	//	btnGeneraDistinta.setBounds(100, 145, 301, 128);
-		btnGeneraDistinta.setBounds(549, 352, 145, 28);
-		btnGeneraDistinta.setEnabled(true);
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		contentPane.add(btnGeneraDistinta, gbc);
+	
 		
-		final JButton btnFine = new JButton("Fine");
-		btnFine.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnFine.setEnabled(true);
-		btnFine.addActionListener(new ActionListener() {
+		JButton btn2 = new JButton(im);
+		JLabel lbl2= new JLabel();
+        VariListener.SettaBtn(PanelBottom, btn2, lbl2,"Eventi", 2, 2,im2,true);
+		btn2.setEnabled(true);
+		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				if(d){
@@ -280,7 +227,7 @@ public class DetPartEv {
 					} catch (COSVisitorException | IOException e) {
 						JOptionPane.showMessageDialog(null,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
 						d2=false;
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 				}
@@ -298,11 +245,9 @@ public class DetPartEv {
 				
 			
 			}});
-		btnFine.setBounds(698, 352, 89, 28);
-		gbc.gridx = 1;
-		gbc.gridy = 2;
 		
-		contentPane.add(btnFine,gbc);
+		
+		contentPane.add(PanelBottom,BorderLayout.SOUTH);
 		
 		
 		

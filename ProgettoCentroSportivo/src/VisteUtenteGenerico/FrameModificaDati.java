@@ -3,54 +3,33 @@ package VisteUtenteGenerico;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.JTextComponent.KeyBinding;
-
 import ClassiDAOIstruttore.ModificaDatiDAO;
-import Model.Home;
 import Model.Utente;
-import VisteUtenteGenerico.*;
 import listener.Listen;
+import listener.VariListener;
 import view_tesserato.PannelloTesserato;
 import visteIstruttore.PannelloIstruttore;
 import visteadmin.PannelloResponsabile;
 import ClassiDao.GetInfoDB;
-import ClassiDao.Reg_dao;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.Action;
-import javax.swing.DefaultComboBoxModel;
-
+import javax.swing.ImageIcon;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-
-import java.awt.ScrollPane;
 import javax.swing.JScrollPane;
-import java.awt.Rectangle;
-import java.awt.Component;
-import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JButton;
 
 
@@ -65,33 +44,29 @@ public class FrameModificaDati extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
-	private JPanel contentPane;
+	private JPanel contentPane,Panel1,Panel2,Panel3;
 	
-	private JTextField textnome;
-	private JTextField textcognome;
-	private JTextField textcodice;
+	
 	private JTextField textcitta;
 	private JTextField textvia;
 	private JTextField textnumciv;
 	private JTextField textmail;
-	private JTextField textnomeutente;
-	private JPasswordField pass;
-	private JTextField secondapass;
+	
 	private JTextField texttelefono;
 	private boolean bool;
 	public String  erroreCF= "";
 	
 	
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	
 	public FrameModificaDati(String user) {
 		user= ""+Utente.getUsername()+"";
-		frame = new JFrame("Registrazione");
+		frame = new JFrame("Frame di modifica");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocation(100, 100);
 		frame.setSize(450, 300);
-        frame.setTitle("Registrati al nostro portale");
+        frame.setTitle("Modifica dei tuoi dati");
 		if(FrameModificaDati.frame==null)
 			frame.setLocationRelativeTo(null);
 			else
@@ -101,14 +76,16 @@ public class FrameModificaDati extends JFrame {
 		
 		
 	
-		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone1.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone2.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo1.png");
 		
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (64,224,208));
-		contentPane.setLayout(new GridBagLayout());
+		contentPane.setLayout(new BorderLayout());
 		 
-		 GridBagConstraints gbc = new GridBagConstraints();
+		
  
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -130,95 +107,62 @@ public class FrameModificaDati extends JFrame {
 		mntmTornaAllaPagina.addActionListener(new Listen(this));
 		mntmTornaAllaPagina.setActionCommand("Vai_home_p");
 		
+		JButton btn = new JButton(im);
+		
+		JLabel lbl= new JLabel("Modifica dati");
 		
 		
-		JLabel lblFormDiRegistrazione = new JLabel("Form di Modifica");
-		lblFormDiRegistrazione.setOpaque(true);
-		lblFormDiRegistrazione.setBackground(new Color(65, 105, 225));
-		lblFormDiRegistrazione.setForeground(new Color(255, 255, 255));
-		lblFormDiRegistrazione.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblFormDiRegistrazione, gbc);
+		Panel1 = new JPanel();
+		Panel1.setBackground(new Color(229, 43, 80));
+		Panel1.setLayout(new GridBagLayout());
 		
-		JLabel lblDatiAnagrafici = new JLabel("Dati Anagrafici");
-		lblDatiAnagrafici.setOpaque(true);
-		lblDatiAnagrafici.setBackground(new Color(65, 105, 225));
-		lblDatiAnagrafici.setForeground(new Color(255, 255, 255));
-		lblDatiAnagrafici.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblDatiAnagrafici, gbc);
+		
+		
+		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 2, 2, "Form di modifica dei dati"), BorderLayout.NORTH);
+		
+		Panel2 = new JPanel();
+		Panel2.setBackground(new Color(229, 43, 80));
+		Panel2.setLayout(new GridBagLayout());
+		
+		
+		
+		VariListener.SettaPannelloTitolo(im3, Panel2, 1, 4, "Dati Anagrafici");
 		
 		
 		
 		
 		
+		JLabel lblCitt = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblCitt, "Città", 0, 5);
 		
+		JLabel lblErrCitta = new JLabel();
+		VariListener.SettaErr("La città non deve contenere numeri",lblErrCitta, 2, 5, Panel2);
 		
-		JLabel lblCitt = new JLabel("Citta");
-		lblCitt.setOpaque(true);
-		lblCitt.setBackground(new Color(205, 127, 50));
-		lblCitt.setForeground(new Color(255, 255, 255));
-		lblCitt.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		contentPane.add(lblCitt, gbc);
-		
-		JLabel lblErrCitta = new JLabel("La città non deve contenere numeri");
-		lblErrCitta.setOpaque(true);
-		lblErrCitta.setBackground(new Color(128, 0, 0));
-		lblErrCitta.setForeground(new Color(255, 255, 255));
-		lblErrCitta.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrCitta.setBounds(25, 30, 10, 10);
-		lblErrCitta.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 5;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		
-		contentPane.add(lblErrCitta,gbc);
 		
 		
 		textcitta = new JTextField();
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 5;
-		contentPane.add(textcitta, gbc);
-		textcitta.setColumns(10);
+		VariListener.SettaTextField(Panel2, textcitta, "Inserire città", 1,5);
+		VariListener.SettaFocus(textcitta);
 		
-		textcitta.addKeyListener(new KeyListener(){
+		textcitta.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent ke)
 		
 		{
 				
 				if((ke.getKeyChar()+"").matches("[0-9]+$")){
                 lblErrCitta.setVisible(true);
+                btn.setVisible(false);
+                lbl.setVisible(false);
                 }
 				else
 				{
 				lblErrCitta.setVisible(false);
+				btn.setVisible(true);
+                lbl.setVisible(true);
 				}
 		}
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}});
+			});
 		
 		
 		
@@ -226,162 +170,84 @@ public class FrameModificaDati extends JFrame {
 		
 		
 		JLabel lblVia = new JLabel("Via");
-		lblVia.setOpaque(true);
-		lblVia.setBackground(new Color(205, 127, 50));
-		lblVia.setForeground(new Color(255, 255, 255));
-		lblVia.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 6;
-		contentPane.add(lblVia, gbc);
+		VariListener.SettaLabelGen(Panel2,lblVia, "Via", 0, 6);
 		
-		JLabel lblErrVia = new JLabel("La via non deve contenere numeri");
-		lblErrVia.setOpaque(true);
-		lblErrVia.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrVia.setBackground(new Color(128, 0, 0));
-		lblErrVia.setForeground(new Color(255, 255, 255));
-		lblErrVia.setBounds(25, 30, 10, 10);
-		lblErrVia.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 6;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		
-		contentPane.add(lblErrVia,gbc);
+		JLabel lblErrVia = new JLabel();
+		VariListener.SettaErr("La via non deve contenere numeri",lblErrVia, 2, 6, Panel2);
 		
 		
 		
 		textvia = new JTextField();
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 6;
-		contentPane.add(textvia, gbc);
-		textvia.setColumns(10);
+		VariListener.SettaTextField(Panel2, textvia, "Inserire via", 1,6);
+		VariListener.SettaFocus(textvia);
 		
 		
-		textvia.addKeyListener(new KeyListener(){
+		textvia.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent ke)
 		
 		{
 				
 				if((ke.getKeyChar()+"").matches("[0-9]+$")){
                 lblErrVia.setVisible(true);
+                btn.setVisible(false);
+                lbl.setVisible(false);
                 }
 				else
 				{
 				lblErrVia.setVisible(false);
+				btn.setVisible(true);
+                lbl.setVisible(true);
 				}
 		}
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}});
+			});
 		
-		JLabel lblNumeroCivico = new JLabel("Numero Civico");
-		lblNumeroCivico.setOpaque(true);
-		lblNumeroCivico.setBackground(new Color(205, 127, 50));
-		lblNumeroCivico.setForeground(new Color(255, 255, 255));
-		lblNumeroCivico.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 7;
-		contentPane.add(lblNumeroCivico, gbc);
+		JLabel lblNumeroCivico = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblNumeroCivico, "Numero civico", 0, 7);
 		
-		JLabel lblErrNC = new JLabel("Il numero civico non può contenere lettere");
-		lblErrNC.setOpaque(true);
-		lblErrNC.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrNC.setBackground(new Color(128, 0, 0));
-		lblErrNC.setForeground(new Color(255, 255, 255));
-		lblErrNC.setBounds(25, 30, 10, 10);
-		lblErrNC.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 7;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		
-		contentPane.add(lblErrNC,gbc);
+		JLabel lblErrNC = new JLabel();
+		VariListener.SettaErr("Il numero civico non deve contenere lettere",lblErrNC, 2, 7, Panel2);
 		
 		
 		
 		textnumciv = new JTextField();
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 7;
-		contentPane.add(textnumciv, gbc);
-		textnumciv.setColumns(10);
+		VariListener.SettaTextField(Panel2, textnumciv, "Inserire il numero civico", 1,7);
+		VariListener.SettaFocus(textnumciv);
 		
-		textnumciv.addKeyListener(new KeyListener(){
+		textnumciv.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent ke)
 		
 		{
 				
 				if(!(ke.getKeyChar()+"").matches("[0-9]+$")){
                 lblErrNC.setVisible(true);
+                btn.setVisible(false);
+                lbl.setVisible(false);
                 }
 				else
 				{
 				lblErrNC.setVisible(false);
+				btn.setVisible(true);
+                lbl.setVisible(true);
 				}
 		}
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}});
+			});
 		
 
-		JLabel lblTelefono = new JLabel("Recapito telefonico(Premi spazio dopo)");
-		lblTelefono.setOpaque(true);
-		lblTelefono.setBackground(new Color(205, 127, 50));
-		lblTelefono.setForeground(new Color(255, 255, 255));
-		lblTelefono.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 8;
-		contentPane.add(lblTelefono, gbc);
+		JLabel lblTelefono = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblTelefono, "Telefono(premi spazio dopo)", 0, 8);
 		
-		JLabel lblErrT = new JLabel("");
-		lblErrT.setOpaque(true);
-		lblErrT.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrT.setBackground(new Color(128, 0, 0));
-		lblErrT.setForeground(new Color(255, 255, 255));
-		lblErrT.setBounds(25, 30, 10, 10);
-		lblErrT.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 8;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		
-		contentPane.add(lblErrT,gbc);
+		JLabel lblErrT = new JLabel();
+		VariListener.SettaErr("Il telefono non deve contenere lettere",lblErrT, 2,8, Panel2);
 		
 		
 		
 		texttelefono = new JTextField();
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 8;
-		contentPane.add(texttelefono, gbc);
-		texttelefono.setColumns(10);
+		VariListener.SettaTextField(Panel2, texttelefono, "Inserire il telefono", 1,8);
+		VariListener.SettaFocus(texttelefono);
 		
-		texttelefono.addKeyListener(new KeyListener(){
+		texttelefono.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent ke)
 		
 		{
@@ -391,6 +257,8 @@ public class FrameModificaDati extends JFrame {
 			    String erroreT="Il telefono deve essere di 10 caratteri";
 			    lblErrT.setText(erroreT);
 			    lblErrT.setVisible(true);
+			    btn.setVisible(false);
+                lbl.setVisible(false);
 				}
 			    else 
 				{
@@ -400,15 +268,18 @@ public class FrameModificaDati extends JFrame {
 		            if (match.matches()==false)
 			    	
 		            {
+		            	btn.setVisible(false);
 			    	String erroreT2="Ricontrolla il formato del telefono";                                          
 			    	lblErrT.setText(erroreT2);
 				    lblErrT.setVisible(true);
-				    
+				    btn.setVisible(false);
+	                lbl.setVisible(false);
 		            }
 		            else 
 		            {
 		            	
-		            	
+		            	btn.setVisible(true);
+		                lbl.setVisible(true);
 					    lblErrT.setVisible(false);
 					    
 		            	}
@@ -418,66 +289,25 @@ public class FrameModificaDati extends JFrame {
 				
 		}
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {  
-				// TODO Auto-generated method stub
-				
-			}});
+			});
 		
 		
-		JLabel lblDatiutenza = new JLabel("Dati di Accesso");
-		lblDatiutenza.setOpaque(true);
-		lblDatiutenza.setBackground(new Color(65, 105, 225));
-		lblDatiutenza.setForeground(new Color(255, 255, 255));
-		lblDatiutenza.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 9;
-		contentPane.add(lblDatiutenza, gbc);
+		VariListener.SettaPannelloTitolo(im3, Panel2, 1, 9, "Dati di accesso al Centro");
 		
 		
-		JLabel lblIndirizzoMail = new JLabel("Indirizzo mail(Premi spazio dopo)");
-		lblIndirizzoMail.setOpaque(true);
-		lblIndirizzoMail.setBackground(new Color(205, 127, 50));
-		lblIndirizzoMail.setForeground(new Color(255, 255, 255));
-		lblIndirizzoMail.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 10;
-		contentPane.add(lblIndirizzoMail, gbc);
+		JLabel lblIndirizzoMail = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblIndirizzoMail, "Indirizzo mail(premi spazio dopo)", 0, 10);
 		
-		JLabel lblErrMail = new JLabel("");
-		lblErrMail.setOpaque(true);
-		lblErrMail.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrMail.setBackground(new Color(128, 0, 0));
-		lblErrMail.setForeground(new Color(255, 255, 255));
-		lblErrMail.setBounds(25, 30, 10, 10);
-		lblErrMail.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 10;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		
-		contentPane.add(lblErrMail,gbc);
+		JLabel lblErrMail = new JLabel();
+		VariListener.SettaErr("",lblErrMail, 2,10, Panel2);
 		
 		
 		
 		textmail = new JTextField();
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 10;
-		contentPane.add(textmail, gbc);
-		textmail.setColumns(10);
+		VariListener.SettaTextField(Panel2, textmail, "Inserire la mail", 1,10);
+		VariListener.SettaFocus(textmail);
 		
-		textmail.addKeyListener(new KeyListener(){
+		textmail.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent ke)
 		
 		{
@@ -487,17 +317,20 @@ public class FrameModificaDati extends JFrame {
 		            Pattern p=Pattern.compile(s,Pattern.CASE_INSENSITIVE);
 		            Matcher match=p.matcher(textmail.getText());
 		            if (match.matches()==false)
-			    	
+		            	
 		            {
+		            btn.setVisible(false);
 			    	String erroreT2="Ricontrolla il formato della mail";                                          
 			    	lblErrMail.setText(erroreT2);
 				    lblErrMail.setVisible(true);
-				    
+				    btn.setVisible(false);
+	                lbl.setVisible(false);
 		            }
 		            else 
 		            {
 		            	
-		            	
+		            	btn.setVisible(true);
+		                lbl.setVisible(true);
 					    lblErrMail.setVisible(false);
 					    
 		            	}
@@ -507,99 +340,82 @@ public class FrameModificaDati extends JFrame {
 				
 		}
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			});
+		
+		
+		contentPane.add(Panel2,BorderLayout.CENTER);
+		
+		
+		
+		Panel3 = new JPanel();
+		Panel3.setBackground(new Color(229, 43, 80));
+		Panel3.setLayout(new GridBagLayout());
 
-			@Override
-			public void keyReleased(KeyEvent e) {  
-				// TODO Auto-generated method stub
-				
-			}});
 		
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-	//	gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
-		
-		
-		
-		JButton btnRegistratiAlNostro = new JButton("Modifica i tuoi dati");
-		btnRegistratiAlNostro.setBackground(new Color(0, 168, 107));
-		btnRegistratiAlNostro.setForeground(new Color(255, 255, 255));
-		btnRegistratiAlNostro.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 16;
-		contentPane.add(btnRegistratiAlNostro, gbc);
-		btnRegistratiAlNostro.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
+        VariListener.SettaBtn(Panel3, btn, lbl,"Modifica i dati", 2, 2,im2,false);
+       
+        
+        btn.setToolTipText("Modifica i dati");
+        
+         
+		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
 	
-			lblIndirizzoMail.setForeground(Color.BLACK);
-			lblIndirizzoMail.setFont(new Font("Tahoma", Font.PLAIN, 11));
-	
 			
-		
-			lblTelefono.setForeground(Color.BLACK);
-			lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		
 		if(texttelefono.getText().isEmpty()||textmail.getText().isEmpty()||textcitta.getText().isEmpty()||textvia.getText().isEmpty()||textnumciv.getText().isEmpty())
 		{
+			
 			if(texttelefono.getText().isEmpty())
 			{
-				lblTelefono.setForeground(Color.RED);
-				lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblTelefono.setForeground(Color.BLUE);
+				lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 16));
 				lblErrT.setText("Il campo è vuoto");
 				lblErrT.setVisible(true);
 			}
 			if(textnumciv.getText().isEmpty())
 			{
-				lblNumeroCivico.setForeground(Color.RED);
-				lblNumeroCivico.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblNumeroCivico.setForeground(Color.BLUE);
+				lblNumeroCivico.setFont(new Font("Tahoma", Font.BOLD, 16));
 				lblErrNC.setText("Il campo è vuoto");
 				lblErrNC.setVisible(true);
 			}
 			if(textvia.getText().isEmpty())
 			{
-				lblVia.setForeground(Color.RED);
-				lblVia.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblVia.setForeground(Color.BLUE);
+				lblVia.setFont(new Font("Tahoma", Font.BOLD, 16));
 				lblErrVia.setText("Il campo è vuoto");
 				lblErrVia.setVisible(true);
 			}
 			if(textcitta.getText().isEmpty())
 			{
-				lblCitt.setForeground(Color.RED);
-				lblCitt.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblCitt.setForeground(Color.BLUE);
+				lblCitt.setFont(new Font("Tahoma", Font.BOLD, 16));
 				lblErrCitta.setText("Il campo è vuoto");
 				lblErrCitta.setVisible(true);
 			}
 			
 			if(textmail.getText().isEmpty())
 			{
-				lblIndirizzoMail.setForeground(Color.RED);
-				lblIndirizzoMail.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblIndirizzoMail.setForeground(Color.BLUE);
+				lblIndirizzoMail.setFont(new Font("Tahoma", Font.BOLD, 16));
 				lblErrMail.setText("Il campo è vuoto");
 				lblErrMail.setVisible(true);
 			}
 			
-			
+			btn.setVisible(false);
 			JOptionPane.showMessageDialog(frame, "Riempire tutti i campi obbligatori"," ",JOptionPane.WARNING_MESSAGE);
 		}
 		
 		else
-			
+			btn.setVisible(true);
+		    lbl.setVisible(true);
+		    lbl.setForeground(Color.WHITE);
 			bool=ModificaDatiDAO.modificadati(textcitta.getText(),textvia.getText(),textnumciv.getText(), textmail.getText(),texttelefono.getText(),""+Utente.getUsername()+"");
 		
 		if(bool)
@@ -608,16 +424,19 @@ public class FrameModificaDati extends JFrame {
 			frame.dispose();
 			if (GetInfoDB.getTipo(""+Utente.getUsername()+"").equals("I"))
 			{
+				new PannelloIstruttore();
 			PannelloIstruttore.frame.setVisible(true);
 			PannelloIstruttore.frame.setEnabled(true);
 			}
 			if (GetInfoDB.getTipo(""+Utente.getUsername()+"").equals("R"))
 			{
+				new PannelloResponsabile();
 			PannelloResponsabile.frame.setVisible(true);
 			PannelloResponsabile.frame.setEnabled(true);
 			}
 			if (GetInfoDB.getTipo(""+Utente.getUsername()+"").equals("T"))
 			{
+				new PannelloTesserato();
 			PannelloTesserato.frame.setVisible(true);
 			PannelloTesserato.frame.setEnabled(true);
 			}
@@ -631,21 +450,21 @@ public class FrameModificaDati extends JFrame {
 		
 		
 		
-       JButton cambia = new JButton("Cambia Password");
-		cambia.setBackground(new Color(0, 168, 107));
-		cambia.setForeground(new Color(255, 255, 255));
-		cambia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		gbc.gridx = 1;
-		gbc.gridy = 17;
-		contentPane.add(cambia, gbc);
+       JButton cambia = new JButton(im);
+       JLabel lbl2= new JLabel();
+       VariListener.SettaBtn(Panel3, cambia, lbl2,"Cambia la password", 2, 5,im2,true);
+       
+       cambia.setToolTipText("Cambia la password");
 		cambia.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				lbl2.setForeground( Color.WHITE);
 			frame.setVisible(false);
 			frame.dispose();
 			new FrameCambia();
 			}});
 		
-
+ contentPane.add(Panel3,BorderLayout.SOUTH);
 }}
 

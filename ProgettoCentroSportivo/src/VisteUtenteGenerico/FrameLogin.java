@@ -11,11 +11,12 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.*;
 
-import javax.swing.border.Border;
 
 import listener.Listen;
 import listener.LoginListener;
+import listener.VariListener;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 
@@ -26,19 +27,18 @@ public class FrameLogin extends JFrame {
    
 	public static JFrame frame;
 	public JTextField CasellaPassword;
-    private JTable tabelladisc;
+   
 	public JTextField CasellaNomeutenteOLD;
-	//private JTextField nullfield;
+	
 	public JTextField passwordField;
-	private JScrollPane tablescroller;
+	
 	public JTextField CasellaNomeutente;
 	public final JButton baccedi;
 	public static boolean crypt=true;
 	int xi;
 	int yi;
-	private JPanel contentPane;
+	private JPanel contentPane,Panel,Panel2,Panel3;
 	public FrameLogin() {
-		//FrameLogin.setDefaultLookAndFeelDecorated(true);
 		
 		frame = new JFrame("Accesso centropolisportivo");
 		frame.setTitle("Pagina Login");
@@ -77,12 +77,18 @@ public class FrameLogin extends JFrame {
 			mnAccedi.addActionListener(new Listen(this));
 			mnAccedi.setActionCommand("Vai_home1");
 			
+			ImageIcon im=new ImageIcon("src/immaginijava/bottone1.png");
+	        ImageIcon im2=new ImageIcon("src/immaginijava/bottone2.png");
+	        ImageIcon im3=new ImageIcon("src/immaginijava/titolo1.png");
+			
 			contentPane = new JPanel();
-			contentPane.setBackground(new Color (255,193,20));
-			contentPane.setLayout(new GridBagLayout());
+			contentPane.setBackground(new Color(229, 43, 80));
+			contentPane.setLayout(new BorderLayout());
 			 
 			GridBagConstraints gbc = new GridBagConstraints();	
-
+  
+			
+			
 			JScrollPane scroll = new JScrollPane(contentPane);
 			scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 			scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -96,106 +102,43 @@ public class FrameLogin extends JFrame {
 
 		
 
-		
+		    Panel = new JPanel();
+			Panel.setBackground(new Color(229, 43, 80));
+			Panel.setLayout(new GridBagLayout());
 		
 		
 
 		
 
-		JLabel lblNewLabel = new JLabel("Login al portale");
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
-		lblNewLabel.setForeground(new Color (255,255,255));
-		lblNewLabel.setBackground(new Color (100,133,217));
-		Border b = BorderFactory.createLineBorder(new Color (255,255,255));
-		lblNewLabel.setBorder(b);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 3;
-		gbc.gridy = 0;
-		contentPane.add(lblNewLabel, gbc);
+			contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel, 2, 2, "Pagina di Login"), BorderLayout.NORTH);
 		
+			
+			    Panel2 = new JPanel();
+				Panel2.setBackground(new Color(229, 43, 80));
+				Panel2.setLayout(new GridBagLayout());
+			
 		
-		JLabel lblNomeUtente = new JLabel("Nome utente");
-		lblNomeUtente.setOpaque(true);
+		JLabel lblNomeUtente = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblNomeUtente, "Nome Utente", 2, 3);
 		
-		lblNomeUtente.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNomeUtente.setForeground(new Color (255,255,255));
-		lblNomeUtente.setBackground(new Color (100,233,17));
-		lblNomeUtente.setBorder(b);
-		lblNomeUtente.setBounds(253, 43, 86, 20);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 3;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblNomeUtente,gbc);
 				
 
 
 		CasellaNomeutente = new JTextField();
-		Border border1 = BorderFactory.createLineBorder(Color.BLACK);
-		CasellaNomeutente.setBorder(border1);
-		CasellaNomeutente.setToolTipText("Inserire il nome utente");
-		CasellaNomeutente.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		CasellaNomeutente.setBounds(253, 43, 86, 20);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 3;
-		gbc.gridy = 3;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(CasellaNomeutente, gbc);
-		CasellaNomeutente.setColumns(10);
-		CasellaNomeutente.addFocusListener(new FocusAdapter() {
-			
-			public void focusGained(FocusEvent arg0) {
-				CasellaNomeutente.setBackground(Color.WHITE);
-				if(CasellaNomeutente.getText().isEmpty())
-					CasellaNomeutente.setBackground(Color.CYAN);
-				
-
-			}
-		});
+		VariListener.SettaTextField(Panel2,CasellaNomeutente,"Inserire il nome utente",3,3);
+		VariListener.SettaFocus(CasellaNomeutente);
+		
 
 
-	    JLabel lblPassword = new JLabel("Password");
-	    lblPassword.setOpaque(true);
-		lblPassword.setBounds(253, 95, 86, 20);
-		lblPassword.setForeground(new Color (255,255,255));
-		lblPassword.setBackground(new Color (100,233,17));
-		lblPassword.setBorder(b);
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 5;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblPassword, gbc);
+	    JLabel lblPassword = new JLabel();
+	    VariListener.SettaLabelGen(Panel2,lblPassword, "Password", 2, 5);
+	    
 		
 		
 		
 		passwordField = new JTextField();
-		Border border2 = BorderFactory.createLineBorder(Color.BLACK);
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		passwordField.setToolTipText("Inserire la password");
-		passwordField.setBounds(253, 95, 86, 20);
-		passwordField.setBorder(border2);
-		passwordField.setForeground(Color.BLACK);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 3;
-		gbc.gridy = 5;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(passwordField, gbc);
-		passwordField.setColumns(10);
-		passwordField.addFocusListener(new FocusAdapter() {
-			@Override
-			
-		
-			public void focusGained(FocusEvent arg0) {
-				passwordField.setBackground(Color.WHITE);
-			    
-				if(passwordField.getText().isEmpty())
-					passwordField.setBackground(Color.CYAN);
-				
-
-			}
-		});
+		VariListener.SettaTextField(Panel2,passwordField,"Inserire la password",3,5);
+		VariListener.SettaFocus(passwordField);
 		
 		
 		
@@ -210,25 +153,30 @@ public class FrameLogin extends JFrame {
 		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		
-		contentPane.add(lblBlocMaiuscAttivo,gbc);
+		Panel2.add(lblBlocMaiuscAttivo,gbc);
 		
 		
 		
-            baccedi = new JButton("Accedi");
+
+		contentPane.add(Panel2,BorderLayout.CENTER);
+		
+		Panel3 = new JPanel();
+		Panel3.setBackground(new Color(229, 43, 80));
+		Panel3.setLayout(new GridBagLayout());
+		
+		
+		
+		
+            baccedi = new JButton(im);
+            JLabel lbl= new JLabel();
+            VariListener.SettaBtn(Panel3, baccedi, lbl,"Accedi", 2, 2,im2,false);
             baccedi.setVisible(false);
+            lbl.setVisible(false);
 	        baccedi.setToolTipText("Esegui l'accesso");
-		    baccedi.setFont(new Font("Dialog", Font.PLAIN, 12));
-		    baccedi.setBounds(253, 151, 89, 23);
-		    baccedi.setContentAreaFilled(true);
-            baccedi.addActionListener(new LoginListener(this));
-            baccedi.setForeground(new Color (255,255,255));
-    		baccedi.setBackground(new Color (10,133,217));
-    		baccedi.setBorder(b);
-             gbc.insets = new Insets(0, 0, 5, 5);
-		    gbc.gridx = 3;
-		    gbc.gridy = 9;
-		    gbc.anchor = GridBagConstraints.LINE_START;
-		    contentPane.add(baccedi, gbc); 
+            
+            contentPane.add(Panel3,BorderLayout.SOUTH);
+            
+		     baccedi.addActionListener(new LoginListener(this));
 		    frame.getRootPane().setDefaultButton(baccedi); //RENDE ACCEDI PULSANTE PREDEFINITO PER ENTER
             
             
@@ -242,6 +190,8 @@ public class FrameLogin extends JFrame {
 				else
 				{
 					baccedi.setVisible(true);
+					lbl.setVisible(true);
+					lbl.setForeground( Color.WHITE);
 					baccedi.setEnabled(true);
 				}
 			}
@@ -254,6 +204,8 @@ public class FrameLogin extends JFrame {
 				else
 				{
 					baccedi.setVisible(true);
+					lbl.setVisible(true);
+					lbl.setForeground( Color.WHITE);
 					baccedi.setEnabled(true);
 				}
 			}

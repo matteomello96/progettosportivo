@@ -76,8 +76,9 @@ public class FrameEventi extends JFrame {
     public static JButton rimuovi;
     public static JButton svuotacarrello;
     public static JButton invia;
-
-
+    public Object[] dati;
+    public DefaultTableModel modello;
+    public boolean u;
 	
 
 	/**
@@ -92,7 +93,8 @@ public class FrameEventi extends JFrame {
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		frame.setResizable(true);
-		
+		String username=""+Utente.getUsername()+"";
+		int tesserato=GetInfoDB.getidTess(username);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -286,7 +288,19 @@ public class FrameEventi extends JFrame {
 				}
 				else{
 				if(table.getSelectedRow()!=-1){
-				Object[] dati = new Object[9];
+					
+					JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"codice"+codice,null,JOptionPane.WARNING_MESSAGE);
+					
+					
+					if(GetInfoDB.getoccev(codice,tesserato)!=-1)
+					{
+						JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"comb"+GetInfoDB.getoccev(codice,tesserato),null,JOptionPane.WARNING_MESSAGE);
+						
+						JOptionPane.showMessageDialog(FrameAttivitaTes.frame, "Hai già un iscrizione con la disciplina da te selezionata",null,JOptionPane.WARNING_MESSAGE);
+						
+					}
+					else{
+				dati = new Object[9];
 
 				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
 				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
@@ -297,11 +311,11 @@ public class FrameEventi extends JFrame {
 				dati[6]=table.getValueAt(table.getSelectedRow(), 6);
 				dati[7]=table.getValueAt(table.getSelectedRow(), 7);
 				dati[8]=table.getValueAt(table.getSelectedRow(), 8);
-				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+				 modello = (DefaultTableModel) table_1.getModel();
+				 u=true;
+					}
 				
-
 				
-				boolean u=true;
 				int c;
 				
 				for(c=0;c<table_1.getRowCount();c++)
@@ -311,8 +325,11 @@ public class FrameEventi extends JFrame {
 							//	table.getValueAt(table.getSelectedRow(), 6).equals(table_1.getValueAt(c, 6)))
 					if(table.getValueAt(table.getSelectedRow(), 8).equals(table_1.getValueAt(c, 8)))
 						{
+						JOptionPane.showMessageDialog(FrameEventi.frame, "Non è possibile Aggiungere lo stesso evento",null,JOptionPane.WARNING_MESSAGE);
 							u=false;
+							
 							break;
+							
 						}
 
 					}

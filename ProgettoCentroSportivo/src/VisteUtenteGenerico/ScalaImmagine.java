@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
+
 
 public class ScalaImmagine {
 

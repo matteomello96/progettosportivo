@@ -57,8 +57,9 @@ public class FrameAttivitaTes extends JPanel {
 	 public static JButton rimuovi;
 	 public static JButton invia;
 	 public String a;
-	
-
+	public DefaultTableModel modello;
+    public Object[] dati;
+    public boolean u;
 	/**
 	 * Create the panel.
 	 */
@@ -70,7 +71,8 @@ public class FrameAttivitaTes extends JPanel {
 		
 		frame = new JFrame("Tesserato");
 		String username=""+Utente.getUsername()+"";
-		frame.setTitle("Benvenuto tesserato "+username+"");
+		int tesserato=GetInfoDB.getidTess(username);
+		frame.setTitle("Elenco attività "+username+"");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 1334, 700);
@@ -245,34 +247,40 @@ public class FrameAttivitaTes extends JPanel {
 				model1 = new disc_attive(elencoattivitaattivedao.elencoiniziale());
 				table_2.setModel(model1);
 				if(table.getSelectedRow()!=-1){
-				Object[] dati = new Object[3];
+					String disc=(String)table.getValueAt(table.getSelectedRow(), 1);
+					String liv=(String)table.getValueAt(table.getSelectedRow(), 0);
+					JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"disc"+disc+" "+"liv"+liv,null,JOptionPane.WARNING_MESSAGE);
+					int comb=GetInfoDB.getcombinazionelivdis( (String)table.getValueAt(table.getSelectedRow(), 1),(String)table.getValueAt(table.getSelectedRow(), 0));
+					JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"COMB"+comb,null,JOptionPane.WARNING_MESSAGE);
+					if(GetInfoDB.getocc(comb,tesserato)!=-1)
+					{
+						JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"comb"+GetInfoDB.getocc(comb,tesserato),null,JOptionPane.WARNING_MESSAGE);
+						
+						JOptionPane.showMessageDialog(FrameAttivitaTes.frame, "Hai già un iscrizione con la disciplina da te selezionata",null,JOptionPane.WARNING_MESSAGE);
+						
+					}
+					else{
+				dati = new Object[3];
 
 				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
 				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
 				dati[2]=table.getValueAt(table.getSelectedRow(), 2);
-				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
+				 modello = (DefaultTableModel) table_1.getModel();
+				  u=true;
+				}
 				
 				int c=0;
 				int q;
 				int ris=0;
-				boolean u=true;
 				
 				
+					
 				//new FrameDiscAttive();
 			//FrameDiscAttive.frame.dispose();
 				for(q=0;q<table_2.getRowCount();q++){
 					
 				
-					if(GetInfoDB.getcombinazionelivdis(table_2.getValueAt(q,0).toString(), table_2.getValueAt(q,1).toString()) == GetInfoDB.getcomb(table_2.getValueAt(q , 1).toString(),table_2.getValueAt(q , 0).toString(),GetInfoDB.getidTess(Utente.getUsername())))
-					{
-					
-					ris=1;
-					}
-					else{
-						
-						
-					}
-					
+				
 					
 				}
 
@@ -295,12 +303,11 @@ public class FrameAttivitaTes extends JPanel {
 					if(u)
 					{
 						
-						if(ris==1){
-							JOptionPane.showMessageDialog(FrameAttivitaTes.frame, "Hai già un iscrizione con la disciplina da te selezionata",null,JOptionPane.WARNING_MESSAGE);
-							
-						}
+					modello.addRow(dati);	
+						
+					}
 						else{
-						modello.addRow(dati);
+						
 						}
 					}
 				
@@ -322,7 +329,6 @@ public class FrameAttivitaTes extends JPanel {
 				
 				
 				
-				}
 				
 			
 	
