@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ import classiDAOResponsabile.Uccidi_iscrizione;
 import classiDAOResponsabile.dettagliiscrizionedao;
 import classiDAOResponsabile.modificaordinedao;
 import listener.Listen;
+import listener.VariListener;
 import modelliTabelleRespo.modellidettagli;
 
 public class FrameDettagliDaAccResp extends JFrame {
@@ -42,7 +44,7 @@ public class FrameDettagliDaAccResp extends JFrame {
 	
 	public static JTable table_2,tablemod2;
 	private modellidettagli model;
-	public JPanel contentPane,pannello;
+	public JPanel contentPane,pannello,Panel,BotPnl1,BotPnl2,BotPnl3;
 	public JButton bottone;
 	public JButton bottone1,bottone3;
 	
@@ -75,60 +77,57 @@ public class FrameDettagliDaAccResp extends JFrame {
 		pannello.setBackground(new Color (255,193,20));
 		pannello.setLayout(new BorderLayout());
 		
+	
+		
+		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+		
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,193,20));
-		contentPane.setLayout(new GridBagLayout());
+		contentPane.setBackground(new Color (255,185,0));
+		contentPane.setLayout(new BorderLayout());
 		
 		
 		
-		GridBagConstraints gbc = new GridBagConstraints();
-		
-		JScrollPane scroll = new JScrollPane(pannello);
+ 
+		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
 		
+	    
+	    
+		Panel = new JPanel();
+		Panel.setBackground(new Color(255,185,0));
+		Panel.setLayout(new GridBagLayout());
 		
-	    JLabel lblUtentiS = new JLabel("Dettagli ordine da accettare");
-		lblUtentiS.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUtentiS.setForeground(Color.WHITE);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		pannello.add(lblUtentiS,BorderLayout.NORTH);
+		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel, 1, 0, "Dettagli ordine accettato"), BorderLayout.NORTH);		
 		
 	
 		
 		table_2 = new JTable();
 		model = new modellidettagli(dettagliiscrizionedao.elencoiniziale(cod));
-		table_2.setCellSelectionEnabled(true);
-		table_2.setModel(model);
-		
-		tablemod2 = setupTableWidths.setupTableWidths(table_2);
-
-		tablemod2.setForeground(new Color(255, 255, 255));
-		tablemod2.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt2 = new JScrollPane();
-
-		scrollt2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt2.setBackground(new Color(255, 193, 20));
-		scrollt2.setViewportView(tablemod2);
+		contentPane.add(VariListener.SettaScroll(table_2,50,model), BorderLayout.CENTER);	
 		
 		
-		pannello.add(scrollt2,BorderLayout.CENTER);
 		
-        bottone= new JButton("Conferma Parte dell'Ordine");
-        bottone.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone.setForeground(Color.BLACK);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		contentPane.add(bottone,gbc);
 		
-		bottone.addActionListener(new ActionListener() {
+		BotPnl1 = new JPanel();
+		BotPnl1.setBackground(new Color (235,193,20));
+		BotPnl1.setLayout(new GridBagLayout());
+		
+		
+		
+		
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn, lbl,"conferma parte dell'ordine", 2, 2,im2,true);
+		btn.setMnemonic('e');
+		
+		btn.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			int iddet,tesserato,codiceturno;
 			String disciplina,livello,giorno,orario;
@@ -153,15 +152,18 @@ public class FrameDettagliDaAccResp extends JFrame {
 				
 				
 				
-		 bottone1= new JButton("Annulla conferma Parte ordine");
-	        bottone1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			bottone1.setForeground(Color.BLACK);
-			gbc.insets = new Insets(0, 0, 5, 5);
-			gbc.gridx = 1;
-			gbc.gridy = 3;
-			contentPane.add(bottone1,gbc);
+		
+		
+		
+		
+		
+		
+		JButton btn1 = new JButton(im);
+		JLabel lbl1= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn1, lbl1,"Annulla ordine", 4, 2,im2,true);
+		btn1.setMnemonic('e');
 
-	bottone1.addActionListener(new ActionListener() {
+	btn1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			int iddet,tesserato,codiceturno,conf;
 			String disciplina,livello,giorno,orario;
@@ -185,14 +187,16 @@ public class FrameDettagliDaAccResp extends JFrame {
 	}
 			);	
 	 
-    bottone3= new JButton("Conferma Ordine");
-	bottone3.setVisible(false);
-    bottone3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	bottone3.setForeground(Color.BLACK);
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx = 2;
-	gbc.gridy = 3;
-	contentPane.add(bottone3,gbc);
+	
+	
+	
+	
+	JButton btn2 = new JButton(im);
+	JLabel lbl2= new JLabel();
+			btn2.setMnemonic('e');
+    VariListener.SettaBtn(BotPnl1, btn2, lbl2,"conferma ordine", 6, 2,im2,false);
+	
+
 	
 	
 	
@@ -211,15 +215,16 @@ public class FrameDettagliDaAccResp extends JFrame {
 					
 			}
 			
-			if (o.equals("a")){bottone3.setVisible(false);}
+			if (o.equals("a")){btn2.setVisible(false);}
 			else
 			{
-				bottone3.setVisible(true);
+				lbl2.setVisible(true);
+				btn2.setVisible(true);
 			}
 			
 					
 		
-	bottone3.addActionListener(new ActionListener() {
+	btn2.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			GestioneIscrizioniDAO.ConfermaIscrizione(cod);
 			frame.dispose();
@@ -227,10 +232,10 @@ public class FrameDettagliDaAccResp extends JFrame {
 	}}
 			);	
 	
-	pannello.add(contentPane,BorderLayout.SOUTH);
+	contentPane.add(BotPnl1,BorderLayout.SOUTH);
 	
 	}
-	
+
 	
 	
 	
