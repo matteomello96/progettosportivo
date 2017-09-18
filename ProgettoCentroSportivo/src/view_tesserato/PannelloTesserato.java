@@ -1,48 +1,27 @@
 package view_tesserato;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-
-import ClassiDAOIstruttore.ElencoAttDAO;
-import ClassiDAOIstruttore.ElencoEventiDAO;
-import ClassiDAOIstruttore.EliminaAttDAO;
-import ClassiDAOIstruttore.EliminaEventoDAO;
 import ClassiDao.DettagliUtenteDAO;
-import ClassiDao.GetInfoDB;
 import Model.Utente;
-import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.FrameModificaDati;
 import listener.Listen;
-import modelliTabelleIstruttore.ModElAttIstr;
-import modelliTabelleIstruttore.ModElEventiIstr;
+import listener.VariListener;
+
+
 public class PannelloTesserato extends JFrame {
 	/**
 	 * 
@@ -53,10 +32,8 @@ public class PannelloTesserato extends JFrame {
 	 */
 	public static JFrame frame;
 	
-	public JPanel contentPane,tabellaPnl,tabellaPnl2,bottoniPnl1,bottoniPnl2;
-	public static JTable table,table2;
-    private ModElEventiIstr model;
-    private ModElAttIstr model2;
+	public JPanel contentPane,Panel2,Panel3,Panel1;
+
     
 	
     
@@ -146,12 +123,17 @@ public class PannelloTesserato extends JFrame {
     		
     		
     		
+    		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
+            ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+            ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+    		
+    		
     		contentPane = new JPanel();
-    		contentPane.setBackground(new Color (64,224,208));
-    		contentPane.setLayout(new GridBagLayout());
+    		contentPane.setBackground(new Color (60,179,113));
+    		contentPane.setLayout(new BorderLayout());
     		
     		
-    		GridBagConstraints gbc = new GridBagConstraints();
+    		
      
     		JScrollPane scroll = new JScrollPane(contentPane);
     		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -159,359 +141,132 @@ public class PannelloTesserato extends JFrame {
     		scroll.setBounds(50, 30, 300, 50);			
     	    frame.getContentPane().add(scroll);
     		
-    	    JLabel lblDatiAnagrafici = new JLabel("Dati Anagrafici");
-    		lblDatiAnagrafici.setOpaque(true);
-    		lblDatiAnagrafici.setBackground(new Color(65, 105, 225));
-    		lblDatiAnagrafici.setForeground(new Color(255, 255, 255));
-    		lblDatiAnagrafici.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 1;
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		contentPane.add(lblDatiAnagrafici, gbc);
+    	    Panel1 = new JPanel();
+    		Panel1.setBackground(new Color(60, 179, 113));
+    		Panel1.setLayout(new GridBagLayout());
     		
     		
     		
-    		JLabel lblNome = new JLabel("Nome");
-    		lblNome.setOpaque(true);
-    		lblNome.setBackground(new Color(205, 127, 50));
-    		lblNome.setForeground(new Color(255, 255, 255));
-    		lblNome.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor =  GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 2;
-    		contentPane.add(lblNome, gbc);
+    		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Pannello di controllo"), BorderLayout.NORTH);
     		
-    		JLabel lblErrNome = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getNome()+"");
-    		lblErrNome.setOpaque(true);
-    		lblErrNome.setBackground(new Color(255, 255, 255));
-    		lblErrNome.setForeground(new Color(0, 0, 0));
-    		lblErrNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrNome.setBounds(25, 30, 10, 10);
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 2;
-    		gbc.anchor = GridBagConstraints.LINE_START;
+    		Panel2 = new JPanel();
+    		Panel2.setBackground(new Color(60,179,113));
+    		Panel2.setLayout(new GridBagLayout());
     		
-    		contentPane.add(lblErrNome,gbc);
+    		
+    		
+    		VariListener.SettaPannelloTitolo(im3, Panel2, 1, 1, "Dati Anagrafici");
+    		
+    		
+    		
+    		JLabel lblNome = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblNome, "Nome", 1, 2);
+    		
+    		JLabel lblErrNome = new JLabel();
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getNome()+"",lblErrNome, 2, 2, Panel2);
 
     		
     		
-    		JLabel lblCognome = new JLabel("Cognome");
-    		lblCognome.setOpaque(true);
-    		lblCognome.setBackground(new Color(205, 127, 50));
-    		lblCognome.setForeground(new Color(255, 255, 255));
-    		lblCognome.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.gridx = 0;
-    		gbc.gridy = 3;
-    		contentPane.add(lblCognome, gbc);
+    		JLabel lblCognome = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblCognome,"Cognome", 1, 3);
     		
     		
     		JLabel lblErrCognome = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getCognome()+"");
-    		lblErrCognome.setOpaque(true);
-    		lblErrCognome.setBackground(new Color(255, 255, 255));
-    		lblErrCognome.setForeground(new Color(0, 0, 0));
-    		lblErrCognome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrCognome.setBounds(25, 30, 10, 10);
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 3;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		
-    		contentPane.add(lblErrCognome,gbc);
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getCognome()+"",lblErrCognome, 2, 3, Panel2);
     		
     		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		JLabel lblCodiceFiscale = new JLabel("Codice Fiscale");
-    		lblCodiceFiscale.setOpaque(true);
-    		lblCodiceFiscale.setBackground(new Color(205, 127, 50));
-    		lblCodiceFiscale.setForeground(new Color(255, 255, 255));
-    		lblCodiceFiscale.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 4;
-    		contentPane.add(lblCodiceFiscale, gbc);
+    	
+    		JLabel lblCodiceFiscale = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblCodiceFiscale,"Codice Fiscale", 1, 4);
     		
     		
     		
     		JLabel lblErrCF = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getCodicefiscale()+"");
-    		lblErrCF.setOpaque(true);
-    		lblErrCF.setBackground(new Color(255, 255, 255));
-    		lblErrCF.setForeground(new Color(0, 0, 0));
-    		lblErrCF.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrCF.setBounds(25, 30, 10, 10);
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx =1;
-    		gbc.gridy = 4;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		contentPane.add(lblErrCF,gbc);
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getCodicefiscale()+"",lblErrCF, 2, 4, Panel2);
     		
     		
+    		JLabel lblCitt = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblCitt,"Citta", 1, 5);
+    		
+    		JLabel lblErrCitta = new JLabel();
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getCitta()+"",lblErrCitta, 2, 5, Panel2);
+    		
+    		JLabel lblVia = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblVia,"Via", 1, 6);
+    		
+    		JLabel lblErrVia = new JLabel();
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getVia()+"",lblErrVia, 2, 6, Panel2);
+    		
+    		JLabel lblNumeroCivico = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblNumeroCivico,"Numero Civico", 1, 7);
+    		
+    		JLabel lblErrNC = new JLabel();
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getNumcivico()+"",lblErrNC, 2, 7, Panel2);
+    		
+    		JLabel lblTelefono = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblTelefono,"Recapito telefonico", 1, 8);
+    		
+    		JLabel lblErrT = new JLabel();
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getTelefono()+"",lblErrT, 2, 10, Panel2);
     		
     		
+    		VariListener.SettaPannelloTitolo(im3, Panel2, 1, 9, "Dati di accesso al Centro");
     		
     		
+    		JLabel lblIndirizzoMail = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblIndirizzoMail,"Indirizzo mail", 1, 10);
     		
+    		JLabel lblErrMail = new JLabel();
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getMail()+"",lblErrMail, 2, 8, Panel2);
     		
-    		
-    		JLabel lblCitt = new JLabel("Citta");
-    		lblCitt.setOpaque(true);
-    		lblCitt.setBackground(new Color(205, 127, 50));
-    		lblCitt.setForeground(new Color(255, 255, 255));
-    		lblCitt.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 0;
-    		gbc.gridy = 5;
-    		contentPane.add(lblCitt, gbc);
-    		
-    		JLabel lblErrCitta = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getCitta()+"");
-    		lblErrCitta.setOpaque(true);
-    		lblErrCitta.setBackground(new Color(255, 255,255));
-    		lblErrCitta.setForeground(new Color(0, 0, 0));
-    		lblErrCitta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrCitta.setBounds(25, 30, 10, 10);
-    		
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 5;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		
-    		contentPane.add(lblErrCitta,gbc);
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		JLabel lblVia = new JLabel("Via");
-    		lblVia.setOpaque(true);
-    		lblVia.setBackground(new Color(205, 127, 50));
-    		lblVia.setForeground(new Color(255, 255, 255));
-    		lblVia.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.gridx = 0;
-    		gbc.gridy = 6;
-    		contentPane.add(lblVia, gbc);
-    		
-    		JLabel lblErrVia = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getVia()+"");
-    		lblErrVia.setOpaque(true);
-    		lblErrVia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrVia.setBackground(new Color(255, 255, 255));
-    		lblErrVia.setForeground(new Color(0, 0, 0));
-    		lblErrVia.setBounds(25, 30, 10, 10);
-    		
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 6;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		
-    		contentPane.add(lblErrVia,gbc);
-    		
-    		
-    		
-    		
-    		
-    		JLabel lblNumeroCivico = new JLabel("Numero Civico");
-    		lblNumeroCivico.setOpaque(true);
-    		lblNumeroCivico.setBackground(new Color(205, 127, 50));
-    		lblNumeroCivico.setForeground(new Color(255, 255, 255));
-    		lblNumeroCivico.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 7;
-    		contentPane.add(lblNumeroCivico, gbc);
-    		
-    		JLabel lblErrNC = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getNumcivico()+"");
-    		lblErrNC.setOpaque(true);
-    		lblErrNC.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrNC.setBackground(new Color(255,255,255));
-    		lblErrNC.setForeground(new Color(0, 0, 0));
-    		lblErrNC.setBounds(25, 30, 10, 10);
-    		
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 7;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		
-    		contentPane.add(lblErrNC,gbc);
-    		
-    		
-    		
-    		
-
-    		JLabel lblTelefono = new JLabel("Recapito telefonico");
-    		lblTelefono.setOpaque(true);
-    		lblTelefono.setBackground(new Color(205, 127, 50));
-    		lblTelefono.setForeground(new Color(255, 255, 255));
-    		lblTelefono.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 8;
-    		contentPane.add(lblTelefono, gbc);
-    		
-    		JLabel lblErrT = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getTelefono()+"");
-    		lblErrT.setOpaque(true);
-    		lblErrT.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrT.setBackground(new Color(255, 255, 255));
-    		lblErrT.setForeground(new Color(0, 0, 0));
-    		lblErrT.setBounds(25, 30, 10, 10);
-    		
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 8;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		
-    		contentPane.add(lblErrT,gbc);
-    		
-    		
-    		
-    		
-
-    			
-    		
-    		
-    		JLabel lblDatiutenza = new JLabel("Dati di Accesso");
-    		lblDatiutenza.setOpaque(true);
-    		lblDatiutenza.setBackground(new Color(65, 105, 225));
-    		lblDatiutenza.setForeground(new Color(255, 255, 255));
-    		lblDatiutenza.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 9;
-    		contentPane.add(lblDatiutenza, gbc);
-    		
-    		
-    		JLabel lblIndirizzoMail = new JLabel("Indirizzo mail");
-    		lblIndirizzoMail.setOpaque(true);
-    		lblIndirizzoMail.setBackground(new Color(205, 127, 50));
-    		lblIndirizzoMail.setForeground(new Color(255, 255, 255));
-    		lblIndirizzoMail.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 10;
-    		contentPane.add(lblIndirizzoMail, gbc);
-    		
-    		JLabel lblErrMail = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getMail()+"");
-    		lblErrMail.setOpaque(true);
-    		lblErrMail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrMail.setBackground(new Color(255, 255,255));
-    		lblErrMail.setForeground(new Color(0, 0,0));
-    		lblErrMail.setBounds(25, 30, 10, 10);
-    		
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 10;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		
-    		contentPane.add(lblErrMail,gbc);
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		JLabel lblNomeutente = new JLabel("Nome Utente");
-    		lblNomeutente.setOpaque(true);
-    		lblNomeutente.setBackground(new Color(205, 127, 50));
-    		lblNomeutente.setForeground(new Color(255, 255, 255));
-    		lblNomeutente.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 11;
-    		contentPane.add(lblNomeutente, gbc);
+    		JLabel lblNomeutente = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblNomeutente,"Nome utente", 1, 11);
     		
     		JLabel lblErrNomeUt = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getUser()+"");
-    		lblErrNomeUt.setOpaque(true);
-    		lblErrNomeUt.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErrNomeUt.setBackground(new Color(255,255,255));
-    		lblErrNomeUt.setForeground(new Color(0, 0, 0));
-    		lblErrNomeUt.setBounds(25, 30, 10, 10);
-    		
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 11;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		
-    		contentPane.add(lblErrNomeUt,gbc);
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getUser()+"",lblErrNomeUt, 2, 11, Panel2);
     			 
     		
     		
     		
-    		JLabel lblPassword = new JLabel("Password");
-    		lblPassword.setOpaque(true);
-    		lblPassword.setBackground(new Color(205, 127, 50));
-    		lblPassword.setForeground(new Color(255, 255, 255));
-    		lblPassword.setFont(new Font("SansSerif", Font.PLAIN, 14));
-    		gbc.anchor = GridBagConstraints.LINE_END;
-    		gbc.insets = new Insets(5, 0, 0, 10);
-    		gbc.gridx = 0;
-    		gbc.gridy = 12;
-    		contentPane.add(lblPassword, gbc);
+    		JLabel lblPassword = new JLabel();
+    		VariListener.SettaLabelGen(Panel2,lblPassword,"Password", 1, 12);
     		
     		JLabel lblErr1P = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getPass()+"");
-    		lblErr1P.setOpaque(true);
-    		lblErr1P.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    		lblErr1P.setBackground(new Color(255,255,255));
-    		lblErr1P.setForeground(new Color(0,0,0));
-    		lblErr1P.setBounds(25, 30, 10, 10);
-    		
-    		gbc.insets = new Insets(0, 0, 5, 5);
-    		gbc.gridx = 1;
-    		gbc.gridy = 12;
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		
-    		contentPane.add(lblErr1P,gbc);
+    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getPass()+"",lblErr1P, 2, 12, Panel2);
     		
     		
     		
     		
     		
     		
-    		JButton btnNewButton7 = new JButton("Modifica dati");
-    		btnNewButton7.setMnemonic('i');
-    		btnNewButton7.addActionListener(new ActionListener() {
+    		contentPane.add(Panel2,BorderLayout.CENTER);
+    		
+    		
+    		
+    		Panel3 = new JPanel();
+    		Panel3.setBackground(new Color (60,179,113));
+    		Panel3.setLayout(new GridBagLayout());
+
+    		
+    		
+    		
+    		JButton btn = new JButton(im);
+    		JLabel lbl= new JLabel();
+            VariListener.SettaBtn(Panel3, btn, lbl,"Modifica i dati", 2, 2,im2,true);
+           
+            
+            btn.setToolTipText("Modifica i dati");
+    		btn.setMnemonic('i');
+    		btn.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
+    				lbl.setBackground(Color.WHITE);
     				frame.setVisible(false);
     				frame.dispose();
     				new FrameModificaDati(""+Utente.getUsername()+"");
     				
     			}
     		});	
-    		gbc.anchor = GridBagConstraints.LINE_START;
-    		gbc.gridwidth = 2;
-    		gbc.gridx = 2;
-    		gbc.gridy = 13;
-    		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
     		
-    	
-    	
-    		
-    		
-    		
-    		
-    		contentPane.add(btnNewButton7, gbc);
-    	
+    		contentPane.add(Panel3,BorderLayout.SOUTH);
     	}
     }
