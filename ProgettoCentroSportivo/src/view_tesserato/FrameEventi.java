@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import ClassiDAOIstruttore.ElencoEventiDAO;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
@@ -49,6 +50,7 @@ import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.FrameIniziale;
 import VisteUtenteGenerico.FrameLogin;
 import listener.Listen;
+import listener.VariListener;
 import modelliTabelleIstruttore.ModElEventiIstr;
 import Model.Utente;
 import Model_Tesserato.ElencoEventiTes;
@@ -65,7 +67,7 @@ public class FrameEventi extends JFrame {
 	 */
 	public static JFrame frame;
 	
-	public JPanel contentPane,tabellaPnl,bottoniPnl1;
+	public JPanel contentPane,tabellaPnl,bottoniPnl1,Panel1;
 	public static JTable table;
 	
 	public static JTable table2;
@@ -110,14 +112,15 @@ public class FrameEventi extends JFrame {
 		mntmNewMenuItem.addActionListener(new Listen(this));
 		mntmNewMenuItem.setActionCommand("pantes2");
 		                                                            
-
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,36,0));
+		contentPane.setBackground(new Color (42,82,190));
 		contentPane.setLayout(new BorderLayout());
 		
 		
-		GridBagConstraints gbc = new GridBagConstraints();
  
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -126,17 +129,17 @@ public class FrameEventi extends JFrame {
 	    frame.getContentPane().add(scroll);
 		
 		
-		JLabel lblEventi = new JLabel("Elenco dei tuoi eventi");
-		lblEventi.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblEventi.setForeground(Color.BLACK);
-		gbc.insets = new Insets(5, 0, 0, 5);
-		gbc.gridx = 4;
-		gbc.gridy = 0;
-		contentPane.add(lblEventi,BorderLayout.NORTH);
+	    Panel1 = new JPanel();
+		Panel1.setBackground(new Color(42, 82, 190));
+		Panel1.setLayout(new GridBagLayout());
+		
+		
+		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 2, 2,"Elenco degli eventi disponibili"), BorderLayout.NORTH);
+		
 		
 		tabellaPnl = new JPanel();
 		tabellaPnl.setLayout(new BorderLayout());
-		
+		tabellaPnl.setBackground(new Color(42, 82, 190));
 		
 		
 		table = new JTable();
@@ -242,7 +245,9 @@ public class FrameEventi extends JFrame {
 		gbc.gridx = 2;
 		gbc.gridy = 7;
 		bottoniPnl2.add(Aggiungi,gbc);
+		
 		tabellaPnl.add(bottoniPnl2,BorderLayout.SOUTH);
+		
 		contentPane.add(tabellaPnl, BorderLayout.WEST);
 		
 		rimuovi = new JButton("rimuovi");

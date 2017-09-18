@@ -9,6 +9,8 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import javax.swing.JMenu;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
@@ -19,6 +21,7 @@ import java.awt.Insets;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,6 +40,7 @@ import ModelliTabelle_Tesserato.disc_tabella;
 import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.setupTableWidths;
 import listener.Listen;
+import listener.VariListener;
 
 
 public class FrameAttivitaTes extends JPanel {
@@ -48,7 +52,7 @@ public class FrameAttivitaTes extends JPanel {
 	public static JTable table_1;
 	public static JTable table_2;
 	public static JFrame frame;
-	public JPanel contentPane;
+	public JPanel contentPane,Panel1,tabellaPnl,PanelBottom;
 	private disc_tabella model;
 	private disc_attive model1;
 	 public static float totale;
@@ -63,6 +67,7 @@ public class FrameAttivitaTes extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	private DefaultTableModel model2;
 	public FrameAttivitaTes() {
 		
 
@@ -79,9 +84,7 @@ public class FrameAttivitaTes extends JPanel {
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
 		
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,36,0));
-		contentPane.setLayout(new GridBagLayout());
+		
 		
 
 	
@@ -101,32 +104,16 @@ public class FrameAttivitaTes extends JPanel {
 		mntmNewMenuItem.setActionCommand("pantes");
 		
 		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
 		
 		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
 		
-		
-		
-		
-		/*JMenuItem scelta_orario= new JMenuItem("Scegli turno");
-		scelta_orario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				a="null";
-				new FrameTurno(a,null,null,null);
-				
-				
-			}
-		});
-		mnNewMenu.add(scelta_orario);*/
 
-		
-	
-		
-		
-		
-		
-		
-		GridBagConstraints gbc = new GridBagConstraints();
 		
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -134,63 +121,25 @@ public class FrameAttivitaTes extends JPanel {
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
 		
+	    Panel1 = new JPanel();
+		Panel1.setBackground(new Color (42,82,190));
+		Panel1.setLayout(new GridBagLayout());
 		
 		
-		JLabel totord = new JLabel("Elenco delle discipline disponibili per l'iscrizione");
-		totord.setFont(new Font("Tahoma", Font.BOLD, 18));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc.gridwidth = 3;
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		contentPane.add(totord, gbc_lblNewLabel);
+		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 2, 2,"Elenco delle discipline disponibili per l'iscrizione"), BorderLayout.NORTH);
+		
+		tabellaPnl = new JPanel();
+		tabellaPnl.setLayout(new BorderLayout());
+		tabellaPnl.setBackground(new Color(42, 82, 190));
 		
 		
 		table = new JTable();
 		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());
-		table.setRowHeight(250);
-		table.setRowHeight(3, 50);
-		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table.setCellSelectionEnabled(true);
-		table.setCellSelectionEnabled(true);
-		table.setModel(model);
-			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.setModel(model);
-		Font font2 = new Font("Comic Sans", Font.PLAIN, 15);
-		table.setFont(font2);
-		tablemod1 = setupTableWidths.setupTableWidths(table);
-
-		tablemod1.setForeground(new Color(255, 255, 255));
-		tablemod1.setBackground(new Color(240, 220, 130));
-		
-		
-		JScrollPane pane2 = new JScrollPane(table);
-		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		// .
-	
-
-		
-		pane2.setBackground(new Color(255, 193, 20));
-		pane2.setViewportView(tablemod1);
-		
-		
-		
-		
-		
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 2;
-		gbc.gridy = 2;
-		contentPane.add(pane2, gbc);
+		tabellaPnl.add(VariListener.SettaScroll(table,50,model), BorderLayout.WEST);
 		
 		
 		table_1 = new JTable();
-		
-		table_1.setModel(new DefaultTableModel(
+		model2=(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
@@ -211,6 +160,7 @@ public class FrameAttivitaTes extends JPanel {
 				
 			
 		});
+		table_1.setModel(model2);
 		
 	
 		table_1.setAutoCreateRowSorter(true);
@@ -218,29 +168,19 @@ public class FrameAttivitaTes extends JPanel {
 		
 		
 
-		JScrollPane pane = new JScrollPane(table_1);
-		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 5;
-		gbc.gridy = 2;
-		contentPane.add(pane, gbc);
+		tabellaPnl.add(VariListener.SettaScroll(table_1,50,model2), BorderLayout.EAST);
 		
+		contentPane.add(tabellaPnl,BorderLayout.CENTER);
 		
+		PanelBottom = new JPanel();
+		PanelBottom.setLayout(new GridBagLayout());
+		PanelBottom.setBackground(new Color (42,82,190));
 
-		Aggiungi = new JButton("Aggiungi");
-		
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 4;
-		contentPane.add(Aggiungi,gbc);
-		
-		
-		
-		Aggiungi.addActionListener(new ActionListener() {
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(PanelBottom, btn, lbl,"Aggiungi", 2, 2,im2,true);
+		btn.setMnemonic('e');
+		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				table_2 = new JTable();
@@ -275,8 +215,7 @@ public class FrameAttivitaTes extends JPanel {
 				
 				
 					
-				//new FrameDiscAttive();
-			//FrameDiscAttive.frame.dispose();
+				
 				for(q=0;q<table_2.getRowCount();q++){
 					
 				
@@ -346,15 +285,12 @@ public class FrameAttivitaTes extends JPanel {
 		
 		
 		
-		rimuovi = new JButton("rimuovi");
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 3;
-		gbc.gridy = 5;
-		contentPane.add(rimuovi, gbc);
+		JButton btn2 = new JButton(im);
+		JLabel lbl2= new JLabel();
+        VariListener.SettaBtn(PanelBottom, btn2, lbl2,"Rimuovi", 2, 5,im2,true);
+		btn2.setMnemonic('e');
 		
-		
-		
-		rimuovi.addActionListener(new ActionListener() {
+		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				if(table_1.getSelectedRow()!=-1){
@@ -365,15 +301,11 @@ public class FrameAttivitaTes extends JPanel {
 		
 		
 		
-	    svuotacarrello = new JButton("svuotacarrello");
-	   
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 4;
-		gbc.gridy = 4;
-		contentPane.add(svuotacarrello, gbc);
-		
-		
-		svuotacarrello.addActionListener(new ActionListener() {
+		JButton btn3 = new JButton(im);
+		JLabel lbl3= new JLabel();
+        VariListener.SettaBtn(PanelBottom, btn3, lbl3,"Svuota carrello", 3, 2,im2,true);
+		btn.setMnemonic('e');
+		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				for(int x=modello.getRowCount()-1;x>=0;x--)
@@ -383,17 +315,13 @@ public class FrameAttivitaTes extends JPanel {
 			}
 		});
 		
-	     invia = new JButton("invia");
-
-			
-			gbc.insets = new Insets(0, 0, 5, 5);
-			gbc.gridx = 5;
-			gbc.gridy = 4;
-			contentPane.add(invia, gbc);
-		
-		invia.addActionListener(new Listen(this));
-		invia.setActionCommand("conf");
-		invia.setEnabled(false);
+		JButton btn4 = new JButton(im);
+		JLabel lbl4= new JLabel();
+        VariListener.SettaBtn(PanelBottom, btn4, lbl4,"Inserisci attività", 4, 2,im2,true);
+		btn.setMnemonic('e');
+		btn4.addActionListener(new Listen(this));
+		btn4.setActionCommand("conf");
+		btn4.setEnabled(false);
 		
 		
 		
@@ -417,13 +345,15 @@ public class FrameAttivitaTes extends JPanel {
 				
 				}
 			
-				totord.setText("TOTALE ISCRIZIONI: "+df.format(totale)+" EUR  ");
+				
+				contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 2, 2,"TOTALE ISCRIZIONI: "+df.format(totale)+" EUR  "), BorderLayout.NORTH);
+				
 				
 				if(table_1.getModel().getRowCount()>0)
-					invia.setEnabled(true);
+					btn4.setEnabled(true);
 				else table_1.setEnabled(false);
 				if(table_1.getModel().getRowCount()<1)
-					invia.setEnabled(false);	
+					btn4.setEnabled(false);	
 				
 				
 				
@@ -432,9 +362,9 @@ public class FrameAttivitaTes extends JPanel {
 					
 		}}
 		);
-	
+	contentPane.add(PanelBottom,BorderLayout.SOUTH);
 	}
-
+	
 }
 
 

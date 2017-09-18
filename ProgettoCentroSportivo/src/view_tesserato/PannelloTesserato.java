@@ -123,13 +123,13 @@ public class PannelloTesserato extends JFrame {
     		
     		
     		
-    		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
-            ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
-            ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+    		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
+            ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
+            ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
     		
     		
     		contentPane = new JPanel();
-    		contentPane.setBackground(new Color (60,179,113));
+    		contentPane.setBackground(new Color (42,82,190));
     		contentPane.setLayout(new BorderLayout());
     		
     		
@@ -142,7 +142,7 @@ public class PannelloTesserato extends JFrame {
     	    frame.getContentPane().add(scroll);
     		
     	    Panel1 = new JPanel();
-    		Panel1.setBackground(new Color(60, 179, 113));
+    		Panel1.setBackground(new Color(42, 82, 190));
     		Panel1.setLayout(new GridBagLayout());
     		
     		
@@ -150,7 +150,7 @@ public class PannelloTesserato extends JFrame {
     		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Pannello di controllo"), BorderLayout.NORTH);
     		
     		Panel2 = new JPanel();
-    		Panel2.setBackground(new Color(60,179,113));
+    		Panel2.setBackground(new Color(42,82,190));
     		Panel2.setLayout(new GridBagLayout());
     		
     		
@@ -163,7 +163,7 @@ public class PannelloTesserato extends JFrame {
     		VariListener.SettaLabelGen(Panel2,lblNome, "Nome", 1, 2);
     		
     		JLabel lblErrNome = new JLabel();
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getNome()+"",lblErrNome, 2, 2, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getNome()+"",lblErrNome, 2, 2, Panel2);
 
     		
     		
@@ -172,7 +172,7 @@ public class PannelloTesserato extends JFrame {
     		
     		
     		JLabel lblErrCognome = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getCognome()+"");
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getCognome()+"",lblErrCognome, 2, 3, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getCognome()+"",lblErrCognome, 2, 3, Panel2);
     		
     		
     	
@@ -182,32 +182,32 @@ public class PannelloTesserato extends JFrame {
     		
     		
     		JLabel lblErrCF = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getCodicefiscale()+"");
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getCodicefiscale()+"",lblErrCF, 2, 4, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getCodicefiscale()+"",lblErrCF, 2, 4, Panel2);
     		
     		
     		JLabel lblCitt = new JLabel();
     		VariListener.SettaLabelGen(Panel2,lblCitt,"Citta", 1, 5);
     		
     		JLabel lblErrCitta = new JLabel();
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getCitta()+"",lblErrCitta, 2, 5, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getCitta()+"",lblErrCitta, 2, 5, Panel2);
     		
     		JLabel lblVia = new JLabel();
     		VariListener.SettaLabelGen(Panel2,lblVia,"Via", 1, 6);
     		
     		JLabel lblErrVia = new JLabel();
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getVia()+"",lblErrVia, 2, 6, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getVia()+"",lblErrVia, 2, 6, Panel2);
     		
     		JLabel lblNumeroCivico = new JLabel();
     		VariListener.SettaLabelGen(Panel2,lblNumeroCivico,"Numero Civico", 1, 7);
     		
     		JLabel lblErrNC = new JLabel();
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getNumcivico()+"",lblErrNC, 2, 7, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getNumcivico()+"",lblErrNC, 2, 7, Panel2);
     		
     		JLabel lblTelefono = new JLabel();
     		VariListener.SettaLabelGen(Panel2,lblTelefono,"Recapito telefonico", 1, 8);
     		
     		JLabel lblErrT = new JLabel();
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getTelefono()+"",lblErrT, 2, 10, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getTelefono()+"",lblErrT, 2, 10, Panel2);
     		
     		
     		VariListener.SettaPannelloTitolo(im3, Panel2, 1, 9, "Dati di accesso al Centro");
@@ -217,13 +217,13 @@ public class PannelloTesserato extends JFrame {
     		VariListener.SettaLabelGen(Panel2,lblIndirizzoMail,"Indirizzo mail", 1, 10);
     		
     		JLabel lblErrMail = new JLabel();
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getMail()+"",lblErrMail, 2, 8, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getMail()+"",lblErrMail, 2, 8, Panel2);
     		
     		JLabel lblNomeutente = new JLabel();
     		VariListener.SettaLabelGen(Panel2,lblNomeutente,"Nome utente", 1, 11);
     		
     		JLabel lblErrNomeUt = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getUser()+"");
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getUser()+"",lblErrNomeUt, 2, 11, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getUser()+"",lblErrNomeUt, 2, 11, Panel2);
     			 
     		
     		
@@ -232,7 +232,7 @@ public class PannelloTesserato extends JFrame {
     		VariListener.SettaLabelGen(Panel2,lblPassword,"Password", 1, 12);
     		
     		JLabel lblErr1P = new JLabel(""+DettagliUtenteDAO.elencoutente(username).get(0).getPass()+"");
-    		VariListener.SettaErr2(""+DettagliUtenteDAO.elencoutente(username).get(0).getPass()+"",lblErr1P, 2, 12, Panel2);
+    		VariListener.SettaErr3(""+DettagliUtenteDAO.elencoutente(username).get(0).getPass()+"",lblErr1P, 2, 12, Panel2);
     		
     		
     		
@@ -244,7 +244,7 @@ public class PannelloTesserato extends JFrame {
     		
     		
     		Panel3 = new JPanel();
-    		Panel3.setBackground(new Color (60,179,113));
+    		Panel3.setBackground(new Color (42,82,190));
     		Panel3.setLayout(new GridBagLayout());
 
     		

@@ -447,8 +447,24 @@ if ("Vai_home_p".equals(e.getActionCommand())){
 	
 	FrameModificaDati.frame.setVisible(false);
 	FrameModificaDati.frame.dispose();
-	new PannelloIstruttore();
+	if (GetInfoDB.getTipo(""+Utente.getUsername()+"").equals("I"))
+	{
+		new PannelloIstruttore();
 	PannelloIstruttore.frame.setVisible(true);
+	PannelloIstruttore.frame.setEnabled(true);
+	}
+	if (GetInfoDB.getTipo(""+Utente.getUsername()+"").equals("R"))
+	{
+		new PannelloResponsabile();
+	PannelloResponsabile.frame.setVisible(true);
+	PannelloResponsabile.frame.setEnabled(true);
+	}
+	if (GetInfoDB.getTipo(""+Utente.getUsername()+"").equals("T"))
+	{
+		new PannelloTesserato();
+	PannelloTesserato.frame.setVisible(true);
+	PannelloTesserato.frame.setEnabled(true);
+	}
 }	
 		
 		

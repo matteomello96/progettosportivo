@@ -101,8 +101,7 @@ public class DetDisciplina {
 		Border c = BorderFactory.createLineBorder(new Color (255,205,255));
 		lblInformazioniLivello.setBorder(c);
 		gbc.insets = new Insets(0, 0, 5, 5);
-		//gbc.gridx = 0;
-		//gbc.gridy = 0;
+		
 		tabellaPnl.add(lblInformazioniLivello,BorderLayout.NORTH);
 		
 		table1 = new JTable();

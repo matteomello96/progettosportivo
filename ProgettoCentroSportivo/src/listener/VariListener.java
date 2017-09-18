@@ -63,7 +63,7 @@ public abstract class VariListener implements MouseListener{
 		panel.add(lbl, gbc);
 		
 	}
-	public static void SettaBox(JPanel panel,JComboBox box,int x,int y){
+	public static void SettaBox(JPanel panel,@SuppressWarnings("rawtypes") JComboBox box,int x,int y){
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		
@@ -238,4 +238,22 @@ public abstract class VariListener implements MouseListener{
 		
 		panel.add(lblerr,gbc);
 	}
+	public static void SettaErr3(String err,JLabel lblerr,int x,int y,JPanel panel){
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		
+		lblerr.setText(err);
+		lblerr.setOpaque(false);
+		lblerr.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblerr.setForeground(Color.ORANGE);
+		lblerr.setBounds(25, 30, 10, 10);
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = x;
+		gbc.gridy = y;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		
+		panel.add(lblerr,gbc);
+	}
+	
+	
 }

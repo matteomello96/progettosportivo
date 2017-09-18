@@ -174,8 +174,9 @@ public class FrameAttIstr extends JFrame {
 				if(table.getSelectedRow()!=-1)
 				{
 				lbl3.setForeground(Color.WHITE);	
-				FrameAttIstr.frame.dispose();
+				frame.setVisible(false);
 				new FrameModificaAtt((String) FrameAttIstr.table.getValueAt(FrameAttIstr.table.getSelectedRow(), 0),(String) FrameAttIstr.table.getValueAt(FrameAttIstr.table.getSelectedRow(),1));
+				frame.dispose();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore attività",JOptionPane.WARNING_MESSAGE);
