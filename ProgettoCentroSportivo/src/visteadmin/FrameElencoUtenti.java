@@ -1,42 +1,37 @@
 package visteadmin;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
-import ClassiDAOIstruttore.ElencoEventiDAO;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Insets;
+
+
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 
 
-import java.awt.ComponentOrientation;
 
-import Model.Utente;
-import VisteUtenteGenerico.FrameCambia;
-import VisteUtenteGenerico.setupTableWidths;
+
+
 import classiDAOResponsabile.ElencoUtentiDAO;
 import classiDAOResponsabile.credenzialidao;
 import listener.Listen;
 import listener.VariListener;
-import modelliTabelleIstruttore.ModElEventiIstr;
+
 import modelliTabelleRespo.ModElUtenti;
 
 import java.awt.event.ActionListener;
@@ -91,7 +86,7 @@ public class FrameElencoUtenti extends JFrame {
 		mntmNewMenuItem.setActionCommand("iniresp");
 		
 		
-JTabbedPane tabel = new JTabbedPane();
+
 		
 		
 		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");

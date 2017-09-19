@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
-import VisteUtenteGenerico.FrameCambia;
+
 import visteadmin.FrameDettagliDaAccResp;
 
 public class Uccidi_iscrizione {

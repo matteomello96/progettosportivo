@@ -20,7 +20,7 @@ import ClassiDao.GetInfoDB;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+
 import javax.swing.JMenu;
 
 import java.awt.event.ActionEvent;
@@ -33,8 +33,7 @@ import java.awt.GridBagLayout;
 
 
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
@@ -257,7 +256,7 @@ public class FrameModificaDisciplina extends JFrame {
 		  VariListener.SettaBtn(PanelBottom, btninsdisc, lbl,"Modifica disciplina", 1, 1,im2,true);
 		
 		btninsdisc.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
+			
 			public void actionPerformed(ActionEvent arg0) {
 			
 			

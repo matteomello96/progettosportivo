@@ -7,39 +7,29 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Insets;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 import ClassiDao.GetInfoDB;
 
-import java.awt.ComponentOrientation;
 
-import Model.Utente;
-import VisteUtenteGenerico.FrameCambia;
-import VisteUtenteGenerico.setupTableWidths;
-import classiDAOResponsabile.ElencoUtentiDAO;
-import classiDAOResponsabile.GestioneIscrizioniDAO;
+
 import classiDAOResponsabile.GestioneIscrizioniEventiDAO;
-import classiDAOResponsabile.RichiesteDao;
-import classiDAOResponsabile.credenzialidao;
+
 import classiDAOResponsabile.downloaddao;
 import classiDAOResponsabile.elencoeventidao;
 import listener.Listen;
 import listener.VariListener;
-import modelliTabelleIstruttore.ModElEventiIstr;
-import modelliTabelleRespo.ModElUtenti;
-import modelliTabelleRespo.modelisc;
+
 import modelliTabelleRespo.modeven;
 
 import java.awt.event.ActionListener;
@@ -68,7 +58,7 @@ public class FrameEventiResp extends JFrame {
 	public JTable tablemod4;
   
 	
-	private modeven model,model2,model3,model4;
+	private modeven model,model2,model3;
 
     private JTabbedPane tabed = new JTabbedPane();
 	/**

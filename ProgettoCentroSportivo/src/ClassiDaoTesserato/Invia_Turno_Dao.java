@@ -5,16 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.swing.JOptionPane;
+
 
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 import Model.Utente;
-import VisteUtenteGenerico.FrameCambia;
+
 import view_tesserato.FrameDiscAttive;
-import view_tesserato.FrameAttivitaTes;
-import view_tesserato.FrameTurno;
-import view_tesserato.FrameInserisciTurno;
+
 
 
 public class Invia_Turno_Dao {

@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 
-import ClassiDao.GetInfoDB;
+
 import DBInterfaccia.DbConnection;
-import Model.Utente;
+
 import Model_Responsabile.ElencoTestResp;
-import Model_Tesserato.ElenoTest;
 
 public class ElencoTestRespDao {
 private static ElencoTestRespDao instance;

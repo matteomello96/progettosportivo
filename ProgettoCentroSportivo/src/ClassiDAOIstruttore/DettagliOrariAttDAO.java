@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import DBInterfaccia.DbConnection;
-import Model.DettagliOrari;
+
 import Model_Istruttore.DettagliOrariAtt;
-import Model_Istruttore.DettagliOrariEv;
+
 
 public class DettagliOrariAttDAO {
 

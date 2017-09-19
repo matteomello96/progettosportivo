@@ -2,6 +2,7 @@ package visteadmin;
 
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import java.awt.Font;
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
 import classiDAOResponsabile.GestioneDAO;
 
 import listener.Listen;
-
+import listener.VariListener;
 import modelliTabelleRespo.ComboDiscipline;
 import modelliTabelleRespo.ComboLivelli;
 
@@ -30,17 +31,14 @@ import java.awt.GridBagLayout;
 
 
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+
 import javax.swing.JTextField;
 
 import javax.swing.ScrollPaneConstants;
 
 
 import javax.swing.JScrollPane;
-
-
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 
@@ -88,18 +86,8 @@ public class FrameModificaDiscDisp extends JFrame {
 	
 		
 		
-		
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color (64,224,208));
-		contentPane.setLayout(new GridBagLayout());
-		 
-		 GridBagConstraints gbc = new GridBagConstraints();
- 
-		JScrollPane scroll = new JScrollPane(contentPane);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(50, 30, 300, 50);			
-	    frame.getContentPane().add(scroll);
+			
+
 		
 		
 		frame.setVisible(true);
@@ -116,17 +104,37 @@ public class FrameModificaDiscDisp extends JFrame {
 		mntmTornaAllaPagina.setActionCommand("Vai_home_da_mod_disc");
 		
 		
+
 		
-		JLabel lblFormDiInserimento = new JLabel("Form di Modifica della disciplina");
-		lblFormDiInserimento.setOpaque(true);
-		lblFormDiInserimento.setBackground(new Color(18, 220, 150));
-		lblFormDiInserimento.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblFormDiInserimento, gbc);
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
 		
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (255,185,0));
+		contentPane.setLayout(new BorderLayout());
+		
+		
+		
+ 
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
+		
+
+		
+
+		
+		JPanel Panel1 = new JPanel();
+ 		Panel1.setBackground(new Color(255,185,0));
+ 		Panel1.setLayout(new GridBagLayout());
+		
+		
+		
+    contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Form di modifica disciplina"), BorderLayout.NORTH);	
 		
 				
 		
@@ -138,37 +146,21 @@ public class FrameModificaDiscDisp extends JFrame {
 	
 		
 		
+    JPanel Panel2 = new JPanel();
+  	Panel2.setLayout(new GridBagLayout());
+  	Panel2.setBackground(new Color (255,185,0));
+  	
+  	
+  	JLabel lblCostomensile = new JLabel();
+  	VariListener.SettaLabelGen(Panel2,lblCostomensile, "Nuovo costo mensile", 0, 1);
 		
-		JLabel lblCostomensile = new JLabel("Nuovo costo mensile");
-		lblCostomensile.setOpaque(true);
-		lblCostomensile.setBackground(new Color(18, 220, 150));
-		lblCostomensile.setForeground(new Color(255, 255, 255));
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy =9;
-		contentPane.add(lblCostomensile, gbc);
+	
+  	JLabel lblErrNome = new JLabel("");
+	VariListener.SettaErr("il costo non deve contenere errori",lblErrNome, 2, 1, Panel2);
 		
-		JLabel lblErrNome = new JLabel("Il livello non deve contenere numeri");
-		lblErrNome.setOpaque(true);
-		lblErrNome.setBackground(new Color(128, 0, 0));
-		lblErrNome.setForeground(new Color(255, 255, 255));
-		lblErrNome.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrNome.setBounds(25, 30, 10, 10);
-		lblErrNome.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 9;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		
-		contentPane.add(lblErrNome,gbc);
-		
-		costomensile = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 9;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(costomensile, gbc);
-		costomensile.setColumns(10);
+	costomensile= new JTextField();
+	VariListener.SettaTextField(Panel2, costomensile, "Inserire nome", 1,1);
+	VariListener.SettaFocus(costomensile);
 
 		costomensile.addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent ke)
@@ -196,17 +188,17 @@ public class FrameModificaDiscDisp extends JFrame {
 				
 			}});
 		
+		JPanel PanelBottom = new JPanel();
+		PanelBottom.setLayout(new GridBagLayout());
+		PanelBottom.setBackground(new Color (255,185,0));
 		
-		JButton btnRegistratiAlNostro = new JButton("Modifica la  disciplina disponibile");
-		btnRegistratiAlNostro.setBackground(new Color(174, 20, 200));
-		btnRegistratiAlNostro.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 14;
-		contentPane.add(btnRegistratiAlNostro, gbc);
+		 JButton btnRegistratiAlNostro = new JButton(im);
+		 JLabel lbl= new JLabel();
+		
+		  VariListener.SettaBtn(PanelBottom, btnRegistratiAlNostro, lbl,"modifica costo", 1, 1,im2,true);
 		
 		btnRegistratiAlNostro.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
+		
 			public void actionPerformed(ActionEvent arg0) {
 			
 
@@ -253,7 +245,8 @@ public class FrameModificaDiscDisp extends JFrame {
 		
 		;
 		
-		
+		contentPane.add(Panel2,BorderLayout.NORTH);
+		contentPane.add(PanelBottom,BorderLayout.CENTER);
 		
 	//	gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
 		

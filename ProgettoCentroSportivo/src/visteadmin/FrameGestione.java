@@ -4,10 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -18,9 +15,7 @@ import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Insets;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,12 +27,10 @@ import javax.swing.ScrollPaneConstants;
 import ClassiDao.ElencoDisciplineDAO;
 
 
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
+
 
 import ModelliTabelle.ModDiscIni;
 
-import VisteUtenteGenerico.setupTableWidths;
 import classiDAOResponsabile.ElencoCalDAO;
 import classiDAOResponsabile.ElencoDiscDispDAO;
 
@@ -76,7 +69,7 @@ public class FrameGestione extends JFrame {
     private ModDiscIni model;
     private ModLiv model2;
     private ModDiscDisp model3;
-    private JPanel GPane1,Panel1,BotPnl1,Panel2,BotPnl2,GPane2,GPane3,Panel3,BotPnl3,GPane4,Panel4,BotPnl4,GPane5,Panel5,BotPnl5,GPane6,Panel6,BotPnl6,GPane7,Panel7,BotPnl7,Panel8;
+    private JPanel GPane1,BotPnl1,Panel2,BotPnl2,GPane2,GPane3,Panel3,BotPnl3,GPane4,Panel4,BotPnl4,GPane5,Panel5,BotPnl5,GPane6,Panel6,BotPnl6,GPane7,Panel7,BotPnl7,Panel8;
     private ModIstrDisp model5;
     private ModPagam model6;
 	private ModElTestResp model7;
@@ -246,7 +239,7 @@ public class FrameGestione extends JFrame {
 			
 			
 			
-	GPane2.add(VariListener.SettaPannelloTitolo(im3, Panel3, 1, 0, "Elenco Richieste Confermate"), BorderLayout.NORTH);		
+	GPane2.add(VariListener.SettaPannelloTitolo(im3, Panel3, 1, 0, "Elenco livelli"), BorderLayout.NORTH);		
 		
 		
 	     table2 = new JTable();
@@ -294,7 +287,7 @@ public class FrameGestione extends JFrame {
 		
 		JButton btn5 = new JButton(im);
 		JLabel lbl5= new JLabel();
-        VariListener.SettaBtn(BotPnl2, btn5, lbl5,"Modifica livello", 6, 2,im2,true);
+        VariListener.SettaBtn(BotPnl2, btn5, lbl5,"Elimina livello", 6, 2,im2,true);
 		btn5.setMnemonic('e');
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -445,22 +438,11 @@ GPane4.add(VariListener.SettaPannelloTitolo(im3, Panel5, 1, 0, "Gestione istrutt
 		}
 	});	
 
-	JButton btn10 = new JButton(im);
-	JLabel lbl10= new JLabel();
-    VariListener.SettaBtn(BotPnl4, btn10, lbl10,"modifica istruttore", 4, 2,im2,true);
-	btn10.setMnemonic('e');
-	btn10.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			
-				
-		}
-	});	
-	
-	
+
 	
 	JButton btn11 = new JButton(im);
 	JLabel lbl11= new JLabel();
-    VariListener.SettaBtn(BotPnl4, btn11, lbl11,"elimina istruttore", 6, 2,im2,true);
+    VariListener.SettaBtn(BotPnl4, btn11, lbl11,"elimina istruttore", 4, 2,im2,true);
 	btn11.setMnemonic('e');
 	btn11.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -534,7 +516,7 @@ GPane4.add(VariListener.SettaPannelloTitolo(im3, Panel5, 1, 0, "Gestione istrutt
 	JLabel lbl13= new JLabel();
     VariListener.SettaBtn(BotPnl5, btn13, lbl13,"modifica modalita pagamento", 4, 2,im2,true);
 	btn13.setMnemonic('e');
-	btn3.addActionListener(new ActionListener() {
+	btn13.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if(table6.getSelectedRow()!=-1)
 			{

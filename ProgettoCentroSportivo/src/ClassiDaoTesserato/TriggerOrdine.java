@@ -10,7 +10,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import javax.swing.JOptionPane;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -19,7 +18,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import ClassiDao.GetInfoDB;
 import Model.Utente;
-import view_tesserato.Confermaordine;
+
 import view_tesserato.FrameAttivitaTes;
 import DBInterfaccia.DbConnection;
 

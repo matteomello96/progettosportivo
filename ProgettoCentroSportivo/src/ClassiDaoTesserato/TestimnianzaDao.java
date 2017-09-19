@@ -7,14 +7,12 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Vector;
+
 
 import javax.swing.JOptionPane;
 
-import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
-import Model.Utente;
-import view_tesserato.FrameAttivitaTes;
+
 import view_tesserato.FrameInsTest;
 
 public class TestimnianzaDao {

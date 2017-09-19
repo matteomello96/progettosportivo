@@ -10,8 +10,6 @@ import DBInterfaccia.DbConnection;
 import Model.Utente;
 import VisteUtenteGenerico.FrameCambia;
 import VisteUtenteGenerico.FrameModificaDati;
-import view_tesserato.FrameAttivitaTes;
-import visteadmin.FrameElencoUtenti;
 public class PasswordChanged {
 	
 	

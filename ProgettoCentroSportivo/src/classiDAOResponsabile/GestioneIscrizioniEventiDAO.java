@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 import visteadmin.FrameDettagliDaAccResp;
-import visteadmin.FrameDettagliMod;
+
 import visteadmin.FrameEventiResp;
 
 

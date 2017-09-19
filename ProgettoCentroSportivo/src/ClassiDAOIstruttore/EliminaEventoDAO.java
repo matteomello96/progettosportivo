@@ -2,22 +2,20 @@
 
 package ClassiDAOIstruttore;
 import DBInterfaccia.DbConnection ;
-import Model.Utente;
-import VisteUtenteGenerico.FrameRegistrazione;
-import visteIstruttore.FrameEventiIstr;
-import visteIstruttore.FrameInserisciEv;
 
-import visteIstruttore.FrameModificaEv;
+import visteIstruttore.FrameEventiIstr;
+
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
+
 
 import javax.swing.JOptionPane;
 
-import ClassiDao.GetInfoDB;
+
 
 
 public class EliminaEventoDAO {

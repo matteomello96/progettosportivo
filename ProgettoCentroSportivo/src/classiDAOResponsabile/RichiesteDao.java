@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import DBInterfaccia.DbConnection;
-import Model.ElencoUtenti;
+
 import Model_Responsabile.ModelRichiestaIscrizione;
 
 public class RichiesteDao {

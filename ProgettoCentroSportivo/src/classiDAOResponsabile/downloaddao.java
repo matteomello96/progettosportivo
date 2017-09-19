@@ -3,20 +3,16 @@ package classiDAOResponsabile;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 
 import javax.swing.JOptionPane;
 
 import DBInterfaccia.DbConnection;
-import visteadmin.FrameInserisciDisciplina;
+
 
 
 public class downloaddao {

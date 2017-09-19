@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import DBInterfaccia.DbConnection;
-import Model.DettagliIstruttore;
+
 import Model.Utente;
 public class DettagliUtenteDAO {
 private static DettagliUtenteDAO instance;

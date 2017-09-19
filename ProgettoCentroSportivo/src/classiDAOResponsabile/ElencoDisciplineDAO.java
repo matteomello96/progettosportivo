@@ -8,24 +8,14 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import java.awt.color.*;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.StringReader;
 
-import Model.DisciplinaElenco;
+import java.awt.Image;
+
+import java.io.File;
+
+import java.io.IOException;
+
+
 import Model_Responsabile.ElencoDisc;
 import VisteUtenteGenerico.FrameIniziale;
 import DBInterfaccia.DbConnection;

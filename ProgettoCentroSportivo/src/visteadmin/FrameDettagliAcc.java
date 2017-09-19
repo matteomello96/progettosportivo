@@ -73,8 +73,7 @@ public class FrameDettagliAcc extends JFrame {
 		
 		
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+	
         ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
 		
 		

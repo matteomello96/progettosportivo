@@ -9,8 +9,7 @@ import javax.swing.JOptionPane;
 
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
-import visteadmin.FrameOrdini;
-import visteadmin.FrameElencoUtenti;
+
 import visteadmin.FrameDettagliDaAccResp;
 
 public class modificaordinedao {

@@ -35,8 +35,7 @@ import java.awt.GridBagLayout;
 
 
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 

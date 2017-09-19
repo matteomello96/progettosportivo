@@ -2,6 +2,7 @@ package visteadmin;
 
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import java.awt.Font;
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
 import classiDAOResponsabile.GestioneDAO;
 
 import listener.Listen;
-
+import listener.VariListener;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -25,14 +26,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 
 import javax.swing.JScrollPane;
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 
@@ -76,18 +76,7 @@ public class FrameModificaModPag extends JFrame {
 	
 		
 		
-		
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color (64,224,208));
-		contentPane.setLayout(new GridBagLayout());
-		 
-		 GridBagConstraints gbc = new GridBagConstraints();
- 
-		JScrollPane scroll = new JScrollPane(contentPane);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(50, 30, 300, 50);			
-	    frame.getContentPane().add(scroll);
+	
 		
 		
 		frame.setVisible(true);
@@ -104,53 +93,56 @@ public class FrameModificaModPag extends JFrame {
 		mntmTornaAllaPagina.setActionCommand("Vai_ges");
 		
 		
+
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
 		
-		JLabel lblFormDiModifica = new JLabel("Form di Modifica della modalità di pagamento");
-		lblFormDiModifica.setOpaque(true);
-		lblFormDiModifica.setBackground(new Color(128, 120, 120));
-		lblFormDiModifica.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblFormDiModifica, gbc);
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (255,185,0));
+		contentPane.setLayout(new BorderLayout());
+		
+		
+		
+ 
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
+		
+	    
+		JPanel Panel1 = new JPanel();
+ 		Panel1.setBackground(new Color(255,185,0));
+ 		Panel1.setLayout(new GridBagLayout());
+		
+		
+		
+    contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Form di modifica mod pagamento"), BorderLayout.NORTH);	
+		
+		
+
+    JPanel Panel2 = new JPanel();
+  	Panel2.setLayout(new GridBagLayout());
+  	Panel2.setBackground(new Color (255,185,0));
+  	
+  	
+  	JLabel lblModP = new JLabel();
+  	VariListener.SettaLabelGen(Panel2,lblModP, "Nome della modalità da inserire", 0, 1);
 		
 		
 		
 
-		JLabel lblModP = new JLabel("Nome della modalità da cambiare");
-		lblModP.setOpaque(true);
-		lblModP.setBackground(new Color(128, 120, 120));
-		lblModP.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		contentPane.add(lblModP, gbc);
+	
+		
+	JLabel lblErrNome = new JLabel("");
+	VariListener.SettaErr("la disciplina non deve contenere errori",lblErrNome, 2, 1, Panel2);
 		
 		
-		JLabel lblErrNome = new JLabel("Il livello non deve contenere numeri");
-		lblErrNome.setOpaque(true);
-		lblErrNome.setBackground(new Color(128, 0, 0));
-		lblErrNome.setForeground(new Color(255, 255, 255));
-		lblErrNome.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrNome.setBounds(25, 30, 10, 10);
-		lblErrNome.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 2;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		
-		contentPane.add(lblErrNome,gbc);
-		
-		
-		
-		textmodpag = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(textmodpag, gbc);
-		textmodpag.setColumns(10);
+	textmodpag= new JTextField();
+	VariListener.SettaTextField(Panel2, textmodpag, "Inserire modalità", 1,1);
+	VariListener.SettaFocus(textmodpag);
 		
 		textmodpag.addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent ke)
@@ -181,16 +173,17 @@ public class FrameModificaModPag extends JFrame {
 		
 		
 		
-		JButton btnRegistratiAlNostro = new JButton("Modifica modalità di pagamento");
-		btnRegistratiAlNostro.setBackground(new Color(128, 120, 0));
-		btnRegistratiAlNostro.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 14;
-		contentPane.add(btnRegistratiAlNostro, gbc);
+		JPanel PanelBottom = new JPanel();
+		PanelBottom.setLayout(new GridBagLayout());
+		PanelBottom.setBackground(new Color (255,185,0));
+		
+		 JButton btnRegistratiAlNostro = new JButton(im);
+		 JLabel lbl= new JLabel();
+		
+		  VariListener.SettaBtn(PanelBottom, btnRegistratiAlNostro, lbl,"Modifica modalità", 1, 1,im2,true);
 		
 		btnRegistratiAlNostro.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
+		
 			public void actionPerformed(ActionEvent arg0) {
 			
 			
@@ -232,7 +225,8 @@ public class FrameModificaModPag extends JFrame {
 		;
 		
 		
-		
+		contentPane.add(Panel2,BorderLayout.NORTH);
+		contentPane.add(PanelBottom,BorderLayout.CENTER);
 	//	gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
 		
 		

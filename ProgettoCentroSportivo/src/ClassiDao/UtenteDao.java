@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 import DBInterfaccia.DbConnection;
 import Model.Utente;
-import VisteUtenteGenerico.FrameLogin;
+
 
 
 public class UtenteDao {

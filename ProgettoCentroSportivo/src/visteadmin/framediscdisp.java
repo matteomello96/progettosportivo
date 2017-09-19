@@ -6,12 +6,12 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
-import classiDAOResponsabile.dettagliiscrizionedao;
+
 import modelliTabelleRespo.modellidettagli;
 
 public class framediscdisp {

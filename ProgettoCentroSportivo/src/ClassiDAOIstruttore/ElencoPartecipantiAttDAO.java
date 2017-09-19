@@ -1,13 +1,13 @@
 package ClassiDAOIstruttore;
 
-import java.io.File;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 import DBInterfaccia.DbConnection;
 import Model_Istruttore.ElencoPartecipanti;
-import Model_Tesserato.ElencoAttivita;
+
 public class ElencoPartecipantiAttDAO {
 	
 private static ElencoPartecipantiAttDAO instance;

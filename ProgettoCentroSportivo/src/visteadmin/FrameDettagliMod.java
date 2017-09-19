@@ -2,10 +2,9 @@ package visteadmin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
+
 import java.awt.GridBagLayout;
-import java.awt.Insets;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -151,7 +150,7 @@ public class FrameDettagliMod extends JFrame {
 
 	btn1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-			int iddet,tesserato,codiceturno,conf;
+			int iddet,tesserato,codiceturno;
 			String disciplina,livello,giorno,orario;
 			
 			disciplina= (String) table_2.getValueAt(table_2.getSelectedRow(), 0);

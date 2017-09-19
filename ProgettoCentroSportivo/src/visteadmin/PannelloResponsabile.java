@@ -29,8 +29,7 @@ import Model.Utente;
 import VisteUtenteGenerico.FrameModificaDati;
 import listener.Listen;
 import listener.VariListener;
-import modelliTabelleIstruttore.ModElAttIstr;
-import modelliTabelleIstruttore.ModElEventiIstr;
+
 public class PannelloResponsabile extends JFrame {
 	/**
 	 * 
@@ -43,8 +42,7 @@ public class PannelloResponsabile extends JFrame {
 	
 	public JPanel contentPane,tabellaPnl,tabellaPnl2,bottoniPnl1,bottoniPnl2,Panel1,Panel2,Panel3;
 	public static JTable table,table2;
-    private ModElEventiIstr model;
-    private ModElAttIstr model2;
+   
 	
     
     	

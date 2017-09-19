@@ -1,7 +1,6 @@
 package ClassiDaoTesserato;
 
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +16,7 @@ import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
 import Model.Utente;
 import view_tesserato.sendeventframe;
-import visteadmin.FrameInserisciDisciplina;
+
 
 public class ordineeventodao {
 	

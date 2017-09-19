@@ -2,18 +2,18 @@ package visteadmin;
 
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
-import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-import VisteUtenteGenerico.setupTableWidths;
+
 
 import listener.Listen;
-
+import listener.VariListener;
 import modelliTabelleRespo.ModDetIstr;
 
 import modelliTabelleRespo.ModLivDis;
@@ -33,11 +33,10 @@ import java.awt.event.ActionListener;
 
 
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+
 
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+
 
 import javax.swing.ScrollPaneConstants;
 
@@ -46,10 +45,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
 
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 
@@ -65,7 +63,7 @@ public class FrameInserisciIstrDisp extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
-	private JPanel contentPane,tabellaPnl,bottoniPnl;
+	private JPanel contentPane;
 	public ModLivDis model2;
 	public ModDetIstr model1;
 	public static JTable table1,table2,tablemod1,tablemod2;
@@ -92,18 +90,6 @@ public class FrameInserisciIstrDisp extends JFrame {
 		
 		
 		
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color (64,224,208));
-		contentPane.setLayout(new GridBagLayout());
-		 
-		 GridBagConstraints gbc = new GridBagConstraints();
- 
-		JScrollPane scroll = new JScrollPane(contentPane);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(50, 30, 300, 50);			
-	    frame.getContentPane().add(scroll);
-		
 		
 		frame.setVisible(true);
 		JMenuBar menuBar = new JMenuBar();
@@ -120,107 +106,85 @@ public class FrameInserisciIstrDisp extends JFrame {
 		
 		
 		
-		JLabel lblFormDiInserimento = new JLabel("Form di Inserimento dell'istruttore disponibile");
-		lblFormDiInserimento.setOpaque(true);
-		lblFormDiInserimento.setBackground(new Color(128, 120, 120));
-		lblFormDiInserimento.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblFormDiInserimento, gbc);
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
 		
 		
-		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(3 , 2));
-		
-		JLabel lblISD = new JLabel("Elenco degli istruttori");
-		lblISD.setOpaque(true);
-		lblISD.setBackground(new Color(128, 120, 120));
-		lblISD.setForeground(new Color(255, 255, 255));
-		lblISD.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx =1;
-		gbc.gridy =1;
-		tabellaPnl.add(lblISD);
-		
-		JScrollPane scrollt1 = new JScrollPane();
-		scrollt1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt1.setBounds(50, 30, 300, 50);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (255,185,0));
+		contentPane.setLayout(new BorderLayout());
 		
 		
-		model1 = new ModDetIstr(DettagliIstruttoreDAO.elencoistruttore());
-		table1 = new JTable(model1);
-		table1.setRowHeight(20);
-		table1.setRowHeight(3, 50);
-		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table1.setCellSelectionEnabled(true);
-		table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tablemod1 = setupTableWidths.setupTableWidths(table1);
+		
+ 
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
+		
 
-		tablemod1.setForeground(new Color(255, 255, 255));
-		tablemod1.setBackground(new Color(240, 220, 130));
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =1;
-		gbc.gridy =2;
+		
+
+		
+		JPanel Panel1 = new JPanel();
+ 		Panel1.setBackground(new Color(255,185,0));
+ 		Panel1.setLayout(new GridBagLayout());
+		
+		
+		
+    contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Form di inserimento istruttore disponibile"), BorderLayout.NORTH);	
+		
+   /* JPanel Panel4 = new JPanel();
+  		Panel4.setBackground(new Color(255,185,0));
+  		Panel4.setLayout(new BorderLayout());
+		
+*/
+		
+    JPanel Panel2 = new JPanel();
+		Panel2.setBackground(new Color(255,185,0));
+		Panel2.setLayout(new BorderLayout());
+		  	
+		
+		JPanel Panelco = new JPanel();
+ 		Panelco.setBackground(new Color(255,185,0));
+ 		Panelco.setLayout(new GridBagLayout());
+		  	
+ 		 Panel2.add(VariListener.SettaPannelloTitolo(im3, Panelco, 1, 1, "Elenco delle discipline"), BorderLayout.EAST);
+ 		
+		
+		  	
+	
 			
-			
-		
-		scrollt1.setViewportView(tablemod1);
-		tabellaPnl.add(scrollt1);
-		
-		
-		
-		
-		
-		
-		JLabel lblDD = new JLabel("Elenco delle discipline disponibili");
-		lblDD.setOpaque(true);
-		lblDD.setBackground(new Color(128, 120, 120));
-		lblDD.setForeground(new Color(255, 255, 255));
-		lblDD.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx =2;
-		gbc.gridy =1;
-		tabellaPnl.add(lblDD);
-		
-		JScrollPane scrollt2 = new JScrollPane();
-		scrollt2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt2.setBounds(50, 30, 300, 50);
-		
-		
+ 		table2 = new JTable();
 		model2 = new ModLivDis(ElencoDiscLivDispDAO.elencoiniziale());
-		table2 = new JTable(model2);
-		table2.setRowHeight(20);
-		table2.setRowHeight(3, 50);
-		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table2.setCellSelectionEnabled(true);
-		table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tablemod2 = setupTableWidths.setupTableWidths(table2);
-
-		tablemod2.setForeground(new Color(255, 255, 255));
-		tablemod2.setBackground(new Color(240, 220, 130));
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =2;
-		gbc.gridy =2;
-			
-			
-		
-		scrollt2.setViewportView(tablemod2);
-		tabellaPnl.add(scrollt2);
+		Panel2.add(VariListener.SettaScroll(table2,50,model2), BorderLayout.EAST);
 		
 		
-		bottoniPnl = new JPanel();
 		
 		
-	  
 		
-		JButton btnNewButton12 = new JButton("Inserisci istruttore  disponibile");
-		btnNewButton12.setBackground(new Color(128, 120, 120));
-		btnNewButton12.setForeground(new Color(255, 255, 255));
-		btnNewButton12.setMnemonic('h');
+		
+	
+	 	Panel2.add(VariListener.SettaPannelloTitolo(im3, Panelco, 2, 0, "Elenco degli istruttori"), BorderLayout.WEST);
+		table1 = new JTable();
+	 	model1 = new ModDetIstr(DettagliIstruttoreDAO.elencoistruttore());
+	
+		Panel2.add(VariListener.SettaScroll(table1,50,model1), BorderLayout.WEST);
+		
+		contentPane.add(Panel2,BorderLayout.EAST);
+		
+		
+	
+		JPanel PanelBottom = new JPanel();
+		PanelBottom.setLayout(new GridBagLayout());
+		PanelBottom.setBackground(new Color (255,185,0));
+		
+		 JButton btnNewButton12 = new JButton(im);
+		 JLabel lbl= new JLabel();
+		
+		  VariListener.SettaBtn(PanelBottom, btnNewButton12, lbl,"Inserisci istruttore disp", 1, 1,im2,true);
 		btnNewButton12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
 			if((table1.getSelectedRow()!=-1)&&(table2.getSelectedRow()!=-1))
@@ -235,25 +199,9 @@ public class FrameInserisciIstrDisp extends JFrame {
 			}			
 			
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx =1;
-		gbc.gridy =5;
-		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl.add(btnNewButton12,gbc);
-		
-		Dimension o = bottoniPnl.getPreferredSize();
-		bottoniPnl.setPreferredSize(o);
-		
-		
-		tabellaPnl.add(bottoniPnl,gbc);
-		Dimension sex= tabellaPnl.getPreferredSize();
-		tabellaPnl.setPreferredSize(sex);
 	
-		contentPane.add(tabellaPnl,gbc);
 		
-		
+	
 		if(bool)
 		{
 			frame.setVisible(false); 
@@ -265,7 +213,8 @@ public class FrameInserisciIstrDisp extends JFrame {
 	}	
 								
 		
-				
+		
+		contentPane.add(PanelBottom,BorderLayout.SOUTH);		
 		
 	
 		

@@ -9,15 +9,11 @@ import javax.swing.JOptionPane;
 
 import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
-import Model.Utente;
-import VisteUtenteGenerico.FrameCambia;
-import view_tesserato.FrameDiscAttive;
-import view_tesserato.FrameAttivitaTes;
+
 import view_tesserato.FrameDettagliConfTess;
 import view_tesserato.FrameDettagliDaAccTess;
 import view_tesserato.FrameDettagliModTess2;
-import view_tesserato.FrameTurno;
-import visteadmin.FrameOrdini;
+
 import view_tesserato.FrameInserisciTurno;
 import view_tesserato.FrameIscrDisc;
 import view_tesserato.FrameModificaTurnoMod;

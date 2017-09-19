@@ -7,35 +7,29 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Insets;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 
 
-import java.awt.ComponentOrientation;
 
-import Model.Utente;
-import VisteUtenteGenerico.FrameCambia;
-import VisteUtenteGenerico.setupTableWidths;
-import classiDAOResponsabile.ElencoUtentiDAO;
+
+
 import classiDAOResponsabile.GestioneIscrizioniDAO;
 import classiDAOResponsabile.RichiesteDao;
-import classiDAOResponsabile.credenzialidao;
+
 import listener.Listen;
 import listener.VariListener;
-import modelliTabelleIstruttore.ModElEventiIstr;
-import modelliTabelleRespo.ModElUtenti;
+
 import modelliTabelleRespo.modelisc;
 
 import java.awt.event.ActionListener;
@@ -63,7 +57,7 @@ public class FrameOrdini extends JFrame {
 	public JTable tablemod3;
 	public JTable tablemod4;
   
-	private modelisc model,model2,model3,model4;
+	private modelisc model,model2,model3;
 
     private JTabbedPane tabed = new JTabbedPane();
 	/**
@@ -252,7 +246,7 @@ public class FrameOrdini extends JFrame {
 		
 		JButton btn4 = new JButton(im);
 		JLabel lbl4= new JLabel();
-        VariListener.SettaBtn(BotPnl3, btn4, lbl4,"Richieste da accettare", 2, 2,im2,true);
+        VariListener.SettaBtn(BotPnl3, btn4, lbl4,"Elimina ordine", 4, 2,im2,true);
 		btn4.setMnemonic('e');
 		btn4.addActionListener(new ActionListener() {
 		

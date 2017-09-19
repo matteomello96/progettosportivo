@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import ClassiDao.GetInfoDB;
-import Model_Tesserato.ElencoEventiTes;
+
 import Model_Tesserato.ElencoGiornoOra;
 import DBInterfaccia.DbConnection;
 
