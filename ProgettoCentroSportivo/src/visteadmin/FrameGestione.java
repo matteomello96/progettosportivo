@@ -8,6 +8,7 @@ import javax.swing.border.Border;
 
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import javax.swing.JMenuBar;
@@ -47,7 +48,7 @@ import classiDAOResponsabile.ElencoTestRespDao;
 
 import classiDAOResponsabile.GestioneDAO;
 import listener.Listen;
-
+import listener.VariListener;
 import modelliTabelleRespo.ModCal;
 import modelliTabelleRespo.ModDiscDisp;
 
@@ -75,12 +76,13 @@ public class FrameGestione extends JFrame {
     private ModDiscIni model;
     private ModLiv model2;
     private ModDiscDisp model3;
-    
+    private JPanel GPane1,Panel1,BotPnl1,Panel2,BotPnl2,GPane2,GPane3,Panel3,BotPnl3,GPane4,Panel4,BotPnl4,GPane5,Panel5,BotPnl5,GPane6,Panel6,BotPnl6,GPane7,Panel7,BotPnl7,Panel8;
     private ModIstrDisp model5;
     private ModPagam model6;
 	private ModElTestResp model7;
 	private ModCal model8;
 	private JTabbedPane tabel = new JTabbedPane();
+
     	/**
 	 * Create the frame.
 	 */
@@ -110,116 +112,80 @@ public class FrameGestione extends JFrame {
 		
 		
 		
-
+		tabel = new JTabbedPane();
+		
+		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
 		
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (164,204,208));
-		contentPane.setLayout(new GridBagLayout());
+		contentPane.setBackground(new Color (255,185,0));
+		contentPane.setLayout(new BorderLayout());
 		
 		
-		GridBagConstraints gbc = new GridBagConstraints();
+		
  
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
+	    
 		
 		
-		JLabel lblEventi = new JLabel("Gestione del centro polisportivo");
-		lblEventi.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblEventi.setForeground(Color.BLACK);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		contentPane.add(lblEventi, gbc);
-		
-		
-		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new BorderLayout());
-		
-		JLabel lblNull = new JLabel("Nessuna informazione disponibile");
-		lblNull.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNull.setBounds(40,40,100,300);
-		lblNull.setOpaque(true);
-		lblNull.setForeground(new Color (255,255,255));
-		lblNull.setBackground(new Color (0,150,17));
-		Border b = BorderFactory.createLineBorder(new Color (255,205,255));
-		lblNull.setBorder(b);
-		
-		
-		JLabel lblG = new JLabel("Elenco delle discipline");
-		lblG.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblG.setForeground(Color.BLACK);
-		Dimension g = lblG.getPreferredSize();
-		lblG.setPreferredSize(g);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		tabellaPnl.add(lblG,BorderLayout.NORTH);
-		
-		
-			
-		JScrollPane scrollt1 = new JScrollPane();
-		scrollt1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt1.setBounds(30, 30, 200, 30);
-		
-		
-		
-		
-		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
-		table = new JTable(model);
-		table.setRowHeight(20);
-		table.setRowHeight(3, 50);
-		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table.setCellSelectionEnabled(true);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tablemod1 = setupTableWidths.setupTableWidths(table);
 
-		tablemod1.setForeground(new Color(255, 255, 255));
-		tablemod1.setBackground(new Color(240, 220, 130));
 		
-		if(model.getRowCount()==0)
-		{
-			scrollt1.setViewportView(lblNull);
-		}
-		else{
-		scrollt1.setViewportView(tablemod1);
-		}
-		tabellaPnl.add(scrollt1,BorderLayout.CENTER);
+
+	       Panel2 = new JPanel();
+	  		Panel2.setBackground(new Color(255,185,0));
+	  		Panel2.setLayout(new GridBagLayout());	
 		
+		
+	    GPane1 = new JPanel();
+		GPane1.setBackground(new Color (235,193,20));
+		GPane1.setLayout(new BorderLayout());
 		
 		
 		
-		bottoniPnl1 = new JPanel();
-		bottoniPnl1.setLayout(new GridBagLayout());
 		
-		JButton btnNewButton = new JButton("Inserisci disciplina");
-		btnNewButton.setEnabled(true);
-		btnNewButton.setMnemonic('a');
-		btnNewButton.addActionListener(new ActionListener() {
+		GPane1.add(VariListener.SettaPannelloTitolo(im3, Panel2, 1, 0, "Gestione disciplina"), BorderLayout.NORTH);		
+		
+		
+		
+		table = new JTable();
+		model = new ModDiscIni(ElencoDisciplineDAO.elencoiniziale());
+		GPane1.add(VariListener.SettaScroll(table,50,model), BorderLayout.CENTER);
+		
+		
+		
+		BotPnl1 = new JPanel();
+		BotPnl1.setBackground(new Color (235,193,20));
+		BotPnl1.setLayout(new GridBagLayout());
+		
+		
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn, lbl,"Inserisci disciplina", 2, 2,im2,true);
+		btn.setMnemonic('e');
+		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				new FrameInserisciDisciplina();
 					
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =0;
-		gbc.gridy =3;
-		gbc.gridwidth = 2;
-		bottoniPnl1.add(btnNewButton,gbc);
+
 		
 		
 		
-		
-		JButton btnNewButton1 = new JButton("Modifica Disciplina");
-		btnNewButton1.setEnabled(true);
-		btnNewButton1.setMnemonic('b');
-		btnNewButton1.addActionListener(new ActionListener() {
+
+		JButton btn1 = new JButton(im);
+		JLabel lbl1= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn1, lbl1,"Modifica disciplina", 4, 2,im2,true);
+		btn1.setMnemonic('e');
+		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				table.setEnabled(true);
 				if(table.getSelectedRow()!=-1)
@@ -232,19 +198,13 @@ public class FrameGestione extends JFrame {
 					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =1;
-		gbc.gridy =3;
-		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl1.add(btnNewButton1,gbc);
-		
-		JButton btnNewButton2 = new JButton("Elimina Disciplina");
-		btnNewButton2.setEnabled(true);
-		btnNewButton2.setMnemonic('c');
-		btnNewButton2.addActionListener(new ActionListener() {
+	
+
+		JButton btn2 = new JButton(im);
+		JLabel lbl2= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn2, lbl2,"elimina disciplina", 6, 2,im2,true);
+		btn2.setMnemonic('e');
+		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1){
 				GestioneDAO.eliminadisciplina((String) FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0));
@@ -254,95 +214,73 @@ public class FrameGestione extends JFrame {
 					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =2;
-		gbc.gridy =3;
-		gbc.gridwidth = 2;
-		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl1.add(btnNewButton2,gbc);
+
 		
 		
 		
 		
 		
 		
-		tabellaPnl.add(bottoniPnl1,BorderLayout.SOUTH);
+		GPane1.add(BotPnl1,BorderLayout.SOUTH);
 		
 	
-		tabel.addTab("Gestione discipline", tabellaPnl);
+		tabel.addTab("Gestione discipline", GPane1);
 		
 		
 
-		tabellaPnl2 = new JPanel();
-		tabellaPnl2.setLayout(new BorderLayout());
 		
 		
-		JLabel lblDisc = new JLabel("Elenco dei livelli");
-		lblDisc.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDisc.setForeground(Color.BLACK);
-		Dimension a = lblDisc.getPreferredSize();
-		lblDisc.setPreferredSize(a);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx =1;
-		gbc.gridy =4;
-		tabellaPnl2.add(lblDisc,BorderLayout.NORTH);
+		  Panel3 = new JPanel();
+			Panel3.setBackground(new Color(255,185,0));
+			Panel3.setLayout(new GridBagLayout());
+			
+			
+			
+			
+			
+		    GPane2 = new JPanel();
+			GPane2.setBackground(new Color (255,185,0));
+			GPane2.setLayout(new BorderLayout());
+			
+			
+			
+			
+			
+	GPane2.add(VariListener.SettaPannelloTitolo(im3, Panel3, 1, 0, "Elenco Richieste Confermate"), BorderLayout.NORTH);		
 		
-		JScrollPane scrollt2 = new JScrollPane();
-		scrollt2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt2.setBounds(50, 30, 300, 50);
 		
-		
-		
+	     table2 = new JTable();
 		model2 = new ModLiv(ElencoLivDAO.elencoliv());
-		table2 = new JTable(model2);
-		table2.setRowHeight(20);
-		table2.setRowHeight(3, 50);
-		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table2.setCellSelectionEnabled(true);
-		table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tablemod2 = setupTableWidths.setupTableWidths(table2);
+	
+		GPane2.add(VariListener.SettaScroll(table2,50,model2), BorderLayout.CENTER);
+		
+		
+		
+		
+	    BotPnl2 = new JPanel();
+		BotPnl2.setBackground(new Color (235,193,20));
+		BotPnl2.setLayout(new GridBagLayout());
+		
+		
 
-		tablemod2.setForeground(new Color(255, 255, 255));
-		tablemod2.setBackground(new Color(240, 220, 130));
-		if(model2.getRowCount()==0)
-		{
-			scrollt2.setViewportView(lblNull);
-		}
-		else
-		{
-		scrollt2.setViewportView(tablemod2);
-		}
-		tabellaPnl2.add(scrollt2,BorderLayout.CENTER);
-		
-		
-		
-		
-        bottoniPnl2 = new JPanel();
-		bottoniPnl2.setLayout(new GridBagLayout());
-		
-		JButton btnNewButton3 = new JButton("Inserisci Livello");
-		btnNewButton3.setMnemonic('d');
-		btnNewButton3.addActionListener(new ActionListener() {
+		JButton btn3 = new JButton(im);
+		JLabel lbl3= new JLabel();
+        VariListener.SettaBtn(BotPnl2, btn3, lbl3,"Inserisci livello", 2, 2,im2,true);
+		btn3.setMnemonic('e');
+		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				new FrameInserisciLiv();
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx =0;
-		gbc.gridy =6;
-		gbc.gridwidth = 2;
-		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl2.add(btnNewButton3,gbc);
+
 		
 		
-		JButton btnNewButton4 = new JButton("Modifica Livello");
-		btnNewButton4.setMnemonic('e');
-		btnNewButton4.addActionListener(new ActionListener() {
+		JButton btn4 = new JButton(im);
+		JLabel lbl4= new JLabel();
+        VariListener.SettaBtn(BotPnl2, btn4, lbl4,"Modifica livello", 4, 2,im2,true);
+		btn4.setMnemonic('e');
+		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table2.getSelectedRow()!=-1)
 				{
@@ -353,17 +291,12 @@ public class FrameGestione extends JFrame {
 					JOptionPane.showMessageDialog(null, "Seleziona un livello dall'elenco","Errore livello",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx =1;
-		gbc.gridy =6;
 		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl2.add(btnNewButton4,gbc);
-		
-		JButton btnNewButton5 = new JButton("Elimina Livello");
-		btnNewButton5.setMnemonic('f');
-		btnNewButton5.addActionListener(new ActionListener() {
+		JButton btn5 = new JButton(im);
+		JLabel lbl5= new JLabel();
+        VariListener.SettaBtn(BotPnl2, btn5, lbl5,"Modifica livello", 6, 2,im2,true);
+		btn5.setMnemonic('e');
+		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table2.getSelectedRow()!=-1)
 			{
@@ -375,105 +308,75 @@ public class FrameGestione extends JFrame {
 					JOptionPane.showMessageDialog(null, "Seleziona un'attività dall'elenco","Errore attività",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx =2;
-		gbc.gridy =6;
-		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl2.add(btnNewButton5,gbc);
 	
 	
-		tabellaPnl2.add(bottoniPnl2,BorderLayout.SOUTH);
+	
+		GPane2.add(BotPnl2,BorderLayout.SOUTH);
 		
-		tabel.addTab("Gestione livelli",tabellaPnl2);
+		tabel.addTab("Gestione livelli",GPane2);
 		
         
-	
-		tabellaPnl3 = new JPanel();
-		tabellaPnl3.setLayout(new BorderLayout());
-		
-		
-		
-		JLabel lblDD = new JLabel("Elenco delle discipline disponibili");
-		lblDD.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDD.setForeground(Color.BLACK);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx =1;
-		gbc.gridy =7;
-		tabellaPnl3.add(lblDD,BorderLayout.NORTH);
-		
-		
-		
-		
-		model3 = new ModDiscDisp(ElencoDiscDispDAO.elencodiscdisp());
-		table3 = new JTable(model3);
-		table3.setRowHeight(20);
-		table3.setRowHeight(3, 50);
-		table3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table3.setCellSelectionEnabled(true);
-		table3.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tablemod3 = setupTableWidths.setupTableWidths(table3);
-
-		tablemod3.setForeground(new Color(255, 255, 255));
-		tablemod3.setBackground(new Color(240, 220, 130));
+		   Panel4 = new JPanel();
+			Panel4.setBackground(new Color(255,185,0));
+			Panel4.setLayout(new GridBagLayout());
 			
-		JScrollPane scrollt3 = new JScrollPane();
-		scrollt3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt3.setBounds(50, 30, 300, 50);
-		if(model3.getRowCount()==0)
-		{
-			scrollt3.setViewportView(lblNull);
-		}
-		else
-		{
-		scrollt3.setViewportView(tablemod3);
-		}
-		tabellaPnl3.add(scrollt3,BorderLayout.CENTER);
-		
-		bottoniPnl3 = new JPanel();
-		bottoniPnl3.setLayout(new GridBagLayout());
+			
+			
+			
+			
+		     GPane3 = new JPanel();
+			GPane3.setBackground(new Color (255,185,0));
+			GPane3.setLayout(new BorderLayout());
+			
+			
+			
+            GPane3.add(VariListener.SettaPannelloTitolo(im3, Panel4, 1, 0, "Elenco discipline disponibili"), BorderLayout.NORTH);		
 		
 		
-		JButton btnNewButton10 = new JButton("Inserisci disciplina disponibile");
-		btnNewButton10.setMnemonic('g');
-		btnNewButton10.addActionListener(new ActionListener() {
+		
+		table3 = new JTable();
+		model3 = new ModDiscDisp(ElencoDiscDispDAO.elencodiscdisp());
+		
+		GPane3.add(VariListener.SettaScroll(table3,50,model3), BorderLayout.CENTER);
+		
+		
+	 BotPnl3 = new JPanel();
+		BotPnl3.setBackground(new Color (235,193,20));
+		BotPnl3.setLayout(new GridBagLayout());
+		
+		
+
+		JButton btn6 = new JButton(im);
+		JLabel lbl6= new JLabel();
+        VariListener.SettaBtn(BotPnl3, btn6, lbl6,"ins discipline disponibili", 2, 2,im2,true);
+		btn6.setMnemonic('e');
+		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				new FrameInserisciDiscDisp();
 					
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx =0;
-		gbc.gridy =9;
 		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl3.add(btnNewButton10,gbc);
 		
-		JButton btnNewButton101 = new JButton("Modifica disciplina disponibile");
-		btnNewButton101.setMnemonic('x');
-		btnNewButton101.addActionListener(new ActionListener() {
+		JButton btn7 = new JButton(im);
+		JLabel lbl7= new JLabel();
+        VariListener.SettaBtn(BotPnl3, btn7, lbl7,"modifica discipline disponibili", 4, 2,im2,true);
+		btn7.setMnemonic('e');
+		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FrameModificaDiscDisp((String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 0),(String) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 1),(float) FrameGestione.table3.getValueAt(FrameGestione.table3.getSelectedRow(), 2));
 					frame.dispose();
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx =1;
-		gbc.gridy =9;
-		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl3.add(btnNewButton101,gbc);
 		
 		
 		
-		JButton btnNewButton11 = new JButton("Elimina disciplina disponibile");
-		btnNewButton11.setMnemonic('y');
-		btnNewButton11.addActionListener(new ActionListener() {
+		JButton btn8 = new JButton(im);
+		JLabel lbl8= new JLabel();
+        VariListener.SettaBtn(BotPnl3, btn8, lbl8,"elimina discipline disponibili", 6, 2,im2,true);
+		btn8.setMnemonic('e');
+		btn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table3.getSelectedRow()!=-1)
 				{
@@ -486,13 +389,7 @@ public class FrameGestione extends JFrame {
 					JOptionPane.showMessageDialog(null, "Seleziona una disciplina dall'elenco","Errore disciplina",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx =2;
-		gbc.gridy =9;
 		
-		//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-		bottoniPnl3.add(btnNewButton11,gbc);
 		
 		
 		
@@ -500,8 +397,8 @@ public class FrameGestione extends JFrame {
 		
 	
 		
-		tabellaPnl3.add(bottoniPnl3,BorderLayout.SOUTH);
-		tabel.addTab("Gestione discipline disponibili",tabellaPnl3);
+		GPane3.add(BotPnl3,BorderLayout.SOUTH);
+		tabel.addTab("Gestione discipline disponibili",GPane3);
 		
 		
 		
@@ -509,88 +406,63 @@ public class FrameGestione extends JFrame {
 		
 		
 
+		   Panel5 = new JPanel();
+			Panel5.setBackground(new Color(255,185,0));
+			Panel5.setLayout(new GridBagLayout());
+			
+			
+			
+			
+			
+		    GPane4 = new JPanel();
+			GPane4.setBackground(new Color (255,185,0));
+			GPane4.setLayout(new BorderLayout());
+			
+			
+			
+			
+			
+GPane4.add(VariListener.SettaPannelloTitolo(im3, Panel5, 1, 0, "Gestione istruttore"), BorderLayout.NORTH);		
 	
-	tabellaPnl5 = new JPanel();
-	tabellaPnl5.setLayout(new BorderLayout());
-	
-	
-	
-	JLabel lblISD = new JLabel("Elenco degli istruttori disponibili");
-	lblISD.setFont(new Font("Tahoma", Font.PLAIN, 14));
-	lblISD.setForeground(Color.BLACK);
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx =1;
-	gbc.gridy =12;
-	tabellaPnl5.add(lblISD,BorderLayout.NORTH);
-	
-	JScrollPane scrollt5 = new JScrollPane();
-	scrollt5.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-	scrollt5.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-	scrollt5.setBounds(50, 30, 300, 50);
-	
-	
+    table5 = new JTable();
 	model5 = new ModIstrDisp(ElencoIstrDispDAO.elencoistrdisp());
-	table5 = new JTable(model5);
-	table5.setRowHeight(20);
-	table5.setRowHeight(3, 50);
-	table5.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-	table5.setCellSelectionEnabled(true);
-	table5.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	tablemod5 = setupTableWidths.setupTableWidths(table5);
+	GPane4.add(VariListener.SettaScroll(table5,50,model5), BorderLayout.CENTER);
+	
+ BotPnl4 = new JPanel();
+	BotPnl4.setBackground(new Color (235,193,20));
+	BotPnl4.setLayout(new GridBagLayout());
+	
+	
 
-	tablemod5.setForeground(new Color(255, 255, 255));
-	tablemod5.setBackground(new Color(240, 220, 130));
-	if(model5.getRowCount()==0)
-	{
-		scrollt5.setViewportView(lblNull);
-	}
-	else
-	{
-	scrollt5.setViewportView(tablemod5);
-	}
-	tabellaPnl5.add(scrollt5,BorderLayout.CENTER);
-	
-	
-	bottoniPnl4 = new JPanel();
-	bottoniPnl4.setLayout(new GridBagLayout());
-	
-	
-	JButton btnNewButton12 = new JButton("Inserisci istruttore  disponibile");
-	btnNewButton12.setMnemonic('h');
-	btnNewButton12.addActionListener(new ActionListener() {
+	JButton btn9 = new JButton(im);
+	JLabel lbl9= new JLabel();
+    VariListener.SettaBtn(BotPnl4, btn9, lbl9,"ins istruttore", 2, 2,im2,true);
+	btn9.setMnemonic('e');
+	btn9.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			new FrameInserisciIstrDisp();
 				frame.dispose();
 		}
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.gridwidth = 2;
-	gbc.gridx =0;
-	gbc.gridy =14;
-	
-	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-	bottoniPnl4.add(btnNewButton12,gbc);
-	
-	JButton btnNewButton122 = new JButton("Modifica istruttore  disponibile");
-	btnNewButton122.setMnemonic('i');
-	btnNewButton122.addActionListener(new ActionListener() {
+
+	JButton btn10 = new JButton(im);
+	JLabel lbl10= new JLabel();
+    VariListener.SettaBtn(BotPnl4, btn10, lbl10,"modifica istruttore", 4, 2,im2,true);
+	btn10.setMnemonic('e');
+	btn10.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
 				
 		}
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.gridwidth = 2;
-	gbc.gridx =0;
-	gbc.gridy =14;
-	
-	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-	bottoniPnl4.add(btnNewButton122,gbc);
 	
 	
-	JButton btnNewButton13 = new JButton("Elimina istruttore disponibile");
-	btnNewButton13.setMnemonic('l');
-	btnNewButton13.addActionListener(new ActionListener() {
+	
+	JButton btn11 = new JButton(im);
+	JLabel lbl11= new JLabel();
+    VariListener.SettaBtn(BotPnl4, btn11, lbl11,"elimina istruttore", 6, 2,im2,true);
+	btn11.setMnemonic('e');
+	btn11.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if(table5.getSelectedRow()!=-1)
 			{
@@ -601,87 +473,68 @@ public class FrameGestione extends JFrame {
 			else{
 			JOptionPane.showMessageDialog(null, "Seleziona una combinazione dall'elenco","Errore combinazione",JOptionPane.WARNING_MESSAGE);}
 	}});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.gridwidth = 2;
-	gbc.gridx =1;
-	gbc.gridy =14;
-	
-	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-	bottoniPnl4.add(btnNewButton13,gbc);
-	
-	
-	
-	tabellaPnl5.add(bottoniPnl4,BorderLayout.SOUTH);
-	
-	tabel.addTab("Gestione Istruttori Disponibii",tabellaPnl5);
-	
-	tabellaPnl6 = new JPanel();
-	tabellaPnl6.setLayout(new BorderLayout());
-	
-	
-	
-	
-	JLabel lblM = new JLabel("Elenco delle modalità di pagamento");
-	lblM.setFont(new Font("Tahoma", Font.PLAIN, 14));
-	lblM.setForeground(Color.BLACK);
-	Dimension i = lblM.getPreferredSize();
-	lblM.setPreferredSize(i);
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx = 1;
-	gbc.gridy = 15;
-	tabellaPnl6.add(lblM,BorderLayout.NORTH);
-	
-	JScrollPane scrollt6 = new JScrollPane();
-	scrollt6.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-	scrollt6.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-	scrollt6.setBounds(30, 30, 200, 30);
-	
-	
-	model6 = new ModPagam(ElencoModPagDAO.elencomodp());
-	table6 = new JTable(model6);
-	table6.setRowHeight(20);
-	table6.setRowHeight(3, 50);
-	table6.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-	table6.setCellSelectionEnabled(true);
-	table6.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	tablemod6 = setupTableWidths.setupTableWidths(table6);
 
-	tablemod6.setForeground(new Color(255, 255, 255));
-	tablemod6.setBackground(new Color(240, 220, 130));
-	if(model6.getRowCount()==0)
-	{
-		scrollt6.setViewportView(lblNull);
-	}
-	else
-	{
-	scrollt6.setViewportView(tablemod6);
-	}
-	tabellaPnl6.add(scrollt6,BorderLayout.CENTER);
 	
-	bottoniPnl5 = new JPanel();
-	bottoniPnl5.setLayout(new GridBagLayout());
 	
-	JButton btnNewButton9 = new JButton("Inserisci modalità di pagamento");
-	btnNewButton9.setMnemonic('m');
-	btnNewButton9.addActionListener(new ActionListener() {
+	
+	GPane4.add(BotPnl4,BorderLayout.SOUTH);
+	
+	tabel.addTab("Gestione Istruttori Disponibii",GPane4);
+	
+	
+	
+	
+	Panel6 = new JPanel();
+	Panel6.setBackground(new Color(255,185,0));
+	Panel6.setLayout(new GridBagLayout());
+	
+	
+	
+	
+	
+    GPane5 = new JPanel();
+	GPane5.setBackground(new Color (255,185,0));
+	GPane5.setLayout(new BorderLayout());
+	
+	
+	
+	
+	
+	GPane5.add(VariListener.SettaPannelloTitolo(im3, Panel6, 1, 0, "Elenco modalita pagamento"), BorderLayout.NORTH);		
+	
+	
+	
+	table6 = new JTable();
+	model6 = new ModPagam(ElencoModPagDAO.elencomodp());
+	GPane5.add(VariListener.SettaScroll(table6,50,model6), BorderLayout.CENTER);
+	
+	
+	
+	BotPnl5 = new JPanel();
+	BotPnl5.setBackground(new Color (235,193,20));
+	BotPnl5.setLayout(new GridBagLayout());
+	
+	
+	
+	
+	JButton btn12 = new JButton(im);
+	JLabel lbl12= new JLabel();
+    VariListener.SettaBtn(BotPnl5, btn12, lbl12,"inserisci modalita pagamento", 2, 2,im2,true);
+	btn12.setMnemonic('e');
+	btn12.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			new FrameInserisciModPag();
 				frame.dispose();
 		}
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =0;
-	gbc.gridy =17;
-	gbc.gridwidth = 2;
-	
-	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-	bottoniPnl5.add(btnNewButton9,gbc);
+
 	
 	
-	JButton btnNewButton14 = new JButton("Modifica modalità di pagamento ");
-	btnNewButton14.setMnemonic('n');
-	btnNewButton14.addActionListener(new ActionListener() {
+	JButton btn13 = new JButton(im);
+	JLabel lbl13= new JLabel();
+    VariListener.SettaBtn(BotPnl5, btn13, lbl13,"modifica modalita pagamento", 4, 2,im2,true);
+	btn13.setMnemonic('e');
+	btn3.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if(table6.getSelectedRow()!=-1)
 			{
@@ -692,18 +545,13 @@ public class FrameGestione extends JFrame {
 				JOptionPane.showMessageDialog(null, "Seleziona una modalità dall'elenco","Errore modalità",JOptionPane.WARNING_MESSAGE);
 		}
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.gridwidth = 2;
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =1;
-	gbc.gridy =17;
+
 	
-	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-	bottoniPnl5.add(btnNewButton14,gbc);
-	
-	JButton btnNewButton15 = new JButton("Elimina modalità di pagamento");
-	btnNewButton15.setMnemonic('o');
-	btnNewButton15.addActionListener(new ActionListener() {
+	JButton btn14 = new JButton(im);
+	JLabel lbl14= new JLabel();
+    VariListener.SettaBtn(BotPnl5, btn14, lbl14,"elimina modalita pagamento", 6, 2,im2,true);
+	btn14.setMnemonic('e');
+	btn14.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if(table6.getSelectedRow()!=-1)
 			{
@@ -716,72 +564,59 @@ public class FrameGestione extends JFrame {
 				JOptionPane.showMessageDialog(null, "Seleziona una modalità dall'elenco","Errore modalità",JOptionPane.WARNING_MESSAGE);
 		}
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =2;
-	gbc.gridy =17;
-	gbc.gridwidth = 2;
-	
-	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-	bottoniPnl5.add(btnNewButton15,gbc);
-	
+
 		
 	
 	
 	
-	tabellaPnl6.add(bottoniPnl5,BorderLayout.SOUTH);
+	GPane5.add(BotPnl5,BorderLayout.SOUTH);
 	
-	tabel.addTab("Gestione modalità di pagamento", tabellaPnl6);
-	
-	tabellaPnl7 = new JPanel();
-	tabellaPnl7.setLayout(new BorderLayout());
+	tabel.addTab("Gestione modalità di pagamento", GPane5);
 	
 	
 	
 	
-	JLabel lblT = new JLabel("Elenco delle testimonianze");
-	lblT.setFont(new Font("Tahoma", Font.PLAIN, 14));
-	lblT.setForeground(Color.BLACK);
-	Dimension it = lblM.getPreferredSize();
-	lblT.setPreferredSize(it);
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx = 1;
-	gbc.gridy = 18;
-	tabellaPnl7.add(lblT,BorderLayout.NORTH);
 	
-	JScrollPane scrollt7 = new JScrollPane();
-	scrollt7.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-	scrollt7.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-	scrollt7.setBounds(30, 30, 200, 30);
-	
-	
-	model7 = new ModElTestResp(ElencoTestRespDao.elencotest());
-	table7 = new JTable(model7);
-	table7.setRowHeight(20);
-	table7.setRowHeight(3, 50);
-	table7.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-	table7.setCellSelectionEnabled(true);
-	table7.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	tablemod7 = setupTableWidths.setupTableWidths(table7);
 
-	tablemod7.setForeground(new Color(255, 255, 255));
-	tablemod7.setBackground(new Color(240, 220, 130));
-	if(model7.getRowCount()==0)
-	{
-		scrollt7.setViewportView(lblNull);
-	}
-	else
-	{
-	scrollt7.setViewportView(tablemod7);
-	}
-	tabellaPnl7.add(scrollt7,BorderLayout.CENTER);
+    Panel7 = new JPanel();
+	Panel7.setBackground(new Color(255,185,0));
+	Panel7.setLayout(new GridBagLayout());
 	
-	bottoniPnl6 = new JPanel();
-	bottoniPnl6.setLayout(new GridBagLayout());
 	
-	JButton btnNewButton16 = new JButton("Cancella Testimonianza");
-	btnNewButton16.setMnemonic('q');
-	btnNewButton16.addActionListener(new ActionListener() {
+	
+	
+	
+    GPane6 = new JPanel();
+	GPane6.setBackground(new Color (255,185,0));
+	GPane6.setLayout(new BorderLayout());
+	
+	
+	
+	
+	
+	GPane6.add(VariListener.SettaPannelloTitolo(im3, Panel7, 1, 0, "Elenco testimonianze"), BorderLayout.NORTH);		
+	
+	
+	table7 = new JTable();
+	model7 = new ModElTestResp(ElencoTestRespDao.elencotest());
+	GPane6.add(VariListener.SettaScroll(table7,50,model7), BorderLayout.CENTER);
+	
+	
+	
+	
+	
+	
+	BotPnl6 = new JPanel();
+	BotPnl6.setBackground(new Color (235,193,20));
+	BotPnl6.setLayout(new GridBagLayout());
+	
+	
+
+	JButton btn15 = new JButton(im);
+	JLabel lbl15= new JLabel();
+    VariListener.SettaBtn(BotPnl6, btn15, lbl15,"Cancella testimonianza", 2, 2,im2,true);
+	btn15.setMnemonic('e');
+	btn15.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if(table7.getSelectedRow()!=-1)
 			{
@@ -795,14 +630,7 @@ public class FrameGestione extends JFrame {
 				
 		
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =1;
-	gbc.gridy =20;
-	gbc.gridwidth = 2;
 	
-	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-	bottoniPnl6.add(btnNewButton16,gbc);
 	
 	
 	
@@ -812,77 +640,61 @@ public class FrameGestione extends JFrame {
 	
 	
 	
-	tabellaPnl7.add(bottoniPnl6,BorderLayout.SOUTH);
+	GPane6.add(BotPnl6,BorderLayout.SOUTH);
 	
-	tabel.addTab("Gestione testimonianze",tabellaPnl7);
-	
-	
-	tabellaPnl8 = new JPanel();
-	tabellaPnl8.setLayout(new BorderLayout());
+	tabel.addTab("Gestione testimonianze",GPane6);
 	
 	
-	
-	
-	JLabel lblC = new JLabel("Elenco dei Calendari");
-	lblC.setFont(new Font("Tahoma", Font.PLAIN, 14));
-	lblC.setForeground(Color.BLACK);
-	Dimension itz = lblC.getPreferredSize();
-	lblC.setPreferredSize(itz);
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx = 1;
-	gbc.gridy = 18;
-	tabellaPnl8.add(lblC,BorderLayout.NORTH);
-	
-	JScrollPane scrollt8 = new JScrollPane();
-	scrollt8.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-	scrollt8.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-	scrollt8.setBounds(30, 30, 200, 30);
-	
-	
-	model8 = new ModCal(ElencoCalDAO.elencocal());
-	table8 = new JTable(model8);
-	table8.setRowHeight(20);
-	table8.setRowHeight(3, 50);
-	table8.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-	table8.setCellSelectionEnabled(true);
-	table8.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	tablemod8 = setupTableWidths.setupTableWidths(table8);
 
-	tablemod8.setForeground(new Color(255, 255, 255));
-	tablemod8.setBackground(new Color(240, 220, 130));
-	if(model8.getRowCount()==0)
-	{
-		scrollt8.setViewportView(lblNull);
-	}
-	else
-	{
-	scrollt8.setViewportView(tablemod8);
-	}
-	tabellaPnl8.add(scrollt8,BorderLayout.CENTER);
+    Panel8 = new JPanel();
+	Panel8.setBackground(new Color(255,185,0));
+	Panel8.setLayout(new GridBagLayout());
 	
-	bottoniPnl7 = new JPanel();
-	bottoniPnl7.setLayout(new GridBagLayout());
-	JButton btnNewButton17 = new JButton("Inserisci calendario");
-	btnNewButton17.setMnemonic('m');
-	btnNewButton17.addActionListener(new ActionListener() {
+	
+	
+	
+	
+    GPane7 = new JPanel();
+	GPane7.setBackground(new Color (255,185,0));
+	GPane7.setLayout(new BorderLayout());
+	
+	
+	
+	
+	
+	GPane7.add(VariListener.SettaPannelloTitolo(im3, Panel8, 1, 0, "Calendario"), BorderLayout.NORTH);		
+	
+	
+	table8 = new JTable();
+	model8 = new ModCal(ElencoCalDAO.elencocal());
+	GPane7.add(VariListener.SettaScroll(table8,50,model8), BorderLayout.CENTER);
+	
+	
+
+	BotPnl7 = new JPanel();
+	BotPnl7.setBackground(new Color (235,193,20));
+	BotPnl7.setLayout(new GridBagLayout());
+	
+	
+
+	JButton btn16 = new JButton(im);
+	JLabel lbl16= new JLabel();
+    VariListener.SettaBtn(BotPnl7, btn16, lbl16,"Inserisci calendario", 2, 2,im2,true);
+	btn16.setMnemonic('e');
+	btn16.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			new FrameInserisciCal();
 				frame.dispose();
 		}
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =0;
-	gbc.gridy =20;
-	gbc.gridwidth = 2;
-	
-	//String[] columnNames = new String[]{"nome", "email", "newsletter"}
-	bottoniPnl7.add(btnNewButton17,gbc);
+
 	
 	
-	JButton btnNewButton18 = new JButton("Modifica calendario ");
-	btnNewButton18.setMnemonic('n');
-	btnNewButton18.addActionListener(new ActionListener() {
+	JButton btn17 = new JButton(im);
+	JLabel lbl17= new JLabel();
+    VariListener.SettaBtn(BotPnl7, btn17, lbl17,"Modifica calendario", 4, 2,im2,true);
+	btn17.setMnemonic('e');
+	btn17.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if(table8.getSelectedRow()!=-1)
 			{
@@ -893,16 +705,13 @@ public class FrameGestione extends JFrame {
 				JOptionPane.showMessageDialog(null, "Seleziona un calendario dall'elenco","Errore calendario",JOptionPane.WARNING_MESSAGE);
 		}
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.gridwidth = 2;
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =1;
-	gbc.gridy =20;
-	bottoniPnl7.add(btnNewButton18,gbc);
+
 	
-	JButton btnNewButton19 = new JButton("Cancella Calendario");
-	btnNewButton19.setMnemonic('q');
-	btnNewButton19.addActionListener(new ActionListener() {
+	JButton btn18 = new JButton(im);
+	JLabel lbl18= new JLabel();
+    VariListener.SettaBtn(BotPnl7, btn18, lbl18,"Cancella calendario", 6, 2,im2,true);
+	btn18.setMnemonic('e');
+	btn18.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if(table8.getSelectedRow()!=-1)
 			{
@@ -916,23 +725,18 @@ public class FrameGestione extends JFrame {
 				
 		
 	});	
-	gbc.anchor = GridBagConstraints.LINE_START;
-	gbc.gridwidth = 2;
-	gbc.insets= new Insets(0,0,5,5);
-	gbc.gridx =2;
-	gbc.gridy =20;
-	bottoniPnl7.add(btnNewButton19,gbc);
+
 	
 
 	
 	
 	
-	tabellaPnl8.add(bottoniPnl7,BorderLayout.SOUTH);
+	GPane7.add(BotPnl7,BorderLayout.SOUTH);
 	
-	tabel.addTab("Gestione calendario",tabellaPnl8);
+	tabel.addTab("Gestione calendario",GPane7);
 	
 	
-	contentPane.add(tabel,gbc);
+	contentPane.add(tabel);
 
 }
 	

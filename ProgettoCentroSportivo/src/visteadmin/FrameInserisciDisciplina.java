@@ -2,6 +2,7 @@ package visteadmin;
 
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import java.awt.Font;
@@ -14,7 +15,7 @@ import classiDAOResponsabile.GestioneDAO;
 
 
 import listener.Listen;
-
+import listener.VariListener;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -43,6 +44,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JScrollPane;
 
 import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 
@@ -70,6 +72,7 @@ public class FrameInserisciDisciplina extends JFrame {
 	public String path="";
 	public String pathprecedente="";
 	public File fileprec;
+	private JLabel lblIm;
 	
 	public FrameInserisciDisciplina() {
 	  
@@ -92,16 +95,10 @@ public class FrameInserisciDisciplina extends JFrame {
 		
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (64,224,208));
+		contentPane.setBackground(new Color (255,185,0));
 		contentPane.setLayout(new GridBagLayout());
 		 
-		 GridBagConstraints gbc = new GridBagConstraints();
- 
-		JScrollPane scroll = new JScrollPane(contentPane);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(50, 30, 300, 50);			
-	    frame.getContentPane().add(scroll);
+		
 		
 		
 		frame.setVisible(true);
@@ -117,49 +114,52 @@ public class FrameInserisciDisciplina extends JFrame {
 		mntmTornaAllaPagina.addActionListener(new Listen(this));
 		mntmTornaAllaPagina.setActionCommand("Vai_ges_da_ins_disc");
 		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
 		
 		
-		JLabel lblFormDiModifica = new JLabel("Form di Inserimento della disciplina");
-		lblFormDiModifica.setOpaque(true);
-		lblFormDiModifica.setBackground(new Color(128, 120, 120));
-		lblFormDiModifica.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		contentPane.add(lblFormDiModifica, gbc);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (255,185,0));
+		contentPane.setLayout(new BorderLayout());
 		
+		
+		
+ 
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
+		
+
+		
+
+		
+		JPanel Panel1 = new JPanel();
+ 		Panel1.setBackground(new Color(255,185,0));
+ 		Panel1.setLayout(new GridBagLayout());
+		
+		
+		
+    contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Form di inserimento disciplina"), BorderLayout.NORTH);	
 		
 		
 
-		JLabel lblNomeD = new JLabel("Nome della disciplina");
-		lblNomeD.setOpaque(true);
-		lblNomeD.setBackground(new Color(128, 120, 120));
-		lblNomeD.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		contentPane.add(lblNomeD, gbc);
+    JPanel Panel2 = new JPanel();
+	Panel2.setLayout(new GridBagLayout());
+	Panel2.setBackground(new Color (255,185,0));
+	
+	
+	JLabel lblNomeD = new JLabel();
+	VariListener.SettaLabelGen(Panel2,lblNomeD, "Nome della disciplina", 0, 1);
 		
-		JLabel lblErrNome = new JLabel("La disciplina non deve contenere numeri");
-		lblErrNome.setOpaque(true);
-		lblErrNome.setBackground(new Color(128, 0, 0));
-		lblErrNome.setForeground(new Color(255, 255, 255));
-		lblErrNome.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrNome.setBounds(25, 30, 10, 10);
-		lblErrNome.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 2;
-		gbc.anchor = GridBagConstraints.LINE_START;
+	JLabel lblErrNome = new JLabel("");
+	VariListener.SettaErr("la disciplina non deve contenere errori",lblErrNome, 2, 1, Panel2);
 		
-		textnomed = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(textnomed, gbc);
-		textnomed.setColumns(10);
+	textnomed= new JTextField();
+	VariListener.SettaTextField(Panel2, textnomed, "Inserire nome", 1,1);
+	VariListener.SettaFocus(textnomed);
 		
 		textnomed.addKeyListener(new KeyListener(){
 			public void keyPressed(KeyEvent ke)
@@ -188,80 +188,34 @@ public class FrameInserisciDisciplina extends JFrame {
 			}});
 		
 		
-		JLabel lblDesc = new JLabel("Descrizione");
-		lblDesc.setOpaque(true);
-		lblDesc.setBackground(new Color(128, 120, 120));
-		lblDesc.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		contentPane.add(lblDesc, gbc);
+		JLabel lblDesc = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblDesc, "Descrizione", 0, 2);
 		
 		JLabel lblErrNome2 = new JLabel("");
-		lblErrNome2.setOpaque(true);
-		lblErrNome2.setBackground(new Color(128, 0, 0));
-		lblErrNome2.setForeground(new Color(255, 255, 255));
-		lblErrNome2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblErrNome2.setBounds(25, 30, 10, 10);
-		lblErrNome2.setVisible(false);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 3;
-		gbc.anchor = GridBagConstraints.LINE_START;
+		VariListener.SettaErr("",lblErrNome2, 2, 2, Panel2);
 		
 		descr = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 3;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(descr, gbc);
-		descr.setColumns(10);
+		VariListener.SettaTextField(Panel2, descr, "Inserire descrizione", 1,2);
+		VariListener.SettaFocus(descr);
 		
-		JLabel lblCal = new JLabel("Scegli calendario");
-		lblCal.setOpaque(true);
-		lblCal.setBackground(new Color(128, 120, 120));
-		lblCal.setForeground(new Color(255, 255, 255));
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		contentPane.add(lblCal, gbc);
+		JLabel lblcal = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblcal, "sel Calendario", 0, 4);
 		
 		combocal = new Combocal();
-		combocal.setEnabled(true);
-		combocal.setVisible(true);
-		combocal.setEditable(false);
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridx = 1;
-		gbc.gridy = 4;
-		contentPane.add(combocal, gbc);
+	     VariListener.SettaBox(Panel2, combocal, 1, 4);
 		
 		
 		
-		JLabel lblIm = new JLabel("Inserisci immagine");
-		lblIm.setOpaque(true);
-		lblIm.setBackground(new Color(128, 120, 120));
-		lblIm.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		contentPane.add(lblIm, gbc);
+		lblIm = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblIm, "sel. immagine", 0, 3);
 		
 		immagine = new JTextField();
-		gbc.gridx = 1;
-		gbc.gridy = 5;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		contentPane.add(immagine, gbc);
-		immagine.setColumns(10);
+		VariListener.SettaTextField(Panel2, immagine, "Inserire descrizione", 1,3);
+		VariListener.SettaFocus(immagine);
 		
-		JButton sfoglia = new JButton("Sfoglia:");
-		sfoglia.setBackground(new Color(28, 220, 157));
-		sfoglia.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 2;
-		gbc.gridy = 5;
-		contentPane.add(sfoglia, gbc);
+		JButton sfoglia = new JButton(im);
+		JLabel lbl6= new JLabel();
+		 VariListener.SettaBtn(Panel2, sfoglia, lbl6,"cerca immagine", 2, 3,im2,true);
 		
 		sfoglia.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent arg0) {
 			{
@@ -284,20 +238,18 @@ public class FrameInserisciDisciplina extends JFrame {
 			
 		}}}});
 		
+	
+
+		JPanel PanelBottom = new JPanel();
+		PanelBottom.setLayout(new GridBagLayout());
+		PanelBottom.setBackground(new Color (255,185,0));
 		
+		 JButton btninsdisc = new JButton(im);
+		 JLabel lbl= new JLabel();
 		
-		
-		
-		JButton btninsdisc = new JButton("Inserisci disciplina");
-		btninsdisc.setBackground(new Color(28, 140, 220));
-		btninsdisc.setForeground(new Color(255, 255, 255));
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 14;
-		contentPane.add(btninsdisc, gbc);
+		  VariListener.SettaBtn(PanelBottom, btninsdisc, lbl,"Inserisci disciplina", 1, 1,im2,true);
 		
 		btninsdisc.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 			 
 			
@@ -349,9 +301,11 @@ public class FrameInserisciDisciplina extends JFrame {
 		
 		;
 		
+		contentPane.add(Panel2,BorderLayout.NORTH);
+		contentPane.add(PanelBottom,BorderLayout.CENTER);
 		
 		
-	//	gbc_combotipoutente.setModel(new DefaultComboBoxModel(new String[] {"tesserato", "istruttore"}));
+	
 		
 		
 
