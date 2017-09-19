@@ -5,8 +5,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
@@ -36,6 +35,7 @@ import classiDAOResponsabile.GestioneIscrizioniDAO;
 import classiDAOResponsabile.RichiesteDao;
 import classiDAOResponsabile.credenzialidao;
 import listener.Listen;
+import listener.VariListener;
 import modelliTabelleIstruttore.ModElEventiIstr;
 import modelliTabelleRespo.ModElUtenti;
 import modelliTabelleRespo.modelisc;
@@ -100,81 +100,71 @@ public class FrameIscrDisc extends JFrame {
 		mntmNewMenuItem.setActionCommand("Vai_home_da_ord2");
 		
 		tabed = new JTabbedPane();
+		
+		
+		int tesserato=GetInfoDB.getidTess(Utente.getUsername());
+		
+		
+		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
+		
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,193,20));
-		contentPane.setLayout(new GridBagLayout());
-		 
-		GridBagConstraints gbc = new GridBagConstraints();
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
+		
+		
+		
  
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
+	    
+	    
 		
-		int tesserato=GetInfoDB.getidTess(Utente.getUsername());
+	    JPanel Panel1 = new JPanel();
+		Panel1.setBackground(new Color(42,82,190));
+		Panel1.setLayout(new GridBagLayout());
+		
 		
 		
 		
 		
 	    GPane1 = new JPanel();
-		GPane1.setBackground(new Color (235,193,20));
+		GPane1.setBackground(new Color (42,82,190));
 		GPane1.setLayout(new BorderLayout());
 		
 		
 		
 		
-		JLabel lblUtenti = new JLabel("Le tue richieste confermate");
-		lblUtenti.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUtenti.setForeground(Color.WHITE);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		GPane1.add(lblUtenti,BorderLayout.NORTH);
+		
+		GPane1.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Le tue richieste confermate"), BorderLayout.NORTH);		
+		
 		
 		table = new JTable();
 		model = new modelisc(RichiesteDaoTes.elencoconfermati(tesserato));
-		table.setRowHeight(50);
-		table.setRowHeight(3, 50);
-		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table.setCellSelectionEnabled(true);
-		// .
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.setModel(model);
-		Font font2 = new Font("Comic Sans", Font.PLAIN, 25);
-		table.setFont(font2);
-		tablemod = setupTableWidths.setupTableWidths(table);
-
-		tablemod.setForeground(new Color(255, 255, 255));
-		tablemod.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt1 = new JScrollPane();
-
-		scrollt1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt1.setBackground(new Color(255, 193, 20));
-		scrollt1.setViewportView(tablemod);
-
-		GPane1.add(scrollt1, BorderLayout.CENTER);
+		GPane1.add(VariListener.SettaScroll(table,50,model), BorderLayout.CENTER);
 
 		
 		
 		
 		
+
 		BotPnl1 = new JPanel();
 		BotPnl1.setBackground(new Color (235,193,20));
 		BotPnl1.setLayout(new GridBagLayout());
 		
 		
-		JButton bottone= new JButton("Dettagli Ordine");
-		bottone.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		BotPnl1.add(bottone,gbc);
-		bottone.addActionListener(new ActionListener() {
+
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn, lbl,"Dettagli ordine", 2, 2,im2,true);
+		btn.setMnemonic('e');
+		btn.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -191,15 +181,11 @@ public class FrameIscrDisc extends JFrame {
 		});
 		
 		
-		JButton bottone2= new JButton("Elimina Ordine");
-		bottone2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone2.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 4;
-		gbc.gridy = 1;
-		BotPnl1.add(bottone2,gbc);
-		bottone2.addActionListener(new ActionListener() {
+		JButton btn1 = new JButton(im);
+		JLabel lbl1= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn1, lbl1,"Elimina ordine", 4, 2,im2,true);
+		btn1.setMnemonic('e');
+		btn1.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -229,39 +215,17 @@ public class FrameIscrDisc extends JFrame {
 		
 		
 		
-		
-		JLabel lblUtentiS = new JLabel("Le tue richieste in attesa di conferma");
-		lblUtentiS.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUtentiS.setForeground(Color.WHITE);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		GPane2.add(lblUtentiS,BorderLayout.NORTH);
+		 JPanel Panel2 = new JPanel();
+			Panel2.setBackground(new Color(42,82,190));
+			Panel2.setLayout(new GridBagLayout());
+				
+			
+			GPane2.add(VariListener.SettaPannelloTitolo(im3, Panel2, 1, 0, "Le tue richieste in attesa di conferma "), BorderLayout.NORTH);	
+			
 		
 		table2 = new JTable();
 		model2 = new modelisc(RichiesteDaoTes.elencodaconf(tesserato));
-		table2.setRowHeight(50);
-		table2.setRowHeight(3, 50);
-		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table2.setCellSelectionEnabled(true);
-		// .
-		table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table2.setModel(model2);
-		
-		table2.setFont(font2);
-		tablemod2 = setupTableWidths.setupTableWidths(table2);
-
-		tablemod2.setForeground(new Color(255, 255, 255));
-		tablemod2.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt2 = new JScrollPane();
-
-		scrollt2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt2.setBackground(new Color(255, 193, 20));
-		scrollt2.setViewportView(tablemod2);
-
-		GPane2.add(scrollt2, BorderLayout.CENTER);
+		GPane2.add(VariListener.SettaScroll(table2,50,model2), BorderLayout.CENTER);
 
 		
 		
@@ -272,15 +236,11 @@ public class FrameIscrDisc extends JFrame {
 		BotPnl2.setLayout(new GridBagLayout());
 		
 		
-		JButton bottone3= new JButton("Dettagli ordine");
-		bottone3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone3.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		BotPnl2.add(bottone3,gbc);
-		bottone3.addActionListener(new ActionListener() {
+		JButton btn3 = new JButton(im);
+		JLabel lbl3= new JLabel();
+        VariListener.SettaBtn(BotPnl2, btn3, lbl3,"Dettagli ordine", 2, 2,im2,true);
+		btn3.setMnemonic('e');
+		btn3.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -298,15 +258,11 @@ public class FrameIscrDisc extends JFrame {
 		});
 		
 		
-		JButton bottone4= new JButton("Elimina Richiesta di Iscrizione");
-		bottone4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone4.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 4;
-		gbc.gridy = 1;
-		BotPnl2.add(bottone4,gbc);
-		bottone4.addActionListener(new ActionListener() {
+		JButton btn4 = new JButton(im);
+		JLabel lbl4= new JLabel();
+        VariListener.SettaBtn(BotPnl2, btn4, lbl4,"Elimina richiesta iscrizione", 4, 2,im2,true);
+		btn4.setMnemonic('e');
+		btn4.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -337,39 +293,16 @@ public class FrameIscrDisc extends JFrame {
 		
 		
 		
-		
-		JLabel lblUtentiM = new JLabel("Le tue richieste modificate");
-		lblUtentiM.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUtentiM.setForeground(Color.WHITE);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		GPane3.add(lblUtentiM,BorderLayout.NORTH);
+		 JPanel Panel3 = new JPanel();
+			Panel3.setBackground(new Color(42,82,190));
+			Panel3.setLayout(new GridBagLayout());
+				
+			
+			GPane2.add(VariListener.SettaPannelloTitolo(im3, Panel3, 1, 0, "Le tue richieste modificate "), BorderLayout.NORTH);	
 		
 		table3 = new JTable();
 		model3 = new modelisc(RichiesteDaoTes.elencomod(tesserato));
-		table3.setRowHeight(50);
-		table3.setRowHeight(3, 50);
-		table3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table3.setCellSelectionEnabled(true);
-		// .
-		table3.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table3.setModel(model3);
-		
-		table3.setFont(font2);
-		tablemod3 = setupTableWidths.setupTableWidths(table3);
-
-		tablemod3.setForeground(new Color(255, 255, 255));
-		tablemod3.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt3 = new JScrollPane();
-
-		scrollt3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt3.setBackground(new Color(255, 193, 20));
-		scrollt3.setViewportView(tablemod3);
-
-		GPane3.add(scrollt3, BorderLayout.CENTER);
+		GPane3.add(VariListener.SettaScroll(table3,50,model3), BorderLayout.CENTER);
 
 		
 		
@@ -380,15 +313,11 @@ public class FrameIscrDisc extends JFrame {
 		BotPnl3.setLayout(new GridBagLayout());
 		
 		
-		JButton bottone53= new JButton("Dettagli ordine");
-		bottone53.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone53.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		BotPnl3.add(bottone53,gbc);
-		bottone53.addActionListener(new ActionListener() {
+		JButton btn5 = new JButton(im);
+		JLabel lbl5= new JLabel();
+        VariListener.SettaBtn(BotPnl3, btn5, lbl5,"Dettagli ordine", 2, 2,im2,true);
+		btn5.setMnemonic('e');
+		btn5.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -406,15 +335,11 @@ public class FrameIscrDisc extends JFrame {
 		});
 		
 		
-		JButton bottone54= new JButton("Elimina Richiesta di Iscrizione");
-		bottone54.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone54.setForeground(Color.BLACK);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.gridx = 4;
-		gbc.gridy = 1;
-		BotPnl3.add(bottone54,gbc);
-		bottone54.addActionListener(new ActionListener() {
+		JButton btn6 = new JButton(im);
+		JLabel lbl6= new JLabel();
+        VariListener.SettaBtn(BotPnl3, btn6, lbl6,"Elimina richiesta di iscrizione", 4, 2,im2,true);
+		btn6.setMnemonic('e');
+		btn6.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -452,7 +377,7 @@ public class FrameIscrDisc extends JFrame {
 		
 		
 		
-		contentPane.add(tabed,gbc);
+		contentPane.add(tabed);
 	}
 	
 

@@ -5,8 +5,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
@@ -38,6 +37,7 @@ import classiDAOResponsabile.credenzialidao;
 import classiDAOResponsabile.downloaddao;
 import classiDAOResponsabile.elencoeventidao;
 import listener.Listen;
+import listener.VariListener;
 import modelliTabelleIstruttore.ModElEventiIstr;
 import modelliTabelleRespo.ModElUtenti;
 import modelliTabelleRespo.modelisc;
@@ -104,83 +104,70 @@ public class FrameIscrEventiTest extends JFrame {
 		mntmNewMenuItem.setActionCommand("inites2");
 		
 		tabed = new JTabbedPane();
+		
+		
+		
+		int tes= GetInfoDB.getidTess(Utente.getUsername());
+		
+		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
+		
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,193,20));
-		contentPane.setLayout(new GridBagLayout());
-		 
-		GridBagConstraints gbc = new GridBagConstraints();
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
+		
+		
+		
  
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
+	    
+	    
+		
+	    JPanel Panel1 = new JPanel();
+		Panel1.setBackground(new Color(42,82,190));
+		Panel1.setLayout(new GridBagLayout());
 		
 		
-		int tes= GetInfoDB.getidTess(Utente.getUsername());
 		
 		
 		
 	    GPane1 = new JPanel();
-		GPane1.setBackground(new Color (235,193,20));
+		GPane1.setBackground(new Color (42,82,190));
 		GPane1.setLayout(new BorderLayout());
 		
 		
 		
 		
-		JLabel lblUtenti = new JLabel("Elenco delle tue richieste confermate");
-		lblUtenti.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUtenti.setForeground(Color.WHITE);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		GPane1.add(lblUtenti,BorderLayout.NORTH);
+		
+		GPane1.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Elenco Richieste Confermate"), BorderLayout.NORTH);		
+		
 		
 		table = new JTable();
 		model = new modeven(ElencoeventidaoTess.elencoevenconf(tes));
-		table.setRowHeight(50);
-		table.setRowHeight(3, 50);
-		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table.setCellSelectionEnabled(true);
-		// .
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.setModel(model);
-		Font font2 = new Font("Comic Sans", Font.PLAIN, 25);
-		table.setFont(font2);
-		tablemod = setupTableWidths.setupTableWidths(table);
-
-		tablemod.setForeground(new Color(255, 255, 255));
-		tablemod.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt1 = new JScrollPane();
-
-		scrollt1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt1.setBackground(new Color(255, 193, 20));
-		scrollt1.setViewportView(tablemod);
-
-		GPane1.add(scrollt1, BorderLayout.CENTER);
+		GPane1.add(VariListener.SettaScroll(table,50,model), BorderLayout.CENTER);
 
 		
 		
 		
 		
 		BotPnl1 = new JPanel();
-		BotPnl1.setBackground(new Color (235,193,20));
+		BotPnl1.setBackground(new Color (42,82,190));
 		BotPnl1.setLayout(new GridBagLayout());
 		
 		
-		
-		
-		JButton btnNewButton_1 = new JButton("Visualizza Certificato ");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton_1.setForeground(Color.BLACK);
 
-		
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		BotPnl1.add(btnNewButton_1, gbc);
-        btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn, lbl,"Visualizza certificato", 2, 2,im2,true);
+		btn.setMnemonic('e');
+		btn.addActionListener(new ActionListener() {
 			
 
 			public void actionPerformed(ActionEvent arg0) {
@@ -199,15 +186,11 @@ public class FrameIscrEventiTest extends JFrame {
 		});	
         
 
-		
-		JButton bottone2= new JButton("Elimina Ordine");
-		bottone2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone2.setForeground(Color.BLACK);
-		
-		gbc.gridx = 3;
-		gbc.gridy = 1;
-		BotPnl1.add(bottone2,gbc);
-		bottone2.addActionListener(new ActionListener() {
+		JButton btn1 = new JButton(im);
+		JLabel lbl1= new JLabel();
+        VariListener.SettaBtn(BotPnl1, btn1, lbl1,"Elimina ordine", 4, 2,im2,true);
+		btn1.setMnemonic('e');
+		btn1.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -237,64 +220,38 @@ public class FrameIscrEventiTest extends JFrame {
 		
 		tabed.add("Richieste confermate",GPane1);
 		
-		
-		
+
 		GPane2 = new JPanel();
-		GPane2.setBackground(new Color (235,193,20));
+		GPane2.setBackground(new Color (42,82,190));
 		GPane2.setLayout(new BorderLayout());
 		
 		
+	    JPanel Panel2 = new JPanel();
+		Panel2.setBackground(new Color(42,82,190));
+		Panel2.setLayout(new GridBagLayout());
+			
 		
+		GPane2.add(VariListener.SettaPannelloTitolo(im3, Panel2, 1, 0, "Elenco Richieste accettate"), BorderLayout.NORTH);	
 		
-		JLabel lblUtentiS = new JLabel("Elenco delle richieste  da accettare");
-		lblUtentiS.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUtentiS.setForeground(Color.WHITE);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		GPane2.add(lblUtentiS,BorderLayout.NORTH);
 		
 		table2 = new JTable();
 		model2 = new modeven(ElencoeventidaoTess.elencoevendaconf(tes));
-		table2.setRowHeight(50);
-		table2.setRowHeight(3, 50);
-		table2.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table2.setCellSelectionEnabled(true);
-		// .
-		table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table2.setModel(model2);
-		
-		table2.setFont(font2);
-		tablemod2 = setupTableWidths.setupTableWidths(table2);
-
-		tablemod2.setForeground(new Color(255, 255, 255));
-		tablemod2.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt2 = new JScrollPane();
-
-		scrollt2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt2.setBackground(new Color(255, 193, 20));
-		scrollt2.setViewportView(tablemod2);
-
-		GPane2.add(scrollt2, BorderLayout.CENTER);
+		GPane2.add(VariListener.SettaScroll(table2,50,model2), BorderLayout.CENTER);
 
 		
 		
 		
 		
 		BotPnl2 = new JPanel();
-		BotPnl2.setBackground(new Color (235,193,20));
+		BotPnl2.setBackground(new Color (42,82,190));
 		BotPnl2.setLayout(new GridBagLayout());
 		
-		JButton bottone24= new JButton("Elimina Ordine");
-		bottone24.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone24.setForeground(Color.BLACK);
 		
-		gbc.gridx = 3;
-		gbc.gridy = 1;
-		BotPnl2.add(bottone24,gbc);
-		bottone24.addActionListener(new ActionListener() {
+		JButton btn3 = new JButton(im);
+		JLabel lbl3= new JLabel();
+        VariListener.SettaBtn(BotPnl2, btn3, lbl3,"Elimina ordine", 2, 2,im2,true);
+		btn3.setMnemonic('e');
+		btn3.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -328,15 +285,11 @@ public class FrameIscrEventiTest extends JFrame {
 		
 		
 		
-		JButton btnNewButton_2 = new JButton("Visualizza Certificato ");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton_2.setForeground(Color.BLACK);
-
-		
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		BotPnl2.add(btnNewButton_2, gbc);
-        btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btn4 = new JButton(im);
+		JLabel lbl4= new JLabel();
+        VariListener.SettaBtn(BotPnl2, btn4, lbl4,"Visualizza certificato", 4, 2,im2,true);
+		btn4.setMnemonic('e');
+       btn4.addActionListener(new ActionListener() {
 			
 
 			public void actionPerformed(ActionEvent arg0) {
@@ -375,7 +328,7 @@ public class FrameIscrEventiTest extends JFrame {
 		
 		
 		
-		contentPane.add(tabed,gbc);
+		contentPane.add(tabed);
 	}
 	
 

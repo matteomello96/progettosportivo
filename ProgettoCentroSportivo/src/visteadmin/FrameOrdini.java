@@ -239,14 +239,12 @@ public class FrameOrdini extends JFrame {
 		
 		
 		
-		BotPnl3 = new JPanel();
-		BotPnl3.setBackground(new Color (235,193,20));
-		BotPnl3.setLayout(new GridBagLayout());
+	
 		
 		
 		JButton btn4 = new JButton(im);
 		JLabel lbl4= new JLabel();
-        VariListener.SettaBtn(BotPnl3, btn4, lbl4,"Elimina ordine", 4, 2,im2,true);
+        VariListener.SettaBtn(BotPnl2, btn4, lbl4,"Elimina ordine", 4, 2,im2,true);
 		btn4.setMnemonic('e');
 		btn4.addActionListener(new ActionListener() {
 		

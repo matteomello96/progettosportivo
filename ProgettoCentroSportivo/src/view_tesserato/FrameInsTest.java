@@ -3,6 +3,7 @@ package view_tesserato;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.tree.TreeSelectionModel;
@@ -16,6 +17,7 @@ import ComboTesserato.Comboliv;
 import ComboTesserato.Combotest;
 import Model.Utente;
 import VisteUtenteGenerico.setupTableWidths;
+import listener.VariListener;
 import modelliTabelleIstruttore.ModLivDis;
 
 import java.awt.GridBagLayout;
@@ -30,11 +32,13 @@ import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
@@ -73,107 +77,87 @@ public class FrameInsTest extends JPanel {
 		frame.setAlwaysOnTop(true);
 		
 		
+		
+		
+		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
+        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
+        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
+		
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,36,0));
-		contentPane.setLayout(new GridBagLayout());
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
 		
 		
+		
+ 
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
+	    
+	    
 		
-		GridBagConstraints gbc = new GridBagConstraints();
-		
-		JLabel lblNewLabel = new JLabel("Inserisci Testimonianze");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	
-		gbc.gridwidth = 2;
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 4;
-		gbc.gridy = 0;
-		contentPane.add(lblNewLabel, gbc);
+	    JPanel Panel1 = new JPanel();
+		Panel1.setBackground(new Color(42,82,190));
+		Panel1.setLayout(new GridBagLayout());
 		
 		
 		
-		JLabel lblDatiDisc = new JLabel("Dati sulle discipline disponibili");
-		lblDatiDisc.setOpaque(true);
 		
-		lblDatiDisc.setForeground(new Color(255, 255, 255));
-		lblDatiDisc.setBackground(new Color(245, 222, 179));
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		contentPane.add(lblDatiDisc, gbc);
+		
+	    JPanel GPane1 = new JPanel();
+		GPane1.setBackground(new Color (42,82,190));
+		GPane1.setLayout(new BorderLayout());
+		
+		
+		
+		
+		
+		GPane1.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Inserisci testimonianza"), BorderLayout.NORTH);		
+		
+		
 			
 		int matricola=GetInfoDB.getidTess(Utente.getUsername());
 		
 		
 		table1 = new JTable();
 		model1 = new ModLivDis(ElencoLivDisTesDAO.elencoiniziale(matricola));
-		table1.setRowHeight(20);
-		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table1.setCellSelectionEnabled(true);
-		table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table1.setModel(model1);
-		tablemod = setupTableWidths.setupTableWidths(table1);
-
-		tablemod.setForeground(new Color(255, 255, 255));
-		tablemod.setBackground(new Color(240, 220, 130));
-		
-		JScrollPane scrollt1 = new JScrollPane();
-
-		scrollt1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt1.setBackground(new Color(255, 193, 20));
-		scrollt1.setViewportView(tablemod);
-		gbc.gridx =0;
-		gbc.gridy =0;
-		contentPane.add(scrollt1, gbc);
+		GPane1.add(VariListener.SettaScroll(table1,50,model1), BorderLayout.CENTER);
 		
 		
-		JLabel lblNewLabel_3 = new JLabel("Inserisci la tua testimonianza");
-			lblNewLabel_3.setForeground(Color.black);
-			lblNewLabel_3.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-			
-			gbc.insets = new Insets(0, 0, 0, 5);
-			gbc.gridwidth = 4;
-			gbc.gridx = 1;
-			gbc.gridy = 1;
-			contentPane.add(lblNewLabel_3, gbc);
+		JPanel Panel2 = new JPanel();
+	  	Panel2.setLayout(new GridBagLayout());
+	  	Panel2.setBackground(new Color (42,82,190));
+	  	
+	  	
+	  	JLabel lblNewLabel_3 = new JLabel();
+	  	VariListener.SettaLabelGen(Panel2,lblNewLabel_3, "inserisci la tua testimonianza", 0, 1);
 			
 		
 		
 		
 		
 		
-		JEditorPane editorPane = new JEditorPane();
-		
-		editorPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		editorPane.setText("Scrivi un commento...");
-		gbc.gridwidth = 7;
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		
-		contentPane.add(editorPane, gbc);
-		
+	  	JTextField editorPane = new JTextField();
+	  	editorPane.setText("Scrivi un commento...");
+		VariListener.SettaTextField(Panel2, editorPane, "Inserisci", 1,1);
+		VariListener.SettaFocus(editorPane);
 		
 			
 			
 			
 				
-				JButton bottone = new JButton("Invia testimonianza");
-				
-				gbc.insets = new Insets(0, 0, 5, 5);
-				gbc.gridx = 5;
-				gbc.gridy = 4;
-				contentPane.add(bottone, gbc);
+		
+		JPanel PanelBottom = new JPanel();
+		PanelBottom.setLayout(new GridBagLayout());
+		PanelBottom.setBackground(new Color (42,82,190));
+		
+		 JButton bottone = new JButton(im);
+		 JLabel lbl= new JLabel();
+		
+		  VariListener.SettaBtn(PanelBottom, bottone, lbl,"Inserisci commento", 1, 1,im2,true);
 
 				bottone.addActionListener(new ActionListener(){
 
@@ -197,6 +181,10 @@ public class FrameInsTest extends JPanel {
 		    
 		    }
 		});
+	
+	contentPane.add(GPane1,BorderLayout.NORTH);
+	contentPane.add(Panel2,BorderLayout.CENTER);
+	contentPane.add(PanelBottom,BorderLayout.SOUTH);
 	
 	
 	
