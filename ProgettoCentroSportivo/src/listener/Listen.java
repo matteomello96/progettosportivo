@@ -22,6 +22,7 @@ import view_tesserato.FrameInsTest;
 import view_tesserato.FrameTurno;
 import view_tesserato.FrameVisTest;
 import view_tesserato.PannelloTesserato;
+import view_tesserato.sendeventframe;
 import visteIstruttore.DetAtt;
 import visteIstruttore.DetEv;
 import visteIstruttore.DetPartAtt;
@@ -106,7 +107,7 @@ public class Listen implements ActionListener {
 	public FrameDettagliModTess2 framedettaglimod;
 	public FrameIscrEventiTest frameevtest;
 	public FrameVisTest framevistest;
-	
+	public sendeventframe send;
 	
 	
 	
@@ -294,6 +295,10 @@ public class Listen implements ActionListener {
 		framevistest=frame;
 	}
 
+	public Listen(sendeventframe frame) {
+		send = frame;
+	}
+
 	public void actionPerformed(ActionEvent e)
 	{
 if ("Vai_home_da_mod_disc".equals(e.getActionCommand())){
@@ -317,6 +322,15 @@ if ("Vai_att_det".equals(e.getActionCommand())){
 	new DetAtt(null, null);
 	DetAtt.frame.setVisible(true);
 }
+if ("send".equals(e.getActionCommand())){
+	
+	sendeventframe.frame.setVisible(false);
+	sendeventframe.frame.dispose();
+	new FrameEventi();
+	FrameEventi.frame.setVisible(true);
+}
+
+
 if ("Vai_ev_det".equals(e.getActionCommand())){
 	
 	DetPartEv.frame.setVisible(false);

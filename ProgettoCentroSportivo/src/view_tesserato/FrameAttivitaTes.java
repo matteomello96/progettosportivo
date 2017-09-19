@@ -2,22 +2,14 @@ package view_tesserato;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-
 import javax.swing.JMenu;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -30,15 +22,12 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.ElencoAttivitaDAO;
 import ClassiDaoTesserato.elencoattivitaattivedao;
 import Model.Utente;
 import ModelliTabelle_Tesserato.disc_attive;
 import ModelliTabelle_Tesserato.disc_tabella;
-import VisteUtenteGenerico.FrameCambia;
-import VisteUtenteGenerico.setupTableWidths;
 import listener.Listen;
 import listener.VariListener;
 
@@ -48,14 +37,13 @@ public class FrameAttivitaTes extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTable table,tablemod1;
+	private JTable table;
 	public static JTable table_1;
 	public static JTable table_2;
 	public static JFrame frame;
-	public JPanel contentPane,Panel1,tabellaPnl,PanelBottom;
+	public JPanel contentPane,Panel1,tabellaPnl,PanelBottom,tab1,PanelBottom2,tab2;
 	private disc_tabella model;
-	private disc_attive model1;
-	 public static float totale;
+	public static float totale;
 	 public static JButton svuotacarrello;
 	 public static JButton Aggiungi;
 	 public static JButton rimuovi;
@@ -67,7 +55,7 @@ public class FrameAttivitaTes extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	private DefaultTableModel model2;
+
 	public FrameAttivitaTes() {
 		
 
@@ -126,75 +114,64 @@ public class FrameAttivitaTes extends JPanel {
 		Panel1.setLayout(new GridBagLayout());
 		
 		
-		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 2, 2,"Elenco delle discipline disponibili per l'iscrizione"), BorderLayout.NORTH);
+		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 2, 2,"Discipline disponibili per l'iscrizione"), BorderLayout.NORTH);
 		
 		tabellaPnl = new JPanel();
 		tabellaPnl.setLayout(new BorderLayout());
 		tabellaPnl.setBackground(new Color(42, 82, 190));
 		
+		tab1 = new JPanel();
+		tab1.setLayout(new BorderLayout());
+		tab1.setBackground(new Color(42, 82, 190));
+		
 		
 		table = new JTable();
 		model = new disc_tabella(ElencoAttivitaDAO.elencoiniziale());
-		tabellaPnl.add(VariListener.SettaScroll(table,50,model), BorderLayout.WEST);
+		tab1.add(VariListener.SettaScroll(table,50,model), BorderLayout.CENTER);
 		
 		
 		table_1 = new JTable();
-		model2=(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Disciplina", "Livello", "CostoMensile"
-			}
-		){
-			
-			private static final long serialVersionUID = 1L;
-			@SuppressWarnings("rawtypes")
-			Class[] columnTypes = new Class[] {
-					String.class, String.class, Integer.class
-					
-				};
-			
-				public Class<?> getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-				
-			
-		});
-		table_1.setModel(model2);
+
+		
 		
 	
-		table_1.setAutoCreateRowSorter(true);
+		tab2 = new JPanel();
+		tab2.setLayout(new BorderLayout());
+		tab2.setBackground(new Color(42, 82, 190));
 		
 		
 		
 
-		tabellaPnl.add(VariListener.SettaScroll(table_1,50,model2), BorderLayout.EAST);
+		tab2.add(VariListener.SettaScroll2(table_1,50), BorderLayout.CENTER);
 		
-		contentPane.add(tabellaPnl,BorderLayout.CENTER);
 		
 		PanelBottom = new JPanel();
 		PanelBottom.setLayout(new GridBagLayout());
 		PanelBottom.setBackground(new Color (42,82,190));
+		
+		
+		PanelBottom2 = new JPanel();
+		PanelBottom2.setLayout(new GridBagLayout());
+		PanelBottom2.setBackground(new Color (42,82,190));
 
 		JButton btn = new JButton(im);
 		JLabel lbl= new JLabel();
-        VariListener.SettaBtn(PanelBottom, btn, lbl,"Aggiungi", 2, 2,im2,true);
+        VariListener.SettaBtn(PanelBottom2, btn, lbl,"Aggiungi", 2, 2,im2,true);
 		btn.setMnemonic('e');
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				table_2 = new JTable();
-				model1 = new disc_attive(elencoattivitaattivedao.elencoiniziale());
-				table_2.setModel(model1);
+				new disc_attive(elencoattivitaattivedao.elencoiniziale());
+				
+				
 				if(table.getSelectedRow()!=-1){
-					String disc=(String)table.getValueAt(table.getSelectedRow(), 1);
-					String liv=(String)table.getValueAt(table.getSelectedRow(), 0);
-					JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"disc"+disc+" "+"liv"+liv,null,JOptionPane.WARNING_MESSAGE);
+				
 					int comb=GetInfoDB.getcombinazionelivdis( (String)table.getValueAt(table.getSelectedRow(), 1),(String)table.getValueAt(table.getSelectedRow(), 0));
-					JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"COMB"+comb,null,JOptionPane.WARNING_MESSAGE);
+					
 					if(GetInfoDB.getocc(comb,tesserato)!=-1)
 					{
-						JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"comb"+GetInfoDB.getocc(comb,tesserato),null,JOptionPane.WARNING_MESSAGE);
+					
 						
 						JOptionPane.showMessageDialog(FrameAttivitaTes.frame, "Hai già un iscrizione con la disciplina da te selezionata",null,JOptionPane.WARNING_MESSAGE);
 						
@@ -205,13 +182,13 @@ public class FrameAttivitaTes extends JPanel {
 				dati[0]=table.getValueAt(table.getSelectedRow(), 0);
 				dati[1]=table.getValueAt(table.getSelectedRow(), 1);				
 				dati[2]=table.getValueAt(table.getSelectedRow(), 2);
-				 modello = (DefaultTableModel) table_1.getModel();
+				modello = (DefaultTableModel) table_1.getModel();
 				  u=true;
 				}
 				
 				int c=0;
 				int q;
-				int ris=0;
+				
 				
 				
 					
@@ -275,19 +252,19 @@ public class FrameAttivitaTes extends JPanel {
 			}
 		});
 		
+		tab1.add(PanelBottom2,BorderLayout.SOUTH);
 		
 		
 		
 		
-		
-		
+		tabellaPnl.add(tab1,BorderLayout.WEST);
 		
 		
 		
 		
 		JButton btn2 = new JButton(im);
 		JLabel lbl2= new JLabel();
-        VariListener.SettaBtn(PanelBottom, btn2, lbl2,"Rimuovi", 2, 5,im2,true);
+        VariListener.SettaBtn(PanelBottom, btn2, lbl2,"Rimuovi", 2, 2,im2,true);
 		btn2.setMnemonic('e');
 		
 		btn2.addActionListener(new ActionListener() {
@@ -304,7 +281,7 @@ public class FrameAttivitaTes extends JPanel {
 		JButton btn3 = new JButton(im);
 		JLabel lbl3= new JLabel();
         VariListener.SettaBtn(PanelBottom, btn3, lbl3,"Svuota carrello", 3, 2,im2,true);
-		btn.setMnemonic('e');
+		btn3.setMnemonic('e');
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
@@ -318,7 +295,7 @@ public class FrameAttivitaTes extends JPanel {
 		JButton btn4 = new JButton(im);
 		JLabel lbl4= new JLabel();
         VariListener.SettaBtn(PanelBottom, btn4, lbl4,"Inserisci attività", 4, 2,im2,true);
-		btn.setMnemonic('e');
+		btn4.setMnemonic('e');
 		btn4.addActionListener(new Listen(this));
 		btn4.setActionCommand("conf");
 		btn4.setEnabled(false);
@@ -362,7 +339,9 @@ public class FrameAttivitaTes extends JPanel {
 					
 		}}
 		);
-	contentPane.add(PanelBottom,BorderLayout.SOUTH);
+	tab2.add(PanelBottom,BorderLayout.SOUTH);
+	tabellaPnl.add(tab2,BorderLayout.EAST);
+	contentPane.add(tabellaPnl,BorderLayout.CENTER);
 	}
 	
 }

@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import VisteUtenteGenerico.setupTableWidths;
@@ -165,6 +166,105 @@ public abstract class VariListener implements MouseListener{
 		}
 		return scrollt;
 	}
+	
+	
+	public static JScrollPane SettaScroll3(JTable table,int altezza){
+		JTable tablemod;
+		
+        table.setRowHeight(altezza);
+        table.setModel(new DefaultTableModel(
+    			new Object[][] {
+    			},
+    			new String[] {
+    					"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello","Costo Evento","Codice Evento"
+    			}
+    		){
+    			
+    			private static final long serialVersionUID = 1L;
+    			@SuppressWarnings("rawtypes")
+    			Class[] columnTypes = new Class[] {
+    					String.class, String.class, String.class,String.class, String.class, String.class, String.class, Integer.class , Integer.class
+    					
+    				};
+    			
+    				public Class<?> getColumnClass(int columnIndex) {
+    					return columnTypes[columnIndex];
+    				}
+    				
+    			
+    		});
+		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		table.setCellSelectionEnabled(true);
+		// .
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setAutoCreateRowSorter(true);
+		Font font2 = new Font("Comic Sans", Font.PLAIN, 20);
+		table.setFont(font2);
+		tablemod = setupTableWidths.setupTableWidths(table);
+
+		tablemod.setForeground(new Color(255, 255, 255));
+		tablemod.setBackground(new Color(240, 220, 130));
+		
+		JScrollPane scrollt = new JScrollPane();
+
+		scrollt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollt.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollt.setBackground(new Color(255, 193, 20));
+		scrollt.setViewportView(tablemod);
+		
+		return scrollt;
+	}
+	
+	
+	public static JScrollPane SettaScroll2(JTable table,int altezza){
+		JTable tablemod;
+		
+        table.setRowHeight(altezza);
+        table.setModel(new DefaultTableModel(
+    			new Object[][] {
+    			},
+    			new String[] {
+    				"Disciplina", "Livello", "CostoMensile"
+    			})
+    		{
+    			
+    			private static final long serialVersionUID = 1L;
+    			@SuppressWarnings("rawtypes")
+    			Class[] columnTypes = new Class[] {
+    					String.class, String.class, Integer.class
+    					
+    				};
+    			
+    				public Class<?> getColumnClass(int columnIndex) {
+    					return columnTypes[columnIndex];
+    				}
+    				
+    			
+    		});
+		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		table.setCellSelectionEnabled(true);
+		// .
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setAutoCreateRowSorter(true);
+		Font font2 = new Font("Comic Sans", Font.PLAIN, 20);
+		table.setFont(font2);
+		tablemod = setupTableWidths.setupTableWidths(table);
+
+		tablemod.setForeground(new Color(255, 255, 255));
+		tablemod.setBackground(new Color(240, 220, 130));
+		
+		JScrollPane scrollt = new JScrollPane();
+
+		scrollt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollt.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollt.setBackground(new Color(255, 193, 20));
+		scrollt.setViewportView(tablemod);
+		
+		return scrollt;
+	}
+	
+	
+	
 	
 	public static JPanel SettaPannelloTitolo(ImageIcon img,JPanel oggetto,int x,int y,String titolo){
 		

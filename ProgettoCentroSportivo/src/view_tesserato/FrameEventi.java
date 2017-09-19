@@ -1,59 +1,33 @@
 package view_tesserato;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-
-import ClassiDAOIstruttore.ElencoEventiDAO;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-
-
-import ClassiDao.ElencoDisciplineDAO;
 import ClassiDao.GetInfoDB;
-import ClassiDao.UtenteDao;
 import ClassiDaoTesserato.ElencoEventiTessDAO;
 import ClassiDaoTesserato.eventoesistedao;
-
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-
-import ModelliTabelle.ModDiscIni;
 import ModelliTabelle_Tesserato.ModElEventiTes;
 import ModelliTabelle_Tesserato.controlloevento;
-import VisteUtenteGenerico.DetDisciplina;
-import VisteUtenteGenerico.FrameCambia;
-import VisteUtenteGenerico.FrameIniziale;
-import VisteUtenteGenerico.FrameLogin;
 import listener.Listen;
 import listener.VariListener;
-import modelliTabelleIstruttore.ModElEventiIstr;
 import Model.Utente;
-import Model_Tesserato.ElencoEventiTes;
+
 
 import javax.swing.JScrollPane;
 
@@ -67,7 +41,7 @@ public class FrameEventi extends JFrame {
 	 */
 	public static JFrame frame;
 	
-	public JPanel contentPane,tabellaPnl,bottoniPnl1,Panel1;
+	public JPanel contentPane,tabellaPnl,bottoniPnl1,Panel1,tab1,tab2,PanelBottom,PanelBottom2;
 	public static JTable table;
 	
 	public static JTable table2;
@@ -83,14 +57,11 @@ public class FrameEventi extends JFrame {
     public boolean u;
 	
 
-	/**
-	 * Create the frame.
-	 */
 	public FrameEventi() {
 		frame = new JFrame();
 		
 		frame.setTitle("Frame Eventi");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 605, 391);
 		frame.setVisible(true);
 		frame.setAutoRequestFocus(true);
@@ -141,81 +112,52 @@ public class FrameEventi extends JFrame {
 		tabellaPnl.setLayout(new BorderLayout());
 		tabellaPnl.setBackground(new Color(42, 82, 190));
 		
+		tab1 = new JPanel();
+		tab1.setLayout(new BorderLayout());
+		tab1.setBackground(new Color(42, 82, 190));
+		
+		
 		
 		table = new JTable();
 		model = new ModElEventiTes(ElencoEventiTessDAO.elencoiniziale());
-		table.setRowHeight(20);
-		table.setRowHeight(3, 50);
-		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table.setCellSelectionEnabled(true);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.setModel(model);
-		
-
-		JScrollPane pane2 = new JScrollPane(table);
-		pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.insets = new Insets(5, 0, 0, 5);
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 7;
-		gbc.gridy = 4;
-		tabellaPnl.add(pane2, BorderLayout.CENTER);
+		tab1.add(VariListener.SettaScroll(table,50,model), BorderLayout.CENTER);
 		
 		
-		bottoniPnl1 = new JPanel();
-		bottoniPnl1.setLayout(new GridBagLayout());
+		
 		JPanel tabellaPnl2 = new JPanel();
 		tabellaPnl2.setLayout(new BorderLayout());
+		
         table_1 = new JTable();
 		
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-					"Nome Evento","Descrizione","TipoEvento","Nome istruttore","Cognome istruttore","Disciplina","Livello","Costo Evento","Codice Evento"
-			}
-		){
-			
-			private static final long serialVersionUID = 1L;
-			@SuppressWarnings("rawtypes")
-			Class[] columnTypes = new Class[] {
-					String.class, String.class, String.class,String.class, String.class, String.class, String.class, Integer.class , Integer.class
-					
-				};
-			
-				public Class<?> getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-				
-			
-		});
+        table_1 = new JTable();
+
 		
-	
-		table_1.setAutoCreateRowSorter(true);
+		
+    	
+		tab2 = new JPanel();
+		tab2.setLayout(new BorderLayout());
+		tab2.setBackground(new Color(42, 82, 190));
 		
 		
 		
-		JScrollPane pane = new JScrollPane(table_1);
-		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.gridwidth = 2;
-		gbc.insets = new Insets(5, 0, 0, 5);
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 7;
-		gbc.gridy = 4;
-		tabellaPnl2.add(pane, BorderLayout.CENTER);
+
+		tab2.add(VariListener.SettaScroll3(table_1,50), BorderLayout.CENTER);
 		
 	
 		 
-		JPanel bottoniPnl2 = new JPanel();
-		bottoniPnl2.setLayout(new GridBagLayout());
+		PanelBottom = new JPanel();
+		PanelBottom.setLayout(new GridBagLayout());
+		PanelBottom.setBackground(new Color (42,82,190));
 		
-		JButton btnNewButton = new JButton("Dettagli Evento");
-		btnNewButton.setMnemonic('d');
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		PanelBottom2 = new JPanel();
+		PanelBottom2.setLayout(new GridBagLayout());
+		PanelBottom2.setBackground(new Color (42,82,190));
+
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(PanelBottom2, btn, lbl,"Dettagli evento", 2, 2,im2,true);
+		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow()!=-1)
 				new DetEvTes();
@@ -223,38 +165,28 @@ public class FrameEventi extends JFrame {
 					JOptionPane.showMessageDialog(null, "Seleziona un evento dall'elenco","Errore evento",JOptionPane.WARNING_MESSAGE);
 			}
 		});	
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy = 6;
-		bottoniPnl2.add(btnNewButton,gbc);
-		
-		
-		/*tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(3, 1));
-		tabellaPnl.add(table.getTableHeader());
-		tabellaPnl.add(table);
-		tabellaPnl.add(bottoniPnl1,gbc);
-		contentPane.add(tabellaPnl, gbc);*/
 		
 		
 		
-		Aggiungi = new JButton("Aggiungi");
-		gbc.anchor = GridBagConstraints.WEST;
-		gbc.insets = new Insets(0, 0, 5, 0);
-		gbc.gridx = 2;
-		gbc.gridy = 7;
-		bottoniPnl2.add(Aggiungi,gbc);
+		JButton btn2 = new JButton(im);
+		JLabel lbl2= new JLabel();
+        VariListener.SettaBtn(PanelBottom2, btn2, lbl2,"Aggiungi", 2, 3,im2,true);
+		btn2.setMnemonic('e');
 		
-		tabellaPnl.add(bottoniPnl2,BorderLayout.SOUTH);
+        tab1.add(PanelBottom2,BorderLayout.SOUTH);
 		
-		contentPane.add(tabellaPnl, BorderLayout.WEST);
 		
-		rimuovi = new JButton("rimuovi");
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 4;
-		gbc.gridy = 7;
-		bottoniPnl1.add(rimuovi, gbc);
+		
+		
+		tabellaPnl.add(tab1,BorderLayout.WEST);
+		
+		
+		
+		
+		JButton btn3 = new JButton(im);
+		JLabel lbl3= new JLabel();
+        VariListener.SettaBtn(PanelBottom, btn3, lbl3,"Rimuovi", 2, 2,im2,true);
+		btn3.setMnemonic('e');
 		
 		table2 = new JTable();
 		model1 = new controlloevento(eventoesistedao.elencoiniziale());
@@ -262,7 +194,7 @@ public class FrameEventi extends JFrame {
 		int tess;
 		tess= GetInfoDB.getidTess(Utente.getUsername());
 		
-		Aggiungi.addActionListener(new ActionListener() {
+		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			
@@ -270,7 +202,7 @@ public class FrameEventi extends JFrame {
 			int i;
 				
 				
-				int esci=0;
+				
 				int b;
 				int prenotazioni,codice;
 				
@@ -278,30 +210,22 @@ public class FrameEventi extends JFrame {
 				prenotazioni=GetInfoDB.getprenotazionievento1(codice);
 				for(i=0;i<table2.getRowCount();i++){
 					b= (int) table2.getValueAt(i, 1);
-			/*if(table2.getValueAt(i, 0)==table.getValueAt(table.getSelectedRow(), 8) && b==tess){
-				
-				
-				esci=1;*/
-			//}
+			
 				
 			
 				}		
 	
-				if(esci==1){
-					
-					JOptionPane.showMessageDialog(FrameEventi.frame, " evento già prenotato!!");
-				}
-				else{
+				
 				if(table.getSelectedRow()!=-1){
 					
-					JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"codice"+codice,null,JOptionPane.WARNING_MESSAGE);
+					
 					
 					
 					if(GetInfoDB.getoccev(codice,tesserato)!=-1)
 					{
-						JOptionPane.showMessageDialog(FrameAttivitaTes.frame,"comb"+GetInfoDB.getoccev(codice,tesserato),null,JOptionPane.WARNING_MESSAGE);
 						
-						JOptionPane.showMessageDialog(FrameAttivitaTes.frame, "Hai già un iscrizione con la disciplina da te selezionata",null,JOptionPane.WARNING_MESSAGE);
+						
+						JOptionPane.showMessageDialog(FrameAttivitaTes.frame, "Hai già un iscrizione effettuata con la disciplina da te selezionata",null,JOptionPane.WARNING_MESSAGE);
 						
 					}
 					else{
@@ -326,17 +250,16 @@ public class FrameEventi extends JFrame {
 				for(c=0;c<table_1.getRowCount();c++)
 				{
 				if(table_1.getRowCount()>=1){
-						//if(table.getValueAt(table.getSelectedRow(), 5).equals(table_1.getValueAt(c, 5))&&
-							//	table.getValueAt(table.getSelectedRow(), 6).equals(table_1.getValueAt(c, 6)))
+						
 					if(table.getValueAt(table.getSelectedRow(), 8).equals(table_1.getValueAt(c, 8)))
 						{
 						JOptionPane.showMessageDialog(FrameEventi.frame, "Non è possibile Aggiungere lo stesso evento",null,JOptionPane.WARNING_MESSAGE);
 							u=false;
 							
-							break;
+						
 							
 						}
-
+                   
 					}
 
 				}
@@ -345,22 +268,29 @@ public class FrameEventi extends JFrame {
 				if(prenotazioni==0)	{
 					JOptionPane.showMessageDialog(FrameEventi.frame, "Numero massimo prenotazioni raggiunto!!",null,JOptionPane.WARNING_MESSAGE);
 				}
+				else if(table_1.getRowCount() >= 1)
+				{
+					
+					JOptionPane.showMessageDialog(FrameEventi.frame, "Non è possibile Aggiungere più di un evento",null,JOptionPane.WARNING_MESSAGE);
+					
+					
+				}
 				else{
 				modello.addRow(dati);
 				}
+				
+				
 				}
 				
-				else{
-					
-					JOptionPane.showMessageDialog(FrameEventi.frame, "Non è possibile Aggiungere lo stesso evento",null,JOptionPane.WARNING_MESSAGE);
+				
+				
 				}
-				}
-				}
+				
 			}
 		});
 		
 		
-		rimuovi.addActionListener(new ActionListener() {
+		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 				if(table_1.getSelectedRow()!=-1){
@@ -370,15 +300,13 @@ public class FrameEventi extends JFrame {
 		});
 		
 		
-		 svuotacarrello = new JButton("svuotacarrello");
-		   
-			gbc.insets = new Insets(0, 0, 5, 5);
-			gbc.gridx = 6;
-			gbc.gridy = 7;
-			bottoniPnl1.add(svuotacarrello, gbc);
+		JButton btn4 = new JButton(im);
+		JLabel lbl4= new JLabel();
+        VariListener.SettaBtn(PanelBottom, btn4, lbl4,"Svuota carrello", 3, 2,im2,true);
+		btn4.setMnemonic('e');
 			
 			
-			svuotacarrello.addActionListener(new ActionListener() {
+			btn4.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					DefaultTableModel modello = (DefaultTableModel) table_1.getModel();
 					for(int x=modello.getRowCount()-1;x>=0;x--)
@@ -390,18 +318,13 @@ public class FrameEventi extends JFrame {
 			
 			
 			
-			  invia = new JButton("invia");
-
-	
-				gbc.insets = new Insets(0, 0, 5, 5);
-				gbc.gridx = 8;
-				gbc.gridy = 7;
-				invia.setEnabled(false);
-				bottoniPnl1.add(invia, gbc);
+			JButton btn5 = new JButton(im);
+			JLabel lbl5= new JLabel();
+	        VariListener.SettaBtn(PanelBottom, btn5, lbl5,"Inserisci evento", 4, 2,im2,true);
+			btn5.setMnemonic('e');
 				
-		tabellaPnl2.add(bottoniPnl1,BorderLayout.SOUTH)	;	
-		contentPane.add(tabellaPnl2, BorderLayout.EAST );
-				invia.addActionListener(new ActionListener(){
+	
+				btn5.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
 						frame.setEnabled(false);
 						new sendeventframe((String) FrameEventi.table.getValueAt(table.getSelectedRow(), 2));
@@ -424,13 +347,17 @@ public class FrameEventi extends JFrame {
 						
 						
 						if(table_1.getModel().getRowCount()>0)
-							invia.setEnabled(true);
+							btn5.setEnabled(true);
 						else table_1.setEnabled(false);
 						if(table_1.getModel().getRowCount()<1)
-							invia.setEnabled(false);	
+							btn5.setEnabled(false);	
 						
 						
 					}});
+				
+				tab2.add(PanelBottom,BorderLayout.SOUTH);
+					tabellaPnl.add(tab2,BorderLayout.EAST);
+					contentPane.add(tabellaPnl,BorderLayout.CENTER);
 		
 	}
 	
