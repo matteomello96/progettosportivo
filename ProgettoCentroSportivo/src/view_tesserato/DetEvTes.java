@@ -1,123 +1,151 @@
 package view_tesserato;
 
-import javax.swing.JDialog;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-
-import VisteUtenteGenerico.FrameIniziale;
+import listener.Listen;
+import listener.VariListener;
 import modelliTabelleIstruttore.ModDetOrariEv;
-import ClassiDao.DettagliIstruttoreDAO;
-import ClassiDao.DettagliLivelloDAO;
-import ClassiDao.DettagliOrariDAO;
-import ClassiDao.DettagliTestimonianzeDAO;
-import ClassiDao.ElencoDisciplineDAO;
+import visteIstruttore.DetEv;
+import visteIstruttore.DetPartEv;
 import ClassiDao.GetInfoDB;
-import ModelliTabelle.ModDetIstr;
-import ModelliTabelle.ModDetLiv;
-import ModelliTabelle.ModDetOrari;
-import ModelliTabelle.ModDetTest;
-import ModelliTabelle.ModDiscIni;
-
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.plaf.TableHeaderUI;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
-import javax.swing.tree.TreeSelectionModel;
-
 import ClassiDAOIstruttore.DettagliOrariEvDAO;
-
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
+
 
 public class DetEvTes {
 
-	private JFrame frame;
-	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4;
+	public static JFrame frame;
+	public JPanel contentPane,tabellaPnl,tabellaPnl2,tabellaPnl3,tabellaPnl4,bottoniPnl1,Panel1;
 	public static JTable table1,table2,table3,table4;
     private ModDetOrariEv model1; 
-    private ModDetIstr model2;
-    private ModDetTest model3;
-    private ModDetOrari model4;
+    
     
     
 	public DetEvTes() {
      String evento=(String) FrameEventi.table.getValueAt(FrameEventi.table.getSelectedRow(), 0);
-		frame = new JFrame();
-		frame.setTitle("Dettaglio Evento: "+evento+"");
-		frame.setBounds(100, 100, 956, 523);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-		frame.setAutoRequestFocus(true);
+		setFrame(new JFrame());
+		getFrame().setTitle("Dettaglio Evento: "+evento+"");
+		getFrame().setBounds(100, 100, 956, 523);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getFrame().setVisible(true);
+		getFrame().setLocationRelativeTo(null);
+		getFrame().setAutoRequestFocus(true);
 		
-		frame.setResizable(true);
+		getFrame().setResizable(true);
+		
+		JMenuBar menuBar = new JMenuBar();
+		getFrame().setJMenuBar(menuBar);
+
+		JMenuItem MenuRegistra = new JMenuItem("Torna agli eventi");
+
+		menuBar.add(MenuRegistra);
+		MenuRegistra.addActionListener(new Listen(this));
+		MenuRegistra.setActionCommand("Vai_ev2");
+		
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone8.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone9.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo4.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,193,20));
-		contentPane.setLayout(new GridBagLayout());
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
+
 		
-		GridBagConstraints gbc = new GridBagConstraints();
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (60,179,113));
+		contentPane.setLayout(new BorderLayout());
 		
 		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(30, 400, 300, 30);	
-	    frame.getContentPane().add(scroll);
+
+		scroll.setBounds(100, 100, 605, 391);
+		getFrame().getContentPane().add(scroll);
 		
-		JLabel lblTurni = new JLabel("Turni disponibili:");
-		lblTurni.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTurni.setBounds(29, 38, 353, 14);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		contentPane.add(lblTurni, gbc);
+		
+		Panel1 = new JPanel();
+ 		Panel1.setBackground(new Color(60, 179, 113));
+ 		Panel1.setLayout(new GridBagLayout());
+ 		
+ 		
+ 		
+ 		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1,2, 2, "Turni disponibili"), BorderLayout.NORTH);
 		
 		table1 = new JTable();
 		model1 = new ModDetOrariEv(DettagliOrariEvDAO.elencoorario(evento));
-		table1.setRowHeight(20);
-		table1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		table1.setCellSelectionEnabled(true);
-		table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table1.setModel(model1);
+		contentPane.add(VariListener.SettaScroll(table1,50,model1), BorderLayout.CENTER);
 		
-		Dimension b = table1.getPreferredSize();
-		table1.setPreferredSize(b);
-		gbc.insets= new Insets(0,0,5,5);
-		gbc.gridx =0;
-		gbc.gridy =1;
-		tabellaPnl = new JPanel();
-		tabellaPnl.setLayout(new GridLayout(2, 1));
-		tabellaPnl.add(table1.getTableHeader());
-		tabellaPnl.add(table1);
-		contentPane.add(tabellaPnl, gbc);
-		
-		JLabel costoev = new JLabel("Costo dell'evento:");
-		costoev.setBounds(29, 38, 353, 14);
-		costoev.setFont(new Font("Tahoma", Font.BOLD, 11));
-		costoev.setText("Costo dell'evento: '"+GetInfoDB.getcosto(evento)+"'");
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		contentPane.add(costoev, gbc);
-		
+		bottoniPnl1 = new JPanel();
+        bottoniPnl1.setBackground(new Color (60,179,113));
+		bottoniPnl1.setLayout(new GridBagLayout());
+        
+        
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(bottoniPnl1, btn, lbl,"Elenco partecipanti",0, 2,im2,true);
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table1.getSelectedRow()!=-1)
+				{
+			   lbl.setForeground(Color.WHITE);
+			   
+			   
+				new DetPartEv((String) DetEv.table1.getValueAt(DetEv.table1.getSelectedRow(), 0),(String) DetEv.table1.getValueAt(DetEv.table1.getSelectedRow(), 1),(String) DetEv.table1.getValueAt(DetEv.table1.getSelectedRow(), 2));
+				DetEv.frame.setVisible(false);
+				DetEv.frame.dispose();
+				
+				}
+				else
+					JOptionPane.showMessageDialog(null, "Seleziona un turno dall'elenco","Errore turno",JOptionPane.WARNING_MESSAGE);
+			}
+		});	
 		
 		
+        VariListener.SettaPannelloTitolo(im3, bottoniPnl1, 0, 3, "Altre info");
 		
+		
+		
+		JLabel costoatt = new JLabel();
+		VariListener.SettaLabelGen(bottoniPnl1,costoatt,"Costo mensile dell'attività:", 0, 4);
+		
+		JLabel costoatt2 = new JLabel();
+		VariListener.SettaErr2("'"+GetInfoDB.getcosto(evento)+"'",costoatt2, 1, 4,bottoniPnl1);
+		
+		
+		
+		 
+		contentPane.add(bottoniPnl1, BorderLayout.SOUTH);		
+		
+		
+	}
+
+
+
+	public static JFrame getFrame() {
+		return frame;
+	}
+
+
+
+	public static void setFrame(JFrame frame) {
+		DetEvTes.frame = frame;
 	}
 }

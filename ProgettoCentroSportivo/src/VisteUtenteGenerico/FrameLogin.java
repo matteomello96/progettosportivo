@@ -10,7 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.*;
-
+import java.net.URL;
 
 import listener.Listen;
 import listener.LoginListener;
@@ -77,9 +77,12 @@ public class FrameLogin extends JFrame {
 			mnAccedi.addActionListener(new Listen(this));
 			mnAccedi.setActionCommand("Vai_home1");
 			
-			ImageIcon im=new ImageIcon("src/immaginijava/bottone1.png");
-	        ImageIcon im2=new ImageIcon("src/immaginijava/bottone2.png");
-	        ImageIcon im3=new ImageIcon("src/immaginijava/titolo1.png");
+			URL url1 = ClassLoader.getSystemResource("immaginijava/bottone1.png");
+			URL url2 = ClassLoader.getSystemResource("immaginijava/bottone2.png");
+			URL url3 = ClassLoader.getSystemResource("immaginijava/titolo1.png");
+	        ImageIcon im=new ImageIcon(url1);
+	        ImageIcon im2=new ImageIcon(url2);
+	        ImageIcon im3=new ImageIcon(url3);
 			
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(229, 43, 80));

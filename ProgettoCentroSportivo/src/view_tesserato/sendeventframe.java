@@ -9,7 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.math.RoundingMode;
+import java.net.URL;
 import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import ClassiDaoTesserato.ordineeventodao;
 import ComboTesserato.Combocon;
 import listener.Listen;
@@ -79,9 +83,12 @@ public sendeventframe(String tipoevento){
 		mntmNewMenuItem.setActionCommand("send");
 		
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone8.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone9.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo4.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		
 		contentPane = new JPanel();
@@ -173,15 +180,26 @@ public sendeventframe(String tipoevento){
          if (tipoevento.equals("Stage"))
 		 {
         	 evento=(int) FrameEventi.table_1.getValueAt(0, 8);
-        	 costo = 0;
-			 pagamento="gratuito";
+        	 costo = (int) FrameEventi.table_1.getValueAt(0, 7);
+        	 if(costo == 0)
+        	 {
+        	 pagamento="gratuito";
+        	 Casella.setVisible(false);
+			 lblEventi.setVisible(false);
+			 ComboP.setVisible(false);
+			 lblEventi2.setVisible(false);	 
+        	 }
+        	 
+        		 
+        	 
+        		 
+        	 
+			 
 			 path="null";
 			 pathprecedente="null";
-			 nomedistinta="null";
-			 Casella.setVisible(false);
-			 lblEventi.setVisible(false);
+			 nomedistinta="null";	 
+			 lbl3.setVisible(false);
 			 btnFine.setVisible(false);
-			 ComboP.setVisible(false);
 			 lblEventi2.setVisible(false);
 		 }
         
@@ -200,18 +218,23 @@ public sendeventframe(String tipoevento){
 
 				
 				 
-				 JFileChooser fc = new JFileChooser();
-				 int sel = fc.showOpenDialog(frame);
-			      if (sel == JFileChooser.APPROVE_OPTION) {
-			    	 pathprecedente=(fc.getSelectedFile().getPath());
-			         nomedistinta=(fc.getSelectedFile().getName());
-			         percorso =("src/certificati");
-			         path=percorso+"/"+nomedistinta;
-			    
-				    }
-			      Casella.setVisible(true);
+			    JFileChooser fileChooser = new JFileChooser();
+		         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+		         FileNameExtensionFilter filter = new FileNameExtensionFilter("pdf", "jpg","png");
+		         fileChooser.addChoosableFileFilter(filter);
+		         int result = fileChooser.showSaveDialog(null);
+		         if(result == JFileChooser.APPROVE_OPTION){
+		             File selectedFile = fileChooser.getSelectedFile();
+		             nomedistinta=fileChooser.getSelectedFile().getName();
+		              path = selectedFile.getAbsolutePath();
+		             
+		            Casella.setVisible(true);
 			      Casella.setText(nomedistinta);
-			
+		              }
+		         else if(result == JFileChooser.CANCEL_OPTION){
+		             System.out.println("No Data");
+			      
+		         }
 					
 			     
 			}}
@@ -231,12 +254,17 @@ public sendeventframe(String tipoevento){
 		
 		    JButton btnConferma = new JButton(im);
 		    JLabel lbl2= new JLabel();
-            VariListener.SettaBtn(Pan2, btnTornaAlCarrello, lbl2,"Conferma", 2, 2,im2,true);
+            VariListener.SettaBtn(Pan2, btnConferma, lbl2,"Conferma", 2, 2,im2,true);
+            
 			btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				JOptionPane.showMessageDialog(sendeventframe.frame, pagamento+" "+ path +" "+pathprecedente+" "+evento+" "+costo+" "+" "+tipoevento,null,JOptionPane.WARNING_MESSAGE);
-				ordineeventodao.insdetiscr(pagamento,path,pathprecedente, evento, costo,tipoevento);
+				if ((tipoevento.equals("Stage"))&&(costo!=0))
+				 {
+				pagamento=ComboP.getSelectedItem().toString();	
+				 }
+				
+				ordineeventodao.insdetiscr(pagamento,path, evento, costo,tipoevento);
 					frame.dispose();	
 					FrameEventi.frame.setEnabled(true);
 					FrameEventi.frame.setAlwaysOnTop(true);
@@ -244,7 +272,7 @@ public sendeventframe(String tipoevento){
 				
 				
 				
-				Casella.setVisible(true);  
+				Casella.setVisible(true); 
 				
              
 				

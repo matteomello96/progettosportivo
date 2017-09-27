@@ -27,9 +27,7 @@ import java.awt.event.ActionListener;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-
-
+import java.net.URL;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 
@@ -103,9 +101,12 @@ public class FrameInserisciLiv extends JFrame {
 		
 		
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+		URL url1 = ClassLoader.getSystemResource("src/immaginijava/bottone6.png");
+		URL url2 = ClassLoader.getSystemResource("src/immaginijava/bottone7.png");
+		URL url3 = ClassLoader.getSystemResource("src/immaginijava/titolo3.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		
 		contentPane = new JPanel();

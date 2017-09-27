@@ -24,6 +24,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
+
 import javax.swing.ImageIcon;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -76,9 +78,12 @@ public class FrameModificaDati extends JFrame {
 		
 		
 	
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone1.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone2.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo1.png");
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone1.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone2.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo1.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		
 		contentPane = new JPanel();

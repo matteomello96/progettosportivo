@@ -26,6 +26,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -52,7 +53,7 @@ public class FrameIniziale extends JFrame {
 	public JPanel contentPane, tabellaPnl, panelImage, panelCenter, PanelBottom;
 	public static JTable table;
 	private ModDiscIni model;
-	BufferedImage img;
+	Image img;
 	int cordx;
 	int cordy;
 
@@ -118,25 +119,30 @@ public class FrameIniziale extends JFrame {
 		frame.getContentPane().add(scroll);
 		
 		
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone1.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone2.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo1.png");
 		
-        ImageIcon im=new ImageIcon("src/immaginijava/bottone1.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone2.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo1.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
         
 		// panelImage = new JPanel();
 		panelCenter = new JPanel();
 		panelCenter.setLayout(new GridBagLayout());
 		panelCenter.setBackground(new Color(229, 43, 80));
 		GridBagConstraints gbc = new GridBagConstraints();
-
-		Image img = null;
-		ImageIcon icon = null;
+ 
+		URL url4 = ClassLoader.getSystemResource("immaginijava/logo.GIF");
+		Image im4=null;
 		try {
-			img = ScalaImmagine.immaginescalata(ImageIO.read(new File("src/immaginijava/logo.GIF ")), 500, 300);
-		} catch (IOException e1) {
-
-			e1.printStackTrace();
+			im4 = ImageIO.read(url4);
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
+		ImageIcon icon=null;
+		img = ScalaImmagine.immaginescalata(im4, 500, 300);
 
 		JLabel lblNewLabel = new JLabel();
 		icon = new ImageIcon(img);

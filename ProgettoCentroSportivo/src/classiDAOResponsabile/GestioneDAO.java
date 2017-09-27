@@ -2,14 +2,19 @@ package classiDAOResponsabile;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +22,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 import DBInterfaccia.DbConnection;
-
+import listener.VariListener;
 import visteadmin.FrameGestione;
 import visteadmin.FrameInserisciDiscDisp;
 import visteadmin.FrameInserisciDisciplina;
@@ -111,7 +116,7 @@ public static boolean eliminamodpagam ( String modpag ){
       	  JOptionPane.showMessageDialog(null, "La modalità di pagamento "+modpag+" non è  stata eliminata"," ",JOptionPane.WARNING_MESSAGE);
         
         else{
-        String discip= rs.getString("modalitapagamento.Nomemodalita "); 
+        String discip= rs.getString("modalitapagamento.Nomemodalita"); 
         st.executeUpdate("DELETE  FROM modalitapagamento WHERE modalitapagamento.Nomemodalita ='"+discip+"' ");
         
          
@@ -502,7 +507,7 @@ return false;
 
 
 
-public static boolean inserimentodisc ( String dis ,String desc,String cal,String pathim,String nomefile,String pathprec){
+public static boolean inserimentodisc ( String dis ,String desc,String cal,String pathim,String nomefile,String pathprec) throws URISyntaxException{
 	 
 	
 	
@@ -531,22 +536,16 @@ public static boolean inserimentodisc ( String dis ,String desc,String cal,Strin
         
         else{
         
-        
-         st2.executeUpdate("INSERT INTO  `disciplina`(nomedisciplina,descrizione,calendario,immagine) VALUES ('"+dis+"','"+desc+"','"+cal+"','"+pathim+"') ");
-        try {
-        java.nio.file.Path pathprec2 =Paths.get(pathprec);
-        java.nio.file.Path pathim3 =Paths.get(pathim);
-        Files.copy(pathprec2,pathim3,StandardCopyOption.REPLACE_EXISTING);
-        
-        
-        
-        }
-        catch (FileNotFoundException e) {
-        	JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);
-          } catch (IOException e) {
-		
-        	  JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);
-		}
+       st2.executeUpdate("INSERT INTO  `disciplina`(nomedisciplina,descrizione,calendario,immagine) VALUES ('"+dis+"','"+desc+"','"+cal+"',NULL) ");
+
+       InputStream is = new FileInputStream(new File(pathim));
+       
+       PreparedStatement ps = con.prepareStatement("UPDATE disciplina set immagine=? where nomedisciplina='"+dis+"'");
+       ps.setBlob(1,is);
+       ps.executeUpdate();
+       JOptionPane.showMessageDialog(null, "Data Inserted");
+   
+
         
         
          
@@ -557,6 +556,9 @@ public static boolean inserimentodisc ( String dis ,String desc,String cal,Strin
      }}
 catch (SQLException ex) {
     JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, ex);
+} catch (FileNotFoundException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
 }
 return false;
 
@@ -618,7 +620,7 @@ return false;
 
 
 
-public static boolean modificadisc (String pathprecimg, String exdisc,String dis ,String desc,String cal,String pathim,String nomefile,String pathprec){
+public static boolean modificadisc ( String exdisc,String dis ,String desc,String cal,String pathim,String nomefile){
 	 
 	
 	
@@ -646,9 +648,9 @@ public static boolean modificadisc (String pathprecimg, String exdisc,String dis
         
         else{
         	
-        if (pathprec.equals(pathprecimg))
+        if (nomefile.equals("stesso file precedente"))
      { 
-    	 pathim=pathprec;
+        	st2.executeUpdate("UPDATE  `disciplina`SET nomedisciplina='"+dis+"',descrizione='"+desc+"',calendario='"+cal+"' where nomedisciplina='"+exdisc+"' ");
      }
     
      else 
@@ -656,25 +658,13 @@ public static boolean modificadisc (String pathprecimg, String exdisc,String dis
         
         try {
        
+        	st2.executeUpdate("UPDATE  `disciplina`SET nomedisciplina='"+dis+"',descrizione='"+desc+"',calendario='"+cal+"' where nomedisciplina='"+exdisc+"' ");
         
-        
-        @SuppressWarnings("resource")
-		FileChannel fc1= new FileOutputStream(pathprec).getChannel();
-        fc1.close();
-        
-        java.nio.file.Path pathprec3 =Paths.get(pathprec);
-        
-        
-       	
-        java.nio.file.Path pathprec2 =Paths.get(pathprecimg);
-        
-        java.nio.file.Path pathim3 =Paths.get(pathim);
-        File f2 = pathim3.toFile();
-        
-        Files.copy(pathprec2,pathim3,StandardCopyOption.REPLACE_EXISTING);
-        
-        File f3 = pathprec3.toFile();
-        
+        	InputStream is = new FileInputStream(new File(pathim));
+            
+            PreparedStatement ps = con.prepareStatement("UPDATE disciplina set immagine=? where nomedisciplina='"+dis+"'");
+            ps.setBlob(1,is);
+            ps.executeUpdate();
         
         
         }
@@ -685,7 +675,7 @@ public static boolean modificadisc (String pathprecimg, String exdisc,String dis
         	  JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);
 		}
      }
-        st2.executeUpdate("UPDATE  `disciplina`SET nomedisciplina='"+dis+"',descrizione='"+desc+"',calendario='"+cal+"',immagine='"+pathim+"' where nomedisciplina='"+exdisc+"' ");
+        st2.executeUpdate("UPDATE  `disciplina`SET nomedisciplina='"+dis+"',descrizione='"+desc+"',calendario='"+cal+"' where nomedisciplina='"+exdisc+"' ");
             
        JOptionPane.showMessageDialog(FrameModificaDisciplina.frame,"La disciplina  \""+dis+"\"  è stata modificata  correttamente ","Modifica riuscita! ",JOptionPane.INFORMATION_MESSAGE);
          return true;

@@ -12,7 +12,7 @@ import javax.swing.JButton;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -35,6 +35,7 @@ import listener.VariListener;
 import modelliTabelleRespo.ModElUtenti;
 
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -89,9 +90,12 @@ public class FrameElencoUtenti extends JFrame {
 
 		
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone4.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone5.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo2.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		
 		contentPane = new JPanel();
@@ -149,7 +153,8 @@ public class FrameElencoUtenti extends JFrame {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				if(table.getSelectedRow()!=-1){
+				
 				int b;
 			
 				b= (int) table.getValueAt(table.getSelectedRow(), 0);
@@ -158,8 +163,10 @@ public class FrameElencoUtenti extends JFrame {
 			frame.dispose();
 			new FrameElencoUtenti();
 			
-		}	
-		});
+		}	else
+			JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+					JOptionPane.WARNING_MESSAGE);
+		}});
 		
 		
 		JButton btn1 = new JButton(im);
@@ -170,7 +177,8 @@ public class FrameElencoUtenti extends JFrame {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				if(table.getSelectedRow()!=-1){
+			
 				int b;
 			
 				b= (int) table.getValueAt(table.getSelectedRow(), 0);
@@ -179,8 +187,10 @@ public class FrameElencoUtenti extends JFrame {
 			frame.dispose();
 			new FrameElencoUtenti();
 			
-		}	
-		});
+		}	else
+			JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+					JOptionPane.WARNING_MESSAGE);
+		}});
 		
 		GPane1.add(BotPnl1,BorderLayout.SOUTH);
 		
@@ -222,13 +232,14 @@ public class FrameElencoUtenti extends JFrame {
 		
 		JButton btn3 = new JButton(im);
 		JLabel lbl3= new JLabel();
-        VariListener.SettaBtn(BotPnl2, btn3, lbl3,"Inserisci livello", 2, 2,im2,true);
+        VariListener.SettaBtn(BotPnl2, btn3, lbl3,"Accetta richiesta", 2, 2,im2,true);
 		btn3.setMnemonic('e');
 		btn3.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				if(table2.getSelectedRow()!=-1){
+				
 				int b;
 			
 				b= (int) table2.getValueAt(table2.getSelectedRow(), 0);
@@ -237,8 +248,10 @@ public class FrameElencoUtenti extends JFrame {
 			frame.dispose();
 			new FrameElencoUtenti();
 			
-		}	
-		});
+		}	else
+			JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+					JOptionPane.WARNING_MESSAGE);
+		}});
 		
 		
 		JButton btn4 = new JButton(im);
@@ -249,7 +262,8 @@ public class FrameElencoUtenti extends JFrame {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				if(table2.getSelectedRow()!=-1){
+			
 				int b;
 			
 				b= (int) table2.getValueAt(table2.getSelectedRow(), 0);
@@ -258,8 +272,10 @@ public class FrameElencoUtenti extends JFrame {
 			frame.dispose();
 			new FrameElencoUtenti();
 			
-		}	
-		});
+		}		else
+			JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+					JOptionPane.WARNING_MESSAGE);
+		}});
 		
 		GPane2.add(BotPnl2,BorderLayout.SOUTH);
 		
@@ -303,7 +319,8 @@ public class FrameElencoUtenti extends JFrame {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				if(table3.getSelectedRow()!=-1){
+		
 				int b;
 			
 				b= (int) table3.getValueAt(table3.getSelectedRow(), 0);
@@ -312,6 +329,9 @@ public class FrameElencoUtenti extends JFrame {
 			frame.dispose();
 			new FrameElencoUtenti();
 			
+		}else
+			JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+					JOptionPane.WARNING_MESSAGE);
 		}	
 		});
 		
@@ -357,7 +377,8 @@ public class FrameElencoUtenti extends JFrame {
 		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				if(table4.getSelectedRow()!=-1){
+				
 				int b;
 			
 				b= (int) table4.getValueAt(table4.getSelectedRow(), 0);
@@ -366,7 +387,10 @@ public class FrameElencoUtenti extends JFrame {
 			frame.dispose();
 			new FrameElencoUtenti();
 			
-		}	
+		}else
+			JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+					JOptionPane.WARNING_MESSAGE);
+		}		
 		});
 		
 		

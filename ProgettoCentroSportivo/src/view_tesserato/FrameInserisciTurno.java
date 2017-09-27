@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -59,7 +59,7 @@ public class FrameInserisciTurno extends JPanel {
 		final DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
 		
-		frame = new JFrame("Testimonianze");
+		frame = new JFrame("Inserisci turno");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 605, 391);
 		frame.setVisible(true);
@@ -68,7 +68,7 @@ public class FrameInserisciTurno extends JPanel {
 		frame.setAlwaysOnTop(true);
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,36,0));
+		contentPane.setBackground(new Color (42,82,190));
 		contentPane.setLayout(new GridBagLayout());
 		
 		
@@ -85,7 +85,7 @@ public class FrameInserisciTurno extends JPanel {
 	    
 	    
 		
-		JLabel lblNewLabel = new JLabel("Inseisci turno");
+		JLabel lblNewLabel = new JLabel("Inserisci turno");
 		lblNewLabel.setFont(new Font("Sylfaen", Font.BOLD, 25));
 		
 		gbc.gridwidth = 2;
@@ -189,7 +189,7 @@ public class FrameInserisciTurno extends JPanel {
 			
 					postidisponibili = GetInfoDB.getprenotazioni(codiceturno);
 					if(postidisponibili==0){
-						JOptionPane.showMessageDialog(FrameTurno.frame, "Posti massimi raggiunti"," ",JOptionPane.WARNING_MESSAGE);	
+						JOptionPane.showMessageDialog(FrameInserisciTurno.frame, "Posti massimi raggiunti"," ",JOptionPane.WARNING_MESSAGE);	
 						frame.dispose();
 						new FrameInserisciTurno(livello,disciplina,null,null,momento);
 					}

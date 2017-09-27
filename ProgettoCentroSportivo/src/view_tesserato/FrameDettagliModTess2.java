@@ -2,13 +2,12 @@ package view_tesserato;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,15 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-
-import ClassiDao.GetInfoDB;
-import VisteUtenteGenerico.setupTableWidths;
-import classiDAOResponsabile.GestioneDetIscrizioniDAO;
-import classiDAOResponsabile.GestioneIscrizioniDAO;
-import classiDAOResponsabile.Uccidi_iscrizione;
 import classiDAOResponsabile.dettagliiscrizionedao;
-import classiDAOResponsabile.modificaordinedao;
 import listener.Listen;
+import listener.VariListener;
 import modelliTabelleRespo.modellidettagli;
 
 public class FrameDettagliModTess2 extends JFrame {
@@ -42,7 +35,7 @@ public class FrameDettagliModTess2 extends JFrame {
 	
 	public static JTable table_2,tablemod2;
 	private modellidettagli model;
-	public JPanel contentPane,pannello;
+	public JPanel contentPane,pannello,PanelBottom2,Panel1;
 	public JButton bottone;
 	public JButton bottone1,bottone3;
 	
@@ -71,65 +64,54 @@ public class FrameDettagliModTess2 extends JFrame {
 		mntmNewMenuItem.addActionListener(new Listen(this));
 		mntmNewMenuItem.setActionCommand("elord2");
 		
-		pannello= new JPanel();
-		pannello.setBackground(new Color (255,193,20));
-		pannello.setLayout(new BorderLayout());
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone8.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone9.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo4.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color (255,193,20));
-		contentPane.setLayout(new GridBagLayout());
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
 		
 		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
 		
-		GridBagConstraints gbc = new GridBagConstraints();
+
 		
-		JScrollPane scroll = new JScrollPane(pannello);
+		JScrollPane scroll = new JScrollPane(contentPane);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);			
 	    frame.getContentPane().add(scroll);
 		
+	    Panel1 = new JPanel();
+		Panel1.setBackground(new Color (42,82,190));
+		Panel1.setLayout(new GridBagLayout());
 		
-	    JLabel lblUtentiS = new JLabel("Dettagli ordine modificato");
-		lblUtentiS.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUtentiS.setForeground(Color.WHITE);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		pannello.add(lblUtentiS,BorderLayout.NORTH);
 		
-	
+		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 2, 2,"Dettagli ordine modificato"), BorderLayout.NORTH);
+		
+		
 		
 		table_2 = new JTable();
 		model = new modellidettagli(dettagliiscrizionedao.elencoiniziale(cod));
-		table_2.setCellSelectionEnabled(true);
-		table_2.setModel(model);
+		contentPane.add(VariListener.SettaScroll(table_2,50,model), BorderLayout.CENTER);
 		
-		tablemod2 = setupTableWidths.setupTableWidths(table_2);
+		PanelBottom2 = new JPanel();
+		PanelBottom2.setLayout(new GridBagLayout());
+		PanelBottom2.setBackground(new Color (42,82,190));
 
-		tablemod2.setForeground(new Color(255, 255, 255));
-		tablemod2.setBackground(new Color(240, 220, 130));
-
-		JScrollPane scrollt2 = new JScrollPane();
-
-		scrollt2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollt2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollt2.setBackground(new Color(255, 193, 20));
-		scrollt2.setViewportView(tablemod2);
-		
-		
-		pannello.add(scrollt2,BorderLayout.CENTER);
-		
-        bottone= new JButton("Modifica Parte dell'Ordine");
-        bottone.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		bottone.setForeground(Color.BLACK);
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		contentPane.add(bottone,gbc);
-		
-		bottone.addActionListener(new ActionListener() {
+		JButton btn = new JButton(im);
+		JLabel lbl= new JLabel();
+        VariListener.SettaBtn(PanelBottom2, btn, lbl,"Modifica parte dell'ordine", 2, 2,im2,true);
+		btn.setMnemonic('e');
+		btn.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
+			if(table_2.getSelectedRow()!=-1){
 			int tesserato;
 			String disciplina,livello,giorno,orario;
 			
@@ -145,88 +127,19 @@ public class FrameDettagliModTess2 extends JFrame {
 				new FrameModificaTurnoMod(disciplina,livello,tesserato);
 			
 		}
+		
+		else
+			JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+					JOptionPane.WARNING_MESSAGE);
 				
-				}
+				}}
 	
 			);		
 				
 				
 				
-	/*	 bottone1= new JButton("Annulla conferma Parte ordine");
-	        bottone1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			bottone1.setForeground(Color.BLACK);
-			gbc.insets = new Insets(0, 0, 5, 5);
-			gbc.gridx = 1;
-			gbc.gridy = 3;
-			contentPane.add(bottone1,gbc);
-
-	bottone1.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			int iddet,tesserato,codiceturno,conf;
-			String disciplina,livello,giorno,orario;
-			
-			disciplina= (String) table_2.getValueAt(table_2.getSelectedRow(), 0);
-			livello=(String) table_2.getValueAt(table_2.getSelectedRow(), 1);
-			tesserato=(int) FrameIscrDisc.table2.getValueAt(FrameIscrDisc.table2.getSelectedRow(), 2);
-		    
-			giorno=(String) table_2.getValueAt(table_2.getSelectedRow(), 5);
-			orario=(String) table_2.getValueAt(table_2.getSelectedRow(), 6);
-			
-			
-			iddet= GetInfoDB.getiddet(disciplina,livello,tesserato,giorno,orario);
-		    codiceturno= GetInfoDB.getcodiceturno2(disciplina, livello, giorno, orario);
-				GestioneDetIscrizioniDAO.AnnullaDetIsc(iddet,tesserato,codiceturno);
-				
-				frame.dispose();
-				new FrameDettagliDaAccTess(cod);
-		
-		}
-	}
-			);	
-	 
-    bottone3= new JButton("Conferma Ordine");
-	bottone3.setVisible(false);
-    bottone3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	bottone3.setForeground(Color.BLACK);
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx = 2;
-	gbc.gridy = 3;
-	contentPane.add(bottone3,gbc);
 	
-	
-	
-	int i=table_2.getRowCount();
-		int count=table_2.getRowCount();
-		String o="b";
-		
-		int[] array= new int[i];
-			for(i=0;i<count;i++){
-			array[i] =  (int)table_2.getValueAt(i, 2);
-			}
-			for (i=0;i <count;i++)
-			{
-				
-				if(array[i]== 0){o="a";}
-					
-			}
-			
-			if (o.equals("a")){bottone3.setVisible(false);}
-			else
-			{
-				bottone3.setVisible(true);
-			}
-			
-					
-		
-	bottone3.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			GestioneIscrizioniDAO.ConfermaIscrizione(cod);
-			frame.dispose();
-			new FrameIscrDisc();
-	}}
-			);	
-	*/
-	pannello.add(contentPane,BorderLayout.SOUTH);
+	contentPane.add(PanelBottom2,BorderLayout.SOUTH);
 	
 	}
 	

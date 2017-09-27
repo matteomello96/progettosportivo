@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import java.awt.GridBagLayout;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -74,8 +75,12 @@ public class FrameDettagliAcc extends JFrame {
 		
 		
 	
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
-		
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone6.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone7.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo3.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,185,0));

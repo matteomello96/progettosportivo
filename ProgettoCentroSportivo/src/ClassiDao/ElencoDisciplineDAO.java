@@ -18,11 +18,11 @@ import java.awt.Image;
 import java.io.File;
 
 import java.io.IOException;
-
+import java.net.URL;
 
 import Model.DisciplinaElenco;
 import VisteUtenteGenerico.FrameIniziale;
-
+import visteadmin.FrameInserisciDisciplina;
 import DBInterfaccia.DbConnection;
 
 public class ElencoDisciplineDAO {
@@ -35,7 +35,7 @@ public class ElencoDisciplineDAO {
 		return instance;
 	}
 	
-	public static   ArrayList<DisciplinaElenco> elencoiniziale()  {
+	public static   ArrayList<DisciplinaElenco> elencoiniziale()   {
 		
 		
         ArrayList<DisciplinaElenco> dati= new ArrayList<DisciplinaElenco>(); 
@@ -51,18 +51,9 @@ public class ElencoDisciplineDAO {
         	d.setDescrizione(riga[1]);
         	d.setCalendario(riga[2]);
        
-        	try{
-        		File is = new File(riga[3]);
-        		Image im2 = ImageIO.read(is);
-          
-        	//d.setA(riga[3]);
-        	d.setImage(new ImageIcon(im2));}
-        	
-        	
-        	
-        	catch (IOException ex) {
-        	    JOptionPane.showMessageDialog(FrameIniziale.frame, ex);
-        	}
+        	Image img = GetInfoDB.SettaImg(riga[0]);
+        		
+        	d.setImage(new ImageIcon(img));
            
         	
         	

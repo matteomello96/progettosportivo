@@ -1,9 +1,12 @@
 package view_tesserato;
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,23 +18,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-
-
 import javax.swing.JButton;
-
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import org.apache.pdfbox.exceptions.COSVisitorException;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
-
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.TriggerOrdine;
 import ComboTesserato.Combocon;
+import listener.VariListener;
 
 
 
@@ -45,6 +45,7 @@ import ComboTesserato.Combocon;
 
 public class Confermaordine {
 	public JButton btnConferma;
+	public JPanel Panel1,PanelBottom2,contentPane,Panel2;
 	public static Combocon ComboP;
 	private JLabel lblTotaleOrdineEur;
 	private JLabel part;
@@ -54,7 +55,7 @@ public class Confermaordine {
 	public static String testodistinta;
 	public static PDDocument documentoPDF=null;
 	public static boolean d=true,d2=true;
-    public static JDialog frame;
+    public static JFrame frame;
     public String pagamento;
     public String momento;
 	
@@ -64,32 +65,51 @@ public Confermaordine(){
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
 		
 		
-		frame = new JDialog(FrameAttivitaTes.frame,true);
+		frame = new JFrame("Conferma ordine");
 		frame.setTitle("Conferma ordine");
 		frame.setBounds(100, 100, 803, 364);
-		frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-		frame.getContentPane().setBackground(new Color (255,36,0));
+		frame.setResizable(true);
+		frame.setBounds(100, 100, 1334, 700);
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
+		
 
-		lblTotaleOrdineEur = new JLabel("TOTALE ISCRIZIONE:");
-		lblTotaleOrdineEur.setToolTipText("");
-		lblTotaleOrdineEur.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTotaleOrdineEur.setBounds(26, 46, 145, 14);
-		frame.getContentPane().add(lblTotaleOrdineEur);
+		
+		JScrollPane scroll = new JScrollPane(contentPane);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);			
+	    frame.getContentPane().add(scroll);
+		
+	    Panel1 = new JPanel();
+		Panel1.setBackground(new Color (42,82,190));
+		Panel1.setLayout(new GridBagLayout());
+
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		lblTotaleOrdineEur = new JLabel();
+		VariListener.SettaLabelGen(Panel1,lblTotaleOrdineEur,"TOTALE ISCRIZIONE:", 0, 1);
 		
 		part = new JLabel("VALORE");
-		part.setHorizontalAlignment(SwingConstants.TRAILING);
-		part.setText(df.format(FrameAttivitaTes.totale)+" EUR");
-		part.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		part.setBounds(171, 46, 118, 14);
-		frame.getContentPane().add(part);
+		VariListener.SettaLabelGen(Panel1,part,df.format(FrameAttivitaTes.totale)+" EUR", 1, 1);
+		
+		contentPane.add(Panel1,BorderLayout.NORTH);
+		
+		Panel2 = new JPanel();
+		Panel2.setBackground(new Color (42,82,190));
+		Panel2.setLayout(new GridBagLayout());
 		
 		
+		JLabel lblEventi = new JLabel();
+		VariListener.SettaLabelGen(Panel2,lblEventi, "Modalità di pagamento", 0, 2);
 
-		 ComboP = new Combocon();
-		ComboP.setEnabled(true);
+		ComboP = new Combocon();
+		VariListener.SettaBox(Panel2, ComboP, 1, 2);
 		ComboP.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(ComboP.getSelectedIndex()<=0)
@@ -99,8 +119,11 @@ public Confermaordine(){
 		});
 		
 		
-		ComboP.setBounds(30, 145, 301, 28);
-		frame.getContentPane().add(ComboP);
+		contentPane.add(Panel2,BorderLayout.CENTER);
+		
+		PanelBottom2 = new JPanel();
+		PanelBottom2.setLayout(new GridBagLayout());
+		PanelBottom2.setBackground(new Color (42,82,190));
 		
 		
 		btnTornaAlCarrello = new JButton("Torna al carrello");
@@ -117,13 +140,17 @@ public Confermaordine(){
 			}
 		});
 		btnTornaAlCarrello.setBounds(21, 295, 138, 28);
-		frame.getContentPane().add(btnTornaAlCarrello);
+		gbc.gridx=2;
+		gbc.gridy=2;
+		PanelBottom2.add(btnTornaAlCarrello,gbc);
 		
 		btnConferma = new JButton("Conferma");
 		btnConferma.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConferma.setEnabled(false);
 		btnConferma.setBounds(668, 295, 115, 28);
-		frame.getContentPane().add(btnConferma);
+		gbc.gridx=0;
+		gbc.gridy=1;
+		PanelBottom2.add(btnConferma,gbc);
 		
 		
 		
@@ -141,7 +168,7 @@ public Confermaordine(){
 				try {
 					TriggerOrdine.writePDF(pagamento,momento).close();
 				} catch (IOException f) {
-					// TODO Auto-generated catch block
+				
 					f.printStackTrace();
 				}
 				
@@ -176,12 +203,12 @@ public Confermaordine(){
 
 						d=false;
 					} catch (COSVisitorException e2) {
-						// TODO Auto-generated catch block
+						
 						JOptionPane.showMessageDialog(frame,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e2.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
 						e2.printStackTrace();
 					} catch (IOException e2) {
 						JOptionPane.showMessageDialog(frame,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e2.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
-						// TODO Auto-generated catch block
+						
 						e2.printStackTrace();
 					}
 			         
@@ -204,9 +231,11 @@ public Confermaordine(){
 	//	btnGeneraDistinta.setBounds(100, 145, 301, 128);
 		btnGeneraDistinta.setBounds(549, 352, 145, 28);
 		btnGeneraDistinta.setEnabled(true);
-		frame.getContentPane().add(btnGeneraDistinta);
+		gbc.gridx=1;
+		gbc.gridy=1;
+		PanelBottom2.add(btnGeneraDistinta,gbc);
 		
-		final JButton btnFine = new JButton("Salva documento");
+		final JButton btnFine = new JButton("Continua iscrizione");
 		btnFine.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnFine.setEnabled(false);
 		btnFine.addActionListener(new ActionListener() {
@@ -244,7 +273,7 @@ public Confermaordine(){
 					} catch (COSVisitorException | IOException e) {
 						JOptionPane.showMessageDialog(null,"Errore durante la scrittura del file. Provare a scegliere un nome o un percorso diverso. \r\n"+e.getMessage(),"Errore",JOptionPane.ERROR_MESSAGE);
 						d2=false;
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 				}
@@ -255,18 +284,16 @@ public Confermaordine(){
 				frame.dispose();
 				FrameAttivitaTes.frame.dispose();
 				new FrameDiscAttive(momento);
-				/*FrameAttivitaTes.frame.setEnabled(true);
-				FrameAttivitaTes.frame.setAlwaysOnTop(true);
-				FrameAttivitaTes.frame.setAlwaysOnTop(false);
-				FrameAttivitaTes.invia.setEnabled(false);
-				FrameAttivitaTes.svuotacarrello.doClick();*/
+				
 				d2=true;
 				}
 				
 			
 			}});
 		btnFine.setBounds(698, 352, 89, 28);
-		frame.getContentPane().add(btnFine);
+		gbc.gridx=2;
+		gbc.gridy=1;
+		PanelBottom2.add(btnFine,gbc);
 		
 		
 
@@ -305,19 +332,18 @@ public Confermaordine(){
 				btnFine.setEnabled(true);
 			
 			
+			
+			
 				testodistinta=TriggerOrdine.scriviDistinta();
 				documentoPDF = TriggerOrdine.writePDF(pagamento,momento);
 				try {
 					TriggerOrdine.writePDF(pagamento,momento).close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 				
-			//	FrameAttivitaTes.tease();
-				
-			//	FrameAttivitaTes.svuotacarrello.doClick();
-				
+			
 				
 
 				
@@ -327,7 +353,7 @@ public Confermaordine(){
 				
 			}
 		});
-		
+		contentPane.add(PanelBottom2, BorderLayout.SOUTH);
 		
 	}
 }

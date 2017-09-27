@@ -1,9 +1,10 @@
 package DBInterfaccia;
 
-import java.io.InputStream;
+
 import java.sql.*;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 
@@ -12,15 +13,12 @@ public class DbConnection {
 	   private static boolean connesso;    
 	   private static DbConnection instance;
 
-	 //  public static String nomebase="sql11184998";
-	 //  public static String rootu="sql11184998";
-	   //public static String rootp="dbcentro100";
-	  // public static String host="sql11.freemysqlhosting.net";
+	
 	   
-	   public static String nomebase="centropolisportivo";
-	   public static String rootu="root";
-	  public static String rootp="Furfudopfa81";
-	   public static String host="127.0.0.1";
+	   public static String nomebase="sql11195820";
+	   public static String rootu="sql11195820";
+	  public static String rootp="jqMYGEWmIN";
+	   public static String host="sql11.freemysqlhosting.net";
 	   
 	 
 	 
@@ -30,19 +28,19 @@ public class DbConnection {
 		   if(instance == null)
 			   instance = new DbConnection();
 		   if(connesso != true)
-				connetti(nomebase, rootu, rootp);
+				connetti(nomebase, rootu, rootp,host);
 		   return instance;
 	   }
 	   
 	   // Apre la connessione con il Database
-	   public static boolean connetti(String nomeDB, String nomeUtente, String pwdUtente) {
+	   public static boolean connetti(String nomeDB, String nomeUtente, String pwdUtente,String host) {
 
 		  connesso = false;
 	      try {
 
 	         // Carico il driver JDBC per la connessione con il database MySQL
 	         Class.forName("com.mysql.jdbc.Driver");
-	         db = DriverManager.getConnection("jdbc:mysql://"+host+"/" + nomeDB + "?user=" + nomeUtente + "&password=" + pwdUtente);
+	         db = DriverManager.getConnection("jdbc:mysql://"+host+"/"+nomeDB,nomeUtente,pwdUtente);
 	         
 	         connesso=true;
 	         
@@ -54,6 +52,7 @@ public class DbConnection {
 	      return connesso;
 	     
 	   }  
+	   
 	   public Vector<String[]> eseguiQuery(String query) {
 		      Vector<String[]> v = null;
 		      String [] record;

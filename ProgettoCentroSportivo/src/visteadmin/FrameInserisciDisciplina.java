@@ -19,7 +19,7 @@ import listener.VariListener;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 
 import java.awt.event.ActionEvent;
@@ -27,10 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-
-
-
-
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.awt.GridBagLayout;
 
 
@@ -38,8 +36,7 @@ import javax.swing.JLabel;
 
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JScrollPane;
 
 import javax.swing.JFileChooser;
@@ -113,9 +110,12 @@ public class FrameInserisciDisciplina extends JFrame {
 		mntmTornaAllaPagina.addActionListener(new Listen(this));
 		mntmTornaAllaPagina.setActionCommand("Vai_ges_da_ins_disc");
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone6.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone7.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo3.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		
 		contentPane = new JPanel();
@@ -218,20 +218,24 @@ public class FrameInserisciDisciplina extends JFrame {
 		
 		sfoglia.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent arg0) {
 			{
-				 JFileChooser fc = new JFileChooser();
-				 int sel = fc.showOpenDialog(frame);
-			      if (sel == JFileChooser.APPROVE_OPTION) {
-			    	
-			    	 pathprecedente=(fc.getSelectedFile().getPath());
-			         nomefile=(fc.getSelectedFile().getName());
-			         percorso =("src/risorse");
-			         path=percorso+"/"+nomefile;
-              	    
-				    immagine.setText(nomefile);
+				JFileChooser fileChooser = new JFileChooser();
+		         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+		         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg","gif","png");
+		         fileChooser.addChoosableFileFilter(filter);
+		         int result = fileChooser.showSaveDialog(null);
+		         if(result == JFileChooser.APPROVE_OPTION){
+		             File selectedFile = fileChooser.getSelectedFile();
+		             nomefile=fileChooser.getSelectedFile().getName();
+		              path = selectedFile.getAbsolutePath();
+		             immagine.setText(nomefile);
+		            
+		              }
+		         else if(result == JFileChooser.CANCEL_OPTION){
+		             System.out.println("No Data");
 			
 			
 			
-			
+		             
 			
 			
 			
@@ -252,19 +256,13 @@ public class FrameInserisciDisciplina extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			 
 			
-			lblNomeD.setForeground(Color.BLACK);
-			lblNomeD.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		
-			lblDesc.setForeground(Color.BLACK);
-			lblDesc.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			
-		
 		
 		if(textnomed.getText().isEmpty()||descr.getText().isEmpty()){
 			if(textnomed.getText().isEmpty())
 			{
 				lblNomeD.setForeground(Color.RED);
-				lblNomeD.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblNomeD.setFont(new Font("Tahoma", Font.BOLD, 20));
 				lblErrNome.setText("Il campo è vuoto");
 				lblErrNome.setVisible(true);
 				
@@ -272,7 +270,7 @@ public class FrameInserisciDisciplina extends JFrame {
 			if(descr.getText().isEmpty())
 			{
 				lblDesc.setForeground(Color.RED);
-				lblDesc.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblDesc.setFont(new Font("Tahoma", Font.BOLD, 20));
 				lblErrNome2.setText("Il campo è vuoto");
 				lblErrNome2.setVisible(true);
 			}
@@ -280,7 +278,12 @@ public class FrameInserisciDisciplina extends JFrame {
 			
 		else
 			
-			bool=GestioneDAO.inserimentodisc(textnomed.getText(),descr.getText(),combocal.getSelectedItem().toString(),path,nomefile,pathprecedente);
+			try {
+				bool=GestioneDAO.inserimentodisc(textnomed.getText(),descr.getText(),combocal.getSelectedItem().toString(),path,nomefile,pathprecedente);
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		
 		if(bool)

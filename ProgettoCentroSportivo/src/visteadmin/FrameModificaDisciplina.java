@@ -25,10 +25,11 @@ import javax.swing.JMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-
+import java.net.URL;
 import java.awt.GridBagLayout;
 
 
@@ -36,7 +37,7 @@ import javax.swing.JLabel;
 
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JScrollPane;
 
 import javax.swing.JFileChooser;
@@ -63,7 +64,7 @@ public class FrameModificaDisciplina extends JFrame {
 	private Combocal combocal;
 	private JTextField immagine;
 	private boolean bool;
-	public String nomefile="";
+	public String nomefile="stesso file precedente";
 	public String percorso="";
 	public String path="";
 	public String pathprecimg=""+GetInfoDB.getPath((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0))+"";
@@ -78,7 +79,7 @@ public class FrameModificaDisciplina extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocation(100, 100);
 		frame.setSize(450, 300);
-        frame.setTitle("Inserisci disciplina");
+        frame.setTitle("Modifica disciplina");
 		if(FrameModificaDisciplina.frame==null)
 			frame.setLocationRelativeTo(null);
 			else
@@ -106,10 +107,12 @@ public class FrameModificaDisciplina extends JFrame {
 		
 		
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
-		
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone6.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone7.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo3.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (255,185,0));
@@ -154,7 +157,7 @@ public class FrameModificaDisciplina extends JFrame {
 	textnomed= new JTextField();
 	VariListener.SettaTextField(Panel2, textnomed, "Inserire nome", 1,1);
 	VariListener.SettaFocus(textnomed);
-		textnomed.addKeyListener(new KeyListener(){
+		textnomed.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent ke)
 		
 		{
@@ -168,17 +171,7 @@ public class FrameModificaDisciplina extends JFrame {
 				}
 		}
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}});
+			});
 		
 		JLabel lblDesc = new JLabel();
 		VariListener.SettaLabelGen(Panel2,lblDesc, "Descrizione", 0, 2);
@@ -210,9 +203,9 @@ public class FrameModificaDisciplina extends JFrame {
 		VariListener.SettaFocus(immagine);
 		
 		
-		String pathprec =""+GetInfoDB.getPath((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0))+"";
-		String newS = pathprec.substring(12);
-		nomefile=newS;
+		
+		
+		immagine.setText(nomefile);
 		
 	
 		
@@ -222,15 +215,22 @@ public class FrameModificaDisciplina extends JFrame {
 		
 		sfoglia.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent arg0) {
 			{
-				 JFileChooser fc = new JFileChooser();
-				 int sel = fc.showOpenDialog(frame);
-			      if (sel == JFileChooser.APPROVE_OPTION) {
+				
 			    	 
-			    	 pathprecimg=(fc.getSelectedFile().getPath());
-			    
-			         nomefile=(fc.getSelectedFile().getName());
-			         percorso =("src/risorse");
-			         pathnuovo=percorso+"/"+nomefile;
+			    	  JFileChooser fileChooser = new JFileChooser();
+				         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg","gif","png");
+				         fileChooser.addChoosableFileFilter(filter);
+				         int result = fileChooser.showSaveDialog(null);
+				         if(result == JFileChooser.APPROVE_OPTION){
+				             File selectedFile = fileChooser.getSelectedFile();
+				             nomefile=fileChooser.getSelectedFile().getName();
+				              path = selectedFile.getAbsolutePath();
+				             
+				            
+				              }
+				         else if(result == JFileChooser.CANCEL_OPTION){
+				             System.out.println("No Data");}
                     
 				      immagine.setText(nomefile);
 			
@@ -240,7 +240,7 @@ public class FrameModificaDisciplina extends JFrame {
 			
 			
 			
-		}}}});
+		}}});
 		
 		
 		
@@ -272,14 +272,14 @@ public class FrameModificaDisciplina extends JFrame {
 		
 			{
 			  if(textnomed.getText().isEmpty()){
-				lblNomeD.setForeground(Color.RED);
-				lblNomeD.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblNomeD.setForeground(Color.BLUE);
+				lblNomeD.setFont(new Font("Tahoma", Font.BOLD, 20));
 				lblErrNome.setText("Il campo è vuoto");
 				lblErrNome.setVisible(true);
 			  }
 			  if(descr.getText().isEmpty()){
-				lblDesc.setForeground(Color.RED);
-				lblDesc.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblDesc.setForeground(Color.BLUE);
+				lblDesc.setFont(new Font("Tahoma", Font.BOLD, 20));
 				lblErrNome2.setText("Il campo è vuoto");
 				lblErrNome2.setVisible(true);
 			}
@@ -287,7 +287,7 @@ public class FrameModificaDisciplina extends JFrame {
 			
 		else
 			
-			bool=GestioneDAO.modificadisc(pathprecimg,(String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0),textnomed.getText(),descr.getText(),combocal.getSelectedItem().toString(),pathnuovo,nomefile,pathprec);
+			bool=GestioneDAO.modificadisc((String)FrameGestione.table.getValueAt(FrameGestione.table.getSelectedRow(), 0),textnomed.getText(),descr.getText(),combocal.getSelectedItem().toString(),path,nomefile);
 			
 		
 		if(bool)

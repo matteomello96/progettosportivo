@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.10-bin.zip"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/fontbox-1.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/jgoodies-common-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jgoodies-common-1.8.0.jar"/>
-	<classpathentry kind="lib" path="lib/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jgoodies-forms-1.8.0.jar"/>
-	<classpathentry kind="lib" path="lib/miglayout-src.zip"/>
-	<classpathentry kind="lib" path="lib/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.35-bin.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.42.zip"/>
-	<classpathentry kind="lib" path="lib/pdfbox-1.8.8.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/commons-codec-1.10-bin.zip"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/jgoodies-common-1.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/jgoodies-common-1.8.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/miglayout15-swing.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/miglayout-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/lib/commons-logging-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/lib/fontbox-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/lib/mysql-connector-java-5.1.35-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Matteo/Desktop/librerie da inserire/lib/pdfbox-1.8.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

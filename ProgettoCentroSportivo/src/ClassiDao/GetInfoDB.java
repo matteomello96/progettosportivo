@@ -1,5 +1,6 @@
 package ClassiDao;
 
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,16 +9,55 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import DBInterfaccia.DbConnection;
 import view_tesserato.FrameAttivitaTes;
-import view_tesserato.FrameTurno;
+import view_tesserato.FrameInserisciTurno;
 import visteadmin.FrameDettagliDaAccResp;
 
 
 
 
 public class GetInfoDB {
+	
+	
+	
+	
+	public static  Image SettaImg (String disciplina){
+		   Connection con = DbConnection.db;
+	        Image im = null;
+	        ImageIcon image=null;
+	        Statement st;
+	        
+	        ResultSet rs;
+	        
+         try {
+	            
+	            st = con.createStatement();
+	           
+	            rs = st.executeQuery("SELECT DISTINCT C.Immagine from disciplina as C where C.nomedisciplina= '"+disciplina+"';"); 
+	          
+	               if(rs.next()){
+            byte[] img = rs.getBytes("C.Immagine");
+              image = new ImageIcon(img);
+               im = image.getImage();
+	               }
+                  
+            
+             
+	        } catch (SQLException ex) {
+	        
+	        }
+       
+		   
+		   
+		return im;
+		   
+		   
+	   }
+	
   
 	public static int getoccev(int cod,int tesserato){
 
@@ -716,7 +756,7 @@ public static int getcodiceturno2(String disciplina,String livello,String giorno
             		
         return ris; 
     } catch (SQLException ex) {
-    	JOptionPane.showMessageDialog(FrameTurno.frame,"Getcodiceturno2 "+ ex+"");
+    	JOptionPane.showMessageDialog(FrameInserisciTurno.frame,"Getcodiceturno2 "+ ex+"");
     }
     return ris;
 

@@ -14,7 +14,7 @@ import java.awt.Image;
 import java.io.File;
 
 import java.io.IOException;
-
+import java.net.URL;
 
 import Model_Responsabile.ElencoDisc;
 import VisteUtenteGenerico.FrameIniziale;
@@ -49,12 +49,15 @@ public class ElencoDisciplineDAO {
         	d.setDescrizione(riga[1]);
         	d.setCalendario(riga[2]);
         	
-        	try{
-        		File is = new File(riga[3]);
-        		Image im2 = ImageIO.read(is);
-          
-        	
-        	d.setImage(new ImageIcon(im2));}
+            try{
+        		
+        		URL url = ClassLoader.getSystemResource(riga[3]);
+        		
+        		
+        		
+        		Image im2 = ImageIO.read(url);
+        	d.setImage(new ImageIcon(im2));
+        	}
         	
         	
         	

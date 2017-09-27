@@ -7,10 +7,11 @@ import java.sql.Statement;
 
 import javax.swing.JComboBox;
 
+import ClassiDao.GetInfoDB;
 import DBInterfaccia.DbConnection;
+import Model.Utente;
 
-
-public class Combocon extends JComboBox<Object>{
+    public class Combocon extends JComboBox<Object> {
 	private static final long serialVersionUID = 1L;
 
 	Connection con = DbConnection.db;
@@ -29,13 +30,13 @@ public class Combocon extends JComboBox<Object>{
             
             st = con.createStatement();
             
-            rs = st.executeQuery("SELECT DISTINCT Nomemodalita  FROM modalitapagamento"); 
+            rs = st.executeQuery("select distinct nomemodalita from modalitapagamento"); 
             
     		
-    		proj=(Object) " Seleziona una modalità di pagamento ";
+    		proj=(Object) "pagamento";
     		this.addItem(proj);
             while(rs.next()){
-                proj=(Object) rs.getString("Nomemodalita ");
+                proj=(Object) rs.getString("nomemodalita");
                 this.addItem(proj);
                         
             }
@@ -51,6 +52,4 @@ public class Combocon extends JComboBox<Object>{
   
 
     }
-    
-    
 }

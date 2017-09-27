@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.net.URL;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -82,9 +83,13 @@ public class FrameEventiIstr extends JFrame {
 		MenuRegistra.addActionListener(new Listen(this));
 		MenuRegistra.setActionCommand("Vai_pan");
 
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone4.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone5.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo2.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
+
 		
 		
 		contentPane = new JPanel();

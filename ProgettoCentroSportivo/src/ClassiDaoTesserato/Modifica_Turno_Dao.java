@@ -43,7 +43,7 @@ public static int conf;
 	  
 	    
 	   
-   //    JOptionPane.showMessageDialog(FrameInserisciTurno.frame, "'"+conf+"'");
+
        
        
        
@@ -105,7 +105,7 @@ public static int conf;
 	   	
         rs.next();
         ris=rs.getInt("idiscrizione");
-	    JOptionPane.showMessageDialog(FrameInserisciTurno.frame, "'"+ris+"'");    	
+	      	
         st.executeUpdate("UPDATE iscrizionedisciplina SET confermato=0,modificato=1,annullato=0 WHERE codiceiscrizionedisciplina='"+ris+"'");
         
         
@@ -159,7 +159,7 @@ public static void ModificaDaMod(String disciplina,String livello, String giorno
 	   	
         rs.next();
         ris=rs.getInt("idiscrizione");
-	    JOptionPane.showMessageDialog(FrameModificaTurnoMod.frame, "'"+ris+"'");    	
+	       	
         st.executeUpdate("UPDATE iscrizionedisciplina SET confermato=0,modificato=1,annullato=0 WHERE codiceiscrizionedisciplina='"+ris+"'");
         
         

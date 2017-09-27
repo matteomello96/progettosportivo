@@ -7,16 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Insets;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -25,22 +23,17 @@ import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.Modifica_Turno_Dao;
 import ClassiDaoTesserato.RichiesteDaoTes;
 
-import java.awt.ComponentOrientation;
+
 
 import Model.Utente;
-import VisteUtenteGenerico.FrameCambia;
-import VisteUtenteGenerico.setupTableWidths;
-import classiDAOResponsabile.ElencoUtentiDAO;
-import classiDAOResponsabile.GestioneIscrizioniDAO;
-import classiDAOResponsabile.RichiesteDao;
-import classiDAOResponsabile.credenzialidao;
+
 import listener.Listen;
 import listener.VariListener;
-import modelliTabelleIstruttore.ModElEventiIstr;
-import modelliTabelleRespo.ModElUtenti;
+
 import modelliTabelleRespo.modelisc;
 
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -106,9 +99,16 @@ public class FrameIscrDisc extends JFrame {
 		
 		
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone8.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone9.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo4.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
 		
 		
 		contentPane = new JPanel();

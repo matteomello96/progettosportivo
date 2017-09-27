@@ -24,7 +24,7 @@ public static ArrayList<ElencoTestResp> elencotest() {
 		
         ArrayList<ElencoTestResp> dati= new ArrayList<ElencoTestResp>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery(" select testimonianza.commento,testimonianza.dataazione,elencoutenti.nome,elencoutenti.cognome from  Testimonianza inner join tesserato on testimonianza.tesserato=tesserato.matricolatesserato inner join elencoutenti on elencoutenti.idutente=tesserato.idutente");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select testimonianza.commento,testimonianza.dataazione,elencoutenti.nome,elencoutenti.cognome from testimonianza inner join tesserato on testimonianza.tesserato=tesserato.matricolatesserato inner join elencoutenti on elencoutenti.idutente=tesserato.idutente");
         Iterator<String[]> i = res.iterator();
         while(i.hasNext())  {
         	String[] riga = i.next();

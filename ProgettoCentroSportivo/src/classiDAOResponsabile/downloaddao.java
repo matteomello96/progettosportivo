@@ -3,11 +3,13 @@ package classiDAOResponsabile;
 
 import java.awt.Desktop;
 import java.io.File;
-
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.sql.Connection;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -18,32 +20,42 @@ import DBInterfaccia.DbConnection;
 public class downloaddao {
 	
     public static File f=null;
-	public static void scarica(String a2){
+	public static void scarica(int a2){
 		Connection con = DbConnection.db;
 
-		/*Statement st;
+		Statement st;
 
 		ResultSet rs;
 
 
-		String ris = null;*/
+		String ris = null;
 
-		//try {
+		try {
 		    
-		   // st = con.createStatement();
+		    st = con.createStatement();
 		  
-		    //rs = st.executeQuery("select certificatomed from iscrizioneevento  where codiceiscrizioneevento='"+a2+"' "); 
-		   // rs.next();	               
-		   // ris=rs.getString("certificatomed");    
+		    rs = st.executeQuery("select certificatomed from iscrizioneevento  where codiceiscrizioneevento='"+a2+"' "); 
+		    rs.next();	               
+		     
 		    try {
 		    	Desktop desktop = null;
 		    	if (Desktop.isDesktopSupported()) {
 		    	desktop = Desktop.getDesktop();
 		    	}
 		    	//java.nio.file.Path path =Paths.get(a2);
-				 f= new File(a2);
+		    	byte[] img = rs.getBytes("certificatomed");
+				 f= new File("certificato.pdf");
 		    	
-		    	
+				 try ( FileOutputStream outputStream = new FileOutputStream(f); ) {
+
+				        outputStream.write(img);  //write the bytes and your done. 
+
+				    } catch (Exception e) {
+				        e.printStackTrace();
+				    }
+
+				
+
 		    	
                 
 		    	desktop.open(f);
@@ -54,11 +66,11 @@ public class downloaddao {
 		    	return;
 		    	}
 
-		//} 
+		} 
 
-		//catch (SQLException ex) {
+		catch (SQLException ex) {
 			
-		//}
+		}
 			
 		
 		}

@@ -24,7 +24,7 @@ public static ArrayList<ElenoTest> elencoiniziale() {
 		
         ArrayList<ElenoTest> dati= new ArrayList<ElenoTest>(); 
         
-        Vector<String[]> res = DbConnection.getInstance().eseguiQuery(" select Disciplina,Livello,Commento from  disciplinedisponibili,Testimonianza where Tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and disciplinedisponibili.combinazionelivdis=testimonianza.combinazionelivdis;");
+        Vector<String[]> res = DbConnection.getInstance().eseguiQuery("select Disciplina,Livello,Commento from disciplinedisponibili,testimonianza where tesserato='"+GetInfoDB.getidTess(Utente.getUsername())+"' and disciplinedisponibili.combinazionelivdis=testimonianza.combinazionelivdis");
         Iterator<String[]> i = res.iterator();
         while(i.hasNext())  {
         	String[] riga = i.next();

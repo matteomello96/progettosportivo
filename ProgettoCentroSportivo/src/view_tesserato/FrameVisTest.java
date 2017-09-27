@@ -2,12 +2,10 @@ package view_tesserato;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -73,15 +72,19 @@ public class FrameVisTest extends JPanel {
 	  
 		
 			
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
-		
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone8.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone9.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo4.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color (42,82,190));
 		contentPane.setLayout(new BorderLayout());
 		
+		
+
 		
 		
  
@@ -109,13 +112,12 @@ public class FrameVisTest extends JPanel {
 		
 		
 		
-		GPane1.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Le tue testimonianze"), BorderLayout.NORTH);		
+		contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 1, 0, "Le tue testimonianze"), BorderLayout.NORTH);		
 		
 		
 		table_1 = new JTable();
 		model = new disc_testimonianza(ElencoTestDao.elencoiniziale());
-		GPane1.add(VariListener.SettaScroll(table_1,50,model), BorderLayout.CENTER);
-		
+		contentPane.add(VariListener.SettaScroll(table_1,50,model), BorderLayout.CENTER);
 		
 		JPanel BotPnl1 = new JPanel();
 		BotPnl1.setBackground(new Color (42,82,190));
@@ -133,7 +135,7 @@ public class FrameVisTest extends JPanel {
 		JButton btn1 = new JButton(im);
 		JLabel lbl1= new JLabel();
         VariListener.SettaBtn(BotPnl1, btn1, lbl1,"Modifica testimonianze", 4, 2,im2,true);
-		btn.setMnemonic('e');
+		btn1.setMnemonic('e');
 
 		
 		JButton btn2 = new JButton(im);
@@ -143,14 +145,18 @@ public class FrameVisTest extends JPanel {
 			
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
+				if(table_1.getSelectedRow()!=-1){
 				disciplina=(String) table_1.getValueAt(table_1.getSelectedRow(), 0);
 				livello=(String) table_1.getValueAt(table_1.getSelectedRow(), 1);
 				DistruggiTestimonianza.EliminaTest(disciplina,livello);
 				frame.dispose();
 				new FrameVisTest();
-			}
+				}
+			else
+				JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+						JOptionPane.WARNING_MESSAGE);
 			
-		});
+		}});
 		
 		
 		btn2.addActionListener(new ActionListener() {
@@ -173,8 +179,8 @@ public class FrameVisTest extends JPanel {
 			}
 			
 		});	
-		GPane1.add(BotPnl1,BorderLayout.SOUTH);	
+		contentPane.add(BotPnl1,BorderLayout.SOUTH);	
 	
-		contentPane.add(GPane1);
+
 	}
 }

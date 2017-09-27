@@ -33,6 +33,7 @@ import listener.VariListener;
 import modelliTabelleRespo.modeven;
 
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -95,9 +96,12 @@ public class FrameEventiResp extends JFrame {
 		tabed = new JTabbedPane();
 		
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone4.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone5.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo2.png");
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone6.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone7.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo3.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
 		
 		
 		contentPane = new JPanel();
@@ -152,9 +156,9 @@ public class FrameEventiResp extends JFrame {
 
 			public void actionPerformed(ActionEvent arg0) {
 				if (table.getSelectedRow() != -1) {
-			String a;
+			Integer a;
 			//String b;
-			a=(String) table.getValueAt( table.getSelectedRow() , 6);
+			a=(int) table.getValueAt( table.getSelectedRow() , 0);
 			downloaddao.scarica(a);
 			//JOptionPane.showMessageDialog(frameeventidacanc.frame, "'"+b+"'");
 				} else
@@ -305,9 +309,9 @@ public class FrameEventiResp extends JFrame {
 
 			public void actionPerformed(ActionEvent arg0) {
 				if (table2.getSelectedRow() != -1) {
-			String a;
+			Integer a;
 			//String b;
-			a=(String) table2.getValueAt( table2.getSelectedRow() , 6);
+			a=(int) table2.getValueAt( table2.getSelectedRow() , 0);
 			downloaddao.scarica(a);
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
@@ -394,9 +398,9 @@ public class FrameEventiResp extends JFrame {
 
 			public void actionPerformed(ActionEvent arg0) {
 				if (table3.getSelectedRow() != -1) {
-			String a;
+			Integer a;
 			//String b;
-			a=(String) table3.getValueAt( table3.getSelectedRow() , 6);
+			a=(int) table3.getValueAt( table3.getSelectedRow() , 0);
 			downloaddao.scarica(a);
 			//JOptionPane.showMessageDialog(frameeventidacanc.frame, "'"+b+"'");
 				} else

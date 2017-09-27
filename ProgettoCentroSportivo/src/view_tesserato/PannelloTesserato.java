@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -122,11 +124,12 @@ public class PannelloTesserato extends JFrame {
     		mnNewMenu_1.add(mntmNewMenuItem_6);
     		
     		
-    		
-    		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
-            ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
-            ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
-    		
+    		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone8.png");
+    		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone9.png");
+    		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo4.png");
+            ImageIcon im=new ImageIcon(url1);
+            ImageIcon im2=new ImageIcon(url2);
+            ImageIcon im3=new ImageIcon(url3);
     		
     		contentPane = new JPanel();
     		contentPane.setBackground(new Color (42,82,190));

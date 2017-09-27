@@ -11,15 +11,19 @@ import VisteUtenteGenerico.FrameLogin;
 import VisteUtenteGenerico.FrameModificaDati;
 import VisteUtenteGenerico.FrameRegistrazione;
 import view_tesserato.Confermaordine;
+import view_tesserato.DetEvTes;
 import view_tesserato.FrameEventi;
 import view_tesserato.FrameIscrDisc;
 import view_tesserato.FrameIscrEventiTest;
+import view_tesserato.FrameModificaTurno;
+import view_tesserato.FrameModificaTurnoConf;
+import view_tesserato.FrameModificaTurnoMod;
 import view_tesserato.FrameAttivitaTes;
 import view_tesserato.FrameDettagliConfTess;
 import view_tesserato.FrameDettagliDaAccTess;
 import view_tesserato.FrameDettagliModTess2;
 import view_tesserato.FrameInsTest;
-import view_tesserato.FrameTurno;
+import view_tesserato.FrameInserisciTurno;
 import view_tesserato.FrameVisTest;
 import view_tesserato.PannelloTesserato;
 import view_tesserato.sendeventframe;
@@ -65,7 +69,7 @@ public class Listen implements ActionListener {
 	public FrameLogin framelogin;
 	public FrameAttivitaTes frametesserato;
 	public FrameElencoUtenti frameresponsabile;
-	public FrameTurno frameturno;
+	public FrameInserisciTurno frameturno;
 	public FrameInsTest frametestimonianze;
 	
 	public FrameEventi frameeventi;
@@ -108,8 +112,10 @@ public class Listen implements ActionListener {
 	public FrameIscrEventiTest frameevtest;
 	public FrameVisTest framevistest;
 	public sendeventframe send;
-	
-	
+	public DetEvTes det;
+	public FrameModificaTurnoMod mt2;
+	public FrameModificaTurno mt1;
+	public FrameModificaTurnoConf mt3;
 	
 	
 	public Listen(FrameModificaLiv frame)
@@ -299,6 +305,22 @@ public class Listen implements ActionListener {
 		send = frame;
 	}
 
+	public Listen(DetEvTes detEv) {
+		det =  detEv;
+	}
+
+	public Listen(FrameModificaTurno frame) {
+		mt1 = frame;
+	}
+
+	public Listen(FrameModificaTurnoConf frame) {
+		mt3 = frame;
+	}
+
+	public Listen(FrameModificaTurnoMod frame) {
+		mt2 = frame;
+	}
+
 	public void actionPerformed(ActionEvent e)
 	{
 if ("Vai_home_da_mod_disc".equals(e.getActionCommand())){
@@ -346,6 +368,14 @@ if ("Vai_ev".equals(e.getActionCommand())){
 	new FrameEventiIstr();
 	FrameEventiIstr.frame.setVisible(true);
 }
+if ("Vai_ev2".equals(e.getActionCommand())){
+	
+	DetEvTes.frame.setVisible(false);
+	DetEvTes.frame.dispose();
+	new FrameEventi();
+	FrameEventi.frame.setVisible(true);
+}
+
 if ("Vai_home_da_det".equals(e.getActionCommand())){
 	
 	DetDisciplina.frame.setVisible(false);
@@ -420,6 +450,32 @@ if ("Vai_home_da_ord".equals(e.getActionCommand())){
 	new PannelloResponsabile();
 	PannelloResponsabile.frame.setVisible(true);
 }	
+if ("mt2".equals(e.getActionCommand())){
+	
+	FrameModificaTurnoConf.frame.setVisible(false);
+	FrameModificaTurnoConf.frame.dispose();
+	new FrameDettagliConfTess((int)FrameIscrDisc.table.getValueAt(FrameIscrDisc.table.getSelectedRow(), 0));
+	FrameDettagliConfTess.frame.setVisible(true);
+}	
+
+if ("mt1".equals(e.getActionCommand())){
+	
+	FrameModificaTurno.frame.setVisible(false);
+	FrameModificaTurno.frame.dispose();
+	new FrameDettagliDaAccTess((int)FrameIscrDisc.table2.getValueAt(FrameIscrDisc.table2.getSelectedRow(), 0));
+	FrameDettagliDaAccTess.frame.setVisible(true);
+}	
+
+if ("mt3".equals(e.getActionCommand())){
+	
+	FrameModificaTurnoMod.frame.setVisible(false);
+	FrameModificaTurnoMod.frame.dispose();
+	new FrameDettagliModTess2((int)FrameIscrDisc.table3.getValueAt(FrameIscrDisc.table3.getSelectedRow(), 0));
+	FrameDettagliModTess2.frame.setVisible(true);
+}	
+
+
+
 if ("Vai_home_da_ord2".equals(e.getActionCommand())){
 	
 	FrameIscrDisc.frame.setVisible(false);

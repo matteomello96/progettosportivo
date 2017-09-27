@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,8 +25,27 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import Model.Home;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import VisteUtenteGenerico.setupTableWidths;
+import visteadmin.FrameInserisciDisciplina;
 
 public abstract class VariListener implements MouseListener{
 	
@@ -356,4 +376,49 @@ public abstract class VariListener implements MouseListener{
 	}
 	
 	
+	
+	    public static void TraferisciFile(String inizio,String fine)
+	    {
+
+	    	InputStream inStream = null;
+		OutputStream outStream = null;
+
+	    	
+	    		File appConfDir = new File("CentroPoliSportivo.jar!/src");
+	    		File appRisorse = new File(appConfDir,"risorse");
+	    		appRisorse.mkdirs();
+	    	    File afile =new File(inizio);
+	    	    File bfile =new File(appRisorse,fine);
+	    	    if(appRisorse.exists())
+	    	    {
+	    	    	JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,appRisorse.getPath());
+	    	    }
+	    	    String path2= bfile.getPath();
+	    	    
+	    	      JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,"fine" + fine);
+	    	      
+	    	      
+	    	      java.nio.file.Path pathprec2 =Paths.get(inizio);
+	    	      java.nio.file.Path pathim3 =Paths.get(path2);
+	    	      JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,"pathim3" + pathim3);
+	    	      try {
+	    	          
+	    	          Files.copy(pathprec2,pathim3,StandardCopyOption.REPLACE_EXISTING);
+	    	         
+	    	         
+	    	         JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,"path prec2="+pathprec2 + " pathprec = "+inizio + "  pathim ="+path2 +" pathim3 ="+pathim3);
+	    	         
+	    	         
+	    	         
+	    	         
+	    	    
+	    	           } catch (IOException e) {
+	    	 		
+	    	         	  JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame, e);
+	    	 		}
+	    	     
+	    	    /*JOptionPane.showMessageDialog(FrameInserisciDisciplina.frame,"successo!");*/
+	    	
+	
+	    	}
 }

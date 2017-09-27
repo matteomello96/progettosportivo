@@ -1,21 +1,24 @@
 package view_tesserato;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import ClassiDaoTesserato.elencoattivitaattivedao;
 import ModelliTabelle_Tesserato.disc_attive;
+import listener.VariListener;
 
 
 
@@ -28,7 +31,7 @@ public class FrameDiscAttive extends JPanel {
 public static JTable table_1;
 public static JFrame frame;
 private disc_attive model;
-public JPanel contentPane;
+public JPanel contentPane,Panel1,PanelBottom2;
 public JButton bottone;
 /**
  * Create the panel.
@@ -45,9 +48,25 @@ public FrameDiscAttive(String momento) {
 	frame.setResizable(true);
 	frame.setAlwaysOnTop(true);
 	
+	
+	
+	
+	URL url1 = ClassLoader.getSystemResource("immaginijava/bottone8.png");
+	URL url2 = ClassLoader.getSystemResource("immaginijava/bottone9.png");
+	URL url3 = ClassLoader.getSystemResource("immaginijava/titolo4.png");
+    ImageIcon im=new ImageIcon(url1);
+    ImageIcon im2=new ImageIcon(url2);
+    ImageIcon im3=new ImageIcon(url3);
+	
 	contentPane = new JPanel();
-	contentPane.setBackground(new Color (255,36,0));
-	contentPane.setLayout(new GridBagLayout());
+	contentPane.setBackground(new Color (42,82,190));
+	contentPane.setLayout(new BorderLayout());
+	
+	contentPane = new JPanel();
+	contentPane.setBackground(new Color (42,82,190));
+	contentPane.setLayout(new BorderLayout());
+	
+
 	
 	JScrollPane scroll = new JScrollPane(contentPane);
 	scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -55,73 +74,60 @@ public FrameDiscAttive(String momento) {
 	scroll.setBounds(50, 30, 300, 50);			
     frame.getContentPane().add(scroll);
 	
-
-		
-	GridBagConstraints gbc = new GridBagConstraints();
+    Panel1 = new JPanel();
+	Panel1.setBackground(new Color (42,82,190));
+	Panel1.setLayout(new GridBagLayout());
 	
 	
-	
-	JLabel lblNewLabel_1 = new JLabel("Completa la scelta degli orari");
-	lblNewLabel_1.setForeground(Color.BLACK);
-	lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 23));
-	
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridwidth = 4;
-	gbc.gridx = 3;
-	gbc.gridy = 0;
-	contentPane.add(lblNewLabel_1, gbc);
-	
+	contentPane.add(VariListener.SettaPannelloTitolo(im3, Panel1, 2, 2,"Completa l'iscrizione"), BorderLayout.NORTH);
+    
+    
+    
 	table_1 = new JTable();
 	model = new disc_attive(elencoattivitaattivedao.elencodopo(momento));
-	table_1.setCellSelectionEnabled(true);
-	table_1.setModel(model);
-	
-	
-	
-	JScrollPane pane2 = new JScrollPane(table_1);
-	pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-	pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-	gbc.anchor = GridBagConstraints.LINE_END;
-	gbc.gridheight = 2;
-	gbc.gridwidth = 6;
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.fill = GridBagConstraints.BOTH;
-	gbc.gridx = 2;
-	gbc.gridy = 2;
-	contentPane.add(pane2, gbc);
-
+	contentPane.add(VariListener.SettaScroll(table_1,50,model), BorderLayout.CENTER);
 		
-	bottone = new JButton("Continua Iscrizione");
-	gbc.anchor = GridBagConstraints.WEST;
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx = 2;
-	gbc.gridy = 4;
-	contentPane.add(bottone,gbc);
 	
+	
+	PanelBottom2 = new JPanel();
+	PanelBottom2.setLayout(new GridBagLayout());
+	PanelBottom2.setBackground(new Color (42,82,190));
 
-	bottone.addActionListener(new ActionListener(){
+	JButton btn = new JButton(im);
+	JLabel lbl= new JLabel();
+    VariListener.SettaBtn(PanelBottom2, btn, lbl,"Continua iscrizione", 2, 2,im2,true);
+	btn.setMnemonic('e');
+	btn.addActionListener(new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			if(table_1.getSelectedRow()!=-1){
 			String a="",b="";
 		
 			a=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 0);
 			b=(String)FrameDiscAttive.table_1.getValueAt(FrameDiscAttive.table_1.getSelectedRow(), 1);
 		
 		new FrameInserisciTurno(a,b,null,null,momento);
-		frame.setVisible(false);
+		frame.dispose();
 		
 			
 		}
-	});
+		
+		else
+			JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
+					JOptionPane.WARNING_MESSAGE);
+	}});
 	
-	JButton bottone2 = new JButton("Fine inserimento");
-	gbc.anchor = GridBagConstraints.WEST;
-	gbc.insets = new Insets(0, 0, 5, 5);
-	gbc.gridx = 3;
-	gbc.gridy = 4;
-	contentPane.add(bottone2,gbc);
-	bottone2.addActionListener(new ActionListener(){
+	
+	
+	JButton btn2 = new JButton(im);
+	
+	JLabel lbl2= new JLabel();
+    VariListener.SettaBtn(PanelBottom2, btn2, lbl2,"Fine inserimento", 2, 3,im2,true);
+	btn2.setMnemonic('f');
+	btn2.setVisible(false);
+	btn2.addActionListener(new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -129,6 +135,8 @@ public FrameDiscAttive(String momento) {
 	          new PannelloTesserato();
 		}
 	});
+	
+	
 	
 	int in=table_1.getRowCount();
 	
@@ -170,14 +178,16 @@ public FrameDiscAttive(String momento) {
 			}
 			
 			if (o.equals("a")){
-				bottone2.setVisible(true);
-				bottone.setVisible(false);
+				btn2.setVisible(true);
+				btn.setVisible(false);
 			}
 				
 			else
 			{
-				bottone2.setVisible(false);
+				btn2.setVisible(false);
 				}
+	
+	contentPane.add(PanelBottom2,BorderLayout.SOUTH);
 	
 	
 	frame.addWindowListener(new java.awt.event.WindowAdapter() {

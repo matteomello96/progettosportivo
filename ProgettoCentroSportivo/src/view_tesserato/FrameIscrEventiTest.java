@@ -7,16 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Insets;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -24,26 +22,17 @@ import javax.swing.ScrollPaneConstants;
 import ClassiDao.GetInfoDB;
 import ClassiDaoTesserato.ElencoeventidaoTess;
 
-import java.awt.ComponentOrientation;
+
 
 import Model.Utente;
-import VisteUtenteGenerico.FrameCambia;
-import VisteUtenteGenerico.setupTableWidths;
-import classiDAOResponsabile.ElencoUtentiDAO;
-import classiDAOResponsabile.GestioneIscrizioniDAO;
 import classiDAOResponsabile.GestioneIscrizioniEventiDAO;
-import classiDAOResponsabile.RichiesteDao;
-import classiDAOResponsabile.credenzialidao;
 import classiDAOResponsabile.downloaddao;
-import classiDAOResponsabile.elencoeventidao;
 import listener.Listen;
 import listener.VariListener;
-import modelliTabelleIstruttore.ModElEventiIstr;
-import modelliTabelleRespo.ModElUtenti;
-import modelliTabelleRespo.modelisc;
 import modelliTabelleRespo.modeven;
 
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -110,9 +99,16 @@ public class FrameIscrEventiTest extends JFrame {
 		int tes= GetInfoDB.getidTess(Utente.getUsername());
 		
 		
-		ImageIcon im=new ImageIcon("src/immaginijava/bottone8.png");
-        ImageIcon im2=new ImageIcon("src/immaginijava/bottone9.png");
-        ImageIcon im3=new ImageIcon("src/immaginijava/titolo4.png");
+		URL url1 = ClassLoader.getSystemResource("immaginijava/bottone8.png");
+		URL url2 = ClassLoader.getSystemResource("immaginijava/bottone9.png");
+		URL url3 = ClassLoader.getSystemResource("immaginijava/titolo4.png");
+        ImageIcon im=new ImageIcon(url1);
+        ImageIcon im2=new ImageIcon(url2);
+        ImageIcon im3=new ImageIcon(url3);
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color (42,82,190));
+		contentPane.setLayout(new BorderLayout());
 		
 		
 		contentPane = new JPanel();
@@ -172,9 +168,9 @@ public class FrameIscrEventiTest extends JFrame {
 
 			public void actionPerformed(ActionEvent arg0) {
 				if (table.getSelectedRow() != -1) {
-			String a;
+			Integer a;
 			//String b;
-			a=(String) table.getValueAt( table.getSelectedRow() , 6);
+			a=(int) table.getValueAt( table.getSelectedRow() , 6);
 			downloaddao.scarica(a);
 			//JOptionPane.showMessageDialog(frameeventidacanc.frame, "'"+b+"'");
 				} else
@@ -294,9 +290,9 @@ public class FrameIscrEventiTest extends JFrame {
 
 			public void actionPerformed(ActionEvent arg0) {
 				if (table2.getSelectedRow() != -1) {
-			String a;
+			int a;
 			//String b;
-			a=(String) table2.getValueAt( table2.getSelectedRow() , 6);
+			a=(int) table2.getValueAt( table2.getSelectedRow() , 6);
 			downloaddao.scarica(a);
 				} else
 					JOptionPane.showMessageDialog(null, "Seleziona un ordine dall'elenco", "Errore ordine",
